@@ -64,6 +64,7 @@ $ curl {{ site.parku.api }} \
 
 ```json
 {
+  "urls_url": "{{ site.parku.api }}",
   "version_url": "{{ site.parku.api }}/version",
   "locations_url": "{{ site.parku.api }}/locations",
   "terms_url": "{{ site.parku.api }}/terms",
@@ -80,6 +81,8 @@ $ curl {{ site.parku.api }} \
   "violations_url": "{{ site.parku.api }}/violations"
 }
 ```
+
+The first few urls are public urls. That means, you only need your developer token to access them. The last few need a user token you get returned when a user logs in.
 
 
   [REST]: http://en.wikipedia.org/wiki/Representational_State_Transfer
