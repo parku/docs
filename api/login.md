@@ -3,7 +3,7 @@ layout: api
 title: Login
 ---
 
-Checks the given credentials _email_ and _password_ for validy. Returns the user object with a user token needed for private endpoints. A _public key_ is needed.
+Checks the given credentials _email_ and _password_ for validity. Returns the user object with a user token needed for private endpoints. A _public key_ is needed.
 
 ### Definition
 
