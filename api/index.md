@@ -1,5 +1,5 @@
 ---
-layout: api
+layout: page
 title: API
 ---
 
@@ -74,6 +74,7 @@ $ curl {{ site.parku.api }} \
 
   "user_url": "{{ site.parku.api }}/user",
   "credit_url": "{{ site.parku.api }}/credit",
+  "phone_numbers_url": "{{ site.parku.api }}/phone_numbers",
   "cars_url": "{{ site.parku.api }}/cars",
   "favorites_url": "{{ site.parku.api }}/favorites",
   "bookings_url": "{{ site.parku.api }}/bookings",
@@ -84,6 +85,7 @@ $ curl {{ site.parku.api }} \
 
 The first few urls are public urls. That means, you only need your developer token to access them. The last few need a user token you get returned when a user logs in.
 
+With a user token you are able to access the public urls.
 
   [REST]: http://en.wikipedia.org/wiki/Representational_State_Transfer
   [JSON]: http://www.json.org/
