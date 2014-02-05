@@ -3,7 +3,7 @@ layout: api
 title: Locations
 ---
 
-Get locations of parking spaces.
+Get locations of parking spaces. A _public key_ is needed.
 
 ### Definition
 
