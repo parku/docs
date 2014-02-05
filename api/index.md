@@ -5,6 +5,8 @@ title: API
 
 The parku API is organized around [REST][REST]. Our API is designed to have predictable, resource-oriented URLs and to use HTTP response codes to indicate API errors. We use built-in HTTP features, like HTTP authentication and HTTP verbs, which can be understood by off-the-shelf HTTP clients. [JSON][JSON] will be returned in all responses from the API, including errors.
 
+You can provide the `Accept-Language` header information for all your requests. Localized content is returned when available. Default content is english.
+
 ### Authentication
 
 Authentication to the API occurs via [HTTP Basic Auth][HTTP Basic Auth]. Provide your API key as the basic auth username. You do not need to provide a password.
@@ -47,7 +49,37 @@ parku uses conventional HTTP response codes to indicate success or failure of an
 
 #### Example Error
 
+### Endpoints
 
+Returns all possible endpoints.
+
+#### Example Request
+
+```sh
+$ curl {{ site.parku.api }} \
+    -u 6f1ed002ab5595859014ebf0951522d9:
+```
+
+#### Example Response
+
+```json
+{
+  "version_url": "{{ site.parku.api }}/version",
+  "locations_url": "{{ site.parku.api }}/locations",
+  "terms_url": "{{ site.parku.api }}/terms",
+  "faq_url": "{{ site.parku.api }}/faq",
+  "privacy_policy_url": "{{ site.parku.api }}/privacy_policy",
+  "login_url": "{{ site.parku.api }}/login",
+
+  "user_url": "{{ site.parku.api }}/user",
+  "credit_url": "{{ site.parku.api }}/credit",
+  "cars_url": "{{ site.parku.api }}/cars",
+  "favorites_url": "{{ site.parku.api }}/favorites",
+  "bookings_url": "{{ site.parku.api }}/bookings",
+  "sesam_url": "{{ site.parku.api }}/sesam",
+  "violations_url": "{{ site.parku.api }}/violations"
+}
+```
 
 
   [REST]: http://en.wikipedia.org/wiki/Representational_State_Transfer
