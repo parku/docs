@@ -1,0 +1,25 @@
+# Dependencies
+markdown:         redcarpet
+pygments:         true
+
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            parku
+tagline:          'The developer guides to parku'
+url:              http://developer.parku.ch
+
+author:
+  name:           'parku'
+  url:            http://parku.ch
+
+paginate:         10
+
+github:
+  repo:           https://github.com/parku/docs
+
+parku:
+  api:            https://api.parku.ch/v4
+
+exclude: [CNAME, Gemfile, Gemfile.lock, Makefile, README.md, LICENSE, vendor]
