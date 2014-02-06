@@ -38,6 +38,11 @@ $ curl {{ site.parku.api }}/login \
   "credit": 106.50,
   "currency": "CHF",
   "country": "CH",
-  "facebook_id": "100006987966349"
+  "facebook_id": "100006987966349",
+  "token": "ce35e3504183c2f52f58263ce11004e0"
 }
 ```
+
+All further requests using the token as [HTTP Basic Auth][HTTP Basic Auth] username are made on behalf of the user.
+
+  [HTTP Basic Auth]: http://en.wikipedia.org/wiki/Basic_access_authentication
