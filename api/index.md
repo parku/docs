@@ -9,7 +9,7 @@ You can provide the `Accept-Language` header information for all your requests. 
 
 ### Authentication
 
-Authentication to the API occurs via [HTTP Basic Auth][HTTP Basic Auth]. Provide your API key as the basic auth username. You do not need to provide a password.
+Authentication to the API occurs via [HTTP Basic Auth][HTTP Basic Auth]. Provide your API key as the basic auth username. The password is always _parku_.
 
 There are two types of keys: public and private. Public keys are used to obtain publicly available informations (eg. parking spaces). Private keys are used to identify users. Whenever user information are requested or bookings on behalf of a user is made, the private key is necessary.
 
@@ -21,7 +21,7 @@ All API requests must be made over HTTPS. Calls made over plain HTTP will fail. 
 
 ```sh
 $ curl {{ site.parku.api }}/version \
-    -u 6f1ed002ab5595859014ebf0951522d9:
+    -u 6f1ed002ab5595859014ebf0951522d9:parku
 ```
 
 ### Errors
@@ -57,7 +57,7 @@ Returns all possible endpoints.
 
 ```sh
 $ curl {{ site.parku.api }} \
-    -u 6f1ed002ab5595859014ebf0951522d9:
+    -u 6f1ed002ab5595859014ebf0951522d9:parku
 ```
 
 #### Example Response

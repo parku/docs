@@ -22,9 +22,9 @@ POST {{ site.parku.api }}/login
 
 ```sh
 $ curl {{ site.parku.api }}/login \
-  -u 6f1ed002ab5595859014ebf0951522d9: \
-  -d email=test@example.com \
-  -d password=1234pwd
+    -u 6f1ed002ab5595859014ebf0951522d9:parku \
+    -d email=test@example.com \
+    -d password=1234pwd
 ```
 
 ### Example Response

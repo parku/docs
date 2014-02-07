@@ -30,11 +30,11 @@ If no parameter is given, all parking spaces are returned. Keep in mind, that so
 
 ```sh
 $ curl {{ site.parku.api }}/locations \
-	?sw=45.74001,5.67868 \
-	&ne=47.74236,10.24900 \
-	&date_start=2014-01-23 10:00:00+0100 \
-	&date_end=2014-01-23 11:00:00+0100 \
-  -u 6f1ed002ab5595859014ebf0951522d9:
+    ?sw=45.74001,5.67868 \
+    &ne=47.74236,10.24900 \
+    &date_start=2014-01-23 10:00:00+0100 \
+    &date_end=2014-01-23 11:00:00+0100 \
+    -u 6f1ed002ab5595859014ebf0951522d9:parku
 ```
 
 ### Example Response
