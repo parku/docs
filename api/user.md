@@ -28,12 +28,12 @@ POST {{ site.parku.api }}/user
 
 ```sh
 $ curl {{ site.parku.api }}/user \
-    -u 6f1ed002ab5595859014ebf0951522d9:parku
-    -d email=test@example.com
-    -d password=test
-    -d country=DE
-    -d firstname=Test
-    -d lastname=Name
+    -u 6f1ed002ab5595859014ebf0951522d9:parku \
+    -d email=test@example.com \
+    -d password=test \
+    -d country=DE \
+    -d firstname=Test \
+    -d lastname=Name \
     -d gender=female
 ```
 
@@ -70,21 +70,70 @@ GET {{ site.parku.api }}/user
 
 ```sh
 $ curl {{ site.parku.api }}/user \
-    -u ce35e3504183c2f52f58263ce11004e0:parku
+    -u 098f6bcd4621d373cade4e832627b4f6:parku
 ```
 
 ### Example Response
 
 ```json
 {
-  "gender": "male",
+  "gender": "female",
   "email": "test@example.com",
-  "firstname": "Firstname",
-  "lastname": "Lastname",
-  "credit": 106.50,
+  "firstname": "Test",
+  "lastname": "Name",
+  "credit": 0,
+  "currency": "EUR",
+  "country": "DE",
+  "facebook_id": null,
+  "token": "098f6bcd4621d373cade4e832627b4f6"
+}
+```
+
+
+## Updating a Customer
+
+Updates the user by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+
+This request accepts mostly the same arguments as the user creation call.
+
+### Definition
+
+````
+PUT {{ site.parku.api }}/user
+````
+
+### Arguments
+
+* __email__ _optional_
+* __password__ _optional_
+* __country__ _optional_
+  _DE_ or _CH_
+* __firstname__ _optional_
+* __lastname__ _optional_
+* __gender__ _optional_
+  _male_ or _female_
+
+### Example Request
+
+```sh
+$ curl {{ site.parku.api }}/user \
+    -u 098f6bcd4621d373cade4e832627b4f6:parku
+    -X PUT
+    -d country=CH
+```
+
+### Example Response
+
+```json
+{
+  "gender": "female",
+  "email": "test@example.com",
+  "firstname": "Test",
+  "lastname": "Name",
+  "credit": 0,
   "currency": "CHF",
   "country": "CH",
-  "facebook_id": "100006987966349",
-  "token": "ce35e3504183c2f52f58263ce11004e0"
+  "facebook_id": null,
+  "token": "098f6bcd4621d373cade4e832627b4f6"
 }
 ```
