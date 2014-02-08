@@ -70,7 +70,7 @@ GET {{ site.parku.api }}/user
 
 ```sh
 $ curl {{ site.parku.api }}/user \
-    -u 6f1ed002ab5595859014ebf0951522d9:parku
+    -u ce35e3504183c2f52f58263ce11004e0:parku
 ```
 
 ### Example Response
