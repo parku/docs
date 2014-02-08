@@ -39,6 +39,8 @@ $ curl {{ site.parku.api }}/user \
 
 ### Example Response
 
+The newly created user object with private key gets returned.
+
 ```json
 {
   "gender": "female",
@@ -56,7 +58,7 @@ $ curl {{ site.parku.api }}/user \
 
 ## Retrieving a User
 
-Returns the user object including the user token. A _private key_ is required.
+Returns the user object for the private key. A _private key_ is required.
 
 ### Definition
 
