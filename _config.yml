@@ -1,25 +1,26 @@
 # Dependencies
-markdown:         redcarpet
-pygments:         true
+markdown:     redcarpet
+pygments:     true
 
 # Permalinks
-permalink:        pretty
+permalink:    pretty
+#permalink:    /:categories/:title.html
 
 # Setup
-title:            parku
-tagline:          'The developer guides to parku'
-url:              http://developer.parku.ch
+title:        parku
+tagline:      'The developer guides to parku'
+url:          http://developer.parku.ch
 
 author:
-  name:           'parku'
-  url:            http://parku.ch
+  name:       'parku'
+  url:        http://parku.ch
 
-paginate:         10
+# paginate:     10
 
 github:
-  repo:           https://github.com/parku/docs
+  repo:       https://github.com/parku/docs
 
 parku:
-  api:            https://api.parku.ch/v4
+  api:        https://api.parku.ch/v4
 
 exclude: [CNAME, Gemfile, Gemfile.lock, Makefile, README.md, LICENSE, vendor]
