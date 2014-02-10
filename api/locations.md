@@ -17,9 +17,9 @@ GET {{ site.parku.api }}/locations
 	Comma separated latitude and longitude of the southwest position.
 * __ne__ _optional_
 	Comma separated latitude and longitude of the northeast position.
-* __date\_start__ _optional_
+* __date_start__ _optional_
 	Filter parking spaces for the start date.
-* __date\_start__ _optional_
+* __date_start__ _optional_
 	Filter parking spaces for the end date.
 
 If only one parameter of the pairs _ne_ - _sw_ or _date\_start_ - _date\_end_ is provided, the other parameter gets skipped.
@@ -30,10 +30,10 @@ If no parameter is given, all parking spaces are returned. Keep in mind, that so
 
 ```sh
 $ curl {{ site.parku.api }}/locations \
-    ?sw=45.74001,5.67868 \
-    &ne=47.74236,10.24900 \
-    &date_start=2014-01-23 10:00:00+0100 \
-    &date_end=2014-01-23 11:00:00+0100 \
+      ?sw=45.74001,5.67868 \
+      &ne=47.74236,10.24900 \
+      &date_start=2014-01-23 10:00:00+0100 \
+      &date_end=2014-01-23 11:00:00+0100 \
     -u 6f1ed002ab5595859014ebf0951522d9:parku
 ```
 

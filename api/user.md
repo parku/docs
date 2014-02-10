@@ -3,7 +3,7 @@ layout: api
 title: User
 ---
 
-## Creating a User
+## Create a new user
 
 Creates a new user object. A _public key_ is required.
 
@@ -56,7 +56,7 @@ The newly created user object with private key gets returned.
 ```
 
 
-## Retrieving a User
+## Retrieve a user
 
 Returns the user object for the private key. A _private key_ is required.
 
@@ -90,7 +90,7 @@ $ curl {{ site.parku.api }}/user \
 ```
 
 
-## Updating a Customer
+## Update a user
 
 Updates the user by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
 
@@ -117,8 +117,8 @@ PUT {{ site.parku.api }}/user
 
 ```sh
 $ curl {{ site.parku.api }}/user \
-    -u 098f6bcd4621d373cade4e832627b4f6:parku
-    -X PUT
+    -u 098f6bcd4621d373cade4e832627b4f6:parku \
+    -X PUT \
     -d country=CH
 ```
 
