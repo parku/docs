@@ -30,7 +30,7 @@ parku uses conventional HTTP response codes to indicate success or failure of an
 
 #### HTTP Status Codes Summary
 
-```
+```nginx
 200 OK - Everything worked as expected
 201 Created - Item was created successfully.
     The URL to the item can be found in the

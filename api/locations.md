@@ -7,7 +7,7 @@ Get locations of parking spaces. A _public key_ is needed.
 
 ### Definition
 
-```
+```nginx
 GET {{ site.parku.api }}/locations
 ```
 
@@ -39,7 +39,7 @@ $ curl {{ site.parku.api }}/locations \
 
 ### Example Response
 
-```
+```nginx
 Status: 200 OK
 ```
 

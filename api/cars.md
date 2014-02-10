@@ -17,7 +17,7 @@ You can store multiple cars for a user.
 
 ### Definition
 
-```
+```nginx
 POST {{ site.parku.api }}/cars
 ```
 
@@ -39,7 +39,7 @@ $ curl {{ site.parku.api }}/cars \
 
 ### Example Response
 
-```
+```nginx
 Status: 201 Created
 Location: {{ site.parku.api }}/cars/23
 ```
@@ -57,7 +57,7 @@ Location: {{ site.parku.api }}/cars/23
 
 ### Definition
 
-```
+```nginx
 GET {{ site.parku.api }}/cars/{car_id}
 ```
 
@@ -75,7 +75,7 @@ $ curl {{ site.parku.api }}/cars/23 \
 
 ### Example Response
 
-```
+```nginx
 Status: 200 OK
 ```
 
@@ -96,7 +96,7 @@ This request accepts mostly the same arguments as the car creation call.
 
 ### Definition
 
-```
+```nginx
 PUT {{ site.parku.api }}/cars/{car_id}
 ```
 
@@ -116,7 +116,7 @@ $ curl {{ site.parku.api }}/cars/23 \
 
 ### Example Response
 
-```
+```nginx
 Status: 200 OK
 ```
 
@@ -133,7 +133,7 @@ Status: 200 OK
 
 ### Definition
 
-```
+```nginx
 DELETE {{ site.parku.api }}/cars/{car_id}
 ```
 
@@ -152,7 +152,7 @@ $ curl {{ site.parku.api }}/cars/23 \
 
 ### Example Response
 
-```
+```nginx
 Status: 204 No Content
 ```
 
@@ -167,7 +167,7 @@ Returns a list of all cars of the user. The cars are returned sorted by creation
 
 ### Definition
 
-```
+```nginx
 GET {{ site.parku.api }}/cars
 ```
 
@@ -180,11 +180,11 @@ $ curl {{ site.parku.api }}/cars \
 
 ### Example Response
 
-```
+```nginx
 Status: 200 OK
 ```
 
-```
+```json
 [
   {
     "id": 22,

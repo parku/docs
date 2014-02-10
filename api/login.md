@@ -7,7 +7,7 @@ Checks the given credentials _email_ and _password_ for validity. Returns the us
 
 ### Definition
 
-```
+```nginx
 POST {{ site.parku.api }}/login
 ```
 
@@ -29,7 +29,7 @@ $ curl {{ site.parku.api }}/login \
 
 ### Example Response
 
-```
+```nginx
 Status: 200 OK
 ```
 

@@ -13,7 +13,7 @@ Creates a new user object. A _public key_ is required.
 
 ### Definition
 
-```
+```nginx
 POST {{ site.parku.api }}/user
 ```
 
@@ -45,7 +45,7 @@ $ curl {{ site.parku.api }}/user \
 
 The newly created user object with private key gets returned.
 
-```
+```nginx
 Status: 201 Created
 Location: {{ site.parku.api }}/user
 ```
@@ -71,7 +71,7 @@ Returns the user object for the private key. A _private key_ is required.
 
 ### Definition
 
-```
+```nginx
 GET {{ site.parku.api }}/user
 ```
 
@@ -84,7 +84,7 @@ $ curl {{ site.parku.api }}/user \
 
 ### Example Response
 
-```
+```nginx
 Status: 200 OK
 ```
 
@@ -111,7 +111,7 @@ This request accepts mostly the same arguments as the user creation call.
 
 ### Definition
 
-````
+````nginx
 PUT {{ site.parku.api }}/user
 ````
 
@@ -137,7 +137,7 @@ $ curl {{ site.parku.api }}/user \
 
 ### Example Response
 
-```
+```nginx
 Status: 200 OK
 ```
 

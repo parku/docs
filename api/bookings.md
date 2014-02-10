@@ -15,7 +15,7 @@ All API requests to `{{ site.parku.api }}/bookings` need a _private key_.
 
 ### Definition
 
-```
+```nginx
 POST {{ site.parku.api }}/bookings
 ```
 
@@ -44,7 +44,7 @@ $ curl {{ site.parku.api }}/bookings \
 
 ### Example Response
 
-```
+```nginx
 Status: 201 Created
 Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
 ```
@@ -98,7 +98,7 @@ Retrieves the details of an existing booking. You need only supply the unique bo
 
 ### Definition
 
-```
+```nginx
 GET {{ site.parku.api }}/bookings/{booking_id}
 ```
 
@@ -118,7 +118,7 @@ $ curl {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d \
 
 Returns a booking object if a valid identifier was provided.
 
-```
+```nginx
 Status: 200 OK
 ```
 
@@ -171,7 +171,7 @@ Updates the booking by setting the values of the parameters passed. Any paramete
 
 ### Definition
 
-```
+```nginx
 PUT {{ site.parku.api }}/bookings/{booking_id}
 ```
 
@@ -193,7 +193,7 @@ $ curl {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d \
 
 ### Example Response
 
-```
+```nginx
 Status: 200 OK
 ```
 
@@ -246,7 +246,7 @@ Permanently cancels a booking. It cannot be undone.
 
 ### Definition
 
-```
+```nginx
 DELETE {{ site.parku.api }}/bookings/{booking_id}
 ```
 
@@ -265,7 +265,7 @@ $ curl {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d \
 
 ### Example Response
 
-```
+```nginx
 Status: 204 No Content
 ```
 
@@ -279,7 +279,7 @@ Returns a list of the user's bookings. A _private key_ is required.
 
 ### Definition
 
-```
+```nginx
 GET {{ site.parku.api }}/bookings
 ```
 
@@ -299,7 +299,7 @@ $ curl {{ site.parku.api }}/bookings?count=3 \
 
 ### Example Response
 
-```
+```nginx
 Status: 200 OK
 ```
 
