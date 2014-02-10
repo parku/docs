@@ -81,7 +81,8 @@ Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
     }
   },
   "phone_number": {
-    // ToDo
+    "id": "150",
+    "phone_number": "+493057701872"
   },
   "reference": "HRS5J",
   "date_start": "{{ site.time | date: '%Y-%m-%d' }} 10:00:00{{ site.time | date: '%z' }}",
@@ -154,7 +155,8 @@ Status: 200 OK
     }
   },
   "phone_number": {
-    // ToDo
+    "id": "150",
+    "phone_number": "+493057701872"
   },
   "reference": "HRS5J",
   "date_start": "{{ site.time | date: '%Y-%m-%d' }} 10:00:00{{ site.time | date: '%z' }}",
@@ -229,7 +231,8 @@ Status: 200 OK
     }
   },
   "phone_number": {
-    // ToDo
+    "id": "150",
+    "phone_number": "+493057701872"
   },
   "reference": "HRS5J",
   "date_start": "{{ site.time | date: '%Y-%m-%d' }} 10:00:00{{ site.time | date: '%z' }}",
@@ -336,7 +339,8 @@ Status: 200 OK
       }
     },
     "phone_number": {
-      // ToDo
+      "id": "150",
+      "phone_number": "+493057701872"
     },
     "reference": "HRS5J",
     "date_start": "2013-07-06 16:00:00+02:00",
