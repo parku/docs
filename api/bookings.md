@@ -3,15 +3,156 @@ layout: api
 title: Bookings
 ---
 
-## Create a new booking
+* [Create a new booking](#create)
+* [Retrieve a booking](#retrieve)
+* [Update a booking](#update)
+* [Cancel a booking](#cancel)
+* [List all bookings](#list)
 
-## Retrieve a booking
+## <a name="create"></a>Create a new booking
 
-## Update a booking
+### Definition
 
-## Cancel a booking
+```
+POST {{ site.parku.api }}/bookings
+```
 
-## List all bookings
+### Arguments
+
+* __location\_id__ _required_<br/>
+  The ID of the location you get returned from the [`locations`][locations] request.
+* __date\_start__ _required_
+* __date\_end__ _required_
+* __car\_id__ _required_<br/>
+  The ID of the used car. Get all cars for the user from the [`cars`][cars] request.
+* __phone\_number\_id__ _required_<br/>
+  The ID of the phone number of the [`phone_numbers`][phone_numbers] request.
+
+### Example Request
+
+```sh
+$ curl {{ site.parku.api }}/bookings \
+    -u 098f6bcd4621d373cade4e832627b4f6:parku \
+    -d location_id=00cd7cfd-e42d-11e2-8bf1-8a83f3373875 \
+    -d "date_start={{ site.time | date: '%Y-%m-%d' }} 10:00:00{{ site.time | date: '%z' }}" \
+    -d "date_end={{ site.time | date: '%Y-%m-%d' }} 16:30:00{{ site.time | date: '%z' }}" \
+    -d car_id=118 \
+    -d phone_number_id=332
+```
+
+### Example Response
+
+```json
+{
+  "id": "005c4826-4e28-11e3-a675-d43d7eece53d",
+  "car": {
+    // ToDo
+  },
+  "location": {
+    "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
+    "code": "ZHRTHW",
+    "latitude": 47.365398,
+    "longitude": 8.51987,
+    "street": "Hopfenstrasse",
+    "street_number": "20",
+    "postcode": "8045",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "sesam_use": false,
+    "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
+    "image_urls": [
+      "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
+      "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"
+    ],
+    "options": [],
+    "notifications": [],
+    "currency": "CHF",
+    "support": {
+      "phone_number": "+41 43 928 72 52"
+    }
+  },
+  "phone_number": {
+    // ToDo
+  },
+  "reference": "HRS5J",
+  "date_start": "{{ site.time | date: '%Y-%m-%d' }} 10:00:00{{ site.time | date: '%z' }}",
+  "date_end": "{{ site.time | date: '%Y-%m-%d' }} 16:30:00{{ site.time | date: '%z' }}",
+  "price": 13.75,
+  "currency": "CHF"
+}
+```
+
+##  <a name="retrieve"></a>Retrieve a booking
+
+Retrieves the details of an existing booking. You need only supply the unique booking identifier that was returned upon booking creation.
+
+### Definition
+
+```
+GET {{ site.parku.api }}/bookings/{booking_id}
+```
+
+### Arguments
+
+* __booking\_id__ _required_<br/>
+  The identifier of the booking to be retrieved.
+
+### Example Request
+
+```sh
+$ curl {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d \
+    -u 098f6bcd4621d373cade4e832627b4f6:parku
+```
+
+### Example Response
+
+Returns a booking object if a valid identifier was provided.
+
+```json
+{
+  "id": "005c4826-4e28-11e3-a675-d43d7eece53d",
+  "car": {
+    // ToDo
+  },
+  "location": {
+    "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
+    "code": "ZHRTHW",
+    "latitude": 47.365398,
+    "longitude": 8.51987,
+    "street": "Hopfenstrasse",
+    "street_number": "20",
+    "postcode": "8045",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "sesam_use": false,
+    "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
+    "image_urls": [
+      "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
+      "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"
+    ],
+    "options": [],
+    "notifications": [],
+    "currency": "CHF",
+    "support": {
+      "phone_number": "+41 43 928 72 52"
+    }
+  },
+  "phone_number": {
+    // ToDo
+  },
+  "reference": "HRS5J",
+  "date_start": "{{ site.time | date: '%Y-%m-%d' }} 10:00:00{{ site.time | date: '%z' }}",
+  "date_end": "{{ site.time | date: '%Y-%m-%d' }} 16:30:00{{ site.time | date: '%z' }}",
+  "price": 13.75,
+  "currency": "CHF"
+}
+```
+
+##  <a name="update"></a>Update a booking
+
+##  <a name="cancel"></a>Cancel a booking
+
+##  <a name="list"></a>List all bookings
 
 Returns a list of the user's bookings. A _private key_ is required.
 
@@ -80,3 +221,7 @@ $ curl {{ site.parku.api }}/bookings?count=3 \
   {...}
 ]
 ```
+
+  [locations]:      /api/locations/
+  [cars]:           /api/cars/
+  [phone_numbers]:  /api/phone_numbers/

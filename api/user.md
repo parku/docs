@@ -3,7 +3,11 @@ layout: api
 title: User
 ---
 
-## Create a new user
+* [Create a new user](#create)
+* [Retrieve a user](#retrieve)
+* [Update a user](#update)
+
+## <a name="create"></a>Create a new user
 
 Creates a new user object. A _public key_ is required.
 
@@ -56,7 +60,7 @@ The newly created user object with private key gets returned.
 ```
 
 
-## Retrieve a user
+## <a name="retrieve"></a>Retrieve a user
 
 Returns the user object for the private key. A _private key_ is required.
 
@@ -90,7 +94,7 @@ $ curl {{ site.parku.api }}/user \
 ```
 
 
-## Update a user
+## <a name="update"></a>Update a user
 
 Updates the user by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
 
