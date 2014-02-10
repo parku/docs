@@ -52,7 +52,9 @@ Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
 {
   "id": "005c4826-4e28-11e3-a675-d43d7eece53d",
   "car": {
-    // ToDo
+    "id": "23",
+    "license_plate": "B-AB 1234",
+    "vehicle": "Polo"
   },
   "location": {
     "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
@@ -123,7 +125,9 @@ Status: 200 OK
 {
   "id": "005c4826-4e28-11e3-a675-d43d7eece53d",
   "car": {
-    // ToDo
+    "id": "23",
+    "license_plate": "B-AB 1234",
+    "vehicle": "Polo"
   },
   "location": {
     "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
@@ -196,7 +200,9 @@ Status: 200 OK
 {
   "id": "005c4826-4e28-11e3-a675-d43d7eece53d",
   "car": {
-    // ToDo
+    "id": "23",
+    "license_plate": "B-AB 1234",
+    "vehicle": "Polo"
   },
   "location": {
     "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
@@ -301,7 +307,9 @@ Status: 200 OK
   {
     "id": "0072c629-e622-11e2-8bf1-8a83f3373875",
     "car": {
-      // ToDo
+      "id": "23",
+      "license_plate": "B-AB 1234",
+      "vehicle": "Polo"
     },
     "location": {
       "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
