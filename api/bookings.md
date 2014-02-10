@@ -9,6 +9,7 @@ title: Bookings
 * [Cancel a booking](#cancel)
 * [List all bookings](#list)
 
+All API requests to `{{ site.parku.api }}/bookings` need a _private key_.
 
 ## <a name="create"></a>Create a new booking
 

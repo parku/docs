@@ -9,6 +9,8 @@ title: Cars
 * [Delete a car](#delete)
 * [List all cars](#list)
 
+All API requests to `{{ site.parku.api }}/cars` need a _private key_.
+
 ## <a name="create"></a>Create a new car
 
 You can store multiple cars for a user.
