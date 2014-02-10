@@ -14,3 +14,13 @@ $ open http://localhost:9393
 ```
 
 You should have a open browser with the latest guides.
+
+## Deployment
+
+Make your changes and commit them. Push to GitHub.
+
+```sh
+$ git push origin gh-pages
+```
+
+Sites gets recreated in a few seconds.
