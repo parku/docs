@@ -9,6 +9,7 @@ title: Bookings
 * [Cancel a booking](#cancel)
 * [List all bookings](#list)
 
+
 ## <a name="create"></a>Create a new booking
 
 ### Definition
@@ -42,6 +43,11 @@ $ curl {{ site.parku.api }}/bookings \
 
 ### Example Response
 
+```
+Status: 201 Created
+Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
+```
+
 ```json
 {
   "id": "005c4826-4e28-11e3-a675-d43d7eece53d",
@@ -81,6 +87,7 @@ $ curl {{ site.parku.api }}/bookings \
   "currency": "CHF"
 }
 ```
+
 
 ##  <a name="retrieve"></a>Retrieve a booking
 
@@ -108,6 +115,10 @@ $ curl {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d \
 
 Returns a booking object if a valid identifier was provided.
 
+```
+Status: 200 OK
+```
+
 ```json
 {
   "id": "005c4826-4e28-11e3-a675-d43d7eece53d",
@@ -148,9 +159,112 @@ Returns a booking object if a valid identifier was provided.
 }
 ```
 
+
 ##  <a name="update"></a>Update a booking
 
+Updates the booking by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+
+### Definition
+
+```
+PUT {{ site.parku.api }}/bookings/{booking_id}
+```
+
+### Arguments
+
+* __car\_id__ _optional_<br/>
+  The ID of the used car. Get all cars for the user from the [`cars`][cars] request.
+* __phone\_number\_id__ _optional_<br/>
+  The ID of the phone number of the [`phone_numbers`][phone_numbers] request.
+
+### Example Request
+
+```sh
+$ curl {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d \
+    -u 098f6bcd4621d373cade4e832627b4f6:parku
+    -X PUT
+    -d car_id=117
+```
+
+### Example Response
+
+```
+Status: 200 OK
+```
+
+```json
+{
+  "id": "005c4826-4e28-11e3-a675-d43d7eece53d",
+  "car": {
+    // ToDo
+  },
+  "location": {
+    "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
+    "code": "ZHRTHW",
+    "latitude": 47.365398,
+    "longitude": 8.51987,
+    "street": "Hopfenstrasse",
+    "street_number": "20",
+    "postcode": "8045",
+    "city": "Zürich",
+    "country": "Switzerland",
+    "sesam_use": false,
+    "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
+    "image_urls": [
+      "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
+      "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"
+    ],
+    "options": [],
+    "notifications": [],
+    "currency": "CHF",
+    "support": {
+      "phone_number": "+41 43 928 72 52"
+    }
+  },
+  "phone_number": {
+    // ToDo
+  },
+  "reference": "HRS5J",
+  "date_start": "{{ site.time | date: '%Y-%m-%d' }} 10:00:00{{ site.time | date: '%z' }}",
+  "date_end": "{{ site.time | date: '%Y-%m-%d' }} 16:30:00{{ site.time | date: '%z' }}",
+  "price": 13.75,
+  "currency": "CHF"
+}
+```
+
+
 ##  <a name="cancel"></a>Cancel a booking
+
+Permanently cancels a booking. It cannot be undone.
+
+### Definition
+
+```
+DELETE {{ site.parku.api }}/bookings/{booking_id}
+```
+
+### Arguments
+
+* __booking\_id__ _required_<br/>
+  The identifier of the booking to be canceled.
+
+### Example Request
+
+```sh
+$ curl {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d \
+    -u 098f6bcd4621d373cade4e832627b4f6:parku
+    -X DELETE
+```
+
+### Example Response
+
+```
+Status: 204 No Content
+```
+
+```
+
+```
 
 ##  <a name="list"></a>List all bookings
 
@@ -177,6 +291,10 @@ $ curl {{ site.parku.api }}/bookings?count=3 \
 ```
 
 ### Example Response
+
+```
+Status: 200 OK
+```
 
 ```json
 [

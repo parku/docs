@@ -29,6 +29,10 @@ $ curl {{ site.parku.api }}/login \
 
 ### Example Response
 
+```
+Status: 200 OK
+```
+
 ```json
 {
   "gender": "male",

@@ -45,6 +45,11 @@ $ curl {{ site.parku.api }}/user \
 
 The newly created user object with private key gets returned.
 
+```
+Status: 201 Created
+Location: {{ site.parku.api }}/user
+```
+
 ```json
 {
   "gender": "female",
@@ -78,6 +83,10 @@ $ curl {{ site.parku.api }}/user \
 ```
 
 ### Example Response
+
+```
+Status: 200 OK
+```
 
 ```json
 {
@@ -127,6 +136,10 @@ $ curl {{ site.parku.api }}/user \
 ```
 
 ### Example Response
+
+```
+Status: 200 OK
+```
 
 ```json
 {
