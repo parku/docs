@@ -81,7 +81,8 @@ Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
   "date_start": "{{ site.time | date: '%Y-%m-%d' }} 10:00:00{{ site.time | date: '%z' }}",
   "date_end": "{{ site.time | date: '%Y-%m-%d' }} 16:30:00{{ site.time | date: '%z' }}",
   "price": 13.75,
-  "currency": "CHF"
+  "currency": "CHF",
+  "violation": null
 }
 ```
 
@@ -148,7 +149,12 @@ Status: 200 OK
   "date_start": "{{ site.time | date: '%Y-%m-%d' }} 10:00:00{{ site.time | date: '%z' }}",
   "date_end": "{{ site.time | date: '%Y-%m-%d' }} 16:30:00{{ site.time | date: '%z' }}",
   "price": 13.75,
-  "currency": "CHF"
+  "currency": "CHF",
+  "violation": {
+    "license_plate": "B-DC 4321",
+    "comment": "This car parked on my parking space!!!",
+    "image_url": "{{ site.parku.url }}/images/reports/12.jpeg"
+  }
 }
 ```
 
@@ -217,7 +223,12 @@ Status: 200 OK
   "date_start": "{{ site.time | date: '%Y-%m-%d' }} 10:00:00{{ site.time | date: '%z' }}",
   "date_end": "{{ site.time | date: '%Y-%m-%d' }} 16:30:00{{ site.time | date: '%z' }}",
   "price": 13.75,
-  "currency": "CHF"
+  "currency": "CHF",
+  "violation": {
+    "license_plate": "B-DC 4321",
+    "comment": "This car parked on my parking space!!!",
+    "image_url": "{{ site.parku.url }}/images/reports/12.jpeg"
+  }
 }
 ```
 
@@ -318,7 +329,8 @@ Status: 200 OK
     "date_start": "2013-07-06 16:00:00+02:00",
     "date_end": "2013-07-07 00:00:00+02:00",
     "price": 13.75,
-    "currency": "CHF"
+    "currency": "CHF",
+    "violation": null
   },
   {...},
   {...}
