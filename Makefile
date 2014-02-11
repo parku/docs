@@ -7,7 +7,9 @@ clean:
 	rm -fr .sass-cache/ _site/
 
 linklint:
+	@cp robots_allow.txt _site/robots.txt
 	linklint -http -host localhost:9393 -limit 1000 /@
+	@cp robots.txt _site/robots.txt
 
 install: uninstall
 	bundle install --binstubs vendor/bundle/bin --path vendor/bundle --without production

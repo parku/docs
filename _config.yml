@@ -24,4 +24,4 @@ parku:
   url:        https://api.parku.ch
   api:        https://api.parku.ch/v4
 
-exclude: [CNAME, Gemfile, Gemfile.lock, Makefile, README.md, LICENSE, vendor]
+exclude: [CNAME, Gemfile, Gemfile.lock, Makefile, README.md, LICENSE, vendor, robots_*]
