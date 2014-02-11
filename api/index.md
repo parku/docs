@@ -11,9 +11,9 @@ You can provide the `Accept-Language` header information for all your requests. 
 
 Authentication to the API occurs via [HTTP Basic Auth][HTTP Basic Auth]. Provide your API key as the basic auth username. The password is always _parku_.
 
-There are two types of keys: public and private. Public keys are used to obtain publicly available informations (eg. parking spaces). Private keys are used to identify users. Whenever user information are requested or bookings on behalf of a user is made, the private key is necessary.
+There are two types of keys: _public_ and _private_. _Public keys_ are used to obtain publicly available informations (eg. parking spaces). _Private keys_ are used to identify users. Whenever user information are requested or bookings on behalf of a user is made, the _private key_ is necessary.
 
-Private keys can be used to obtain public information.
+_Private keys_ can be used to obtain public information.
 
 All API requests must be made over HTTPS. Calls made over plain HTTP will fail. You must authenticate for all requests.
 
@@ -71,23 +71,25 @@ $ curl {{ site.parku.api }} \
   "faq_url": "{{ site.parku.api }}/faq",
   "privacy_policy_url": "{{ site.parku.api }}/privacy_policy",
   "login_url": "{{ site.parku.api }}/login",
-
   "user_url": "{{ site.parku.api }}/user",
+  "password_url": "{{ site.parku.api }}/password",
   "credit_url": "{{ site.parku.api }}/credit",
   "phone_numbers_url": "{{ site.parku.api }}/phone_numbers",
   "cars_url": "{{ site.parku.api }}/cars",
   "favorites_url": "{{ site.parku.api }}/favorites",
   "bookings_url": "{{ site.parku.api }}/bookings",
+  "violation_url": "{{ site.parku.api }}/bookings/{booking_id}/violation"
   "sesam_url": "{{ site.parku.api }}/sesam",
-  "violations_url": "{{ site.parku.api }}/violations"
 }
 ```
 
-The first few urls are public urls. That means, you only need your developer token to access them. The last few need a user token you get returned when a user logs in.
+Keep in mind, that some of these urls are private. You need a _private key_ which you get when [logging in a user][login].
+For the public urls you need a _public key_.
 
-With a user token you are able to access the public urls.
+With a _private key_ you can access public urls.
 
   [REST]: http://en.wikipedia.org/wiki/Representational_State_Transfer
   [JSON]: http://www.json.org/
   [HTTP Basic Auth]: http://en.wikipedia.org/wiki/Basic_access_authentication
   [HTTPS]: http://en.wikipedia.org/wiki/HTTP_Secure
+  [login]: /api/login/
