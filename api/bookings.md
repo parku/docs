@@ -13,6 +13,8 @@ All API requests to `{{ site.parku.api }}/bookings` need a _private key_.
 
 ## <a name="create"></a>Create a new booking
 
+After creating a booking the user needs to perform the payment. This is done through an external provider sdk. When completing the payment, the [API needs to be informed about the payment][payment].
+
 ### Definition
 
 ```nginx
@@ -340,3 +342,4 @@ Status: 200 OK
   [locations]:      /api/locations/
   [cars]:           /api/cars/
   [phone_numbers]:  /api/phone_numbers/
+  [payment]:        /api/payments/
