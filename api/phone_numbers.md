@@ -53,7 +53,7 @@ Location: {{ site.parku.api }}/phone_numbers/151
 ### Definition
 
 ```nginx
-GET {{ site.parku.api }}/phone_numbers/{phone_number_id}
+GET {{ site.parku.api }}/phone_numbers/:phone_number_id
 ```
 
 ### Arguments
@@ -88,7 +88,7 @@ Status: 200 OK
 ### Definition
 
 ```nginx
-PUT {{ site.parku.api }}/phone_numbers/{phone_number_id}
+PUT {{ site.parku.api }}/phone_numbers/:phone_number_id
 ```
 
 ### Arguments
@@ -123,7 +123,7 @@ Status: 200 OK
 ### Definition
 
 ```nginx
-DELETE {{ site.parku.api }}/phone_numbers/{phone_number_id}
+DELETE {{ site.parku.api }}/phone_numbers/:phone_number_id
 ```
 
 ### Arguments

@@ -93,7 +93,7 @@ Retrieves the details of an existing booking. You need only supply the unique bo
 ### Definition
 
 ```nginx
-GET {{ site.parku.api }}/bookings/{booking_id}
+GET {{ site.parku.api }}/bookings/:booking_id
 ```
 
 ### Arguments
@@ -160,7 +160,7 @@ Updates the booking by setting the values of the parameters passed. Any paramete
 ### Definition
 
 ```nginx
-PUT {{ site.parku.api }}/bookings/{booking_id}
+PUT {{ site.parku.api }}/bookings/:booking_id
 ```
 
 ### Arguments
@@ -229,7 +229,7 @@ Permanently cancels a booking. It cannot be undone.
 ### Definition
 
 ```nginx
-DELETE {{ site.parku.api }}/bookings/{booking_id}
+DELETE {{ site.parku.api }}/bookings/:booking_id
 ```
 
 ### Arguments

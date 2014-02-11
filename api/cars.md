@@ -58,7 +58,7 @@ Location: {{ site.parku.api }}/cars/23
 ### Definition
 
 ```nginx
-GET {{ site.parku.api }}/cars/{car_id}
+GET {{ site.parku.api }}/cars/:car_id
 ```
 
 ### Arguments
@@ -97,7 +97,7 @@ This request accepts mostly the same arguments as the car creation call.
 ### Definition
 
 ```nginx
-PUT {{ site.parku.api }}/cars/{car_id}
+PUT {{ site.parku.api }}/cars/:car_id
 ```
 
 ### Arguments
@@ -134,7 +134,7 @@ Status: 200 OK
 ### Definition
 
 ```nginx
-DELETE {{ site.parku.api }}/cars/{car_id}
+DELETE {{ site.parku.api }}/cars/:car_id
 ```
 
 ### Arguments
