@@ -52,11 +52,8 @@ Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
 ```json
 {
   "id": "005c4826-4e28-11e3-a675-d43d7eece53d",
-  "car": {
-    "id": "23",
-    "license_plate": "B-AB 1234",
-    "vehicle": "Polo"
-  },
+  "license_plate": "B-AB 1234",
+  "phone_number": "+493057701872",
   "location": {
     "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
     "code": "ZHRTHW",
@@ -79,10 +76,6 @@ Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
     "support": {
       "phone_number": "+41 43 928 72 52"
     }
-  },
-  "phone_number": {
-    "id": "150",
-    "phone_number": "+493057701872"
   },
   "reference": "HRS5J",
   "date_start": "{{ site.time | date: '%Y-%m-%d' }} 10:00:00{{ site.time | date: '%z' }}",
@@ -126,11 +119,8 @@ Status: 200 OK
 ```json
 {
   "id": "005c4826-4e28-11e3-a675-d43d7eece53d",
-  "car": {
-    "id": "23",
-    "license_plate": "B-AB 1234",
-    "vehicle": "Polo"
-  },
+  "license_plate": "B-AB 1234",
+  "phone_number": "+493057701872",
   "location": {
     "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
     "code": "ZHRTHW",
@@ -153,10 +143,6 @@ Status: 200 OK
     "support": {
       "phone_number": "+41 43 928 72 52"
     }
-  },
-  "phone_number": {
-    "id": "150",
-    "phone_number": "+493057701872"
   },
   "reference": "HRS5J",
   "date_start": "{{ site.time | date: '%Y-%m-%d' }} 10:00:00{{ site.time | date: '%z' }}",
@@ -182,7 +168,7 @@ PUT {{ site.parku.api }}/bookings/{booking_id}
 * __car\_id__ _optional_<br/>
   The ID of the used car. Get all cars for the user from the [`cars`][cars] request.
 * __phone\_number\_id__ _optional_<br/>
-  The ID of the phone number of the [`phone_numbers`][phone_numbers] request.
+  The ID of the phone number from the [`phone_numbers`][phone_numbers] request.
 
 ### Example Request
 
@@ -202,11 +188,8 @@ Status: 200 OK
 ```json
 {
   "id": "005c4826-4e28-11e3-a675-d43d7eece53d",
-  "car": {
-    "id": "23",
-    "license_plate": "B-AB 1234",
-    "vehicle": "Polo"
-  },
+  "license_plate": "B-AB 1234",
+  "phone_number": "+493057701872",
   "location": {
     "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
     "code": "ZHRTHW",
@@ -229,10 +212,6 @@ Status: 200 OK
     "support": {
       "phone_number": "+41 43 928 72 52"
     }
-  },
-  "phone_number": {
-    "id": "150",
-    "phone_number": "+493057701872"
   },
   "reference": "HRS5J",
   "date_start": "{{ site.time | date: '%Y-%m-%d' }} 10:00:00{{ site.time | date: '%z' }}",
@@ -310,11 +289,7 @@ Status: 200 OK
 [
   {
     "id": "0072c629-e622-11e2-8bf1-8a83f3373875",
-    "car": {
-      "id": "23",
-      "license_plate": "B-AB 1234",
-      "vehicle": "Polo"
-    },
+    "license_plate": "B-AB 1234",
     "location": {
       "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
       "code": "ZHRTHW",
@@ -338,10 +313,7 @@ Status: 200 OK
         "phone_number": "+41 43 928 72 52"
       }
     },
-    "phone_number": {
-      "id": "150",
-      "phone_number": "+493057701872"
-    },
+    "phone_number": "+493057701872",
     "reference": "HRS5J",
     "date_start": "2013-07-06 16:00:00+02:00",
     "date_end": "2013-07-07 00:00:00+02:00",
