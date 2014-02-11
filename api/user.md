@@ -107,7 +107,7 @@ Status: 200 OK
 
 Updates the user by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
 
-This request accepts mostly the same arguments as the user creation call.
+This request accepts mostly the same arguments as the user creation call. Changing the password is done through a [separate endpoint][password].
 
 ### Definition
 
@@ -118,7 +118,6 @@ PUT {{ site.parku.api }}/user
 ### Arguments
 
 * __email__ _optional_
-* __password__ _optional_
 * __country__ _optional_
   _DE_ or _CH_
 * __firstname__ _optional_
@@ -154,3 +153,5 @@ Status: 200 OK
   "token": "098f6bcd4621d373cade4e832627b4f6"
 }
 ```
+
+  [password]: /api/password/
