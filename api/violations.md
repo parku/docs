@@ -26,9 +26,9 @@ POST {{ site.parku.api }}/bookings/:booking_id/violation
 
 * __booking\_id__ _required_<br/>
   The identifier of the booking to which the violation belongs to.
-* __license\_plate___ _required_<br/>
+* __license\_plate__ _required_<br/>
   The license plate of the car that should not park on the parking space.
-* __comment___ _optional_<br/>
+* __comment__ _optional_<br/>
   An optional comment of the user.
 
 ### Example Request
@@ -142,9 +142,9 @@ PUT {{ site.parku.api }}/bookings/:booking_id/violation
 
 * __booking\_id__ _required_<br/>
   The identifier of the booking to which the violation belongs to.
-* __license\_plate___ _required_<br/>
+* __license\_plate__ _optional_<br/>
   The license plate of the car that should not park on the parking space.
-* __comment___ _optional_<br/>
+* __comment__ _optional_<br/>
   An optional comment of the user.
 
 ### Example Request
