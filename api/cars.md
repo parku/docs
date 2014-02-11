@@ -46,7 +46,7 @@ Location: {{ site.parku.api }}/cars/23
 
 ```json
 {
-  "id": "23",
+  "id": 23,
   "license_plate": "B-AB 1234",
   "vehicle": "Isetta"
 }
@@ -81,7 +81,7 @@ Status: 200 OK
 
 ```json
 {
-  "id": "23",
+  "id": 23,
   "license_plate": "B-AB 1234",
   "vehicle": "Isetta"
 }
@@ -122,7 +122,7 @@ Status: 200 OK
 
 ```json
 {
-  "id": "23",
+  "id": 23,
   "license_plate": "B-AB 1234",
   "vehicle": "Polo"
 }
