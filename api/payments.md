@@ -51,6 +51,7 @@ $ curl {{ site.parku.api }}/payment \
     -X POST \
     -d method=paypal \
     -d amount=12.50 \
+    -d currency=EUR \
     -d reference_id=AP-123456789012345 \
     -d "provider_info={\"client\":{\"paypal...}}" \
     -d booking_id=0072c629-e622-11e2-8bf1-8a83f3373875
