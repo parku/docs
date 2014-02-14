@@ -33,7 +33,7 @@ The required arguments depends on the payment method. _Credit_ does not need any
 ### Example Request
 
 ```sh
-$ curl {{ site.parku.api }}/cars \
+$ curl {{ site.parku.api }}/payment \
     -u 098f6bcd4621d373cade4e832627b4f6:parku \
     -X POST \
     -d method=paypal \
