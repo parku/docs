@@ -25,7 +25,7 @@ POST {{ site.parku.api }}/facebook/login
 ### Example Request
 
 ```sh
-$ curl {{ site.parku.api }}/facekook/login \
+$ curl {{ site.parku.api }}/facebook/login \
     -u 6f1ed002ab5595859014ebf0951522d9:parku \
     -d country=DE \
     -d access_token=1234...
