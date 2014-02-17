@@ -5,6 +5,8 @@ title: Login
 
 Checks the given credentials _email_ and _password_ for validity. Returns the user object with a user token needed for private endpoints. A _public key_ is needed.
 
+Login through Facebook is described in a [separate document][facebook].
+
 ### Definition
 
 ```nginx
@@ -50,3 +52,4 @@ Status: 200 OK
 All further requests using the token as [HTTP Basic Auth][HTTP Basic Auth] username are made on behalf of the user.
 
   [HTTP Basic Auth]: http://en.wikipedia.org/wiki/Basic_access_authentication
+  [facebook]: /api/facebook/#login
