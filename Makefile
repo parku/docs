@@ -12,7 +12,7 @@ linklint:
 	@cp robots.txt _site/robots.txt
 
 install: uninstall
-	bundle install --binstubs vendor/bundle/bin --path vendor/bundle --without production
+	bundle install --binstubs vendor/bundle/bin --path vendor/bundle -j4 --without production
 	rm -rf vendor/bundle/ruby/*/gems/jekyll-*/test/source
 
 uninstall: clean
