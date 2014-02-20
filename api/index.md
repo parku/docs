@@ -24,7 +24,7 @@ $ curl {{ site.parku.api }}/version \
     -u 6f1ed002ab5595859014ebf0951522d9:parku
 ```
 
-### Errors
+### <a name="errors"></a>Errors
 
 parku uses conventional HTTP response codes to indicate success or failure of an API request. In general, codes in the 2xx range indicate success, codes in the 4xx range indicate an error that resulted from the provided information (e.g. a required parameter was missing, etc.), and codes in the 5xx range indicate an error with parku's servers.
 
@@ -49,6 +49,29 @@ parku uses conventional HTTP response codes to indicate success or failure of an
 
 #### Example Error
 
+```nginx
+Status: 422 Unprocessable Entity
+```
+
+```json
+{
+  "errors": [
+    {
+      "code": "missing",
+      "field": "date_start"
+    }
+  ]
+}
+```
+
+All error objects have field properties so that your client can tell what the problem is. There is also an error code to let you know what is wrong with the field. These are possible validation error codes:
+
+Error Code | Description
+-----------|------------
+missing    | The _field_ is not present.
+invalid    | The formatting of the _field_ is invalid. The documentation for that field should be able to give you more specific information.
+
+
 ### Endpoints
 
 Returns all possible endpoints.
@@ -62,6 +85,9 @@ $ curl {{ site.parku.api }} \
 
 #### Example Response
 
+```nginx
+Status: 200 OK
+```
 ```json
 {
   "urls_url": "{{ site.parku.api }}",
