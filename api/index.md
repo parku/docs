@@ -3,11 +3,16 @@ layout: page
 title: API
 ---
 
+* [Authentication](#authentication)
+* [Errors](#errors)
+* [Endpoints](#endpoints)
+
+
 The parku API is organized around [REST][REST]. Our API is designed to have predictable, resource-oriented URLs and to use HTTP response codes to indicate API errors. We use built-in HTTP features, like HTTP authentication and HTTP verbs, which can be understood by off-the-shelf HTTP clients. [JSON][JSON] will be returned in all responses from the API, including errors.
 
 You can provide the `Accept-Language` header information for all your requests. Localized content is returned when available. Default content is english.
 
-### Authentication
+### <a name="authentication"></a>Authentication
 
 Authentication to the API occurs via [HTTP Basic Auth][HTTP Basic Auth]. Provide your API key as the basic auth username. The password is always _parku_.
 
@@ -60,7 +65,7 @@ Status: 422 Unprocessable Entity
 }
 ```
 
-All error objects have field properties so that your client can tell what the problem is. There is also an error code to let you know what is wrong with the field. These are possible validation error codes:
+All error objects have _field_ properties so that your client can tell what the problem is. There is also an error _code_ to let you know what is wrong with the field. These are possible validation error codes:
 
 Error Code | Description
 -----------|------------
@@ -68,7 +73,7 @@ missing    | The _field_ is not present.
 invalid    | The formatting of the _field_ is invalid. The documentation for that field should be able to give you more specific information.
 
 
-### Endpoints
+### <a name="endpoints"></a>Endpoints
 
 Returns all possible endpoints.
 
