@@ -36,11 +36,7 @@ parku uses conventional HTTP response codes to indicate success or failure of an
     The URL to the item can be found in the
 	"Location"-Header.
 204 No Content - The request was successful.
-400 Bad Request - Often missing a required
-	parameter.
 401 Unauthorized - No valid API key provided.
-402 Request Failed - Parameters were valid but
-	request failed.
 404 Not Found - The requested item doesn't exist.
 422 Unprocessable Entity
 5xx Server errors - something went wrong on
