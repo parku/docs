@@ -71,7 +71,7 @@ Error Code | Description
 -----------|------------
 missing    | The _field_ is not present.
 invalid    | The formatting of the _field_ is invalid. The documentation for that field should be able to give you more specific information.
-dublicate  | The value for _field_ is already present in our database. Only used when trying to [create a user][createuser] with an existing email address.
+duplicate  | The value for _field_ is already present in our database. Only used when trying to [create a user][createuser] with an existing email address.
 
 
 ### <a name="endpoints"></a>Endpoints
