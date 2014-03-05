@@ -35,18 +35,15 @@ parku uses conventional HTTP response codes to indicate success or failure of an
 
 #### HTTP Status Codes Summary
 
-```nginx
-200 OK - Everything worked as expected
-201 Created - Item was created successfully.
-    The URL to the item can be found in the
-	"Location"-Header.
-204 No Content - The request was successful.
-401 Unauthorized - No valid API key provided.
-404 Not Found - The requested item doesn't exist.
-422 Unprocessable Entity
-5xx Server errors - something went wrong on
-	parku's end.
-```
+Code                | Description
+--------------------|------------
+<nobr>200 OK</nobr>              | Everything worked as expected.
+<nobr>201 Created</nobr>         | Item was created successfully. The URL to the item can be found in the "Location"-Header.
+<nobr>204 No Content</nobr>      | The request was successful.
+<nobr>401 Unauthorized</nobr>    | No valid API key provided.
+<nobr>404 Not Found</nobr>       | The requested item doesn't exist.
+<nobr>422 Unprocessable Entity</nobr> | &nbsp;
+5xx                 | Server errors - something went wrong on parku's end.
 
 #### Example Error
 
