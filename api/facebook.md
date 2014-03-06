@@ -19,6 +19,7 @@ POST {{ site.parku.api }}/facebook/login
 
 * __access\_token__ _required_<br/>
   The access token which is used to obtain information from Facebook. The token must have the permissions to get the users email.
+
 ### Example Request
 
 ```sh
