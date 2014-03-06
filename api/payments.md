@@ -3,7 +3,7 @@ layout: api
 title: Payments
 ---
 
-After [creating a booking][booking] or updating the [users credit][credit] we need some informations about the payment. The payment is usually done through an external provider (PayPal, etc.).
+After [creating a booking][booking] or when updating the users credit we need some informations about the payment. The payment is usually done through an external provider (PayPal, etc.).
 
 We need the information to verify the booking or credit charge. If no information is provided, the credit charge or the booking gets invalid.
 
@@ -41,7 +41,7 @@ The required arguments depends on the payment method.
 * __provider\_info__ _optional_<br/>
   All additional information you get returned from the payment provider. For some providers more information than the reference_id are needed.
 * __booking\_id__ _optional_<br/>
-  Add the booking_id when the payment was for a booking. If no booking_id is submitted, the amount will be added to the users credit.
+  Add the booking\_id when the payment was for a booking. If no booking\_id is submitted, the amount will be added to the users credit.
 
 ### Example Request
 
@@ -68,7 +68,4 @@ Status: 204 No Content
 ```
 
 
-
-
   [booking]:  /api/bookings/
-  [credit]:   /api/credit/

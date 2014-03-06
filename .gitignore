@@ -11,3 +11,6 @@ _site/
 
 # Sass
 .sass-cache
+
+# Linklint
+linklint/

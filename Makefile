@@ -8,7 +8,7 @@ clean:
 
 linklint:
 	@cp robots_allow.txt _site/robots.txt
-	linklint -http -host localhost:9393 -limit 1000 /@
+	linklint -http -host localhost:9393 -limit 1000 -doc linklint /@
 	@cp robots.txt _site/robots.txt
 
 install: uninstall
