@@ -36,10 +36,8 @@ The required arguments depends on the payment method.
   The amount of the payment transaction. If the amount is greater than the booking price, the difference gets added to the credit.
 * __currency__ _required_<br/>
   _CHF_ and _EUR_ are valid.
-* __reference\_id__ _required_<br/>
-  The reference id from the provider. This ID is used to validate the payment.
-* __provider\_info__ _optional_<br/>
-  All additional information you get returned from the payment provider. For some providers more information than the reference_id are needed.
+* __provider\_info__ _required_<br/>
+  All information you get returned from the payment provider. This is used for backend validation of the payment.
 * __booking\_id__ _optional_<br/>
   Add the booking\_id when the payment was for a booking. If no booking\_id is submitted, the amount will be added to the users credit.
 
