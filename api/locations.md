@@ -61,7 +61,9 @@ Status: 200 OK
       {"url": "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"},
       {"url": "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"}
     ],
-    "options": [],
+    "options": [
+      "excess length", "indoor", "disabled", "patio"
+    ],
     "notifications": [],
     "currency": "CHF",
     "support": {
