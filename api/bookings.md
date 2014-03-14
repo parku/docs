@@ -65,8 +65,7 @@ Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
     "street_number": "20",
     "postcode": "8045",
     "city": "Zürich",
-    "country": "Switzerland",
-    "sesam_use": false,
+    "country": "CH",
     "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
     "image_urls": [
       "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
@@ -133,8 +132,7 @@ Status: 200 OK
     "street_number": "20",
     "postcode": "8045",
     "city": "Zürich",
-    "country": "Switzerland",
-    "sesam_use": false,
+    "country": "CH",
     "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
     "image_urls": [
       "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
@@ -207,8 +205,7 @@ Status: 200 OK
     "street_number": "20",
     "postcode": "8045",
     "city": "Zürich",
-    "country": "Switzerland",
-    "sesam_use": false,
+    "country": "CH",
     "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
     "image_urls": [
       "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
@@ -312,8 +309,7 @@ Status: 200 OK
       "street_number": "20",
       "postcode": "8045",
       "city": "Zürich",
-      "country": "Switzerland",
-      "sesam_use": false,
+      "country": "CH",
       "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
       "image_urls": [
         "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",

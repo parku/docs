@@ -54,7 +54,7 @@ Status: 200 OK
     "street_number": "20",
     "postcode": "8045",
     "city": "Zürich",
-    "country": "Switzerland",
+    "country": "CH",
     "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
     "image_urls": [
       {"url": "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"},
