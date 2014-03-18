@@ -30,7 +30,7 @@ $ curl {{ site.parku.api }}/voucher \
 Status: 200 OK
 ```
 
-```
+```json
 {
   "gender": "female",
   "email": "test@example.com",
