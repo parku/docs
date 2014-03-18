@@ -9,7 +9,6 @@ We need the information to verify the booking or credit charge. If no informatio
 
 * [PayPal](#paypal)
 * [Braintree](#braintree)
-* [Voucher](#voucher)
 * [Credit](#credit)
 
 ## <a name="paypal"></a>PayPal
@@ -73,39 +72,6 @@ TBD
 
 TBD
 
-
-## <a name="voucher"></a>Voucher
-
-### Definition
-
-```nginx
-POST {{ site.parku.api }}/payment/voucher
-```
-
-### Arguments
-
-* __voucher__ _required_<br/>
-* __device_id__ _optional_<br/>
-  The ID of the mobile device (usually the IMEI) when voucher code can only be used once per device.
-
-### Example Request
-
-```sh
-$ curl {{ site.parku.api }}/payment/voucher \
-    -u 098f6bcd4621d373cade4e832627b4f6:parku \
-    -X POST \
-    -d voucher=parkieren2
-```
-
-### Example Response
-
-```nginx
-Status: 204 No Content
-```
-
-```
-
-```
 
 ## <a name="credit"></a>Credit
 
