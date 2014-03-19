@@ -1,0 +1,45 @@
+---
+layout: api
+title: Sesam
+---
+
+This endpoint is used to open gates and barriers. A _private key_ is needed. The user scans a QR code which is attached somewhere near the gate or barrier. The QR code contains an URL: _http://parku.ch/s/1234abcd_.
+
+The part after the last / (slash) represents the sesam ID. You have to parse the URL and create an API call with the sesam ID.
+
+![QR-code Example](http://chart.googleapis.com/chart?cht=qr&chs=247x247&chl=http://parku.ch/s/IHAFGJNL)
+
+_This QR code is valid and activates a sesam device in the parku office._
+
+### Definition
+
+```nginx
+PUT {{ site.parku.api }}/sesam/:sesam_id
+```
+
+### Arguments
+
+* __sesam\_id__ _required_<br>
+  The sesam ID which is hidden in the QR code.
+
+### Example Request
+
+```sh
+$ curl {{ site.parku.api }}/sesam/1234abcd \
+    -u 098f6bcd4621d373cade4e832627b4f6:parku
+```
+
+### Example Response
+
+```nginx
+Status: 204 No Content
+```
+
+There are three possible responses:
+
+1. `Status: 404 Not Found`<br>
+   The QR code is not valid. Either it is not a parku QR code or the QR code is outdated.
+2. `Status: 401 Unauthorized`<br>
+   The code is valid, but the user does not have the permissions to use this sesam device. Either no booking is made or the time for opening the sesam has expired.
+3. `Status: 204 No Content`<br>
+   Everything went fine. The gate/barrier connected to the sesam device should open in the next few seconds.
