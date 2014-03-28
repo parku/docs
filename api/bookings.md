@@ -6,7 +6,89 @@ title: Bookings
 
 # Bookings
 
+All API requests to `https://api.parku.ch/v4/bookings` need a __private key__.
+
+## Create a new booking
+
 TBD
+
+## Retrieve a booking
+
+TBD
+
+## Update a booking
+
+TBD
+
+## Cancel a booking
+
+TBD
+
+## List all bookings
+
+Returns a list of the user's bookings. A _private key_ is required.
+
+```sh
+$ curl {{ site.parku.api }}/bookings?count=3 \
+    -u 098f6bcd4621d373cade4e832627b4f6:parku
+```
+
+> Response
+
+```nginx
+Status: 200 OK
+```
+```json
+[
+  {
+    "id": "0072c629-e622-11e2-8bf1-8a83f3373875",
+    "license_plate": "B-AB 1234",
+    "location": {
+      "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
+      "code": "ZHRTHW",
+      "latitude": 47.365398,
+      "longitude": 8.51987,
+      "street": "Hopfenstrasse",
+      "street_number": "20",
+      "postcode": "8045",
+      "city": "Zürich",
+      "country": "CH",
+      "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
+      "image_urls": [
+        "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
+        "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"
+      ],
+      "options": [],
+      "notifications": [],
+      "currency": "CHF",
+      "support": {
+        "phone_number": "+41 43 928 72 52"
+      }
+    },
+    "phone_number": "+493057701872",
+    "reference": "HRS5J",
+    "date_start": "2013-07-06 16:00:00+02:00",
+    "date_end": "2013-07-07 00:00:00+02:00",
+    "price": 13.75,
+    "currency": "CHF",
+    "violation": null
+  },
+  {...},
+  {...}
+]
+```
+
+### HTTP Request
+
+`GET {{ site.parku.api }}/bookings`
+
+### Parameters
+
+Parameter  | Description
+---        | ---
+`count`    | A limit on the number of objects to be returned. Count can range between 1 and 100 items. __Optional, default is 10.__
+`offset`   | An offset into the list of returned items. The API will return the requested number of items starting at that offset. __Optional, default is 10.__
+
 
 <!--
 
@@ -272,75 +354,6 @@ Status: 204 No Content
 
 ```
 
-##  <a name="list"></a>List all bookings
-
-Returns a list of the user's bookings. A _private key_ is required.
-
-### Definition
-
-```nginx
-GET {{ site.parku.api }}/bookings
-```
-
-### Arguments
-
-* __count__ _optional_ - default is 10<br/>
-  A limit on the number of objects to be returned. Count can range between 1 and 100 items.
-* __offset__ _optional_ - default is 0<br/>
-  An offset into the list of returned items. The API will return the requested number of items starting at that offset.
-
-### Example Request
-
-```sh
-$ curl {{ site.parku.api }}/bookings?count=3 \
-    -u 098f6bcd4621d373cade4e832627b4f6:parku
-```
-
-### Example Response
-
-```nginx
-Status: 200 OK
-```
-
-```json
-[
-  {
-    "id": "0072c629-e622-11e2-8bf1-8a83f3373875",
-    "license_plate": "B-AB 1234",
-    "location": {
-      "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
-      "code": "ZHRTHW",
-      "latitude": 47.365398,
-      "longitude": 8.51987,
-      "street": "Hopfenstrasse",
-      "street_number": "20",
-      "postcode": "8045",
-      "city": "Zürich",
-      "country": "CH",
-      "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
-      "image_urls": [
-        "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
-        "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"
-      ],
-      "options": [],
-      "notifications": [],
-      "currency": "CHF",
-      "support": {
-        "phone_number": "+41 43 928 72 52"
-      }
-    },
-    "phone_number": "+493057701872",
-    "reference": "HRS5J",
-    "date_start": "2013-07-06 16:00:00+02:00",
-    "date_end": "2013-07-07 00:00:00+02:00",
-    "price": 13.75,
-    "currency": "CHF",
-    "violation": null
-  },
-  {...},
-  {...}
-]
-```
 
 -->
 

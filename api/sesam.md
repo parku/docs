@@ -32,7 +32,6 @@ Status: 204 No Content
 
 ```
 
-
 ### HTTP Request
 
 `PUT {{ site.parku.api }}/sesam/:sesam_id`
