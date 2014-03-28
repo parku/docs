@@ -1,7 +1,14 @@
 ---
-layout: api
+layout: page
+categories: ["API"]
 title: Payments
 ---
+
+# Payments
+
+TBD
+
+<!--
 
 After [creating a booking][booking] or when updating the users credit we need some informations about the payment. The payment is usually done through an external provider (PayPal, etc.).
 
@@ -105,6 +112,8 @@ Status: 204 No Content
 ```
 
 ```
+
+-->
 
   [booking]:  /api/bookings/
   [error]:    /api/#errors

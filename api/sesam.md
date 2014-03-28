@@ -1,7 +1,12 @@
 ---
-layout: api
+layout: page
+categories: ["API"]
 title: Sesam
 ---
+
+# Sesam
+
+All API requests to `https://api.parku.ch/v4/sesam` need a __private key__.
 
 This endpoint is used to open gates and barriers. A _private key_ is needed. The user scans a QR code which is attached somewhere near the gate or barrier. The QR code contains an URL: _http://parku.ch/s/1234abcd_.
 
@@ -11,29 +16,35 @@ The part after the last / (slash) represents the sesam ID. You have to parse the
 
 _This QR code is valid and activates a sesam device in the parku office._
 
-### Definition
-
-```nginx
-PUT {{ site.parku.api }}/sesam/:sesam_id
-```
-
-### Arguments
-
-* __sesam\_id__ _required_<br>
-  The sesam ID which is hidden in the QR code.
-
-### Example Request
+## Open Sesam
 
 ```sh
 $ curl {{ site.parku.api }}/sesam/1234abcd \
     -u 098f6bcd4621d373cade4e832627b4f6:parku
 ```
 
-### Example Response
+> Response
 
 ```nginx
 Status: 204 No Content
 ```
+```
+
+```
+
+
+### HTTP Request
+
+`PUT {{ site.parku.api }}/sesam/:sesam_id`
+
+### Parameters
+
+Parameter  | Description
+---        | ---
+`sesam_id` | The sesam ID which is hidden in the QR code. __Required.__
+
+
+### Response
 
 There are three possible responses:
 

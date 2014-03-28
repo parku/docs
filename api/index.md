@@ -3,16 +3,20 @@ layout: page
 title: API
 ---
 
-* [Authentication](#authentication)
-* [Errors](#errors)
-* [Endpoints](#endpoints)
-
+# API
 
 The parku API is organized around [REST][REST]. Our API is designed to have predictable, resource-oriented URLs and to use HTTP response codes to indicate API errors. We use built-in HTTP features, like HTTP authentication and HTTP verbs, which can be understood by off-the-shelf HTTP clients. [JSON][JSON] will be returned in all responses from the API, including errors.
 
+<!-- no
 You can provide the `Accept-Language` header information for all your requests. Localized content is returned when available. Default content is english.
+-->
 
-### <a name="authentication"></a>Authentication
+## Authentication
+
+```sh
+$ curl {{ site.parku.api }}/version \
+    -u 6f1ed002ab5595859014ebf0951522d9:parku
+```
 
 Authentication to the API occurs via [HTTP Basic Auth][HTTP Basic Auth]. Provide your API key as the basic auth username. The password is always _parku_.
 
@@ -22,30 +26,8 @@ _Private keys_ can be used to obtain public information.
 
 All API requests must be made over HTTPS. Calls made over plain HTTP will fail. You must authenticate for all requests.
 
-#### Example Request
 
-```sh
-$ curl {{ site.parku.api }}/version \
-    -u 6f1ed002ab5595859014ebf0951522d9:parku
-```
-
-### <a name="errors"></a>Errors
-
-parku uses conventional HTTP response codes to indicate success or failure of an API request. In general, codes in the 2xx range indicate success, codes in the 4xx range indicate an error that resulted from the provided information (e.g. a required parameter was missing, etc.), and codes in the 5xx range indicate an error with parku's servers.
-
-#### HTTP Status Codes Summary
-
-Code                | Description
---------------------|------------
-<nobr>200 OK</nobr>              | Everything worked as expected.
-<nobr>201 Created</nobr>         | Item was created successfully. The URL to the item can be found in the "Location"-Header.
-<nobr>204 No Content</nobr>      | The request was successful.
-<nobr>401 Unauthorized</nobr>    | No valid API key provided.
-<nobr>404 Not Found</nobr>       | The requested item doesn't exist.
-<nobr>422 Unprocessable Entity</nobr> | &nbsp;
-5xx                 | Server errors - something went wrong on parku's end.
-
-#### Example Error
+## Errors
 
 ```nginx
 Status: 422 Unprocessable Entity
@@ -62,27 +44,37 @@ Status: 422 Unprocessable Entity
 }
 ```
 
+parku uses conventional HTTP response codes to indicate success or failure of an API request. In general, codes in the 2xx range indicate success, codes in the 4xx range indicate an error that resulted from the provided information (e.g. a required parameter was missing, etc.), and codes in the 5xx range indicate an error with parku's servers.
+
+### HTTP Status Codes Summary
+
+Code   | Description
+---    |---
+`200`  | OK - Everything worked as expected.
+`201`  | Created - Item was created successfully. The URL to the item can be found in the "Location"-Header.
+`204`  | No Content - The request was successful.
+`401`  | Unauthorized - No valid API key provided.
+`404`  | Not Found - The requested item doesn't exist.
+`422`  |  Unprocessable Entity
+`5xx`  | Server errors - something went wrong on parku's end.
+
 All error objects have _field_ properties so that your client can tell what the problem is. There is also an error _code_ to let you know what is wrong with the field. These are possible validation error codes:
 
-Error Code | Description
+<nobr>Error Code</nobr> | Description
 -----------|------------
 missing    | The _field_ is not present.
 invalid    | The formatting of the _field_ is invalid. The documentation for that field should be able to give you more specific information.
 duplicate  | The value for _field_ is already present in our database. Only used when trying to [create a user][createuser] with an existing email address.
 
 
-### <a name="endpoints"></a>Endpoints
-
-Returns all possible endpoints.
-
-#### Example Request
+## Endpoints
 
 ```sh
 $ curl {{ site.parku.api }} \
     -u 6f1ed002ab5595859014ebf0951522d9:parku
 ```
 
-#### Example Response
+> Response
 
 ```nginx
 Status: 200 OK
@@ -101,10 +93,9 @@ Status: 200 OK
   "credit_url": "{{ site.parku.api }}/credit",
   "phone_numbers_url": "{{ site.parku.api }}/phone_numbers",
   "cars_url": "{{ site.parku.api }}/cars",
-  "favorites_url": "{{ site.parku.api }}/favorites",
   "bookings_url": "{{ site.parku.api }}/bookings",
-  "violation_url": "{{ site.parku.api }}/bookings/{booking_id}/violation"
-  "sesam_url": "{{ site.parku.api }}/sesam",
+  "violation_url": "{{ site.parku.api }}/bookings/{booking_id}/violation",
+  "sesam_url": "{{ site.parku.api }}/sesam"
 }
 ```
 
@@ -118,4 +109,4 @@ With a _private key_ you can access public urls.
   [HTTP Basic Auth]: http://en.wikipedia.org/wiki/Basic_access_authentication
   [HTTPS]: http://en.wikipedia.org/wiki/HTTP_Secure
   [login]: /api/login/
-  [createuser]: /api/user/#create
+  [createuser]: /api/user/#toc_1

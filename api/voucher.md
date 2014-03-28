@@ -1,21 +1,14 @@
 ---
-layout: api
+layout: page
+categories: ["API"]
 title: Voucher
 ---
 
-### Definition
+# Voucher
 
-```nginx
-PUT {{ site.parku.api }}/voucher
-```
+All API requests to `https://api.parku.ch/v4/voucher` need a __private key__.
 
-### Arguments
-
-* __voucher__ _required_<br/>
-* __device_id__ _optional_<br/>
-  The ID of the mobile device (usually the IMEI) when voucher code can only be used once per device.
-
-### Example Request
+## Redeem Voucher
 
 ```sh
 $ curl {{ site.parku.api }}/voucher \
@@ -24,12 +17,11 @@ $ curl {{ site.parku.api }}/voucher \
     -d voucher=parkieren12
 ```
 
-### Example Response
+> Response
 
 ```nginx
 Status: 200 OK
 ```
-
 ```json
 {
   "gender": "female",
@@ -44,3 +36,13 @@ Status: 200 OK
 }
 ```
 
+### HTTP Request
+
+`PUT {{ site.parku.api }}/voucher`
+
+### Parameters
+
+Parameter    | Description
+---          | ---
+`voucher`    | __Required.__
+`device_id`  | The ID of the mobile device (usually the IMEI) when voucher code can only be used once per device. _Optional._

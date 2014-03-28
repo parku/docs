@@ -1,37 +1,17 @@
 ---
-layout: api
+layout: page
+categories: ["API"]
 title: Violations
 ---
 
-* [Create a new violation](#create)
-* [Add a photo](#photo)
-* [Retrieve a violation](#retrieve)
-* [Update a violation](#update)
-* [Delete a violation](#delete)
+# Violations
 
-All API requests for violations need a _private key_. You can store one violation per booking. A violation report is done in two steps:
+All API requests `https://api.parku.ch/v4/bookings/:booking_id/violation` need a __private key__. You can store one violation per booking. A violation report is done in two steps:
 
-1. [Create a new violation](#create)
-2. [Add a photo](#photo)
+1. [Create a new violation](#toc_1)
+2. [Add a photo](#toc_4)
 
-## <a name="create"></a>Create a new violation
-
-### Definition
-
-```nginx
-POST {{ site.parku.api }}/bookings/:booking_id/violation
-```
-
-### Arguments
-
-* __booking\_id__ _required_<br/>
-  The identifier of the booking to which the violation belongs to.
-* __license\_plate__ _required_<br/>
-  The license plate of the car that should not park on the parking space.
-* __comment__ _optional_<br/>
-  An optional comment of the user.
-
-### Example Request
+## Create a new violation
 
 ```sh
 $ curl {{ site.parku.api }}/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation \
@@ -40,13 +20,12 @@ $ curl {{ site.parku.api }}/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violat
     -d "comment=This car parked on my parking space!!!"
 ```
 
-### Example Response
+> Response
 
 ```nginx
 Status: 201 Created
 Location: {{ site.parku.api }}/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation
 ```
-
 ```json
 {
   "license_plate": "B-CD 4321",
@@ -55,22 +34,22 @@ Location: {{ site.parku.api }}/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/vio
 }
 ```
 
-## <a name="photo"></a>Add a photo
+### HTTP Request
+
+`POST {{ site.parku.api }}/bookings/:booking_id/violation`
+
+### Parameters
+
+Parameter       | Description
+---             | ---
+`booking_id`    | The identifier of the booking to which the violation belongs to. __Required.__
+`license_plate` | The license plate of the car that should not park on the parking space. __Required.__
+`comment`    | An optional comment of the user. _Optional._
+
+
+## Add a photo
 
 You can add one photo to the violation. If you add a new photo the previous one gets overwritten.
-
-### Definition
-
-```nginx
-PUT {{ site.parku.api }}/bookings/:booking_id/violation/image
-```
-
-### Arguments
-
-The entire `PUT` body will be treated as the file. Make sure to add the `Content-Type: application/octet-stream` to your header.
-
-
-### Example Request
 
 ```sh
 $ curl {{ site.parku.api }}/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation/image \
@@ -79,12 +58,11 @@ $ curl {{ site.parku.api }}/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violat
     -T file.jpeg
 ```
 
-### Example Response
+> Response
 
 ```nginx
 Status: 200 OK
 ```
-
 ```json
 {
   "license_plate": "B-CD 4321",
@@ -93,32 +71,27 @@ Status: 200 OK
 }
 ```
 
-## <a name="retrieve"></a>Retrieve a violation
+### HTTP Request
 
-### Definition
+`PUT {{ site.parku.api }}/bookings/:booking_id/violation/image`
 
-```nginx
-GET {{ site.parku.api }}/bookings/:booking_id/violation
-```
+### Parameters
 
-### Arguments
+The entire `PUT` body will be treated as the file. Make sure to add the `Content-Type: application/octet-stream` to your header.
 
-* __booking\_id__ _required_<br/>
-  The identifier of the booking to which the violation belongs to.
 
-### Example Request
+## Retrieve a violation
 
 ```sh
 $ curl {{ site.parku.api }}/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation \
     -u 098f6bcd4621d373cade4e832627b4f6:parku
 ```
 
-### Example Response
+> Response
 
 ```nginx
 Status: 200 OK
 ```
-
 ```json
 {
   "license_plate": "B-CD 4321",
@@ -127,41 +100,33 @@ Status: 200 OK
 }
 ```
 
+### HTTP Request
 
-## <a name="update"></a>Update a violation
+`GET {{ site.parku.api }}/bookings/:booking_id/violation`
 
-Updates the violation by setting the values of the parameters passed. Any parameters not provided will be left unchanged. The photo can be updated [through adding a new photo](#photo).
+### Parameters
 
-### Definition
+Parameter       | Description
+---             | ---
+`booking_id`    | The identifier of the booking to which the violation belongs to. __Required.__
 
-```nginx
-PUT {{ site.parku.api }}/bookings/:booking_id/violation
-```
 
-### Arguments
+## Update a violation
 
-* __booking\_id__ _required_<br/>
-  The identifier of the booking to which the violation belongs to.
-* __license\_plate__ _optional_<br/>
-  The license plate of the car that should not park on the parking space.
-* __comment__ _optional_<br/>
-  An optional comment of the user.
-
-### Example Request
+Updates the violation by setting the values of the parameters passed. Any parameters not provided will be left unchanged. The photo can be updated [through adding a new photo](#toc_4).
 
 ```sh
 $ curl {{ site.parku.api }}/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation \
     -u 098f6bcd4621d373cade4e832627b4f6:parku \
-    -X PUT
+    -X PUT \
     -d "license_plate=B-DC 4321"
 ```
 
-### Example Response
+> Response
 
 ```nginx
 Status: 200 OK
 ```
-
 ```json
 {
   "license_plate": "B-DC 4321",
@@ -170,33 +135,42 @@ Status: 200 OK
 }
 ```
 
+### HTTP Request
 
-## <a name="delete"></a>Delete a violation
+`PUT {{ site.parku.api }}/bookings/:booking_id/violation`
 
-### Definition
+### Parameters
 
-```nginx
-DELETE {{ site.parku.api }}/bookings/:booking_id/violation
-```
+Parameter       | Description
+---             | ---
+`booking_id`    | The identifier of the booking to which the violation belongs to. __Required.__
+`license_plate` | The license plate of the car that should not park on the parking space. _Optional._
+`comment`       | An optional comment of the user. _Optional._
 
-### Arguments
 
-* __booking\_id__ _required_<br/>
-  The identifier of the booking to which the violation belongs to.
-
-### Example Request
+## Delete a violation
 
 ```sh
 $ curl {{ site.parku.api }}/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation \
-    -u 098f6bcd4621d373cade4e832627b4f6:parku
+    -u 098f6bcd4621d373cade4e832627b4f6:parku \
     -X DELETE
 ```
 
-### Example Response
+> Response
 
 ```nginx
 Status: 204 No Content
 ```
+```
 
 ```
 
+### HTTP Request
+
+`DELETE {{ site.parku.api }}/bookings/:booking_id/violation`
+
+### Parameters
+
+Parameter       | Description
+---             | ---
+`booking_id`    | The identifier of the booking to which the violation belongs to. __Required.__

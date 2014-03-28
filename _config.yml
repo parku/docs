@@ -1,30 +1,41 @@
-# Dependencies
-markdown:     redcarpet
-pygments:     true
+# GitHub Pages
+# None of these can actually be changed
+safe:     true
+lsi:      false
+pygments: true
 
+# Formatting
+markdown: redcarpet
 redcarpet:
-  extensions: ["tables"]
+  extensions: [
+    "autolink"
+  , "tables"
+  , "strikethrough"
+  , "with_toc_data"
+  , "fenced_code_blocks"
+  , "no_intra_emphasis"
+  ]
 
 # Permalinks
-permalink:    pretty
-#permalink:    /:categories/:title.html
+permalink: pretty
 
-# Setup
+# File inclusion (these would otherwise be hidden)
+include: ["_assets", "_search.json"]
+
+exclude: [CNAME, Gemfile, Gemfile.lock, Makefile, README.md, LICENSE, vendor, robots_*, linklint]
+
+# Project specific
+# Remember to change these!
+baseurl:
 title:        parku
-tagline:      'The developer guides to parku'
+tagline:      The developer guides to parku
+description:
 url:          http://developer.parku.ch
 
 author:
-  name:       'parku'
-  url:        http://parku.ch
-
-# paginate:     10
-
-github:
-  repo:       https://github.com/parku/docs
+  name:       Danilo Braband
+  url:        https://github.com/dabio
 
 parku:
   url:        https://api.parku.ch
   api:        https://api.parku.ch/v4
-
-exclude: [CNAME, Gemfile, Gemfile.lock, Makefile, README.md, LICENSE, vendor, robots_*]

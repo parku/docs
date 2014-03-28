@@ -1,26 +1,14 @@
 ---
-layout: api
+layout: page
+categories: ["API"]
 title: Login
 ---
+
+# Login
 
 Checks the given credentials _email_ and _password_ for validity. Returns the user object with a user token needed for private endpoints. A _public key_ is needed.
 
 Login through Facebook is described in a [separate document][facebook].
-
-### Definition
-
-```nginx
-POST {{ site.parku.api }}/login
-```
-
-### Arguments
-
-* __email__ _required_
-  The users email address.
-* __password__ _required_
-  The users password.
-
-### Example Request
 
 ```sh
 $ curl {{ site.parku.api }}/login \
@@ -29,12 +17,11 @@ $ curl {{ site.parku.api }}/login \
     -d password=1234pwd
 ```
 
-### Example Response
+> Response
 
 ```nginx
 Status: 200 OK
 ```
-
 ```json
 {
   "gender": "male",
@@ -49,7 +36,18 @@ Status: 200 OK
 }
 ```
 
+### HTTP Request
+
+`POST {{ site.parku.api }}/login`
+
+### Parameters
+
+Parameter	  | Description
+---					| ---
+`email`			| The users email address. __Required.__
+`password`	 | The users password. __Required.__
+
 All further requests using the token as [HTTP Basic Auth][HTTP Basic Auth] username are made on behalf of the user.
 
   [HTTP Basic Auth]: http://en.wikipedia.org/wiki/Basic_access_authentication
-  [facebook]: /api/facebook/#login
+  [facebook]: /api/facebook/#toc_1

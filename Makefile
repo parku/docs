@@ -13,7 +13,9 @@ linklint:
 
 install: uninstall
 	bundle install --binstubs vendor/bundle/bin --path vendor/bundle -j4 --without production
-	rm -rf vendor/bundle/ruby/*/gems/jekyll-*/test/source
+	rm -rf vendor/bundle/ruby/*/gems/jekyll-*/test
+	rm -fr vendor/bundle/ruby/*/gems/jekyll-*/lib/site_template
+	rm -fr vendor/bundle/ruby/*/gems/jekyll-*/site
 
 uninstall: clean
 	rm -rf Gemfile.lock vendor/ .bundle/

@@ -1,31 +1,16 @@
 ---
-layout: api
+layout: page
+categories: ["API"]
 title: Phone Numbers
 ---
 
-* [Create a new phone number](#create)
-* [Retrieve a phone number](#retrieve)
-* [Update a phone number](#update)
-* [Delete a phone number](#delete)
-* [List all phone numbers](#list)
+# Phone Numbers
 
 All API requests to `{{ site.parku.api }}/phone_numbers` need a _private key_.
 
-## <a name="create"></a>Create a new phone number
+## Create a new phone number
 
 You can store multiple phone numbers for a user.
-
-### Definition
-
-```nginx
-POST {{ site.parku.api }}/phone_numbers
-```
-
-### Arguments
-
-* __phone\_number__ _required_<br/>
-
-### Example Request
 
 ```sh
 $ curl {{ site.parku.api }}/phone_numbers \
@@ -33,13 +18,12 @@ $ curl {{ site.parku.api }}/phone_numbers \
     -d "phone_number=+493057701873"
 ```
 
-### Example Response
+> Response
 
 ```nginx
 Status: 201 Created
 Location: {{ site.parku.api }}/phone_numbers/151
 ```
-
 ```json
 {
   "id": "151",
@@ -47,28 +31,25 @@ Location: {{ site.parku.api }}/phone_numbers/151
 }
 ```
 
+### HTTP Request
 
-## <a name="retrieve"></a>Retrieve a phone number
+`POST {{ site.parku.api }}/phone_numbers`
 
-### Definition
+### Parameters
 
-```nginx
-GET {{ site.parku.api }}/phone_numbers/:phone_number_id
-```
+Parameter      | &nbsp;
+---            | ---
+`phone_number` | __Required.__
 
-### Arguments
 
-* __phone\_number\_id__ _required_<br/>
-  The identifier of the phone number to be retrieved.
-
-### Example Request
+## Retrieve a phone number
 
 ```sh
 $ curl {{ site.parku.api }}/phone_numbers/151 \
     -u 098f6bcd4621d373cade4e832627b4f6:parku
 ```
 
-### Example Response
+> Response
 
 ```nginx
 Status: 200 OK
@@ -81,21 +62,18 @@ Status: 200 OK
 }
 ```
 
+### HTTP Request
 
-## <a name="update"></a>Update a phone number
+`GET {{ site.parku.api }}/phone_numbers/:phone_number_id`
+
+### Parameters
+
+Parameter         | Description
+---               | ---
+`phone_number_id` | The identifier of the phone number to be retrieved. __Required.__
 
 
-### Definition
-
-```nginx
-PUT {{ site.parku.api }}/phone_numbers/:phone_number_id
-```
-
-### Arguments
-
-* __phone\_number__ _required_<br/>
-
-### Example Request
+## Update a phone number
 
 ```sh
 $ curl {{ site.parku.api }}/phone_numbers/151 \
@@ -104,12 +82,11 @@ $ curl {{ site.parku.api }}/phone_numbers/151 \
     -d "phone_number=+493057701874"
 ```
 
-### Example Response
+> Response
 
 ```nginx
 Status: 200 OK
 ```
-
 ```json
 {
   "id": 151,
@@ -117,21 +94,19 @@ Status: 200 OK
 }
 ```
 
+### HTTP Request
 
-## <a name="delete"></a>Delete a phone number
+`PUT {{ site.parku.api }}/phone_numbers/:phone_number_id`
 
-### Definition
+### Parameters
 
-```nginx
-DELETE {{ site.parku.api }}/phone_numbers/:phone_number_id
-```
+Parameter         | Description
+---               | ---
+`phone_number_id` | The identifier of the phone number to be updated. __Required.__
+`phone_number`    | __Required.__
 
-### Arguments
 
-* __phone\_number__ _required_<br/>
-  The identifier of the phone number to be deleted.
-
-### Example Request
+## Delete a phone number
 
 ```sh
 $ curl {{ site.parku.api }}/phone_numbers/151 \
@@ -139,35 +114,36 @@ $ curl {{ site.parku.api }}/phone_numbers/151 \
     -X DELETE
 ```
 
-### Example Response
+> Response
 
 ```nginx
 Status: 204 No Content
 ```
-
 ```
 
 ```
 
+### HTTP Request
 
-## <a name="list"></a>List all phone numbers
+`DELETE {{ site.parku.api }}/phone_numbers/:phone_number_id`
+
+### Parameters
+
+Parameter         | Description
+---               | ---
+`phone_number_id` | The identifier of the phone number to be deleted. __Required.__
+
+
+## List all phone numbers
 
 Returns a list of all phone numbers of the user. The phone numbers are returned sorted by creation date, with the most recently created phone number appearing first.
-
-### Definition
-
-```nginx
-GET {{ site.parku.api }}/phone_numbers
-```
-
-### Example Request
 
 ```sh
 $ curl {{ site.parku.api }}/phone_numbers \
     -u 098f6bcd4621d373cade4e832627b4f6:parku
 ```
 
-### Example Response
+> Response
 
 ```nginx
 Status: 200 OK
@@ -188,3 +164,7 @@ Status: 200 OK
 ]
 ```
 
+
+### HTTP Request
+
+`GET {{ site.parku.api }}/phone_numbers`
