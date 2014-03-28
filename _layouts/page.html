@@ -2,7 +2,18 @@
 layout: default
 ---
 
-<div class="page">
-  <h1 class="page-title">{{ page.title }}</h1>
-  {{ content }}
+<div class="toc-wrapper">
+  {% include partials/search.html %}
+
+  <h3>Documentation</h3>
+  <div class="toc nav">
+    {% include partials/nav.html context="/" %}
+  </div>
+</div>
+
+<div class="page-wrapper">
+  <div class="content float-view markdown-body js-markdown-body">
+    {{ content }}
+  </div>
+  <div class="code-canvas"></div>
 </div>

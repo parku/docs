@@ -1,34 +1,14 @@
 ---
-layout: api
+layout: page
+categories: ["API"]
 title: User
 ---
 
-* [Create a new user](#create)
-* [Retrieve a user](#retrieve)
-* [Update a user](#update)
+# User
 
-## <a name="create"></a>Create a new user
+## Create a new user
 
 Creates a new user object. A _public key_ is required.
-
-### Definition
-
-```nginx
-POST {{ site.parku.api }}/user
-```
-
-### Arguments
-
-* __email__ _required_
-* __password__ _required_
-* __country__ _required_
-  _DE_ or _CH_
-* __firstname__ _required_
-* __lastname__ _required_
-* __gender__ _optional_
-  _male_ or _female_
-
-### Example Request
 
 ```sh
 $ curl {{ site.parku.api }}/user \
@@ -41,15 +21,12 @@ $ curl {{ site.parku.api }}/user \
     -d gender=female
 ```
 
-### Example Response
-
-The newly created user object with private key gets returned.
+> Response
 
 ```nginx
 Status: 201 Created
 Location: {{ site.parku.api }}/user
 ```
-
 ```json
 {
   "gender": "female",
@@ -64,30 +41,36 @@ Location: {{ site.parku.api }}/user
 }
 ```
 
+### HTTP Request
 
-## <a name="retrieve"></a>Retrieve a user
+`POST {{ site.parku.api }}/user`
+
+### Parameters
+
+Parameter    | Description
+---          | ---
+`email`      | __Required.__
+`password`   | __Required.__
+`country`    | _DE_ or _CH_ __Required.__
+`firstname`  | __Required.__
+`lastname`   | __Required.__
+`gender`     | _male_ or _female_. _Optional._
+
+
+## Retrieve a user
 
 Returns the user object for the private key. A _private key_ is required.
-
-### Definition
-
-```nginx
-GET {{ site.parku.api }}/user
-```
-
-### Example Request
 
 ```sh
 $ curl {{ site.parku.api }}/user \
     -u 098f6bcd4621d373cade4e832627b4f6:parku
 ```
 
-### Example Response
+> Response
 
 ```nginx
 Status: 200 OK
 ```
-
 ```json
 {
   "gender": "female",
@@ -101,31 +84,16 @@ Status: 200 OK
   "token": "098f6bcd4621d373cade4e832627b4f6"
 }
 ```
+### HTTP Request
+
+`GET {{ site.parku.api }}/user`
 
 
-## <a name="update"></a>Update a user
+## Update a user
 
 Updates the user by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
 
 This request accepts mostly the same arguments as the user creation call. Changing the password is done through a [separate endpoint][password].
-
-### Definition
-
-````nginx
-PUT {{ site.parku.api }}/user
-````
-
-### Arguments
-
-* __email__ _optional_
-* __country__ _optional_
-  _DE_ or _CH_
-* __firstname__ _optional_
-* __lastname__ _optional_
-* __gender__ _optional_
-  _male_ or _female_
-
-### Example Request
 
 ```sh
 $ curl {{ site.parku.api }}/user \
@@ -134,12 +102,11 @@ $ curl {{ site.parku.api }}/user \
     -d country=CH
 ```
 
-### Example Response
+> Response
 
 ```nginx
 Status: 200 OK
 ```
-
 ```json
 {
   "gender": "female",
@@ -153,5 +120,21 @@ Status: 200 OK
   "token": "098f6bcd4621d373cade4e832627b4f6"
 }
 ```
+
+### HTTP Request
+
+`PUT {{ site.parku.api }}/user`
+
+### Parameters
+
+Parameter    | Description
+---          | ---
+`email`      | _Optional._
+`password`   | _Optional._
+`country`    | _DE_ or _CH_ _Optional._
+`firstname`  | _Optional._
+`lastname`   | __Optional._
+`gender`     | _male_ or _female_. _Optional._
+
 
   [password]: /api/password/

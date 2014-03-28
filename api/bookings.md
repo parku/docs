@@ -1,7 +1,14 @@
 ---
-layout: api
+layout: page
+categories: ["API"]
 title: Bookings
 ---
+
+# Bookings
+
+TBD
+
+<!--
 
 * [Create a new booking](#create)
 * [Retrieve a booking](#retrieve)
@@ -334,6 +341,8 @@ Status: 200 OK
   {...}
 ]
 ```
+
+-->
 
   [locations]:      /api/locations/
   [cars]:           /api/cars/

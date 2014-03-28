@@ -1,26 +1,16 @@
 ---
-layout: api
+layout: page
+categories: ["API"]
 title: Facebook
 ---
 
+# Facebook
+
 There is currently only one endpoint available for Facebook.
 
-## <a name="login"></a>Login
+## Login
 
 A _public key_ is required.
-
-### Definition
-
-````nginx
-POST {{ site.parku.api }}/facebook/login
-````
-
-### Arguments
-
-* __access\_token__ _required_<br/>
-  The access token which is used to obtain information from Facebook. The token must have the permissions to get the users email.
-
-### Example Request
 
 ```sh
 $ curl {{ site.parku.api }}/facebook/login \
@@ -28,12 +18,11 @@ $ curl {{ site.parku.api }}/facebook/login \
     -d access_token=1234...
 ```
 
-### Example Response
+> Response
 
 ```nginx
 Status: 200 OK
 ```
-
 ```json
 {
   "gender": "male",
@@ -48,9 +37,19 @@ Status: 200 OK
 }
 ```
 
+### HTTP Request
+
+`POST {{ site.parku.api }}/facebook/login`
+
+### Parameters
+
+Parameter      | Description
+---            | ---
+`access_token` | The access token which is used to obtain information from Facebook. The token must have the permissions to get the users email. __Required.__
+
 When a new user was created through Facebook, the _country_ is not set. In this case, you _must_ ask the user for the _country_ and [update the user profile][update-user] accordingly.
 
 All further requests using the token as [HTTP Basic Auth][HTTP Basic Auth] username are made on behalf of the user.
 
-  [update-user]: /api/user/#update
+  [update-user]: /api/user/#toc_6
   [HTTP Basic Auth]: http://en.wikipedia.org/wiki/Basic_access_authentication
