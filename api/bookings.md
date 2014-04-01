@@ -87,7 +87,7 @@ Status: 200 OK
 Parameter  | Description
 ---        | ---
 `count`    | A limit on the number of objects to be returned. Count can range between 1 and 100 items. __Optional, default is 10.__
-`offset`   | An offset into the list of returned items. The API will return the requested number of items starting at that offset. __Optional, default is 10.__
+`offset`   | An offset into the list of returned items. The API will return the requested number of items starting at that offset. __Optional, default is 0.__
 
 
 <!--
