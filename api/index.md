@@ -61,11 +61,11 @@ Code   | Description
 All error objects have _field_ properties so that your client can tell what the problem is. There is also an error _code_ to let you know what is wrong with the field. These are possible validation error codes:
 
 <nobr>Error Code</nobr> | Description
------------|------------
-missing    | The _field_ is not present.
-invalid    | The formatting of the _field_ is invalid. The documentation for that field should be able to give you more specific information.
-duplicate  | The value for _field_ is already present in our database. Only used when trying to [create a user][createuser] with an existing email address.
-
+---          |---
+`missing`    | The _field_ is not present.
+`invalid`    | The formatting of the _field_ is invalid. The documentation for that field should be able to give you more specific information.
+`duplicate`  | The value for _field_ is already present in our database. Only used when trying to [create a user][createuser] with an existing email address.
+`extra_field`| The _field_ should not be present.
 
 ## Endpoints
 
