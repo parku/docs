@@ -10,7 +10,91 @@ All API requests to `https://api.parku.ch/v4/bookings` need a __private key__.
 
 ## Create a new booking
 
-TBD
+```sh
+$ curl {{ site.parku.api }}/bookings?with=paypal \
+    -u 098f6bcd4621d373cade4e832627b4f6:parku \
+    -d location_id=00cd7cfd-e42d-11e2-8bf1-8a83f3373875 \
+    -d "date_start={{ site.time | date: '%Y-%m-%d' }} 10:00:00{{ site.time | date: '%z' }}" \
+    -d "date_end={{ site.time | date: '%Y-%m-%d' }} 16:30:00{{ site.time | date: '%z' }}" \
+    -d "license_plate=B-AB 1234" \
+    -d "phone_number=+493057701873" \
+    -d 'provider_info={
+  "client": {
+    "environment": "sandbox",
+    "paypal_sdk_version": "2.0.1",
+    "platform": "iOS",
+    "product_name": "PayPal iOS SDK"
+  },
+  "response": {
+    "create_time": "2014-03-31T12:51:14Z",
+    "id": "PAY-1CM399047K4649003KM4WJQQ",
+    "intent": "authorize",
+    "state": "approved"
+  },
+  "response_type": "payment"
+}'
+```
+
+> Response
+
+```nginx
+Status: 201 Created
+Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
+```
+
+```json
+{
+  "id": "005c4826-4e28-11e3-a675-d43d7eece53d",
+  "license_plate": "B-AB 1234",
+  "phone_number": "+493057701872",
+  "location": {
+    "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
+    "code": "ZHRTHW",
+    "latitude": 47.365398,
+    "longitude": 8.51987,
+    "street": "Hopfenstrasse",
+    "street_number": "20",
+    "postcode": "8045",
+    "city": "Zürich",
+    "country": "CH",
+    "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
+    "image_urls": [
+      "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
+      "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"
+    ],
+    "options": [],
+    "notifications": [],
+    "currency": "CHF",
+    "support": {
+      "phone_number": "+41 43 928 72 52"
+    }
+  },
+  "reference": "HRS5J",
+  "date_start": "{{ site.time | date: '%Y-%m-%d' }} 10:00:00{{ site.time | date: '%z' }}",
+  "date_end": "{{ site.time | date: '%Y-%m-%d' }} 16:30:00{{ site.time | date: '%z' }}",
+  "price": 13.75,
+  "currency": "CHF",
+  "violation": null
+}
+```
+
+### HTTP Request
+
+`POST {{ site.parku.api }}/bookings?with=payment`
+
+### Parameters
+
+Parameter      | Description
+---            | ---
+`with`         | The payment method. Available options are _paypal_, _braintree_ or _credit_. __Required.__
+`location_id`  | The ID of the location you get returned from the [`locations`][locations] request. __Required.__
+`date_start`   | __Required.__
+`date_end`     | __Required.__
+`license_plate`| The license_plate of the used car. Get all cars of a user from the [`cars`][cars] request. __Required.__
+`phone_number` | The phone number. Get all phone numbers of a user from the [`phone_numbers`][phone_numbers] request. __Required.__
+`provider_info`| The information of the payment provider to perform a payment. __Required__ for payment methods _paypal_ and _braintree_.
+
+
 
 ## Retrieve a booking
 
