@@ -8,13 +8,17 @@ title: Sesam
 
 All API requests to `https://api.parku.ch/v4/sesam` need a __private key__.
 
-This endpoint is used to open gates and barriers. A _private key_ is needed. The user scans a QR code which is attached somewhere near the gate or barrier. The QR code contains an URL: _http://parku.ch/s/1234abcd_.
+This endpoint is used to open gates and barriers. A _private key_ is needed. The user scans a QR code which is attached somewhere near the gate or barrier. The QR code contains an URL: _http://parku.ch/s/1234abcd_ or _http://parku.de/s/1234abcd_.
 
 The part after the last / (slash) represents the sesam ID. You have to parse the URL and create an API call with the sesam ID.
 
-![QR-code Example](http://chart.googleapis.com/chart?cht=qr&chs=247x247&chl=http://parku.ch/s/IHAFGJNL)
+![QR-code Example ch](http://chart.googleapis.com/chart?cht=qr&chs=247x247&chl=http://parku.ch/s/IHAFGJNL)
 
-_This QR code is valid and activates a sesam device in the parku office._
+![QR-code Example de](http://chart.googleapis.com/chart?cht=qr&chs=247x247&chl=http://parku.de/s/E14EE6T7)
+
+<style>img[alt="QR-code Example ch"] {float: right}</style>
+
+_Both QR codes are valid and activate a sesam device in the parku office._
 
 ## Open Sesam
 
