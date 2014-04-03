@@ -14,11 +14,11 @@ All API requests to `https://api.parku.ch/v4/bookings` need a __private key__.
 $ curl {{ site.parku.api }}/bookings?with=paypal \
     -u 098f6bcd4621d373cade4e832627b4f6:parku \
     -d location_id=00cd7cfd-e42d-11e2-8bf1-8a83f3373875 \
-    -d "date_start={{ site.time | date: '%Y-%m-%d' }} 10:00:00{{ site.time | date: '%z' }}" \
-    -d "date_end={{ site.time | date: '%Y-%m-%d' }} 16:30:00{{ site.time | date: '%z' }}" \
+    --data-urlencode date_start="{{ site.time | date: '%Y-%m-%d' }} 10:00:00{{ site.time | date: '%z' }}" \
+    --data-urlencode date_end="{{ site.time | date: '%Y-%m-%d' }} 16:30:00{{ site.time | date: '%z' }}" \
     -d "license_plate=B-AB 1234" \
     -d "phone_number=+493057701873" \
-    -d 'provider_info={
+    --data-urlencode 'provider_info={
   "client": {
     "environment": "sandbox",
     "paypal_sdk_version": "2.0.1",
