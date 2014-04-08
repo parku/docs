@@ -88,8 +88,8 @@ Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
 Parameter      | Description
 ---            | ---
 `location_id`  | The ID of the location you get returned from the [`locations`][locations] request. __Required.__
-`date_start`   | __Required.__
-`date_end`     | __Required.__
+`date_start`   | [ISO 8601][iso-8601] format: `{{ site.time | date_to_xmlschema }}`.  __Required.__
+`date_end`     | [ISO 8601][iso-8601] format: `{{ site.time | date_to_xmlschema }}`.  __Required.__
 `license_plate`| The license_plate of the used car. Get all cars of a user from the [`cars`][cars] request. __Required.__
 `phone_number` | The phone number. Get all phone numbers of a user from the [`phone_numbers`][phone_numbers] request. __Required.__
 `provider`     | The payment method. Available options are _paypal_, _braintree_ or _credit_. __Required.__
@@ -355,6 +355,7 @@ Status: 204 No Content
 
 -->
 
+  [iso-8601]:       http://en.wikipedia.org/wiki/ISO_8601
   [locations]:      /api/locations/
   [cars]:           /api/cars/
   [phone_numbers]:  /api/phone_numbers/
