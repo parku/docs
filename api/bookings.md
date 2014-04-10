@@ -169,7 +169,7 @@ TBD
 
 ```sh
 $ curl {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d \
-    -u 098f6bcd4621d373cade4e832627b4f6:parku
+    -u 098f6bcd4621d373cade4e832627b4f6:parku \
     -X DELETE
 ```
 
