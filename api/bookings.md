@@ -71,8 +71,8 @@ Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
     }
   },
   "reference": "HRS5J",
-  "date_start": "{{ site.time | date: '%Y-%m-%d' }} 10:00:00{{ site.time | date: '%z' }}",
-  "date_end": "{{ site.time | date: '%Y-%m-%d' }} 16:30:00{{ site.time | date: '%z' }}",
+  "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
+  "date_end": "{{ site.time | date: '%Y-%m-%d' }}T16:30:00{{ site.time | date: '%z' }}",
   "price": 13.75,
   "currency": "CHF",
   "violation": null
@@ -136,8 +136,8 @@ Status: 200 OK
     }
   },
   "reference": "HRS5J",
-  "date_start": "{{ site.time | date: '%Y-%m-%d' }} 10:00:00{{ site.time | date: '%z' }}",
-  "date_end": "{{ site.time | date: '%Y-%m-%d' }} 16:30:00{{ site.time | date: '%z' }}",
+  "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
+  "date_end": "{{ site.time | date: '%Y-%m-%d' }}T16:30:00{{ site.time | date: '%z' }}",
   "price": 13.75,
   "currency": "CHF",
   "violation": {
@@ -167,7 +167,30 @@ TBD
 
 ## Cancel a booking
 
-TBD
+```sh
+$ curl {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d \
+    -u 098f6bcd4621d373cade4e832627b4f6:parku
+    -X DELETE
+```
+
+> Response
+
+```nginx
+Status: 204 No Content
+```
+
+Permanently cancels a booking. It cannot be undone.
+
+### HTTP Request
+
+`DELETE {{ site.parku.api }}/bookings/:booking_id`
+
+### Parameters
+
+Parameter      | Description
+---            | ---
+`booking_id`   | The identifier of the booking to be canceled. __Required.__
+
 
 ## List all bookings
 
@@ -212,8 +235,8 @@ Status: 200 OK
     },
     "phone_number": "+493057701872",
     "reference": "HRS5J",
-    "date_start": "2013-07-06 16:00:00+02:00",
-    "date_end": "2013-07-07 00:00:00+02:00",
+    "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
+    e"date_end": "{{ site.time | date: '%Y-%m-%d' }}T16:30:00{{ site.time | date: '%z' }}",
     "price": 13.75,
     "currency": "CHF",
     "violation": null
@@ -318,39 +341,6 @@ Status: 200 OK
 }
 ```
 
-
-##  <a name="cancel"></a>Cancel a booking
-
-Permanently cancels a booking. It cannot be undone.
-
-### Definition
-
-```nginx
-DELETE {{ site.parku.api }}/bookings/:booking_id
-```
-
-### Arguments
-
-* __booking\_id__ _required_<br/>
-  The identifier of the booking to be canceled.
-
-### Example Request
-
-```sh
-$ curl {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d \
-    -u 098f6bcd4621d373cade4e832627b4f6:parku
-    -X DELETE
-```
-
-### Example Response
-
-```nginx
-Status: 204 No Content
-```
-
-```
-
-```
 
 
 -->
