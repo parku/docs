@@ -98,6 +98,8 @@ Parameter      | Description
 
 ## Retrieve a booking
 
+Retrieves the details of an existing booking. You need only supply the unique booking identifier that was returned upon booking creation.
+
 ```sh
 $ curl {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d \
     -u 098f6bcd4621d373cade4e832627b4f6:parku
@@ -148,8 +150,6 @@ Status: 200 OK
 }
 ```
 
-Retrieves the details of an existing booking. You need only supply the unique booking identifier that was returned upon booking creation.
-
 ### HTTP Request
 
 `GET {{ site.parku.api }}/bookings/:booking_id`
@@ -163,9 +163,74 @@ Parameter      | Description
 
 ## Update a booking
 
-TBD
+Updates the booking by setting the values of the parameters passes. Any parameter not provided will be left unchanges.
+
+```sh
+$ curl {{ site.parku.api }}/bookings \
+    -u 098f6bcd4621d373cade4e832627b4f6:parku \
+    -X PUT \
+    --data-urlencode license_plate="B-BC 4567" \
+    --data-urlencode phone_number="+493057701871"
+```
+
+> Response
+
+```nginx
+Status: 200 OK
+```
+
+```json
+{
+  "id": "005c4826-4e28-11e3-a675-d43d7eece53d",
+  "license_plate": "B-BC 4567",
+  "phone_number": "+493057701871",
+  "location": {
+    "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
+    "code": "ZHRTHW",
+    "latitude": 47.365398,
+    "longitude": 8.51987,
+    "street": "Hopfenstrasse",
+    "street_number": "20",
+    "postcode": "8045",
+    "city": "Zürich",
+    "country": "CH",
+    "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
+    "image_urls": [
+      "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
+      "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"
+    ],
+    "options": [],
+    "notifications": [],
+    "currency": "CHF",
+    "support": {
+      "phone_number": "+41 43 928 72 52"
+    }
+  },
+  "reference": "HRS5J",
+  "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
+  "date_end": "{{ site.time | date: '%Y-%m-%d' }}T16:30:00{{ site.time | date: '%z' }}",
+  "price": 13.75,
+  "currency": "CHF",
+  "violation": null
+}
+```
+
+### HTTP Request
+
+`PUT {{ site.parku.api }}/bookings/:booking_id`
+
+### Parameters
+
+Parameter      | Description
+---            | ---
+`booking_id`   | The identifier of the booking to be updated. __Required.__
+`license_plate`| The license_plate of the used car.
+`phone_number` | The phone number.
+
 
 ## Cancel a booking
+
+Permanently cancels a booking. It cannot be undone.
 
 ```sh
 $ curl {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d \
@@ -178,8 +243,6 @@ $ curl {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d \
 ```nginx
 Status: 204 No Content
 ```
-
-Permanently cancels a booking. It cannot be undone.
 
 ### HTTP Request
 
