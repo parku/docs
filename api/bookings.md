@@ -75,7 +75,39 @@ Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
   "date_end": "{{ site.time | date: '%Y-%m-%d' }}T16:30:00{{ site.time | date: '%z' }}",
   "price": 13.75,
   "currency": "CHF",
-  "violation": null
+  "violation": null,
+  "extend": [
+    {
+      "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
+      "date_end": "{{ site.time | date: '%Y-%m-%d' }}T17:00:00{{ site.time | date: '%z' }}",
+      "price": 1.25,
+      "currency": "CHF"
+    },
+    {
+      "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
+      "date_end": "{{ site.time | date: '%Y-%m-%d' }}T17:30:00{{ site.time | date: '%z' }}",
+      "price": 2.5,
+      "currency": "CHF"
+    },
+    {
+      "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
+      "date_end": "{{ site.time | date: '%Y-%m-%d' }}T18:30:00{{ site.time | date: '%z' }}",
+      "price": 5,
+      "currency": "CHF"
+    },
+    {
+      "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
+      "date_end": "{{ site.time | date: '%Y-%m-%d' }}T19:30:00{{ site.time | date: '%z' }}",
+      "price": 7.5,
+      "currency": "CHF"
+    },
+    {
+      "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
+      "date_end": "{{ site.time | date: '%Y-%m-%d' }}T21:30:00{{ site.time | date: '%z' }}",
+      "price": 7.5,
+      "currency": "CHF"
+    }
+  ]
 }
 ```
 
@@ -146,7 +178,39 @@ Status: 200 OK
     "license_plate": "B-DC 4321",
     "comment": "This car parked on my parking space!!!",
     "image_url": "{{ site.parku.url }}/images/reports/12.jpeg"
-  }
+  },
+  "extend": [
+    {
+      "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
+      "date_end": "{{ site.time | date: '%Y-%m-%d' }}T17:00:00{{ site.time | date: '%z' }}",
+      "price": 1.25,
+      "currency": "CHF"
+    },
+    {
+      "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
+      "date_end": "{{ site.time | date: '%Y-%m-%d' }}T17:30:00{{ site.time | date: '%z' }}",
+      "price": 2.5,
+      "currency": "CHF"
+    },
+    {
+      "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
+      "date_end": "{{ site.time | date: '%Y-%m-%d' }}T18:30:00{{ site.time | date: '%z' }}",
+      "price": 5,
+      "currency": "CHF"
+    },
+    {
+      "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
+      "date_end": "{{ site.time | date: '%Y-%m-%d' }}T19:30:00{{ site.time | date: '%z' }}",
+      "price": 7.5,
+      "currency": "CHF"
+    },
+    {
+      "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
+      "date_end": "{{ site.time | date: '%Y-%m-%d' }}T21:30:00{{ site.time | date: '%z' }}",
+      "price": 7.5,
+      "currency": "CHF"
+    }
+  ]
 }
 ```
 
@@ -170,7 +234,9 @@ $ curl {{ site.parku.api }}/bookings \
     -u 098f6bcd4621d373cade4e832627b4f6:parku \
     -X PUT \
     --data-urlencode license_plate="B-BC 4567" \
-    --data-urlencode phone_number="+493057701871"
+    --data-urlencode phone_number="+493057701871" \
+    --data-urlencode date_end="{{ site.time | date: '%Y-%m-%d' }}T17:00:00{{ site.time | date: '%z' }}" \
+    -d provider=credit
 ```
 
 > Response
@@ -208,7 +274,7 @@ Status: 200 OK
   },
   "reference": "HRS5J",
   "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
-  "date_end": "{{ site.time | date: '%Y-%m-%d' }}T16:30:00{{ site.time | date: '%z' }}",
+  "date_end": "{{ site.time | date: '%Y-%m-%d' }}T17:00:00{{ site.time | date: '%z' }}",
   "price": 13.75,
   "currency": "CHF",
   "violation": null
@@ -226,6 +292,9 @@ Parameter      | Description
 `booking_id`   | The identifier of the booking to be updated. __Required.__
 `license_plate`| The license_plate of the used car.
 `phone_number` | The phone number.
+`date_end`     | The new datetime when extending the booking.
+`provider`     | __Required__ when extending the booking.
+`provider_info`| The information of the payment provider to perform a payment. __Required__ when extending a booking and for payment methods _paypal_ and _braintree_.
 
 
 ## Cancel a booking
