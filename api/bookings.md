@@ -225,6 +225,42 @@ Parameter      | Description
 `booking_id`   | The identifier of the booking to be retrieved. __Required.__
 
 
+## Custom extend prices
+
+Retrieving a booking returns a few prices for standard intervals. Use this endpoint for custom intervals.
+
+```sh
+$ curl {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d/extend?date_end={{ site.time | date: '%Y-%m-%d' }}T17:45:00{{ site.time | date: '%z' }} \
+    -u 098f6bcd4621d373cade4e832627b4f6:parku
+```
+
+> Response
+
+```nginx
+Status: 200 OK
+```
+```json
+{
+  "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
+  "date_end": "{{ site.time | date: '%Y-%m-%d' }}T17:45:00{{ site.time | date: '%z' }}",
+  "price": 3.15,
+  "currency": "CHF"
+}
+```
+
+### HTTP Request
+
+`GET {{ site.parku.api }}/bookings/:booking_id/extend?date_end=:date_end`
+
+### Parameters
+
+Parameter      | Description
+---            | ---
+`booking_id`   | The identifier of the booking to be updated. __Required.__
+`date_end`     | The customized datetime. __Required.__
+
+If the booking cannot be extended for the given date, the HTTP status code `404` is returned.
+
 ## Update a booking
 
 Updates the booking by setting the values of the parameters passes. Any parameter not provided will be left unchanges.
