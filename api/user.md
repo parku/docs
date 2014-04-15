@@ -133,7 +133,7 @@ Parameter    | Description
 `password`   | _Optional._
 `country`    | _DE_ or _CH_ _Optional._
 `firstname`  | _Optional._
-`lastname`   | __Optional._
+`lastname`   | _Optional._
 `gender`     | _male_ or _female_. _Optional._
 
 
