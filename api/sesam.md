@@ -20,6 +20,7 @@ The part after the last / (slash) represents the sesam ID. You have to parse the
 
 _Both QR codes are valid and activate a sesam device in the parku office._
 
+
 ## Open Sesam
 
 ```sh
@@ -57,3 +58,25 @@ There are three possible responses:
    The code is valid, but the user does not have the permissions to use this sesam device. Either no booking is made or the time for opening the sesam has expired.
 3. `Status: 204 No Content`<br>
    Everything went fine. The gate/barrier connected to the sesam device should open in the next few seconds.
+
+
+## Sesam Available
+
+Endpoint gives you the information whether the user can open a sesam device now or in the near future.
+
+If a booking with a sesam device is available, the result will be `204 No Content` otherwise `404 Not Found`.
+
+```sh
+$ curl {{ site.parku.api }}/sesam \
+    -u 098f6bcd4621d373cade4e832627b4f6:parku
+```
+
+> Response
+
+```nginx
+Status: 204 No Content
+```
+
+### HTTP Request
+
+`GET {{ site.parku.api }}/sesam`
