@@ -422,96 +422,11 @@ Status: 200 OK
 
 Parameter  | Description
 ---        | ---
-`count`    | A limit on the number of objects to be returned. Count can range between 1 and 100 items. __Optional, default is 10.__
-`offset`   | An offset into the list of returned items. The API will return the requested number of items starting at that offset. __Optional, default is 0.__
+`count`    | A limit on the number of objects to be returned. Count can range between 1 and 100 items. _Optional, default is 10._
+`offset`   | An offset into the list of returned items. The API will return the requested number of items starting at that offset. _Optional, default is 0._
 
 The result will be ordered by start and end date. The latest bookings will be first.
 
-
-<!--
-
-* [Update a booking](#update)
-* [Cancel a booking](#cancel)
-* [List all bookings](#list)
-
-All API requests to `{{ site.parku.api }}/bookings` need a _private key_.
-
-
-##  <a name="update"></a>Update a booking
-
-Updates the booking by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
-
-### Definition
-
-```nginx
-PUT {{ site.parku.api }}/bookings/:booking_id
-```
-
-### Arguments
-
-* __car\_id__ _optional_<br/>
-  The ID of the used car. Get all cars for the user from the [`cars`][cars] request.
-* __phone\_number\_id__ _optional_<br/>
-  The ID of the phone number from the [`phone_numbers`][phone_numbers] request.
-
-### Example Request
-
-```sh
-$ curl {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d \
-    -u 098f6bcd4621d373cade4e832627b4f6:parku
-    -X PUT
-    -d car_id=117
-```
-
-### Example Response
-
-```nginx
-Status: 200 OK
-```
-
-```json
-{
-  "id": "005c4826-4e28-11e3-a675-d43d7eece53d",
-  "license_plate": "B-AB 1234",
-  "phone_number": "+493057701872",
-  "location": {
-    "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
-    "code": "ZHRTHW",
-    "latitude": 47.365398,
-    "longitude": 8.51987,
-    "street": "Hopfenstrasse",
-    "street_number": "20",
-    "postcode": "8045",
-    "city": "Zürich",
-    "country": "CH",
-    "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
-    "image_urls": [
-      "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
-      "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"
-    ],
-    "options": [],
-    "notifications": [],
-    "currency": "CHF",
-    "support": {
-      "phone_number": "+41 43 928 72 52"
-    }
-  },
-  "reference": "HRS5J",
-  "date_start": "{{ site.time | date: '%Y-%m-%d' }} 10:00:00{{ site.time | date: '%z' }}",
-  "date_end": "{{ site.time | date: '%Y-%m-%d' }} 16:30:00{{ site.time | date: '%z' }}",
-  "price": 13.75,
-  "currency": "CHF",
-  "violation": {
-    "license_plate": "B-DC 4321",
-    "comment": "This car parked on my parking space!!!",
-    "image_url": "{{ site.parku.url }}/images/reports/12.jpeg"
-  }
-}
-```
-
-
-
--->
 
   [iso-8601]:       http://en.wikipedia.org/wiki/ISO_8601
   [locations]:      /api/locations/
