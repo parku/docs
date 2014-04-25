@@ -127,6 +127,11 @@ Parameter      | Description
 `provider`     | The payment method. Available options are _paypal_, _braintree_ or _credit_. __Required.__
 `provider_info`| The information of the payment provider to perform a payment. __Required__ for payment methods _paypal_ and _braintree_.
 
+#### Provider Info
+
+The field provider info should contain required payment information. Typically you just forward the info from your request to the payment provider into this field.
+
+* __PayPal__
 
 ## Retrieve a booking
 
