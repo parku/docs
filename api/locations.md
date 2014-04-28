@@ -6,7 +6,9 @@ title: Locations
 
 # Locations
 
-Get locations of parking spaces. A _public key_ is needed.
+All API requests to `{{ site.parku.api }}/locations` need a __private key__.
+
+## List Locations
 
 ```sh
 $ curl {{ site.parku.api }}/locations \
@@ -70,3 +72,34 @@ Parameter		 | Description
 If only one parameter of the pairs _ne_ - _sw_ or _date\_start_ - _date\_end_ is provided, the other parameter gets skipped.
 
 If no parameter is given, all parking spaces are returned. Keep in mind, that some of them might not be available at the current time.
+
+
+## Terms and Conditions
+
+Each location can have different terms and conditions. With this endpoint you can retrieve location based terms and conditions.
+
+```sh
+$ curl {{ site.parku.api }}/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/terms \
+		-u 6f1ed002ab5595859014ebf0951522d9:parku
+```
+
+> Response
+
+```nginx
+Status: 200 OK
+```
+```html
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"...
+
+```
+
+### HTTP Request
+
+`GET {{ site.parku.api }}/locations/:location_id/terms`
+
+### Parameters
+
+Parameter		| Description
+---					| ---
+`location_id`| The location you like to retrieve the T&C for. __Required.__
