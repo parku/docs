@@ -19,21 +19,7 @@ $ curl {{ site.parku.api }}/bookings \
     --data-urlencode date_start="{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}" \
     --data-urlencode date_end="{{ site.time | date: '%Y-%m-%d' }}T16:30:00{{ site.time | date: '%z' }}" \
     -d provider=paypal \
-    --data-urlencode 'provider_info={
-  "client": {
-    "environment": "sandbox",
-    "paypal_sdk_version": "2.0.1",
-    "platform": "iOS",
-    "product_name": "PayPal iOS SDK"
-  },
-  "response": {
-    "create_time": "2014-03-31T12:51:14Z",
-    "id": "PAY-1CM399047K4649003KM4WJQQ",
-    "intent": "authorize",
-    "state": "approved"
-  },
-  "response_type": "payment"
-}'
+    -d provider_info=PAY-1CM399047K4649003KM4WJQQ
 ```
 
 > Response
@@ -75,39 +61,7 @@ Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
   "date_end": "{{ site.time | date: '%Y-%m-%d' }}T16:30:00{{ site.time | date: '%z' }}",
   "price": 13.75,
   "currency": "CHF",
-  "violation": null,
-  "extend": [
-    {
-      "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
-      "date_end": "{{ site.time | date: '%Y-%m-%d' }}T17:00:00{{ site.time | date: '%z' }}",
-      "price": 1.25,
-      "currency": "CHF"
-    },
-    {
-      "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
-      "date_end": "{{ site.time | date: '%Y-%m-%d' }}T17:30:00{{ site.time | date: '%z' }}",
-      "price": 2.5,
-      "currency": "CHF"
-    },
-    {
-      "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
-      "date_end": "{{ site.time | date: '%Y-%m-%d' }}T18:30:00{{ site.time | date: '%z' }}",
-      "price": 5,
-      "currency": "CHF"
-    },
-    {
-      "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
-      "date_end": "{{ site.time | date: '%Y-%m-%d' }}T19:30:00{{ site.time | date: '%z' }}",
-      "price": 7.5,
-      "currency": "CHF"
-    },
-    {
-      "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
-      "date_end": "{{ site.time | date: '%Y-%m-%d' }}T21:30:00{{ site.time | date: '%z' }}",
-      "price": 7.5,
-      "currency": "CHF"
-    }
-  ]
+  "violation": null
 }
 ```
 
@@ -131,7 +85,17 @@ Parameter      | Description
 
 The field provider info should contain required payment information. Typically you just forward the info from your request to the payment provider into this field.
 
-* __PayPal__
+* __PayPal__<br/>
+  You can either use the complete PayPal response or just add the payment ID: `provider_info=PAY-1CM399047K4649003KM4WJQQ`
+* __Braintree__<br/>
+  There are two ways to pay with braintree:
+  1. _CreditCard-ID_: retrieve the Card ID through the [payment endpoint][payment-cc] and add it to the request:<br/>
+    `provider_info[id]=gphsyb`
+  2. _CreditCard Credentials_:<br/>
+    `provider_info[number]=EncryptedCreditCardNumber`<br/>
+    `provider_info[expiration_date]=EncryptedExpirationDate`<br/>
+    `provider_info[cvv]=EncryptedCvv`
+
 
 ## Retrieve a booking
 
@@ -438,3 +402,4 @@ The result will be ordered by start and end date. The latest bookings will be fi
   [cars]:           /api/cars/
   [phone_numbers]:  /api/phone_numbers/
   [payment]:        /api/payments/
+  [payment-cc]:     /api/payment/#toc_1
