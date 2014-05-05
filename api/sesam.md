@@ -64,7 +64,7 @@ There are three possible responses:
 
 Endpoint gives you the information whether the user can open a sesam device now or in the near future.
 
-If a booking with a sesam device is available, the result will be `204 No Content` otherwise `404 Not Found`.
+If a booking with a sesam device is available, the result will be `200 OK` with a few sesam related information, otherwise `404 Not Found`.
 
 ```sh
 $ curl {{ site.parku.api }}/sesam \
@@ -74,7 +74,16 @@ $ curl {{ site.parku.api }}/sesam \
 > Response
 
 ```nginx
-Status: 204 No Content
+Status: 200 OK
+```
+```json
+[
+  {
+    "support": {
+      "phone_number": "+41 43 928 72 52"
+    }
+  }
+]
 ```
 
 ### HTTP Request
