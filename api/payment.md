@@ -46,31 +46,6 @@ Status: 200 OK
 `GET {{ site.parku.api }}/payment/creditcards`
 
 
-## Get Credit
-
-Request shows the credit of the current user.
-
-```sh
-$ curl {{ site.parku.api }}/payment/credit \
-    -u 098f6bcd4621d373cade4e832627b4f6:parku
-```
-
-> Response
-
-```nginx
-Status: 200 OK
-```
-```json
-{
-  "credit": 32
-}
-```
-
-### HTTP Request
-
-`GET {{ site.parku.api }}/payment/credit`
-
-
 ## Update Credit
 
 Top up the credit of the user.
@@ -91,7 +66,15 @@ Status: 200 OK
 ```
 ```json
 {
-  "credit": 42
+  "gender": "female",
+  "email": "test@example.com",
+  "firstname": "Test",
+  "lastname": "Name",
+  "credit": 10,
+  "currency": "EUR",
+  "country": "DE",
+  "facebook_id": null,
+  "token": "098f6bcd4621d373cade4e832627b4f6"
 }
 ```
 
