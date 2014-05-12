@@ -63,7 +63,7 @@ All error objects have _field_ properties so that your client can tell what the 
 ## Endpoints
 
 ```sh
-$ curl {{ site.parku.api }} \
+$ curl {{ site.parku.api }}/ \
     -u 6f1ed002ab5595859014ebf0951522d9:parku
 ```
 
@@ -74,7 +74,7 @@ Status: 200 OK
 ```
 ```json
 {
-  "urls_url": "{{ site.parku.api }}",
+  "urls_url": "{{ site.parku.api }}/",
   "version_url": "{{ site.parku.api }}/version",
   "locations_url": "{{ site.parku.api }}/locations",
   "terms_url": "{{ site.parku.api }}/terms",

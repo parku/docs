@@ -2,7 +2,7 @@
 # None of these can actually be changed
 safe:     true
 lsi:      false
-pygments: true
+highlighter: pygments
 
 # Formatting
 markdown: redcarpet
