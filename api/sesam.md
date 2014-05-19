@@ -6,7 +6,7 @@ title: Sesam
 
 # Sesam
 
-All API requests to `https://api.parku.ch/v4/sesam` need a __private key__.
+All API requests to `{{ site.parku.api }}/sesam` need a __private key__.
 
 This endpoint is used to open gates and barriers. A _private key_ is needed. The user scans a QR code which is attached somewhere near the gate or barrier. The QR code contains an URL: _http://parku.ch/s/1234abcd_ or _http://parku.de/s/1234abcd_.
 

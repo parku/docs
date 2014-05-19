@@ -37,5 +37,5 @@ author:
   url:        https://github.com/dabio
 
 parku:
-  url:        https://api.parku.ch
-  api:        https://api.parku.ch/v4
+  url:        https://parku.ch
+  api:        https://parku.ch/v4

@@ -6,7 +6,7 @@ title: Bookings
 
 # Bookings
 
-All API requests to `https://api.parku.ch/v4/bookings` need a __private key__.
+All API requests to `{{ site.parku.api }}/bookings` need a __private key__.
 
 ## Create a new booking
 

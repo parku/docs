@@ -6,7 +6,7 @@ title: Violations
 
 # Violations
 
-All API requests `https://api.parku.ch/v4/bookings/:booking_id/violation` need a __private key__. You can store one violation per booking. A violation report is done in two steps:
+All API requests `{{ site.parku.api }}/bookings/:booking_id/violation` need a __private key__. You can store one violation per booking. A violation report is done in two steps:
 
 1. [Create a new violation](#toc_1)
 2. [Add a photo](#toc_4)
