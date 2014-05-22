@@ -389,10 +389,12 @@ Status: 200 OK
 
 ### Parameters
 
-Parameter  | Description
----        | ---
-`count`    | A limit on the number of objects to be returned. Count can range between 1 and 100 items. _Optional, default is 10._
-`offset`   | An offset into the list of returned items. The API will return the requested number of items starting at that offset. _Optional, default is 0._
+Parameter   | Description
+---         | ---
+`count`     | A limit on the number of objects to be returned. Count can range between 1 and 100 items. _Optional, default is 10._
+`offset`    | An offset into the list of returned items. The API will return the requested number of items starting at that offset. _Optional, default is 0._
+`date_start`| Filter bookings, shows past bookings. _Optional_, allowed parameter value is `past`.
+`date_end`  | Filter bookings, shows future and current bookings. _Optional_, allowed parameter value is `future`.
 
 The result will be ordered by start and end date. The latest bookings will be first.
 
