@@ -373,7 +373,7 @@ Status: 200 OK
     "phone_number": "+493057701872",
     "reference": "HRS5J",
     "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
-    e"date_end": "{{ site.time | date: '%Y-%m-%d' }}T16:30:00{{ site.time | date: '%z' }}",
+    "date_end": "{{ site.time | date: '%Y-%m-%d' }}T16:30:00{{ site.time | date: '%z' }}",
     "price": 13.75,
     "currency": "CHF",
     "violation": null
