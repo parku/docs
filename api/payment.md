@@ -51,7 +51,7 @@ Status: 200 OK
 Top up the credit of the user.
 
 ```sh
-$ curl {{ site.parku.api }}/payment/creditcards \
+$ curl {{ site.parku.api }}/payment/credit \
     -u 098f6bcd4621d373cade4e832627b4f6:parku \
     -X PUT \
     -d amount=10 \
