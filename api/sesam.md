@@ -77,13 +77,13 @@ $ curl {{ site.parku.api }}/sesam \
 Status: 200 OK
 ```
 ```json
-[
-  {
-    "support": {
-      "phone_number": "+41 43 928 72 52"
+{
+  "support": {
+    "phone_number": {
+      "phone_number": "+49 123 456 789"
     }
   }
-]
+}
 ```
 
 ### HTTP Request
