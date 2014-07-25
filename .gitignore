@@ -14,3 +14,6 @@ _site/
 
 # Linklint
 linklint/
+
+# phpstorm
+.idea/
