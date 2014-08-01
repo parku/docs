@@ -1,20 +1,19 @@
 ---
 layout: page
 categories: ["API"]
-title: Messages
+title: Launch Messages
 ---
 
 # Messages
 
-All API requests to `{{ site.parku.api }}/messages` needs a _private key_.
+All API requests to `{{ site.parku.api }}/launch_messages` needs a _private key_.
 
-# Request Messages
+# Request Launch Messages
 
 ```sh
-$ curl {{ site.parku.api }}/messages \
+$ curl {{ site.parku.api }}/launch_messages \
     -G \
     -u 098f6bcd4621d373cade4e832627b4f6:parku \
-    -d platform=android \
     -d os=Android \
 	-d os_version=4.4 \
 	-d adjust_id=132 \
@@ -47,13 +46,12 @@ Status: 200 OK
 
 ### HTTP Request
 
-`GET {{ site.parku.api }}/messages`
+`GET {{ site.parku.api }}/launch_messages`
 
 ### Parameters
 
 Parameter		 | Description
 ---					 | ---
-`platform`					| Platform (android, ios, web) _(if applicable)_
 `os`					| Operating system (Android, iOS, OS X, Windows, Windows Phone, Firefox OS, Chrome OS, Linux, Other) _(if applicable)_
 `os_version`					| OS Version _(if applicable)_
 `adjust_id`					| Adjust ID _(if applicable)_
