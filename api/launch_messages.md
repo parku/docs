@@ -12,14 +12,14 @@ All API requests to `{{ site.parku.api }}/launch_messages` needs a _private key_
 
 ```sh
 $ curl {{ site.parku.api }}/launch_messages \
-    -G \
     -u 098f6bcd4621d373cade4e832627b4f6:parku \
     -d os=Android \
 	-d os_version=4.4 \
 	-d adjust_id=132 \
 	-d advertisement_id=13 \
 	-d device_main_id=62c7c7042511c086 \
-	-d device_other_ids=1,2,3 \
+	-d device_other_ids["example_id"]=123 \
+	-d device_other_ids["another_example_id"]=456 \
 	-d app_version=1.0 \
 	-d app_build_version=1.0 \
 ```
@@ -46,7 +46,7 @@ Status: 200 OK
 
 ### HTTP Request
 
-`GET {{ site.parku.api }}/launch_messages`
+`POST {{ site.parku.api }}/launch_messages`
 
 ### Parameters
 
@@ -57,7 +57,7 @@ Parameter		 | Description
 `adjust_id`					| Adjust ID _(if applicable)_
 `advertisement_id`					| Advertisement ID _(if applicable)_
 `device_main_id`					| Device unique ID depending on os and os version (INID, IMEI, UDID, DUID, BB Pin) _(if applicable)_
-`device_other_ids`					| Comma separated list of other Android or iOS IDs _(if applicable)_
+`device_other_ids`					| Other Android or iOS IDs as a dictionary _(if applicable)_
 `app_version`					| App version _(if applicable)_
 `app_build_version`					| App build version _(if applicable)_
 
