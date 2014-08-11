@@ -12,6 +12,7 @@ All API requests to `{{ site.parku.api }}/launch_messages` needs a _private key_
 
 ```sh
 $ curl {{ site.parku.api }}/launch_messages \
+    -X POST \
     -u 098f6bcd4621d373cade4e832627b4f6:parku \
     -d os=Android \
 	-d os_version=4.4 \
