@@ -4,7 +4,9 @@ categories: ["API"]
 title: Launch Messages
 ---
 
-# Messages
+# Launch Messages
+
+Provides launch messages based on the given data.
 
 All API requests to `{{ site.parku.api }}/launch_messages` needs a _private key_.
 
@@ -34,11 +36,11 @@ Status: 200 OK
 [
     {
         "id": "1",
-        "type": "???",
+        "type": "critical",
         "title": "Obsolete",
         "message": "Please update your application",
-        "call_to_action_text": "???",
-        "call_to_action_link": "http://someupdates???"
+        "call_to_action_text": "OK",
+        "call_to_action_link": "app://deeplink"
     },
     {...},
     {...}
@@ -63,4 +65,17 @@ Parameter		 | Description
 `app_build_version`					| App build version _(if applicable)_
 
 
+
+### Response
+
+Response contains a list of messages
+
+Key		 | Description
+---					 | ---
+`id`					| Message id
+`type`					| Type can be one of the following [critical, warning, info]
+`title`					| Message title
+`message`					| Message content
+`call_to_action_text`					| Button or link text
+`call_to_action_link`					| Can be a in app deep link, a link to the app store, a link to our website
 
