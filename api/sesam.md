@@ -25,7 +25,8 @@ _Both QR codes are valid and activate a sesam device in the parku office._
 
 ```sh
 $ curl {{ site.parku.api }}/sesam/1234abcd \
-    -u 098f6bcd4621d373cade4e832627b4f6:parku
+    -u 098f6bcd4621d373cade4e832627b4f6:parku \
+    -X PUT
 ```
 
 > Response
