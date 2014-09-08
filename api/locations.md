@@ -14,8 +14,8 @@ All API requests to `{{ site.parku.api }}/locations` need a __private key__.
 $ curl {{ site.parku.api }}/locations \
 			?sw=45.74001,5.67868 \
 			&ne=47.74236,10.24900 \
-			&date_start={{ site.time | date: '%Y-%m-%d' }} 10:00:00{{ site.time | date: '%z' }} \
-			&date_end={{ site.time | date: '%Y-%m-%d' }} 16:30:00{{ site.time | date: '%z' }} \
+			&date_start={{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }} \
+			&date_end={{ site.time | date: '%Y-%m-%d' }}T16:30:00{{ site.time | date: '%z' }} \
 		-u 6f1ed002ab5595859014ebf0951522d9:parku
 ```
 
@@ -64,10 +64,10 @@ Status: 200 OK
 
 Parameter		 | Description
 ---					 | ---
-`sw`					| Comma separated latitude and longitude of the southwest position. _Optional._
-`ne`					| Comma separated latitude and longitude of the northeast position. _Optional._
-`date_start`	| Filter parking spaces for the start date. _Optional._
-`date_end`		| Filter parking spaces for the end date. _Optional._
+`sw`					| Comma separated latitude and longitude of the southwest position. _Required. Will become optional._
+`ne`					| Comma separated latitude and longitude of the northeast position. _Required. Will become optional._
+`date_start`	| Filter parking spaces for the start date. _Required. Will become optional._
+`date_end`		| Filter parking spaces for the end date. _Required. Will become optional._
 
 If only one parameter of the pairs _ne_ - _sw_ or _date\_start_ - _date\_end_ is provided, the other parameter gets skipped.
 
