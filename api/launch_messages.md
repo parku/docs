@@ -8,7 +8,7 @@ title: Launch Messages
 
 Provides launch messages based on the given data.
 
-All API requests to `{{ site.parku.api }}/launch_messages` needs a _private key_.
+All API requests to `{{ site.parku.api }}/launch_messages` needs a _public key_.
 
 # Request Launch Messages
 
