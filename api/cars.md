@@ -15,7 +15,8 @@ All API requests to `{{ site.parku.api }}/cars` need a __private key__.
 $ curl {{ site.parku.api }}/cars \
     -u 098f6bcd4621d373cade4e832627b4f6:parku \
     -d "license_plate=B-AB 1234" \
-    -d vehicle=Isetta
+    -d vehicle=Isetta \
+    -d country=DE
 ```
 
 > Response
@@ -28,7 +29,8 @@ Location: {{ site.parku.api }}/cars/23
 {
   "id": 23,
   "license_plate": "B-AB 1234",
-  "vehicle": "Isetta"
+  "vehicle": "Isetta",
+  "country": "DE"
 }
 ```
 
@@ -43,7 +45,8 @@ You can store multiple cars for a user.
 Parameter      | Description
 ---            | ---
 `license_plate`| The license plate for the stored car. __Required.__
-`vehicle`      | A name for the car to be identified easier.
+`vehicle`      | A name for the car to be identified easier. _Optional_
+`country`      | The country code the license plate (_DE_ or _CH_). _Optional_
 
 
 ## Retrieve a car
@@ -62,7 +65,8 @@ Status: 200 OK
 {
   "id": 23,
   "license_plate": "B-AB 1234",
-  "vehicle": "Isetta"
+  "vehicle": "Isetta",
+  "country": "DE"
 }
 ```
 
@@ -99,7 +103,8 @@ Status: 200 OK
 {
   "id": 23,
   "license_plate": "B-AB 1234",
-  "vehicle": "Polo"
+  "vehicle": "Polo",
+  "country": "DE"
 }
 ```
 
@@ -110,8 +115,9 @@ Status: 200 OK
 Parameter      | Description
 ---            | ---
 `car_id`       | The identifier of the car to update. __Required.__
-`license_plate`| The license plate for the stored car.
-`vehicle`      | A name for the car to be identified easier.
+`license_plate`| The license plate for the stored car. _Optional_
+`vehicle`      | A name for the car to be identified easier. _Optional_
+`country`      | The country code the license plate (_DE_ or _CH_). _Optional_
 
 
 ## Delete a car
@@ -159,12 +165,14 @@ Status: 200 OK
   {
     "id": 22,
     "vehicle": "Ducati Monster S4Rs",
-    "license_plate": "ABCDE1234"
+    "license_plate": "ABCDE1234",
+    "country": "DE"
   },
   {
     "id": 21,
     "vehicle": "Harley Davidson FortyEight 1200",
-    "license_plate": "ABCDE2345"
+    "license_plate": "ABCDE2345",
+    "country": "DE"
   },
   {...},
   {...}
