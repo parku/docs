@@ -6,17 +6,17 @@ title: Locations
 
 # Locations
 
-All API requests to `{{ site.parku.api }}/locations` need a __private key__.
+All API requests to `{{ site.parku.api }}/locations` need a at require a _public key_.
 
 ## List Locations
 
 ```sh
 $ curl {{ site.parku.api }}/locations \
-			?sw=45.74001,5.67868 \
-			&ne=47.74236,10.24900 \
-			&date_start={{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }} \
-			&date_end={{ site.time | date: '%Y-%m-%d' }}T16:30:00{{ site.time | date: '%z' }} \
-		-u 6f1ed002ab5595859014ebf0951522d9:parku
+        ?sw=45.74001,5.67868 \
+        &ne=47.74236,10.24900 \
+        &date_start={{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }} \
+        &date_end={{ site.time | date: '%Y-%m-%d' }}T16:30:00{{ site.time | date: '%z' }} \
+    -u 6f1ed002ab5595859014ebf0951522d9:parku
 ```
 
 > Response
@@ -26,33 +26,33 @@ Status: 200 OK
 ```
 ```json
 [
-	{
-		"id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
-		"code": "ZHRTHW",
-		"latitude": 47.365398,
-		"longitude": 8.51987,
-		"street": "Hopfenstrasse",
-		"street_number": "20",
-		"postcode": "8045",
-		"city": "Zürich",
-		"country": "CH",
-		"description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
-		"image_urls": [
-			"http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
-			"http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"
-		],
-		"options": [
-			"excess length", "indoor", "disabled", "patio", "barrier"
-		],
-		"notifications": [],
-		"currency": "CHF",
-		"support": {
-			"phone_number": "+41 43 928 72 52"
-		},
-		"price": 3.5
-	},
-	{...},
-	{...}
+    {
+        "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
+        "code": "ZHRTHW",
+        "latitude": 47.365398,
+        "longitude": 8.51987,
+        "street": "Hopfenstrasse",
+        "street_number": "20",
+        "postcode": "8045",
+        "city": "Zürich",
+        "country": "CH",
+        "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
+        "image_urls": [
+            "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
+            "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"
+        ],
+        "options": [
+            "excess length", "indoor", "disabled", "patio", "barrier"
+        ],
+        "notifications": [],
+        "currency": "CHF",
+        "support": {
+            "phone_number": "+41 43 928 72 52"
+        },
+        "price": 3.5
+    },
+    {...},
+    {...}
 ]
 ```
 
@@ -62,17 +62,20 @@ Status: 200 OK
 
 ### Parameters
 
-Parameter		 | Description
----					 | ---
-`sw`					| Comma separated latitude and longitude of the southwest position. _Required. Will become optional._
-`ne`					| Comma separated latitude and longitude of the northeast position. _Required. Will become optional._
-`date_start`	| Filter parking spaces for the start date. _Required. Will become optional._
-`date_end`		| Filter parking spaces for the end date. _Required. Will become optional._
+Parameter | Description
+--- | ---
+`sw` | Comma separated latitude and longitude of the southwest position. _Required. Will become optional._
+`ne` | Comma separated latitude and longitude of the northeast position. _Required. Will become optional._
+`date_start` | Filter parking spaces for the start date. _Required. Will become optional._
+`date_end` | Filter parking spaces for the end date. _Required. Will become optional._
 
-If only one parameter of the pairs _ne_ - _sw_ or _date\_start_ - _date\_end_ is provided, the other parameter gets skipped.
+Available options for a parking space are:
 
-If no parameter is given, all parking spaces are returned. Keep in mind, that some of them might not be available at the current time.
-
+* `excess length` The parking space can be used by cars with a small trailer.
+* `indoor` The parking space has a roof or can be an underground garage.
+* `disabled` Parking space is accessible for diabled people.
+* `patio` The parking space is located at an inner courtyard.
+* `barrier` Parking space has a barrier and user needs a smartphone to open it.
 
 ## Terms and Conditions
 
@@ -80,7 +83,7 @@ Each location can have different terms and conditions. With this endpoint you ca
 
 ```sh
 $ curl {{ site.parku.api }}/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/terms \
-		-u 6f1ed002ab5595859014ebf0951522d9:parku
+    -u 6f1ed002ab5595859014ebf0951522d9:parku
 ```
 
 > Response
