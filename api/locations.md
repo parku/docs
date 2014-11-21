@@ -66,8 +66,8 @@ Parameter | Description
 --- | ---
 `sw` | Comma separated latitude and longitude of the southwest position. _Required. Will become optional._
 `ne` | Comma separated latitude and longitude of the northeast position. _Required. Will become optional._
-`date_start` | Filter parking spaces for the start date. _Required. Will become optional._
-`date_end` | Filter parking spaces for the end date. _Required. Will become optional._
+`date_start` | Filter parking spaces for the start date. _Optional._
+`date_end` | Filter parking spaces for the end date. _Optional._
 
 Available options for a parking space are:
 
@@ -76,6 +76,8 @@ Available options for a parking space are:
 * `disabled` Parking space is accessible for diabled people.
 * `patio` The parking space is located at an inner courtyard.
 * `barrier` Parking space has a barrier and user needs a smartphone to open it.
+
+When no `date_start` or `date_end` was provided, all locations are returned. That does not mean, that they are available.
 
 ## Terms and Conditions
 
