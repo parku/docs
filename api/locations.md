@@ -131,6 +131,7 @@ Available options for a parking space are:
 * `disabled` Parking space is accessible for disabled people.
 * `patio` The parking space is located at an inner courtyard.
 * `barrier` Parking space has a barrier and user needs a smartphone to open it.
+* `charging station` Parking space with an electric vehicle charging station.
 
 When no `date_start` or `date_end` was provided, all locations are returned. That does not mean, that they are available.
 
