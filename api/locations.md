@@ -6,7 +6,62 @@ title: Locations
 
 # Locations
 
-All API requests to `{{ site.parku.api }}/locations` need a at require a _public key_.
+All API requests to `{{ site.parku.api }}/locations` require at least a _public key_.
+
+## Retrieve a Location
+
+```sh
+$ curl {{ site.parku.api }}/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875 \
+        ?date_start={{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }} \
+        &date_end={{ site.time | date: '%Y-%m-%d' }}T16:30:00{{ site.time | date: '%z' }} \
+    -u 6f1ed002ab5595859014ebf0951522d9:parku
+```
+
+> Response
+
+```nginx
+Status: 200 OK
+```
+```json
+{
+    "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
+    "code": "ZHRTHW",
+    "latitude": 47.365398,
+    "longitude": 8.51987,
+    "street": "Hopfenstrasse",
+    "street_number": "20",
+    "postcode": "8045",
+    "city": "Zürich",
+    "country": "CH",
+    "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
+    "image_urls": [
+        "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
+        "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"
+    ],
+    "options": [
+        "excess length", "indoor", "disabled", "patio", "barrier"
+    ],
+    "notifications": [],
+    "currency": "CHF",
+    "support": {
+        "phone_number": "+41 43 928 72 52"
+    },
+    "price": 3.5
+}
+```
+
+### HTTP Request
+
+`GET {{ site.parku.api }}/locations/:location_id`
+
+### Parameters
+
+Parameter | Description
+--- | ---
+`location_id` | Identifier of the location. __Required__
+`date_start` | Used to calculate the price for a location. Requires the field `date_end` to be defined. If no `date_start` or `date_end` is specified, the returned price field will be `null`. _Optional_
+`date_end` | See `date_start`. _Optional_
+
 
 ## List Locations
 
@@ -73,9 +128,10 @@ Available options for a parking space are:
 
 * `excess length` The parking space can be used by cars with a small trailer.
 * `indoor` The parking space has a roof or can be an underground garage.
-* `disabled` Parking space is accessible for diabled people.
+* `disabled` Parking space is accessible for disabled people.
 * `patio` The parking space is located at an inner courtyard.
 * `barrier` Parking space has a barrier and user needs a smartphone to open it.
+* `charging station` Parking space with an electric vehicle charging station.
 
 When no `date_start` or `date_end` was provided, all locations are returned. That does not mean, that they are available.
 
