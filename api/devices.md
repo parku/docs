@@ -28,7 +28,7 @@ Status: 204 No Content
 
 ### HTTP Request
 
-`POST {{ site.parku.api }}/device`
+`POST {{ site.parku.api }}/devices`
 
 Send the latest device identifier to the backend.
 
