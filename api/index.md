@@ -78,17 +78,19 @@ Status: 200 OK
   "version_url": "{{ site.parku.api }}/version",
   "locations_url": "{{ site.parku.api }}/locations",
   "terms_url": "{{ site.parku.api }}/terms",
+  "imprint_url": "{{ site.parku.api }}/imprint",
   "faq_url": "{{ site.parku.api }}/faq",
   "privacy_policy_url": "{{ site.parku.api }}/privacy_policy",
+  "withdrawal_url": "{{ site.parku.api }}/terms#withdrawal",
   "login_url": "{{ site.parku.api }}/login",
   "user_url": "{{ site.parku.api }}/user",
   "password_url": "{{ site.parku.api }}/password",
-  "credit_url": "{{ site.parku.api }}/credit",
   "phone_numbers_url": "{{ site.parku.api }}/phone_numbers",
   "cars_url": "{{ site.parku.api }}/cars",
   "bookings_url": "{{ site.parku.api }}/bookings",
-  "violation_url": "{{ site.parku.api }}/bookings/{booking_id}/violation",
-  "sesam_url": "{{ site.parku.api }}/sesam"
+  "violation_url": "{{ site.parku.api }}/bookings/:booking_id/violation",
+  "messages_url": "{{ site.parku.api }}/launch_messages",
+  "devices_url": "{{ site.parku.api }}/devices"
 }
 ```
 
