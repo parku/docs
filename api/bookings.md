@@ -99,10 +99,15 @@ The field provider info should contain required payment information. Typically y
 
 ## Retrieve a booking
 
-Retrieves the details of an existing booking. You need only supply the unique booking identifier that was returned upon booking creation.
+Retrieves the details of an existing booking. You need to supply either the _id_ or the _reference_ of a booking.
 
 ```sh
 $ curl {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d \
+    -u 098f6bcd4621d373cade4e832627b4f6:parku
+```
+
+```sh
+$ curl {{ site.parku.api }}/bookings/HRS5J \
     -u 098f6bcd4621d373cade4e832627b4f6:parku
 ```
 
@@ -186,12 +191,16 @@ Status: 200 OK
 ### HTTP Request
 
 `GET {{ site.parku.api }}/bookings/:booking_id`
+`GET {{ site.parku.api }}/bookings/:reference`
 
 ### Parameters
 
 Parameter      | Description
 ---            | ---
 `booking_id`   | The identifier of the booking to be retrieved. __Required.__
+               | _OR_
+`reference`    | The reference of the booking to be retrieved. __Required.__
+
 
 
 ## Custom extend prices
