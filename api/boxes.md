@@ -22,7 +22,7 @@ Status: 200 OK
 ```
 ```json
 {
-  "services": ["FEFB"],
+  "services": ["FEFB", "BEA57"],
   "identifiers": [
     {
       "identifier": "PARKU121",
