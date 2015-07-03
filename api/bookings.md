@@ -54,7 +54,8 @@ Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
     "currency": "CHF",
     "support": {
       "phone_number": "+41 43 928 72 52"
-    }
+    },
+    "address_slug": "hopfenstrasse-20"
   },
   "reference": "HRS5J",
   "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
@@ -141,7 +142,8 @@ Status: 200 OK
     "currency": "CHF",
     "support": {
       "phone_number": "+41 43 928 72 52"
-    }
+    },
+    "address_slug": "hopfenstrasse-20"
   },
   "reference": "HRS5J",
   "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
@@ -284,7 +286,8 @@ Status: 200 OK
     "currency": "CHF",
     "support": {
       "phone_number": "+41 43 928 72 52"
-    }
+    },
+    "address_slug": "hopfenstrasse-20"
   },
   "reference": "HRS5J",
   "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
@@ -377,7 +380,8 @@ Status: 200 OK
       "currency": "CHF",
       "support": {
         "phone_number": "+41 43 928 72 52"
-      }
+      },
+      "address_slug": "hopfenstrasse-20"
     },
     "phone_number": "+493057701872",
     "reference": "HRS5J",
