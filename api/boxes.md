@@ -33,15 +33,15 @@ Status: 200 OK
   "identifiers": [
     {
       "identifier": "PARKU121",
-      "device": "PRK-297"
+      "name": "PRK-297"
     },
     {
       "identifier": "PARKU3KU",
-      "device": "PRK-238"
+      "name": "PRK-238"
     },
     {
       "identifier": "6544A9B4-8539-41F9-9D0A-7FE15566EE65:34:1F",
-      "device": "PRK-238"
+      "name": "PRK-238"
     }
   ]
 }
