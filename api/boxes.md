@@ -22,15 +22,26 @@ Status: 200 OK
 ```
 ```json
 {
-  "services": ["FEFB", "BEA57"],
+  "beacons": [
+    "6544A9B4-8539-41F9-9D0A-7FE15566EE65",
+    "67D9FC16-0EBD-4779-BED7-50800367EA7B"
+  ],
+  "services": [
+    "FEFB",
+    "BEA57"
+  ],
   "identifiers": [
     {
       "identifier": "PARKU121",
-      "device": "0080254943ED"
+      "name": "PRK-297"
     },
     {
       "identifier": "PARKU3KU",
-      "device": "0080254943E5"
+      "name": "PRK-238"
+    },
+    {
+      "identifier": "6544A9B4-8539-41F9-9D0A-7FE15566EE65:34:1F",
+      "name": "PRK-238"
     }
   ]
 }
@@ -42,9 +53,15 @@ Status: 200 OK
 
 Request will return a list of all bluetooth services and boxes.
 
+### What do I get
+
+The _beacons_ directive contains all UUIDs that are used by our beacons. _Services_ are the UUIDs exposed by our sesam boxes. _Identifiers_ list all devices available.
+
 ### How to implement it
 
 The result might contain a long list of boxes. Please call this endpoint only _once a day_.
+
+The app can scan for all beacons with the given UUIDs. If one was found, the major and minor should be validated against the list of identifiers. The format is `[UUID]:[major]:[minor]`. The associated device should used for the bluetooth connection.
 
 When the app is running and bluetooth is active, start scanning for bluetooth devices that expose the given services (named _services_ in the JSON response). When the app found a few devices, start looking for the nearest devices and check the result, whether the exposed bluetooth name is in the result list (named _device_ in the JSON response).
 
