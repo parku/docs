@@ -47,7 +47,10 @@ Status: 200 OK
         "phone_number": "+41 43 928 72 52"
     },
     "price": 3.5,
-    "address_slug": "hopfenstrasse-20"
+    "address_slug": "hopfenstrasse-20",
+    "interfaces": [
+      "bt", "api"
+    ]
 }
 ```
 
@@ -106,7 +109,10 @@ Status: 200 OK
             "phone_number": "+41 43 928 72 52"
         },
         "price": 3.5,
-        "address_slug": "hopfenstrasse-20"
+        "address_slug": "hopfenstrasse-20",
+        "interfaces": [
+          "bt", "api"
+        ]
     },
     {...},
     {...}
