@@ -48,7 +48,7 @@ Status: 200 OK
     },
     "price": 3.5,
     "address_slug": "hopfenstrasse-20",
-    "open_order": [
+    "interfaces": [
       "bt", "api"
     ]
 }
@@ -110,7 +110,7 @@ Status: 200 OK
         },
         "price": 3.5,
         "address_slug": "hopfenstrasse-20",
-        "open_order": [
+        "interfaces": [
           "bt", "api"
         ]
     },

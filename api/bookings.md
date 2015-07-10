@@ -56,7 +56,7 @@ Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
       "phone_number": "+41 43 928 72 52"
     },
     "address_slug": "hopfenstrasse-20",
-    "open_order": [
+    "interfaces": [
       "bt", "api"
     ]
   },
@@ -147,7 +147,7 @@ Status: 200 OK
       "phone_number": "+41 43 928 72 52"
     },
     "address_slug": "hopfenstrasse-20",
-    "open_order": [
+    "interfaces": [
       "bt", "api"
     ]
   },
@@ -294,7 +294,7 @@ Status: 200 OK
       "phone_number": "+41 43 928 72 52"
     },
     "address_slug": "hopfenstrasse-20",
-    "open_order": [
+    "interfaces": [
       "bt", "api"
     ]
   },
@@ -391,7 +391,7 @@ Status: 200 OK
         "phone_number": "+41 43 928 72 52"
       },
       "address_slug": "hopfenstrasse-20",
-      "open_order": [
+      "interfaces": [
         "bt", "api"
       ]
     },
