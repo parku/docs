@@ -136,6 +136,5 @@ Parameter    | Description
 `firstname`  | _Optional._
 `lastname`   | _Optional._
 `gender`     | _male_ or _female_. _Optional._
-`facebook_id`| _Optional._
 
   [password]: /api/password/
