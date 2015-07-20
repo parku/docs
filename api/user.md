@@ -18,7 +18,8 @@ $ curl {{ site.parku.api }}/user \
     -d country=DE \
     -d firstname=Test \
     -d lastname=Name \
-    -d gender=female
+    -d gender=female \
+    -d facebook_id=xxx
 ```
 
 > Response
@@ -55,7 +56,7 @@ Parameter    | Description
 `firstname`  | __Required.__
 `lastname`   | __Required.__
 `gender`     | _male_ or _female_. _Optional._
-
+`facebook_id`| _Optional._
 
 ## Retrieve a user
 
@@ -135,6 +136,5 @@ Parameter    | Description
 `firstname`  | _Optional._
 `lastname`   | _Optional._
 `gender`     | _male_ or _female_. _Optional._
-
 
   [password]: /api/password/
