@@ -56,8 +56,29 @@ Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
       "phone_number": "+41 43 928 72 52"
     },
     "address_slug": "hopfenstrasse-20",
-    "interfaces": [
-      "bt", "api"
+    "gates": [
+      {
+        "type": "beacon",
+        "identifier": "A97186B0-C879-4526-93AD-29A731AB0C39:12:F5",
+        "gateways": [
+          {
+            "type": "box",
+            "name": "PRK-123"
+          },
+          {
+            "type": "api"
+          }
+        ]
+      },
+      {
+        "type": "qrcode",
+        "identifier": "PARKU3KU",
+        "gateways": [
+          {
+            "type": "api"
+          }
+        ]
+      }
     ]
   },
   "reference": "HRS5J",
@@ -147,8 +168,29 @@ Status: 200 OK
       "phone_number": "+41 43 928 72 52"
     },
     "address_slug": "hopfenstrasse-20",
-    "interfaces": [
-      "bt", "api"
+    "gates": [
+      {
+        "type": "beacon",
+        "identifier": "A97186B0-C879-4526-93AD-29A731AB0C39:12:F5",
+        "gateways": [
+          {
+            "type": "box",
+            "name": "PRK-123"
+          },
+          {
+            "type": "api"
+          }
+        ]
+      },
+      {
+        "type": "qrcode",
+        "identifier": "PARKU3KU",
+        "gateways": [
+          {
+            "type": "api"
+          }
+        ]
+      }
     ]
   },
   "reference": "HRS5J",
@@ -294,8 +336,29 @@ Status: 200 OK
       "phone_number": "+41 43 928 72 52"
     },
     "address_slug": "hopfenstrasse-20",
-    "interfaces": [
-      "bt", "api"
+    "gates": [
+      {
+        "type": "beacon",
+        "identifier": "A97186B0-C879-4526-93AD-29A731AB0C39:12:F5",
+        "gateways": [
+          {
+            "type": "box",
+            "name": "PRK-123"
+          },
+          {
+            "type": "api"
+          }
+        ]
+      },
+      {
+        "type": "qrcode",
+        "identifier": "PARKU3KU",
+        "gateways": [
+          {
+            "type": "api"
+          }
+        ]
+      }
     ]
   },
   "reference": "HRS5J",
@@ -391,8 +454,29 @@ Status: 200 OK
         "phone_number": "+41 43 928 72 52"
       },
       "address_slug": "hopfenstrasse-20",
-      "interfaces": [
-        "bt", "api"
+      "gates": [
+        {
+          "type": "beacon",
+          "identifier": "A97186B0-C879-4526-93AD-29A731AB0C39:12:F5",
+          "gateways": [
+            {
+              "type": "box",
+              "name": "PRK-123"
+            },
+            {
+              "type": "api"
+            }
+          ]
+        },
+        {
+          "type": "qrcode",
+          "identifier": "PARKU3KU",
+          "gateways": [
+            {
+              "type": "api"
+            }
+          ]
+        }
       ]
     },
     "phone_number": "+493057701872",
