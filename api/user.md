@@ -52,7 +52,7 @@ Parameter    | Description
 ---          | ---
 `email`      | __Required.__
 `password`   | __Optional.__
-`country`    | _DE_ or _CH_ __Optional.__
+`country`    | _DE_ or _CH_ __Required.__
 `firstname`  | __Required.__
 `lastname`   | __Required.__
 `gender`     | _male_ or _female_. _Optional._
