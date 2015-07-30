@@ -19,7 +19,11 @@ $ curl {{ site.parku.api }}/user \
     -d firstname=Test \
     -d lastname=Name \
     -d gender=female \
-    -d facebook_id=xxx
+    -d facebook_id=xxx \
+    -d "cars[0][license_plate]=B-AB 1234 \
+    -d &cars[0][vehicle]=Isetta" \
+    -d "phone_numbers[0][phone_number]=+493057701873 \
+    -d &phone_numbers[1][phone_number]=+401234567434"
 ```
 
 > Response
@@ -38,6 +42,16 @@ Location: {{ site.parku.api }}/user
   "currency": "EUR",
   "country": "DE",
   "facebook_id": null,
+  "cars": [{
+    "id": 12,
+    "license_plate": "B-AB 1234",
+    "vehicle": "Isetta",
+    "country": null
+  }],
+  "phone_numbers": [{
+    "id": 16696,
+    "phone_number": "099028-237489"
+  }],
   "token": "098f6bcd4621d373cade4e832627b4f6"
 }
 ```
@@ -48,15 +62,17 @@ Location: {{ site.parku.api }}/user
 
 ### Parameters
 
-Parameter    | Description
----          | ---
-`email`      | __Required.__
-`password`   | __Optional.__
-`country`    | _DE_ or _CH_ __Required.__
-`firstname`  | __Required.__
-`lastname`   | __Required.__
-`gender`     | _male_ or _female_. _Optional._
-`facebook_id`| _Optional._
+Parameter      | Description
+---            | ---
+`email`        | __Required.__
+`password`     | __Required.__
+`country`      | _DE_ or _CH_ __Required.__
+`firstname`    | __Required.__
+`lastname`     | __Required.__
+`gender`       | _male_ or _female_. _Optional._
+`facebook_id`  | _Optional._
+`cars`         | _object_ _Optional._
+`phone_numbers`| _object_ _Optional._
 
 ## Retrieve a user
 
@@ -82,6 +98,16 @@ Status: 200 OK
   "currency": "EUR",
   "country": "DE",
   "facebook_id": null,
+  "cars": [{
+    "id": 12,
+    "license_plate": "B-AB 1234",
+    "vehicle": "Isetta",
+    "country": null
+  }],
+  "phone_numbers": [{
+    "id": 16696,
+    "phone_number": "099028-237489"
+  }],
   "token": "098f6bcd4621d373cade4e832627b4f6"
 }
 ```
@@ -118,6 +144,16 @@ Status: 200 OK
   "currency": "CHF",
   "country": "CH",
   "facebook_id": null,
+  "cars": [{
+    "id": 12,
+    "license_plate": "B-AB 1234",
+    "vehicle": "Isetta",
+    "country": null
+  }],
+  "phone_numbers": [{
+    "id": 16696,
+    "phone_number": "099028-237489"
+  }],
   "token": "098f6bcd4621d373cade4e832627b4f6"
 }
 ```
