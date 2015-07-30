@@ -8,6 +8,9 @@ title: Changelog
 <!--
   Add new changes to the log in historically descending order.
 -->
+## {{ '2015-07-30' | date_to_string }}
+
+* Added minimum_displayprice_unit and minimum_displayprice to location endpoint.
 
 ## {{ '2015-07-05' | date_to_string }}
 
