@@ -8,6 +8,11 @@ title: Changelog
 <!--
   Add new changes to the log in historically descending order.
 -->
+## [[ '2015-07-30' | date_to_string }}
+
+* Added `cars` and `phone_numbers` to user endpoint
+
+
 ## {{ '2015-07-30' | date_to_string }}
 
 * Parameter "password" is optional when creating User
