@@ -50,7 +50,9 @@ Status: 200 OK
     "address_slug": "hopfenstrasse-20",
     "interfaces": [
       "bt", "api"
-    ]
+    ],
+    "minimum_displayprice_unit": "0",
+    "minimum_displayprice": null
 }
 ```
 
@@ -112,7 +114,9 @@ Status: 200 OK
         "address_slug": "hopfenstrasse-20",
         "interfaces": [
           "bt", "api"
-        ]
+        ],
+        "minimum_displayprice_unit": "0",
+        "minimum_displayprice": null
     },
     {...},
     {...}
