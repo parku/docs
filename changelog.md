@@ -12,6 +12,12 @@ title: Changelog
 
 * Parameter "password" is optional when creating User
 
+
+## {{ '2015-07-30' | date_to_string }}
+
+* Added minimum_displayprice_unit and minimum_displayprice to location endpoint.
+
+
 ## {{ '2015-07-05' | date_to_string }}
 
 * Added the _beacon_ directive to the [boxes endpoint][boxes].
