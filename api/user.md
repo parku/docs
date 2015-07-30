@@ -51,7 +51,7 @@ Location: {{ site.parku.api }}/user
 Parameter    | Description
 ---          | ---
 `email`      | __Required.__
-`password`   | __Required.__
+`password`   | __Optional.__
 `country`    | _DE_ or _CH_ __Required.__
 `firstname`  | __Required.__
 `lastname`   | __Required.__
