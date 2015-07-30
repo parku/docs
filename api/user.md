@@ -20,9 +20,10 @@ $ curl {{ site.parku.api }}/user \
     -d lastname=Name \
     -d gender=female \
     -d facebook_id=xxx \
-    -d "cars[license_plate]=B-AB 1234" \
-    -d "cars[vehicle]=Isetta" \
-    -d "phone_numbers[phone_number]=+493057701873"
+    -d "cars[0][license_plate]=B-AB 1234 \
+    -d &cars[0][vehicle]=Isetta" \
+    -d "phone_numbers[0][phone_number]=+493057701873 \
+    -d &phone_numbers[1][phone_number]=+401234567434"
 ```
 
 > Response
