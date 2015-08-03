@@ -47,7 +47,9 @@ Status: 200 OK
         "phone_number": "+41 43 928 72 52"
     },
     "price": 3.5,
-    "address_slug": "hopfenstrasse-20"
+    "address_slug": "hopfenstrasse-20",
+    "minimum_displayprice_unit": "0",
+    "minimum_displayprice": null
 }
 ```
 
@@ -106,7 +108,9 @@ Status: 200 OK
             "phone_number": "+41 43 928 72 52"
         },
         "price": 3.5,
-        "address_slug": "hopfenstrasse-20"
+        "address_slug": "hopfenstrasse-20",
+        "minimum_displayprice_unit": "0",
+        "minimum_displayprice": null
     },
     {...},
     {...}
