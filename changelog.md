@@ -11,7 +11,7 @@ title: Changelog
 
 ## {{ '2015-08-07' | date_to_string }}
 
-* Expose post booking information to every booking for storing more sensetive data
+* Expose post booking information to every booking for storing more sensitive data
 
 ## {{ '2015-08-03' | date_to_string }}
 
