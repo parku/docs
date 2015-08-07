@@ -9,6 +9,10 @@ title: Changelog
   Add new changes to the log in historically descending order.
 -->
 
+## {{ '2015-08-07' | date_to_string }}
+
+* Expose post booking information to every booking for storing more sensetive data
+
 ## {{ '2015-08-03' | date_to_string }}
 
 * Expose gate information to every booking on how to open a gate (via api or via bt)

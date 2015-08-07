@@ -45,6 +45,7 @@ Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
     "city": "Zürich",
     "country": "CH",
     "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
+    "post_booing_info": "Bitte holen sie den Schlüssel vorher ab und schließen das Tor",
     "image_urls": [
       "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
       "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"
@@ -157,6 +158,7 @@ Status: 200 OK
     "city": "Zürich",
     "country": "CH",
     "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
+    "post_booing_info": "Bitte holen sie den Schlüssel vorher ab und schließen das Tor",
     "image_urls": [
       "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
       "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"
@@ -325,6 +327,7 @@ Status: 200 OK
     "city": "Zürich",
     "country": "CH",
     "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
+    "post_booing_info": "Bitte holen sie den Schlüssel vorher ab und schließen das Tor",
     "image_urls": [
       "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
       "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"
@@ -443,6 +446,7 @@ Status: 200 OK
       "city": "Zürich",
       "country": "CH",
       "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
+      "post_booing_info": "Bitte holen sie den Schlüssel vorher ab und schließen das Tor",
       "image_urls": [
         "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
         "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"
