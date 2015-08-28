@@ -8,6 +8,9 @@ title: Changelog
 <!--
   Add new changes to the log in historically descending order.
 -->
+## {{ '2015-08-28' | date_to_string }}
+
+* Add attributes to a new user or update them for existing ones
 
 ## {{ '2015-08-07' | date_to_string }}
 
