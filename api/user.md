@@ -23,7 +23,9 @@ $ curl {{ site.parku.api }}/user \
     -d "cars[0][license_plate]=B-AB 1234 \
     -d &cars[0][vehicle]=Isetta" \
     -d "phone_numbers[0][phone_number]=+493057701873 \
-    -d &phone_numbers[1][phone_number]=+401234567434"
+    -d &phone_numbers[1][phone_number]=+401234567434" \
+    -d "attributes[0][key]=adac \
+    -d &attributes[0][value]=1234567890"
 ```
 
 > Response
@@ -52,6 +54,11 @@ Location: {{ site.parku.api }}/user
     "id": 16696,
     "phone_number": "099028-237489"
   }],
+  "attributes": [{
+    "id": 1,
+    "key": "adac",
+    "value": "1234567890"
+  }],
   "token": "098f6bcd4621d373cade4e832627b4f6"
 }
 ```
@@ -73,6 +80,7 @@ Parameter      | Description
 `facebook_id`  | _Optional._
 `cars`         | _object_ _Optional._
 `phone_numbers`| _object_ _Optional._
+`attributes`   | _object_ _Optional._
 
 ## Retrieve a user
 
@@ -107,6 +115,11 @@ Status: 200 OK
   "phone_numbers": [{
     "id": 16696,
     "phone_number": "099028-237489"
+  }],
+  "attributes": [{
+    "id": 1,
+    "key": "adac",
+    "value": "1234567890"
   }],
   "token": "098f6bcd4621d373cade4e832627b4f6"
 }
@@ -154,6 +167,11 @@ Status: 200 OK
     "id": 16696,
     "phone_number": "099028-237489"
   }],
+  "attributes": [{
+    "id": 1,
+    "key": "adac",
+    "value": "1234567890"
+  }],
   "token": "098f6bcd4621d373cade4e832627b4f6"
 }
 ```
@@ -172,5 +190,6 @@ Parameter    | Description
 `firstname`  | _Optional._
 `lastname`   | _Optional._
 `gender`     | _male_ or _female_. _Optional._
+`attributes` | _key_: _adac_. _value_: _string_. _Optional._
 
   [password]: /api/password/
