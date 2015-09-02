@@ -49,7 +49,8 @@ Status: 200 OK
     "price": 3.5,
     "address_slug": "hopfenstrasse-20",
     "minimum_displayprice_unit": "0",
-    "minimum_displayprice": null
+    "minimum_displayprice": null,
+    "user_owned": false
 }
 ```
 
@@ -110,7 +111,8 @@ Status: 200 OK
         "price": 3.5,
         "address_slug": "hopfenstrasse-20",
         "minimum_displayprice_unit": "0",
-        "minimum_displayprice": null
+        "minimum_displayprice": null,
+        "user_owned": false
     },
     {...},
     {...}
@@ -130,6 +132,9 @@ Parameter | Description
 `date_start` | Filter parking spaces for the start date. _Optional._
 `date_end` | Filter parking spaces for the end date. _Optional._
 
+When no `date_start` or `date_end` was provided, all locations are returned. That does not mean, that they are available.
+
+### Return values
 Available options for a parking space are:
 
 * `excess length` The parking space can be used by cars with a small trailer.
@@ -139,7 +144,7 @@ Available options for a parking space are:
 * `barrier` Parking space has a barrier and user needs a smartphone to open it.
 * `charging station` Parking space with an electric vehicle charging station.
 
-When no `date_start` or `date_end` was provided, all locations are returned. That does not mean, that they are available.
+`user_owned` is `true` if the user who requested the location is also the owner of the parking space. This allows the web and the apps to determine if the user could block the parking space from bookings. The blocking feature itself is not yet supported in APIv4. 
 
 ## Terms and Conditions
 
