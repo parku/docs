@@ -170,6 +170,7 @@ Status: 200 OK
       "phone_number": "+41 43 928 72 52"
     },
     "address_slug": "hopfenstrasse-20",
+    "user_owned": false,
     "gates": [
       {
         "type": "beacon",
@@ -339,6 +340,7 @@ Status: 200 OK
       "phone_number": "+41 43 928 72 52"
     },
     "address_slug": "hopfenstrasse-20",
+    "user_owned": false
     "gates": [
       {
         "type": "beacon",
@@ -458,6 +460,7 @@ Status: 200 OK
         "phone_number": "+41 43 928 72 52"
       },
       "address_slug": "hopfenstrasse-20",
+      "user_owned": false
       "gates": [
         {
           "type": "beacon",
