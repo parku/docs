@@ -8,6 +8,10 @@ title: Changelog
 <!--
   Add new changes to the log in historically descending order.
 -->
+## {{ '2015-09-11' | date_to_string }}
+
+* New user_owned attribute added to the location endpoint. This returns true if the user who requests the location is also the owner of that parking space.
+
 ## {{ '2015-08-28' | date_to_string }}
 
 * Add attributes to a new user or update them for existing ones
