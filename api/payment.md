@@ -45,6 +45,33 @@ Status: 200 OK
 
 `GET {{ site.parku.api }}/payment/creditcards`
 
+## Delete a credit card
+
+```sh
+$ curl {{ site.parku.api }}/payment/creditcards/gphsyb \
+    -u 098f6bcd4621d373cade4e832627b4f6:parku
+    -X DELETE
+```
+
+> Response
+
+```nginx
+Status: 204 No Content
+```
+```json
+
+```
+
+### HTTP Request
+
+`DELETE {{ site.parku.api }}/payment/creditcards/:credit_card_id`
+
+Parameter        | Description
+---              | ---
+`credit_card_id` | The identifier of the credit card to delete. You'll receive a list of the users credit cards through the [List Credit Cards request](/api/payment/#list-credit-cards). __Required.__
+
+
+
 
 ## Update Credit
 
