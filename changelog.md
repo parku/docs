@@ -8,6 +8,11 @@ title: Changelog
 <!--
   Add new changes to the log in historically descending order.
 -->
+
+## {{ '2015-09-14' | date_to_string }}
+
+* New endpoint for [deleting credit cards](/api/payment/#delete-a-credit-card).
+
 ## {{ '2015-09-11' | date_to_string }}
 
 * New user_owned attribute added to the location endpoint. This returns true if the user who requests the location is also the owner of that parking space.
