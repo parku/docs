@@ -47,9 +47,8 @@ Status: 200 OK
         "phone_number": "+41 43 928 72 52"
     },
     "price": 3.5,
+    "price_unit": "day",
     "address_slug": "hopfenstrasse-20",
-    "minimum_displayprice_unit": "0",
-    "minimum_displayprice": null,
     "user_owned": false
 }
 ```
@@ -109,9 +108,8 @@ Status: 200 OK
             "phone_number": "+41 43 928 72 52"
         },
         "price": 3.5,
+        "price_unit": "week",
         "address_slug": "hopfenstrasse-20",
-        "minimum_displayprice_unit": "0",
-        "minimum_displayprice": null,
         "user_owned": false
     },
     {...},
@@ -144,7 +142,7 @@ Available options for a parking space are:
 * `barrier` Parking space has a barrier and user needs a smartphone to open it.
 * `charging station` Parking space with an electric vehicle charging station.
 
-`user_owned` is `true` if the user who requested the location is also the owner of the parking space. This allows the web and the apps to determine if the user could block the parking space from bookings. The blocking feature itself is not yet supported in APIv4. 
+`user_owned` is `true` if the user who requested the location is also the owner of the parking space. This allows the web and the apps to determine if the user could block the parking space from bookings. The blocking feature itself is not yet supported in APIv4.
 
 ## Terms and Conditions
 
