@@ -47,7 +47,7 @@ Status: 200 OK
         "phone_number": "+41 43 928 72 52"
     },
     "price": 3.5,
-    "price_unit": "day",
+    "price_period": "day",
     "address_slug": "hopfenstrasse-20",
     "user_owned": false
 }
@@ -65,6 +65,25 @@ Parameter | Description
 `date_start` | Used to calculate the price for a location. Requires the field `date_end` to be defined. If no `date_start` or `date_end` is specified, the returned price field will be `null`. _Optional_
 `date_end` | See `date_start`. _Optional_
 
+### Return values
+
+Available options for a parking space are:
+
+* `excess length` The parking space can be used by cars with a small trailer.
+* `indoor` The parking space has a roof or can be an underground garage.
+* `disabled` Parking space is accessible for disabled people.
+* `patio` The parking space is located at an inner courtyard.
+* `barrier` Parking space has a barrier and user needs a smartphone to open it.
+* `charging station` Parking space with an electric vehicle charging station.
+
+`user_owned` is `true` if the user who requested the location is also the owner of the parking space. This allows the web and the apps to determine if the user could block the parking space from bookings. The blocking feature itself is not yet supported in APIv4.
+
+`price` and `price_period`: The `price` is the actual price shown to the user. The `price_period` contains the period for how long the price is valid:
+
+* `day`
+* `week`
+* `month`
+* `timeframe`
 
 ## List Locations
 
@@ -108,7 +127,7 @@ Status: 200 OK
             "phone_number": "+41 43 928 72 52"
         },
         "price": 3.5,
-        "price_unit": "week",
+        "price_period": "week",
         "address_slug": "hopfenstrasse-20",
         "user_owned": false
     },
@@ -131,18 +150,6 @@ Parameter | Description
 `date_end` | Filter parking spaces for the end date. _Optional._
 
 When no `date_start` or `date_end` was provided, all locations are returned. That does not mean, that they are available.
-
-### Return values
-Available options for a parking space are:
-
-* `excess length` The parking space can be used by cars with a small trailer.
-* `indoor` The parking space has a roof or can be an underground garage.
-* `disabled` Parking space is accessible for disabled people.
-* `patio` The parking space is located at an inner courtyard.
-* `barrier` Parking space has a barrier and user needs a smartphone to open it.
-* `charging station` Parking space with an electric vehicle charging station.
-
-`user_owned` is `true` if the user who requested the location is also the owner of the parking space. This allows the web and the apps to determine if the user could block the parking space from bookings. The blocking feature itself is not yet supported in APIv4.
 
 ## Terms and Conditions
 
