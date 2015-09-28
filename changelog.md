@@ -9,6 +9,11 @@ title: Changelog
   Add new changes to the log in historically descending order.
 -->
 
+## {{ '2015-09-25' | date_to_string }}
+
+* Removing the `minimum_displayprice` and `minimum_displayprice_unit`.
+* Adding the `price_period` to [location endpoints](/api/locations/).
+
 ## {{ '2015-09-14' | date_to_string }}
 
 * New endpoint for [deleting credit cards](/api/payment/#delete-a-credit-card).
