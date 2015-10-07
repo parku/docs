@@ -133,7 +133,7 @@ Status: 200 OK
 
 Updates the user by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
 
-This request accepts mostly the same arguments as the user creation call. Changing the password is done through a [separate endpoint][password].
+This request accepts mostly the same arguments as the user creation call. Changing [cars][cars], [phone_numbers][phone_numbers], [attributes][attributes] and [password][password] is done via separate endpoints.
 
 ```sh
 $ curl {{ site.parku.api }}/user \
@@ -190,6 +190,8 @@ Parameter    | Description
 `firstname`  | _Optional._
 `lastname`   | _Optional._
 `gender`     | _male_ or _female_. _Optional._
-`attributes` | _key_: _adac_. _value_: _string_. _Optional._
 
+  [cars]: /api/cars/
+  [phone_numbers]: /api/phone_numbers/
+  [attributes]: /api/attributes/
   [password]: /api/password/
