@@ -106,7 +106,7 @@ Status: 200 OK
 
 Parameter      | Description
 ---            | ---
-`car_id`       | The identifier of the car to update. __Required.__
+`attribute_id` | The identifier of the attribute to update. __Required.__
 
 ## Delete an attribute
 
