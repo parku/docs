@@ -9,6 +9,10 @@ title: Changelog
   Add new changes to the log in historically descending order.
 -->
 
+## {{ '2015-10-20' | date_to_string }}
+
+* Remove _Launch Messages_.
+
 ## {{ '2015-09-25' | date_to_string }}
 
 * Removing the `minimum_displayprice` and `minimum_displayprice_unit`.
