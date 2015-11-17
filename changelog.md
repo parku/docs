@@ -8,6 +8,9 @@ title: Changelog
 <!--
   Add new changes to the log in historically descending order.
 -->
+## {{ '2015-11-17' | date_to_string }}
+
+* Added `/v4/settings` [endpoint](/api/settings/).
 
 ## {{ '2015-10-20' | date_to_string }}
 
