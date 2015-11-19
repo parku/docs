@@ -49,19 +49,7 @@ Status: 200 OK
     "price": 3.5,
     "price_period": "day",
     "address_slug": "hopfenstrasse-20",
-    "user_owned": false,
-    "settings": {
-        "booking": {
-            "start": {
-                "min_minutes": -15,
-                "max_minutes": 43170
-            },
-            "duration": {
-                "min_minutes": 30,
-                "max_minutes": 43170
-            }
-        }
-    }
+    "user_owned": false
 }
 ```
 
@@ -96,9 +84,6 @@ Available options for a parking space are:
 * `week`
 * `month`
 * `timeframe`
-
-`settings`: `booking` contains the minimum and maximum start-time and the minimum and maximum duration of a booking for this location.
-All values are in minutes and the minimum and maximum start-time need to be calculated in minutes from now. The settings of a parking space are used in favor of the global settings that can be found in the settings endpoint.
 
 ## List Locations
 
@@ -144,19 +129,7 @@ Status: 200 OK
         "price": 3.5,
         "price_period": "week",
         "address_slug": "hopfenstrasse-20",
-        "user_owned": false,
-        "settings": {
-            "booking": {
-                "start": {
-                    "min_minutes": -15,
-                    "max_minutes": 43170
-                },
-                "duration": {
-                    "min_minutes": 30,
-                    "max_minutes": 43170
-                }
-            }
-        }
+        "user_owned": false
     },
     {...},
     {...}

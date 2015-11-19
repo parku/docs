@@ -57,18 +57,6 @@ Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
       "phone_number": "+41 43 928 72 52"
     },
     "address_slug": "hopfenstrasse-20",
-    "settings": {
-        "booking": {
-            "start": {
-                "min_minutes": -15,
-                "max_minutes": 43170
-            },
-            "duration": {
-                "min_minutes": 30,
-                "max_minutes": 43170
-            }
-        }
-    }
     "gates": [
       {
         "type": "beacon",
