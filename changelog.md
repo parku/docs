@@ -9,6 +9,10 @@ title: Changelog
   Add new changes to the log in historically descending order.
 -->
 
+## {{ '2015-11-17' | date_to_string }}
+
+* Added `settings` property to [location endpoint](/api/locations/).
+
 ## {{ '2015-10-20' | date_to_string }}
 
 * Remove _Launch Messages_.
