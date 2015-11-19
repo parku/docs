@@ -89,7 +89,8 @@ Status: 200 OK
   "cars_url": "{{ site.parku.api }}/cars",
   "bookings_url": "{{ site.parku.api }}/bookings",
   "violation_url": "{{ site.parku.api }}/bookings/:booking_id/violation",
-  "devices_url": "{{ site.parku.api }}/devices"
+  "devices_url": "{{ site.parku.api }}/devices",
+  "settings_url": "{{ site.parku.api }}/settings"
 }
 ```
 
