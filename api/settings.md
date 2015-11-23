@@ -27,21 +27,20 @@ Status: 200 OK
 ```json
 {
   "location": {
-    "booking": {
-      "start": {
-        "min_minutes": -15,
-        "max_minutes": 43170
-      },
-      "duration": {
-        "min_minutes": 30,
-        "max_minutes": 43170
-      }
+      "bookable_range_start": -15,
+      "bookable_range_end": 43200,
+      "booking_duration_min": 30,
+      "booking_duration_max": 43200
     }
   }
 }
 ```
-The location object provides the booking requirements. These include the minimum and maximum start-time and the minimum and maximum duration of a booking.
-All values are in minutes and the minimum and maximum start-time need to be calculated in minutes from now.
+The location node provides the booking requirements for a parking space:
+
+* `bookable_range_start`: start of the range wherein a booking is allowed in minutes from now.
+* `bookable_range_end`: end of the range wherein a booking is allowed in minutes from now.
+* `booking_duration_min`: minimum duration of a booking in minutes.
+* `booking_duration_max`: maximum duration of a booking in minutes.
 
 Every location can have it's own settings but these will always be the same or within the limits of the global settings.
 
