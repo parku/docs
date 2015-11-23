@@ -27,11 +27,10 @@ Status: 200 OK
 ```json
 {
   "location": {
-      "bookable_range_start": -15,
-      "bookable_range_end": 43200,
-      "booking_duration_min": 30,
-      "booking_duration_max": 43200
-    }
+    "bookable_range_start": -15,
+    "bookable_range_end": 43200,
+    "booking_duration_min": 30,
+    "booking_duration_max": 43200
   }
 }
 ```
