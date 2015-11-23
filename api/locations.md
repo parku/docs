@@ -51,16 +51,10 @@ Status: 200 OK
     "address_slug": "hopfenstrasse-20",
     "user_owned": false,
     "settings": {
-        "booking": {
-            "start": {
-                "min_minutes": -15,
-                "max_minutes": 43170
-            },
-            "duration": {
-                "min_minutes": 30,
-                "max_minutes": 43170
-            }
-        }
+        "bookable_range_start": -15,
+        "bookable_range_end": 43200,
+        "booking_duration_min": 30,
+        "booking_duration_max": 43200
     }
 }
 ```
@@ -97,8 +91,14 @@ Available options for a parking space are:
 * `month`
 * `timeframe`
 
-`settings`: `booking` contains the minimum and maximum start-time and the minimum and maximum duration of a booking for this location.
-All values are in minutes and the minimum and maximum start-time need to be calculated in minutes from now. The settings of a parking space are used in favor of the global settings that can be found in the settings endpoint.
+The `settings` node provides the booking requirements for a location:
+
+* `bookable_range_start`: start of the range wherein a booking is allowed in minutes from now.
+* `bookable_range_end`: end of the range wherein a booking is allowed in minutes from now.
+* `booking_duration_min`: minimum duration of a booking in minutes.
+* `booking_duration_max`: maximum duration of a booking in minutes.
+
+The settings of a location are used in favor of the global settings that can be found in the settings endpoint.
 
 ## List Locations
 
@@ -146,16 +146,10 @@ Status: 200 OK
         "address_slug": "hopfenstrasse-20",
         "user_owned": false,
         "settings": {
-            "booking": {
-                "start": {
-                    "min_minutes": -15,
-                    "max_minutes": 43170
-                },
-                "duration": {
-                    "min_minutes": 30,
-                    "max_minutes": 43170
-                }
-            }
+            "bookable_range_start": -15,
+            "bookable_range_end": 43200,
+            "booking_duration_min": 30,
+            "booking_duration_max": 43200
         }
     },
     {...},

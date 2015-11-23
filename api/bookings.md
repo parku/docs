@@ -57,18 +57,13 @@ Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
       "phone_number": "+41 43 928 72 52"
     },
     "address_slug": "hopfenstrasse-20",
+    "user_owned": false,
     "settings": {
-        "booking": {
-            "start": {
-                "min_minutes": -15,
-                "max_minutes": 43170
-            },
-            "duration": {
-                "min_minutes": 30,
-                "max_minutes": 43170
-            }
-        }
-    }
+      "bookable_range_start": -15,
+      "bookable_range_end": 43200,
+      "booking_duration_min": 30,
+      "booking_duration_max": 43200
+    },
     "gates": [
       {
         "type": "beacon",
@@ -183,6 +178,12 @@ Status: 200 OK
     },
     "address_slug": "hopfenstrasse-20",
     "user_owned": false,
+    "settings": {
+      "bookable_range_start": -15,
+      "bookable_range_end": 43200,
+      "booking_duration_min": 30,
+      "booking_duration_max": 43200
+    },
     "gates": [
       {
         "type": "beacon",
@@ -352,7 +353,13 @@ Status: 200 OK
       "phone_number": "+41 43 928 72 52"
     },
     "address_slug": "hopfenstrasse-20",
-    "user_owned": false
+    "user_owned": false,
+    "settings": {
+      "bookable_range_start": -15,
+      "bookable_range_end": 43200,
+      "booking_duration_min": 30,
+      "booking_duration_max": 43200
+    },
     "gates": [
       {
         "type": "beacon",
@@ -472,7 +479,13 @@ Status: 200 OK
         "phone_number": "+41 43 928 72 52"
       },
       "address_slug": "hopfenstrasse-20",
-      "user_owned": false
+      "user_owned": false,
+      "settings": {
+        "bookable_range_start": -15,
+        "bookable_range_end": 43200,
+        "booking_duration_min": 30,
+        "booking_duration_max": 43200
+      },
       "gates": [
         {
           "type": "beacon",
