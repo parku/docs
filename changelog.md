@@ -10,6 +10,10 @@ title: Changelog
 -->
 ## {{ '2015-11-17' | date_to_string }}
 
+* Changed the naming of the location node in the response of the [settings endpoint](/api/settings/).
+
+## {{ '2015-11-17' | date_to_string }}
+
 * Added `/v4/settings` [endpoint](/api/settings/).
 
 ## {{ '2015-10-20' | date_to_string }}
