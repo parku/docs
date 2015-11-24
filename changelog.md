@@ -8,6 +8,11 @@ title: Changelog
 <!--
   Add new changes to the log in historically descending order.
 -->
+
+## {{ '2015-11-24' | date_to_string }}
+
+* Added the sesam settings to the [settings endpoint](/api/settings/).
+
 ## {{ '2015-11-17' | date_to_string }}
 
 * Changed the naming of the location node in the response of the [settings endpoint](/api/settings/).
