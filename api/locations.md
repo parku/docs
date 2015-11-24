@@ -49,7 +49,13 @@ Status: 200 OK
     "price": 3.5,
     "price_period": "day",
     "address_slug": "hopfenstrasse-20",
-    "user_owned": false
+    "user_owned": false,
+    "settings": {
+        "bookable_range_start": -15,
+        "bookable_range_end": 43200,
+        "booking_duration_min": 30,
+        "booking_duration_max": 43200
+    }
 }
 ```
 
@@ -84,6 +90,15 @@ Available options for a parking space are:
 * `week`
 * `month`
 * `timeframe`
+
+The `settings` node provides the booking requirements for a location:
+
+* `bookable_range_start`: start of the range wherein a booking is allowed in minutes from now.
+* `bookable_range_end`: end of the range wherein a booking is allowed in minutes from now.
+* `booking_duration_min`: minimum duration of a booking in minutes.
+* `booking_duration_max`: maximum duration of a booking in minutes.
+
+The settings of a location are used in favor of the global settings that can be found in the settings endpoint.
 
 ## List Locations
 
@@ -129,7 +144,13 @@ Status: 200 OK
         "price": 3.5,
         "price_period": "week",
         "address_slug": "hopfenstrasse-20",
-        "user_owned": false
+        "user_owned": false,
+        "settings": {
+            "bookable_range_start": -15,
+            "bookable_range_end": 43200,
+            "booking_duration_min": 30,
+            "booking_duration_max": 43200
+        }
     },
     {...},
     {...}
