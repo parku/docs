@@ -31,10 +31,22 @@ Status: 200 OK
     "bookable_range_end": 43200,
     "booking_duration_min": 30,
     "booking_duration_max": 43200
+  },
+  "sesam": {
+    "bluetooth": {
+      "connection_trials": 2,
+      "connection_timeout": 2,
+      "communication_timeout": 2
+    }
   }
 }
 ```
-The location node provides the booking requirements for a parking space:
+
+### HTTP Request
+
+`GET {{ site.parku.api }}/settings`
+
+The **location** node provides the booking requirements for a parking space:
 
 * `bookable_range_start`: start of the range wherein a booking is allowed in minutes from now.
 * `bookable_range_end`: end of the range wherein a booking is allowed in minutes from now.
@@ -43,10 +55,8 @@ The location node provides the booking requirements for a parking space:
 
 Every location can have it's own settings but these will always be the same or within the limits of the global settings.
 
-### HTTP Request
+The **sesam** node contains informations about how to work with the sesam boxes.
 
-`GET {{ site.parku.api }}/settings`
-
-### Parameters
-
-None.
+* `connection_trials` Amount of tries to connect to a sesam box.
+* `connection_timeout` Amount of seconds allowed to connect to a box.
+* `communication_timeout` Second until canceling the communication with the sesam box.
