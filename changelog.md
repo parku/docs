@@ -9,6 +9,12 @@ title: Changelog
   Add new changes to the log in historically descending order.
 -->
 
+## {{ '2016-02-02' | date_to_string }}
+
+* Extended [settings endpoint](/api/settings/) with *gps* node.
+* Added *notifications* to [settings endpoint](/api/settings/).
+* Added `PUT` to toggle notification in [settings endpoint](/api/settings/).
+
 ## {{ '2015-11-24' | date_to_string }}
 
 * Added the sesam settings to the [settings endpoint](/api/settings/).
