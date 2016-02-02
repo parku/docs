@@ -2,6 +2,10 @@
 
 Use them as a basic start into developing parku applications.
 
+## Prerequisites
+
+You'll need Ruby in a fairly new version installed.
+
 ## Installation
 
 If you want to make improvements to our guidelines, make a pull requests with your changes.
