@@ -28,11 +28,9 @@ include: ["_assets", "_search.json"]
 
 exclude: [CNAME, Gemfile, Gemfile.lock, Makefile, README.md, LICENSE, vendor, robots_*, linklint]
 
-# Project specific
-# Remember to change these!
 baseurl:
-title:        parku
-tagline:      The developer guides to parku
+title:        ParkU
+tagline:      A Developers Guide To Parking
 description:
 url:          http://developer.parku.ch
 
