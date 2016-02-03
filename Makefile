@@ -12,6 +12,7 @@ linklint:
 	@cp robots.txt _site/robots.txt
 
 install: uninstall
+	gem install bundler
 	bundle install --binstubs vendor/bundle/bin --path vendor/bundle --without production
 	rm -rf vendor/bundle/ruby/*/gems/jekyll-*/test
 	rm -fr vendor/bundle/ruby/*/gems/jekyll-*/lib/site_template
