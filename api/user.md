@@ -36,6 +36,7 @@ Location: {{ site.parku.api }}/user
 ```
 ```json
 {
+  "code": "KFJ32",
   "gender": "female",
   "email": "test@example.com",
   "firstname": "Test",
@@ -98,6 +99,7 @@ Status: 200 OK
 ```
 ```json
 {
+  "code": "KFJ32",
   "gender": "female",
   "email": "test@example.com",
   "firstname": "Test",
@@ -149,6 +151,7 @@ Status: 200 OK
 ```
 ```json
 {
+  "code": "KFJ32",
   "gender": "female",
   "email": "test@example.com",
   "firstname": "Test",

@@ -8,6 +8,10 @@ title: Changelog
 <!--
   Add new changes to the log in historically descending order.
 -->
+## {{ '2016-02-16' | date_to_string }}
+
+* Response in [user endpoint](/api/user/) returns a `code` node, containing a
+  character/number combination, unique to each customer.
 
 ## {{ '2016-02-02' | date_to_string }}
 
