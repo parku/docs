@@ -8,6 +8,11 @@ title: Changelog
 <!--
   Add new changes to the log in historically descending order.
 -->
+## {{ '2016-03-07' | date_to_string }}
+
+* Added [coupon endpoint](/api/coupon/). It enables 3rd parties to validate a
+  coupon code.
+
 ## {{ '2016-02-16' | date_to_string }}
 
 * Response in [user endpoint](/api/user/) returns a `code` node, containing a
