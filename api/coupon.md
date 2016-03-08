@@ -8,53 +8,43 @@ title: Coupon
 
 All API requests to `https://api.parku.ch/v4/coupon` need a __private key__.
 
-## Validate a coupon
+## Test a coupon
 
 ```sh
-$ curl {{ site.parku.api }}/coupon/Zm9vYmFyMTIz \
-    -u 098f6bcd4621d373cade4e832627b4f6:parku \
-    -X POST \
-    -d amount=42
-```
-
-> Response
-
-```nginx
-Status: 200 OK
-```
-```json
-{
-  "amount_requested": 42,
-  "coupon_code": "foobar123",
-  "coupon_type": "amount",
-  "coupon_value": 10,
-  "coupon_using": 10,
-  "coupon_leftover": 0,
-  "amount_leftover": 32
-}
+$ curl {{ site.parku.api }}/coupon/Zm9vYmFyMTIz\?action\=test\&amount\=42 \
+    -u 098f6bcd4621d373cade4e832627b4f6:parku
 ```
 
 ### HTTP Request
 
-`PUT {{ site.parku.api }}/voucher/:encoded_code`
+`GET {{ site.parku.api }}/voucher/:encoded_code?action=test&amount=:amount`
 
 ### Parameters
 
 Parameter     | Description
 ---           | ---
 `encoded_code`| __Required.__ A base64url encoded coupon code string
+`action`      | __Required.__ `test` will use amount and coupon code to test
+`amount`      | __Required.__ Amount coupon has to be tested against
 
-### Return values
+```nginx
+Status: 200 OK
+```
+```json
+{
+  "code": "foobar123",
+  "value": 10,
+  "deduction": 10
+}
+```
+
+### Response
 
 Key               | Description
 ---               | ---
-`amount_requested`| `amount` a coupon is validated against
-`coupon_code`     | Decoded, sanitized coupon code
-`coupon_type`     | Either `amount` or `discount`
-`coupon_value`    | Coupons value
-`coupon_using`    | Amount used of coupon value
-`coupon_leftover` | Amount left of coupon value
-`amount_leftover` | Amount left of originally, requested `amount`
+`code`            | Decoded, sanitized coupon code
+`value`           | Coupons value
+`deduction`       | Amount used of coupon value
 
 ### Errors
 
@@ -75,7 +65,7 @@ Status: 422 Unprocessable Entity
 
 Error Code | HTTP Status Code | Description
 ---        | ---              | ---
-10         | 422              | Form is not valid. Likely amount in body is missing.
+10         | 422              | "amount" is faulty, probably below 0.
 20         | 404              | Coupon not found.
 21         | 404              | Coupon is inactive.
 22         | 404              | Coupon expired.
