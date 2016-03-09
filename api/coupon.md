@@ -17,7 +17,7 @@ $ curl {{ site.parku.api }}/coupon/Zm9vYmFyMTIz\?action\=test\&amount\=42 \
 
 ### HTTP Request
 
-`GET {{ site.parku.api }}/voucher/:encoded_code?action=test&amount=:amount`
+`GET {{ site.parku.api }}/coupon/:encoded_code?action=test&amount=:amount`
 
 ### Parameters
 
