@@ -149,9 +149,6 @@ $ curl {{ site.parku.api }}/settings/booking/notifiction/time_to_leave \
 ```nginx
 Status: 204 No Content
 ```
-```
-
-```
 
 ### HTTP Request
 
@@ -163,3 +160,8 @@ Parameter          | Description
 ---                | ---
 `notification_key` | A notification key, see list above __Required.__
 `enabled`          | `true` or `false` __Required.__
+
+### Response
+
+If updated successfully, API returns `204 No Content` — if "posted" value didn't
+change, it returns `304 Not Modified`.
