@@ -100,6 +100,74 @@ The `settings` node provides the booking requirements for a location:
 
 The settings of a location are used in favor of the global settings that can be found in the settings endpoint.
 
+## Get availability times for location
+
+```sh
+$ curl {{ site.parku.api }}/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/availability \
+        ?date_start=2016-04-12 \
+        &date_end=2016-04-14 \
+    -u 6f1ed002ab5595859014ebf0951522d9:parku
+```
+
+> Response
+
+```nginx
+Status: 200 OK
+```
+```json
+{
+    "begin": "2016-04-09T00:00:00+02:00",
+    "end": "2016-04-18T00:00:00+02:00",
+    "weekday_1": {
+      "start": "08:00",
+      "end": "17:00"
+    },
+    "weekday_2": {
+      "start": "08:00",
+      "end": "17:00"
+    },
+    "weekday_3": {
+      "start": "08:00",
+      "end": "16:00"
+    },
+    "weekday_4": {
+      "start": "08:00",
+      "end": "16:00"
+    },
+    "weekday_5": {
+      "start": "08:00",
+      "end": "18:00"
+    },
+    "weekday_6": {
+      "start": "08:00",
+      "end": "17:00"
+    }
+}
+```
+
+### HTTP Request
+
+`GET {{ site.parku.api }}/locations/:location_id/availability`
+
+### Parameters
+
+Parameter | Description
+--- | ---
+`location_id` | Identifier of the location. __Required__
+`date_start` | Start of time frame to include periods. If date_start is provided, date_end is required and vice versa. _Optional_
+`date_end` | End of time frame, so that periods are included. _Optional_
+
+### Return values
+
+Displays the availability times. For every affected availability period there will be one entry in the json. This sub json contains 9 keys, one for every weekday including the day's times and also the period start and end.
+
+__Caution:__ This does not include bookings
+
+A period is affected, if one of the following holds:
+* date_start is between period start and period end
+* date_end is between period start and end
+* date_start and date_end overlay the period
+
 ## List Locations
 
 ```sh
