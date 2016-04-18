@@ -118,30 +118,34 @@ Status: 200 OK
 {
     "begin": "2016-04-09T00:00:00+02:00",
     "end": "2016-04-18T00:00:00+02:00",
-    "weekday_1": {
+    "weekday_1": [{
       "start": "08:00",
       "end": "17:00"
-    },
-    "weekday_2": {
+    }],
+    "weekday_2": [{
       "start": "08:00",
       "end": "17:00"
-    },
-    "weekday_3": {
+    }],
+    "weekday_3": [{
       "start": "08:00",
       "end": "16:00"
-    },
-    "weekday_4": {
+    }],
+    "weekday_4": [{
       "start": "08:00",
       "end": "16:00"
-    },
-    "weekday_5": {
+    }],
+    "weekday_5": [{
       "start": "08:00",
       "end": "18:00"
-    },
-    "weekday_6": {
+    }],
+    "weekday_6": [{
       "start": "08:00",
       "end": "17:00"
-    }
+    }],
+    "weekday_7": [{
+      "start": "08:00",
+      "end": "17:00"
+    }]
 }
 ```
 
