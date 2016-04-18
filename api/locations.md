@@ -168,9 +168,10 @@ Displays the availability times. For every affected availability period there wi
 __Caution:__ This does not include bookings
 
 A period is affected, if one of the following holds:
-* date_start is between period start and period end
-* date_end is between period start and end
-* date_start and date_end overlay the period
+
+* `date_start` is between period start and period end
+* `date_end` is between period start and end
+* `date_start and date_end overlay the period
 
 ## List Locations
 
