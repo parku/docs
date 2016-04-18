@@ -8,6 +8,11 @@ title: Changelog
 <!--
   Add new changes to the log in historically descending order.
 -->
+## {{ '2016-04-08' | date_to_string }}
+
+* Added [availability endpoint](/api/locations/{location_id}/availability). Retrieve information
+  about the availability times of a parking space.
+
 ## {{ '2016-03-07' | date_to_string }}
 
 * Added [coupon endpoint](/api/coupon/). It enables 3rd parties to validate a
