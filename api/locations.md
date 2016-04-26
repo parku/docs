@@ -55,7 +55,11 @@ Status: 200 OK
         "bookable_range_end": 43200,
         "booking_duration_min": 30,
         "booking_duration_max": 43200
-    }
+    },
+    "required_fields": [
+        "additional_services",
+        "car_colour"
+    ]
 }
 ```
 
@@ -99,6 +103,9 @@ The `settings` node provides the booking requirements for a location:
 * `booking_duration_max`: maximum duration of a booking in minutes.
 
 The settings of a location are used in favor of the global settings that can be found in the settings endpoint.
+
+`required_fields` lists all additionally required fields when creating a booking for this location.
+The field names correspond to the `booking.fields.*` entries in the settings endpoint.
 
 ## Get availability times for location
 
