@@ -12,6 +12,7 @@ title: Changelog
 
 * Added new properties to [locations endpoint](/api/locations/).
 * Introduced type for [locations endpoint](/api/locations/). 
+* Added optional status filter to [bookings endpoint](/api/bookings/). Retrieve bookings filtered by status.
 
 ## {{ '2016-04-08' | date_to_string }}
 
