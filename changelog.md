@@ -8,6 +8,11 @@ title: Changelog
 <!--
   Add new changes to the log in historically descending order.
 -->
+## {{ '2016-04-28' | date_to_string }}
+
+* Added new properties to [locations endpoint](/api/locations/).
+* Introduced type for [locations endpoint](/api/locations/). 
+
 ## {{ '2016-04-08' | date_to_string }}
 
 * Added [availability endpoint](/api/locations/{location_id}/availability). Retrieve information

@@ -78,7 +78,7 @@ Available parking space types are:
 
 * `off-street` Off-Street parking space. _Default_
 * `park-and-ride` Park & Ride (P+R)
-* `pprofessional-garage` Professional garage
+* `professional-garage` Professional garage
 * `airport-parking` Airport-Parking
 * `harbor-parking` Harbor-Parking
 
