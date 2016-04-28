@@ -149,6 +149,7 @@ Node            | Description
 
 Each additional field uses its name as a key to a dictionary containing the field `label`.
 `label` contains the translated name of the field.
+The translation of the label is determined by the language of user who is identified by the provided user token.
 
 ## Enable or disable notification
 
