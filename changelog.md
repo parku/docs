@@ -8,6 +8,11 @@ title: Changelog
 <!--
   Add new changes to the log in historically descending order.
 -->
+## {{ '2016-05-09' | date_to_string }}
+
+* Extended [settings endpoint](/api/settings) with `booking.fields`
+* Extended [location endpoints](/api/locations) with `required_fields`
+
 ## {{ '2016-04-28' | date_to_string }}
 
 * Added optional status filter to [bookings endpoint](/api/bookings/). Retrieve bookings filtered by status.
