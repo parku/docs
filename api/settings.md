@@ -88,13 +88,13 @@ Status: 200 OK
     },
     "fields": {
       "additional_services": {
-        "label": "zusätzliche Dienste",
+        "label": "zusätzliche Dienste"
       },
       "car_colour": {
-        "label": "Fahrzeugfarbe",
+        "label": "Fahrzeugfarbe"
       },
       "car_model": {
-        "label": "Fahrzeugmodell",
+        "label": "Fahrzeugmodell"
       }
     }
   }
