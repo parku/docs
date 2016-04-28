@@ -20,6 +20,7 @@ $ curl {{ site.parku.api }}/bookings \
     --data-urlencode date_end="{{ site.time | date: '%Y-%m-%d' }}T16:30:00{{ site.time | date: '%z' }}" \
     -d provider=paypal \
     -d provider_info=PAY-1CM399047K4649003KM4WJQQ
+    -d status=all \
 ```
 
 > Response
@@ -111,8 +112,9 @@ Parameter      | Description
 `date_end`     | [ISO 8601][iso-8601] format: `{{ site.time | date_to_xmlschema }}`.  __Required.__
 `license_plate`| The license_plate of the used car. Get all cars of a user from the [`cars`][cars] request. __Required.__
 `phone_number` | The phone number. Get all phone numbers of a user from the [`phone_numbers`][phone_numbers] request. __Required.__
-`provider`     | The payment method. Available options are _paypal_, _braintree_ or _credit_. __Required.__
+`provider`     | The payment method. Available options are _`paypal`_, _`braintree`_ or _`credit`_. __Required.__
 `provider_info`| The information of the payment provider to perform a payment. __Required__ for payment methods _paypal_ and _braintree_.
+`status`       | Get bookings by status. Available options are _`all`_, _`active`_ _(default)_ or _`cancelled`_. _Optional_
 
 #### Provider Info
 
