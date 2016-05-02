@@ -8,6 +8,10 @@ title: Changelog
 <!--
   Add new changes to the log in historically descending order.
 -->
+## {{ '2016-05-02' | date_to_string }}
+
+* Added features [settings endpoint](/api/settings/). Return feature flags based on parameters given in header.
+
 ## {{ '2016-04-28' | date_to_string }}
 
 * Added optional status filter to [bookings endpoint](/api/bookings/). Retrieve bookings filtered by status.

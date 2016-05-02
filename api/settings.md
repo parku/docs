@@ -16,6 +16,11 @@ Only requesting these settings is possible. Changing them is not.
 ```sh
 $ curl {{ site.parku.api }}/settings \
     -u 098f6bcd4621d373cade4e832627b4f6:parku \
+    -H "Os: android" \
+    -H "Os-Build: 21" \
+    -H "App-Build: 48" \
+    -H "Latitude: 52.53536625" \
+    -H "Longitude: 13.39387752" \
     -X GET
 ```
 
@@ -86,6 +91,14 @@ Status: 200 OK
         }
       }
     }
+  },
+  "features": {
+    "recommend_update": {
+      "enabled": true
+    },
+    "force_update": {
+      "enabled": false
+    }
   }
 }
 ```
@@ -93,6 +106,20 @@ Status: 200 OK
 ### HTTP Request
 
 `GET {{ site.parku.api }}/settings`
+
+#### Header parameters
+
+Header parameters provides operation system, application version and location specific settings.
+
+Parameter   | Description
+---         | ---
+`Os`         | Name of operating system. _Optional_
+`Os-Build`   | Operating system version ( e.g. 21 for android API version 21 ). _Optional_
+`App-Build`  | Application build number. _Optional_
+`Latitude`   | Latitude of current location. _Optional_
+`Longitude`  | Longitude of current location. _Optional_
+
+### Return values
 
 The **location** node provides the booking requirements for a parking space:
 
@@ -132,6 +159,15 @@ Node            | Description
 `near_entry`    | Entering a region, defined by `radius` in meters around a booking location.
 `expiring`      | Shown _n_ `minutes` to a bookings ending.
 `over`          | Shown _n_ `minutes` to a bookings ending.
+
+The **features** contains feature flags that enables or disables certaint features 
+based parameters given in header.
+These feature flags can be different for each operation systems.
+
+* `recommend_update` _Android_ specific: Is enabled if there is a newer version off application that is 
+recommended to be updated. Current version still works.
+* `force_update` _Android_ specific: Is enabled if current application version is not supported anymore.
+
 
 ## Enable or disable notification
 
