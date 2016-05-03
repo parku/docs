@@ -16,11 +16,8 @@ Only requesting these settings is possible. Changing them is not.
 ```sh
 $ curl {{ site.parku.api }}/settings \
     -u 098f6bcd4621d373cade4e832627b4f6:parku \
-    -H "Os: android" \
-    -H "Os-Build: 21" \
-    -H "App-Build: 48" \
-    -H "Latitude: 52.53536625" \
-    -H "Longitude: 13.39387752" \
+    -d lat=52.53536625 \
+    -d lon=13.39387752 \
     -X GET
 ```
 
@@ -107,17 +104,12 @@ Status: 200 OK
 
 `GET {{ site.parku.api }}/settings`
 
-#### Header parameters
-
-Header parameters provides operation system, application version and location specific settings.
+#### parameters
 
 Parameter   | Description
 ---         | ---
-`Os`         | Name of operating system. _Optional_
-`Os-Build`   | Operating system version ( e.g. 21 for android API version 21 ). _Optional_
-`App-Build`  | Application build number. _Optional_
-`Latitude`   | Latitude of current location. _Optional_
-`Longitude`  | Longitude of current location. _Optional_
+`lat`   | Latitude of current location. _Optional_
+`lon`   | Longitude of current location. _Optional_
 
 ### Return values
 

@@ -10,7 +10,7 @@ title: Changelog
 -->
 ## {{ '2016-05-02' | date_to_string }}
 
-* Added features [settings endpoint](/api/settings/). Return feature flags based on parameters given in header.
+* Added features [settings endpoint](/api/settings/). Return feature flags based on parameters and user agent.
 
 ## {{ '2016-04-28' | date_to_string }}
 
