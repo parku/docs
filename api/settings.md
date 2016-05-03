@@ -15,9 +15,9 @@ Only requesting these settings is possible. Changing them is not.
 
 ```sh
 $ curl {{ site.parku.api }}/settings \
+    ?lat=52.53568811 \
+    &lon=13.39412887 \
     -u 098f6bcd4621d373cade4e832627b4f6:parku \
-    -d lat=52.53536625 \
-    -d lon=13.39387752 \
     -X GET
 ```
 
