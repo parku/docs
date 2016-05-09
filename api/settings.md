@@ -85,6 +85,17 @@ Status: 200 OK
           "include_distance": false
         }
       }
+    },
+    "fields": {
+      "additional_services": {
+        "label": "zusätzliche Dienste"
+      },
+      "car_colour": {
+        "label": "Fahrzeugfarbe"
+      },
+      "car_model": {
+        "label": "Fahrzeugmodell"
+      }
     }
   }
 }
@@ -101,7 +112,7 @@ The **location** node provides the booking requirements for a parking space:
 * `booking_duration_min`: minimum duration of a booking in minutes.
 * `booking_duration_max`: maximum duration of a booking in minutes.
 
-Every location can have it's own settings but these will always be the same or within the limits of the global settings.
+Every location can have its own settings but these will always be the same or within the limits of the global settings.
 
 The **sesam** node contains informations about how to work with the sesam boxes.
 
@@ -118,6 +129,7 @@ The **booking** node contains information on how to handle bookings.
 
 * `booking.collection.ttl` Time-To-Live for previously retrieved booking list
 * `booking.notification.*` List of notifications and their settings.
+* `booking.fields.*` List of additional fields that may be required to make a booking.
 
 #### Notifications
 
@@ -132,6 +144,12 @@ Node            | Description
 `near_entry`    | Entering a region, defined by `radius` in meters around a booking location.
 `expiring`      | Shown _n_ `minutes` to a bookings ending.
 `over`          | Shown _n_ `minutes` to a bookings ending.
+
+#### Additional Fields
+
+Each additional field uses its name as a key to a dictionary containing the field `label`.
+`label` contains the translated name of the field.
+The translation of the label is determined by the language of user who is identified by the provided user token.
 
 ## Enable or disable notification
 
