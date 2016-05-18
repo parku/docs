@@ -15,6 +15,8 @@ Only requesting these settings is possible. Changing them is not.
 
 ```sh
 $ curl {{ site.parku.api }}/settings \
+    ?lat=52.53568811 \
+    &lon=13.39412887 \
     -u 098f6bcd4621d373cade4e832627b4f6:parku \
     -X GET
 ```
@@ -97,6 +99,14 @@ Status: 200 OK
         "label": "Fahrzeugmodell"
       }
     }
+  },
+  "features": {
+    "recommend_update": {
+      "enabled": true
+    },
+    "force_update": {
+      "enabled": false
+    }
   }
 }
 ```
@@ -104,6 +114,15 @@ Status: 200 OK
 ### HTTP Request
 
 `GET {{ site.parku.api }}/settings`
+
+#### parameters
+
+Parameter   | Description
+---         | ---
+`lat`   | Latitude of current location. _Optional_
+`lon`   | Longitude of current location. _Optional_
+
+### Return values
 
 The **location** node provides the booking requirements for a parking space:
 
@@ -150,6 +169,16 @@ Node            | Description
 Each additional field uses its name as a key to a dictionary containing the field `label`.
 `label` contains the translated name of the field.
 The translation of the label is determined by the language of user who is identified by the provided user token.
+
+#### Features
+
+Feature flags that enables or disables certaint features 
+based parameters given in header.
+These feature flags can be different for each operation systems.
+
+* `recommend_update` _Android_ specific: Is enabled if there is a newer version off application that is 
+recommended to be updated. Current version still works.
+* `force_update` _Android_ specific: Is enabled if current application version is not supported anymore.
 
 ## Enable or disable notification
 
