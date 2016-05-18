@@ -87,6 +87,17 @@ Status: 200 OK
           "include_distance": false
         }
       }
+    },
+    "fields": {
+      "additional_services": {
+        "label": "zusätzliche Dienste"
+      },
+      "car_colour": {
+        "label": "Fahrzeugfarbe"
+      },
+      "car_model": {
+        "label": "Fahrzeugmodell"
+      }
     }
   },
   "features": {
@@ -120,7 +131,7 @@ The **location** node provides the booking requirements for a parking space:
 * `booking_duration_min`: minimum duration of a booking in minutes.
 * `booking_duration_max`: maximum duration of a booking in minutes.
 
-Every location can have it's own settings but these will always be the same or within the limits of the global settings.
+Every location can have its own settings but these will always be the same or within the limits of the global settings.
 
 The **sesam** node contains informations about how to work with the sesam boxes.
 
@@ -137,6 +148,7 @@ The **booking** node contains information on how to handle bookings.
 
 * `booking.collection.ttl` Time-To-Live for previously retrieved booking list
 * `booking.notification.*` List of notifications and their settings.
+* `booking.fields.*` List of additional fields that may be required to make a booking.
 
 #### Notifications
 
@@ -152,14 +164,21 @@ Node            | Description
 `expiring`      | Shown _n_ `minutes` to a bookings ending.
 `over`          | Shown _n_ `minutes` to a bookings ending.
 
-The **features** contains feature flags that enables or disables certaint features 
+#### Additional Fields
+
+Each additional field uses its name as a key to a dictionary containing the field `label`.
+`label` contains the translated name of the field.
+The translation of the label is determined by the language of user who is identified by the provided user token.
+
+#### Features
+
+Feature flags that enables or disables certaint features 
 based parameters given in header.
 These feature flags can be different for each operation systems.
 
 * `recommend_update` _Android_ specific: Is enabled if there is a newer version off application that is 
 recommended to be updated. Current version still works.
 * `force_update` _Android_ specific: Is enabled if current application version is not supported anymore.
-
 
 ## Enable or disable notification
 

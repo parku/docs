@@ -8,6 +8,12 @@ title: Changelog
 <!--
   Add new changes to the log in historically descending order.
 -->
+
+## {{ '2016-05-09' | date_to_string }}
+
+* Extended [settings endpoint](/api/settings) with `booking.fields`
+* Extended [location endpoints](/api/locations) with `required_fields`
+
 ## {{ '2016-05-02' | date_to_string }}
 
 * Added features [settings endpoint](/api/settings/). Return feature flags based on parameters and user agent.
