@@ -9,6 +9,11 @@ title: Changelog
   Add new changes to the log in historically descending order.
 -->
 
+## {{ '2016-05-19' | date_to_string }}
+
+* Extended [settings endpoint](/api/settings) with `provider`
+* Extended [location endpoints](/api/locations) with `provider`
+
 ## {{ '2016-05-09' | date_to_string }}
 
 * Extended [settings endpoint](/api/settings) with `booking.fields`

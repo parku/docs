@@ -107,6 +107,17 @@ Status: 200 OK
     "force_update": {
       "enabled": false
     }
+  },
+  "provider": {
+    "providerkey": {
+      "image": "http://provider/image.png",
+      "thumbnail": "http://provider/thumbnail.png",
+      "header": "[?]Please provide the data necessary for booking the parking spaces.",
+      "legal": {
+        "accept": ["http://www.provider.com/terms_and_conditions.html"],
+        "shown": ["http://www.provider.com/terms_and_conditions_info.html"]
+      }
+    }
   }
 }
 ```
@@ -179,6 +190,18 @@ These feature flags can be different for each operation systems.
 * `recommend_update` _Android_ specific: Is enabled if there is a newer version off application that is 
 recommended to be updated. Current version still works.
 * `force_update` _Android_ specific: Is enabled if current application version is not supported anymore.
+
+#### Provider
+
+Info for parking space provider. Key is linked with [location endpoint](/api/locations).
+
+ Node       | Description
+---         | ---
+`image`     | Large provider logo.
+`thumbnail` | Provider logo thumbnail
+`header`    | Translated header text for required fields
+`legal`     | Contains two url lists for terms and conditions. <br>- `accept`: User needs to accept t&c with some action (like checkbox).  <br>- `shown`: User needs only to see the t&c.
+
 
 ## Enable or disable notification
 
