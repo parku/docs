@@ -112,10 +112,20 @@ Status: 200 OK
     "providerkey": {
       "image": "http://provider/image.png",
       "thumbnail": "http://provider/thumbnail.png",
-      "header": "[?]Please provide the data necessary for booking the parking spaces.",
-      "legal": {
-        "accept": ["http://www.provider.com/terms_and_conditions.html"],
-        "shown": ["http://www.provider.com/terms_and_conditions_info.html"]
+      "header": "Please provide the data necessary for booking the parking spaces.",
+      "legals": {
+        "accept": [
+          {
+            "url": "http://www.provider.com/terms_and_conditions.html",
+            "text": "Please accept the parking providers' %TERMS_LINK%.",
+          }
+        ],
+        "show": [
+          {
+            "url": "http://www.provider.com/terms_and_conditions_info.html",
+            "text": "By tapping 'Pay Now' you hereby acknowledge and agree the %TERMS_LINK% of parking space provider",
+          }
+        ],
       }
     }
   }
@@ -193,14 +203,14 @@ recommended to be updated. Current version still works.
 
 #### Provider
 
-Info for parking space provider. Key is linked with [location endpoint](/api/locations).
+Info for parking space provider. Key is linked with [location](/api/locations).
 
  Node       | Description
 ---         | ---
 `image`     | Large provider logo.
 `thumbnail` | Provider logo thumbnail
 `header`    | Translated header text for required fields
-`legal`     | Contains two url lists for terms and conditions. <br>- `accept`: User needs to accept t&c with some action (like checkbox).  <br>- `shown`: User needs only to see the t&c.
+`legal`     | Contains two url lists for terms and conditions. <br>- `accept`: User needs to accept terms and conditions with some action (like checkbox).  <br>- `show`: User needs only to see the terms and conditions.
 
 
 ## Enable or disable notification
