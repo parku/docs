@@ -11,8 +11,9 @@ title: Changelog
 
 ## {{ '2016-05-19' | date_to_string }}
 
-* Extended [settings endpoint](/api/settings) with `provider`
-* Extended [location endpoints](/api/locations) with `provider`
+* Extended [settings](/api/settings) with `provider`
+* Extended [location](/api/locations) with `provider`
+* Added terms and conditions remark to the top of [bookings](/api/bookings) 
 
 ## {{ '2016-05-09' | date_to_string }}
 
