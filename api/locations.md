@@ -108,7 +108,7 @@ The settings of a location are used in favor of the global settings that can be 
 `required_fields` lists all additionally required fields when creating a booking for this location.
 The field names correspond to the `booking.fields.*` entries in the settings endpoint.
 
-`provider` node informs about parking space provider. Additional information for provider can be found from by same key from [settings](/api/settings/)
+`provider` node informs about parking space provider. Additional information for the provider can be using the same key in [settings](/api/settings/)
 
 ## Get availability times for location
 

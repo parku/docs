@@ -112,7 +112,7 @@ Status: 200 OK
     "parku": {
       "legals": {
         "show": [{
-          "text": "By proceeding further you hereby acknowledge and agree the %TERMS_LINK% of ParkU.",
+          "text": "By proceeding further, you acknowledge and agree to ParkU’s %TERMS_LINK%.",
           "url": "https:\/\/parku.de\/terms\/"
         }]
       }
@@ -120,7 +120,7 @@ Status: 200 OK
     "providerkey": {
       "image": "http://provider/image.png",
       "thumbnail": "http://provider/thumbnail.png",
-      "header": "Please provide the data necessary for booking the parking spaces.",
+      "header": "Please provide the data necessary for booking the parking space.",
       "legals": {
         "accept": [
           {
@@ -219,9 +219,9 @@ Info for parking space provider. Key is linked with [location](/api/locations).
 `thumbnail` | Provider logo thumbnail
 `header`    | Translated header text for required fields
 `legal`     | Contains two lists for terms and conditions entries where you can find text and url for each. 
-            |  - `accept`: List of terms and conditions entries which user needs to accept by some action (like checkbox).
-            |  - `show`: List of terms and conditions entries which user needs only to see.
-            | If the list entry `text` contains %TERMS_LINK%, it should be replaced by actual the actual link (check example).
+            |  - `accept`: List of terms and conditions entries which the user needs to accept by some action (like checkbox).
+            |  - `show`: List of terms and conditions entries which the user needs only to see.
+            | If the list entry `text` contains %TERMS_LINK%, it should be replaced by the actual link (check example).
 
 
 ## Enable or disable notification
