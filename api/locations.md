@@ -26,6 +26,7 @@ Status: 200 OK
 {
     "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
     "code": "ZHRTHW",
+    "type": "off-street",
     "latitude": 47.365398,
     "longitude": 8.51987,
     "street": "Hopfenstrasse",
@@ -78,6 +79,14 @@ Parameter | Description
 
 ### Return values
 
+Available parking space types are:
+
+* `off-street` Off-Street parking space. _Default_
+* `park-and-ride` Park & Ride (P+R)
+* `professional-garage` Professional garage
+* `airport-parking` Airport-Parking
+* `harbor-parking` Harbor-Parking
+
 Available options for a parking space are:
 
 * `excess length` The parking space can be used by cars with a small trailer.
@@ -86,6 +95,10 @@ Available options for a parking space are:
 * `patio` The parking space is located at an inner courtyard.
 * `barrier` Parking space has a barrier and user needs a smartphone to open it.
 * `charging station` Parking space with an electric vehicle charging station.
+* `key_necessary` Parking space can only be accessed with a key.
+* `long_term_booking` Parking space is bookable for longer time period.
+* `surveillance` Parking space has surveillance.
+* `valet_service` Parking space contains valet service.
 
 `user_owned` is `true` if the user who requested the location is also the owner of the parking space. This allows the web and the apps to determine if the user could block the parking space from bookings. The blocking feature itself is not yet supported in APIv4.
 
