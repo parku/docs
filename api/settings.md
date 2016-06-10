@@ -90,14 +90,18 @@ Status: 200 OK
     },
     "fields": {
       "additional_services": {
-        "label": "zusätzliche Dienste"
+        "label": "zusätzliche Dienste",
+        "type": "text"
       },
       "car_colour": {
-        "label": "Fahrzeugfarbe"
+        "label": "Fahrzeugfarbe",
+        "type": "text"
       },
-      "car_model": {
-        "label": "Fahrzeugmodell"
+      "number_of_passengers": {
+        "label": "Anzahl der Passagiere",
+        "type": "number"
       }
+      ...
     }
   },
   "features": {
@@ -195,9 +199,19 @@ Node            | Description
 
 #### Additional Fields
 
-Each additional field uses its name as a key to a dictionary containing the field `label`.
+Each additional field uses its name as a key to a dictionary containing the field `label` and `type`.
 `label` contains the translated name of the field.
 The translation of the label is determined by the language of user who is identified by the provided user token.
+
+Field types currently are:
+
+* `text`
+* `datetime`
+* `date`
+* `time`
+* `number`
+* `tel`
+* `boolean`
 
 #### Features
 

@@ -15,6 +15,11 @@ title: Changelog
 * Extended [location](/api/locations) with `provider`
 * Added terms and conditions remark to the top of [bookings](/api/bookings) 
 
+## {{ '2016-05-18' | date_to_string }}
+
+* Adding type to required fields in [settings endpoint](/api/settings) with `booking.fields`
+* Extended new booking in [bookings endpoint](/api/bookings) with `required_fields`
+
 ## {{ '2016-05-09' | date_to_string }}
 
 * Extended [settings endpoint](/api/settings) with `booking.fields`
@@ -26,6 +31,8 @@ title: Changelog
 
 ## {{ '2016-04-28' | date_to_string }}
 
+* Added new properties to [locations endpoint](/api/locations/).
+* Introduced type for [locations endpoint](/api/locations/). 
 * Added optional status filter to [bookings endpoint](/api/bookings/). Retrieve bookings filtered by status.
 
 ## {{ '2016-04-08' | date_to_string }}
