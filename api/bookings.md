@@ -65,6 +65,11 @@ Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
       "booking_duration_min": 30,
       "booking_duration_max": 43200
     },
+    "required_fields":[
+      "additional_services",
+      "car_colour",
+      "number_of_passengers"
+    ],
     "gates": [
       {
         "type": "beacon",
@@ -105,16 +110,17 @@ Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
 
 ### Parameters
 
-Parameter      | Description
----            | ---
-`location_id`  | The ID of the location you get returned from the [`locations`][locations] request. __Required.__
-`date_start`   | [ISO 8601][iso-8601] format: `{{ site.time | date_to_xmlschema }}`.  __Required.__
-`date_end`     | [ISO 8601][iso-8601] format: `{{ site.time | date_to_xmlschema }}`.  __Required.__
-`license_plate`| The license_plate of the used car. Get all cars of a user from the [`cars`][cars] request. __Required.__
-`phone_number` | The phone number. Get all phone numbers of a user from the [`phone_numbers`][phone_numbers] request. __Required.__
-`provider`     | The payment method. Available options are _`paypal`_, _`braintree`_ or _`credit`_. __Required.__
-`provider_info`| The information of the payment provider to perform a payment. __Required__ for payment methods _paypal_ and _braintree_.
-`status`       | Get bookings by status. Available options are _`all`_, _`active`_ _(default)_ or _`cancelled`_. _Optional_
+Parameter         | Description
+---               | ---
+`location_id`     | The ID of the location you get returned from the [`locations`][locations] request. __Required.__
+`date_start`      | [ISO 8601][iso-8601] format: `{{ site.time | date_to_xmlschema }}`.  __Required.__
+`date_end`        | [ISO 8601][iso-8601] format: `{{ site.time | date_to_xmlschema }}`.  __Required.__
+`license_plate`   | The license_plate of the used car. Get all cars of a user from the [`cars`][cars] request. __Required.__
+`phone_number`    | The phone number. Get all phone numbers of a user from the [`phone_numbers`][phone_numbers] request. __Required.__
+`provider`        | The payment method. Available options are _`paypal`_, _`braintree`_ or _`credit`_. __Required.__
+`provider_info`   | The information of the payment provider to perform a payment. __Required__ for payment methods _paypal_ and _braintree_.
+`status`          | Get bookings by status. Available options are _`all`_, _`active`_ _(default)_ or _`cancelled`_. _Optional_
+`required_fields` | Parking space required fields defined in the [`locations`][locations] request. __Required if defined in location.__
 
 #### Provider Info
 
@@ -130,6 +136,15 @@ The field provider info should contain required payment information. Typically y
     `provider_info[number]=EncryptedCreditCardNumber`<br/>
     `provider_info[expiration_date]=EncryptedExpirationDate`<br/>
     `provider_info[cvv]=EncryptedCvv`
+
+#### Required Fields
+
+The required fields should contain all required fields defined in location. All values should be sent as strings.
+
+* __car_colour__<br/>
+  `required_fields[car_colour]="red"`
+* __number_of_passengers__<br/>
+  `required_fields[number_of_passengers]="5"`
 
 
 ## Retrieve a booking

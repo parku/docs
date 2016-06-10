@@ -58,7 +58,8 @@ Status: 200 OK
     },
     "required_fields": [
         "additional_services",
-        "car_colour"
+        "car_colour",
+        "number_of_passengers"
     ]
 }
 ```
