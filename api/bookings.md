@@ -8,6 +8,8 @@ title: Bookings
 
 All API requests to `{{ site.parku.api }}/bookings` need a __private key__.
 
+__By creating or extending a booking it is asumed that all terms and conditions are reviewed and accepted.__
+
 ## Create a new booking
 
 ```sh

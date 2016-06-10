@@ -51,6 +51,7 @@ Status: 200 OK
     "price_period": "day",
     "address_slug": "hopfenstrasse-20",
     "user_owned": false,
+    "provider": "providerkey",
     "settings": {
         "bookable_range_start": -15,
         "bookable_range_end": 43200,
@@ -120,6 +121,8 @@ The settings of a location are used in favor of the global settings that can be 
 
 `required_fields` lists all additionally required fields when creating a booking for this location.
 The field names correspond to the `booking.fields.*` entries in the settings endpoint.
+
+`provider` node informs about parking space provider. Additional information for the provider can be using the same key in [settings](/api/settings/)
 
 ## Get availability times for location
 
@@ -239,6 +242,7 @@ Status: 200 OK
         "price_period": "week",
         "address_slug": "hopfenstrasse-20",
         "user_owned": false,
+        "provider": "parku",
         "settings": {
             "bookable_range_start": -15,
             "bookable_range_end": 43200,

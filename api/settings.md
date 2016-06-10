@@ -111,6 +111,35 @@ Status: 200 OK
     "force_update": {
       "enabled": false
     }
+  },
+  "provider": {
+    "parku": {
+      "legals": {
+        "show": [{
+          "text": "By proceeding further, you acknowledge and agree to ParkU’s %TERMS_LINK%.",
+          "url": "https:\/\/parku.de\/terms\/"
+        }]
+      }
+    },
+    "providerkey": {
+      "image": "http://provider/image.png",
+      "thumbnail": "http://provider/thumbnail.png",
+      "header": "Please provide the data necessary for booking the parking space.",
+      "legals": {
+        "accept": [
+          {
+            "url": "http://www.provider.com/terms_and_conditions.html",
+            "text": "Please accept the parking providers' %TERMS_LINK%.",
+          }
+        ],
+        "show": [
+          {
+            "url": "http://www.provider.com/terms_and_conditions_info.html",
+            "text": "By tapping 'Pay Now' you hereby acknowledge and agree the %TERMS_LINK% of parking space provider",
+          }
+        ],
+      }
+    }
   }
 }
 ```
@@ -193,6 +222,21 @@ These feature flags can be different for each operation systems.
 * `recommend_update` _Android_ specific: Is enabled if there is a newer version off application that is 
 recommended to be updated. Current version still works.
 * `force_update` _Android_ specific: Is enabled if current application version is not supported anymore.
+
+#### Provider
+
+Info for parking space provider. Key is linked with [location](/api/locations).
+
+ Node       | Description
+---         | ---
+`image`     | Large provider logo.
+`thumbnail` | Provider logo thumbnail
+`header`    | Translated header text for required fields
+`legal`     | Contains two lists for terms and conditions entries where you can find text and url for each. 
+            |  - `accept`: List of terms and conditions entries which the user needs to accept by some action (like checkbox).
+            |  - `show`: List of terms and conditions entries which the user needs only to see.
+            | If the list entry `text` contains %TERMS_LINK%, it should be replaced by the actual link (check example).
+
 
 ## Enable or disable notification
 
