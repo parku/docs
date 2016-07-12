@@ -56,6 +56,12 @@ Location: {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d
     "options": [],
     "notifications": [],
     "currency": "CHF",
+    "pricing": {
+      "rate_hourly": 2,
+      "rate_daily": 10,
+      "rate_weekly": null,
+      "rate_monthly": null
+    },
     "support": {
       "phone_number": "+41 43 928 72 52"
     },
@@ -192,6 +198,12 @@ Status: 200 OK
     "options": [],
     "notifications": [],
     "currency": "CHF",
+    "pricing": {
+      "rate_hourly": 2,
+      "rate_daily": 10,
+      "rate_weekly": null,
+      "rate_monthly": null
+    },
     "support": {
       "phone_number": "+41 43 928 72 52"
     },
@@ -368,6 +380,12 @@ Status: 200 OK
     "options": [],
     "notifications": [],
     "currency": "CHF",
+    "pricing": {
+      "rate_hourly": 2,
+      "rate_daily": 10,
+      "rate_weekly": null,
+      "rate_monthly": null
+    },
     "support": {
       "phone_number": "+41 43 928 72 52"
     },
@@ -494,6 +512,12 @@ Status: 200 OK
       "options": [],
       "notifications": [],
       "currency": "CHF",
+      "pricing": {
+        "rate_hourly": 2,
+        "rate_daily": 10,
+        "rate_weekly": null,
+        "rate_monthly": null
+      },
       "support": {
         "phone_number": "+41 43 928 72 52"
       },

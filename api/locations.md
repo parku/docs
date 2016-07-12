@@ -48,6 +48,12 @@ Status: 200 OK
         "phone_number": "+41 43 928 72 52"
     },
     "price": 3.5,
+    "pricing": {
+    	"rate_hourly": 2,
+    	"rate_daily": 10,
+    	"rate_weekly": null,
+    	"rate_monthly": null
+  	},
     "price_period": "day",
     "address_slug": "hopfenstrasse-20",
     "user_owned": false,
@@ -109,6 +115,15 @@ Available options for a parking space are:
 * `week`
 * `month`
 * `timeframe`
+
+`pricing` contains information about the pricing and price prediction. It contains the keys:
+
+* `rate_hourly`
+* `rate_daily`
+* `rate_weekly`
+* `rate_monthly`
+
+If the pricing does not rely on these values, but on a custom price pattern, all these values will be `null`.
 
 The `settings` node provides the booking requirements for a location:
 
@@ -239,6 +254,12 @@ Status: 200 OK
             "phone_number": "+41 43 928 72 52"
         },
         "price": 3.5,
+        "pricing": {
+    		"rate_hourly": 2,
+    		"rate_daily": 10,
+    		"rate_weekly": null,
+    		"rate_monthly": null
+  		},
         "price_period": "week",
         "address_slug": "hopfenstrasse-20",
         "user_owned": false,
