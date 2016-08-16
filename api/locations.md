@@ -52,6 +52,10 @@ Status: 200 OK
     "address_slug": "hopfenstrasse-20",
     "user_owned": false,
     "provider": "providerkey",
+    "next_available_at": {
+      "from": "2016-08-20T00:00:00+02:00",
+      "to": "2016-08-28T00:00:00+0200"
+    },
     "settings": {
         "bookable_range_start": -15,
         "bookable_range_end": 43200,
@@ -68,13 +72,13 @@ Status: 200 OK
 
 ### HTTP Request
 
-`GET {{ site.parku.api }}/locations/:location_id`
+`GET {{ site.parku.api }}/locations/:parking_space_id`
 
 ### Parameters
 
 Parameter | Description
 --- | ---
-`location_id` | Identifier of the location. __Required__
+`parking_space_id` | Identifier of the parking space. __Required__
 `date_start` | Used to calculate the price for a location. Requires the field `date_end` to be defined. If no `date_start` or `date_end` is specified, the returned price field will be `null`. _Optional_
 `date_end` | See `date_start`. _Optional_
 
@@ -123,6 +127,8 @@ The settings of a location are used in favor of the global settings that can be 
 The field names correspond to the `booking.fields.*` entries in the settings endpoint.
 
 `provider` node informs about parking space provider. Additional information for the provider can be using the same key in [settings](/api/settings/)
+
+`next_available_at` The next date range when the parking space would be available.
 
 ## Get availability times for location
 
