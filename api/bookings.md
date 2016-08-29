@@ -434,7 +434,7 @@ Parameter      | Description
 Permanently cancels a booking. It cannot be undone.
 
 ```sh
-$ curl {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d \
+$ curl {{ site.parku.api }}/bookings/005c4826-4e28-11e3-a675-d43d7eece53d?force \
     -u 098f6bcd4621d373cade4e832627b4f6:parku \
     -X DELETE
 ```
@@ -447,13 +447,14 @@ Status: 204 No Content
 
 ### HTTP Request
 
-`DELETE {{ site.parku.api }}/bookings/:booking_id`
+`DELETE {{ site.parku.api }}/bookings/:booking_id{?force}`
 
 ### Parameters
 
 Parameter      | Description
 ---            | ---
 `booking_id`   | The identifier of the booking to be canceled. __Required.__
+`force`        | A flag to force booking cancelation even if it is active, and it would be only available for support users. __Optional.__
 
 
 ## List all bookings
