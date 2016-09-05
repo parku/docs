@@ -9,7 +9,7 @@ title: Invitations
 ## Check validity
 
 ```sh
-$ curl {{ site.parku.api }}/invitations/ckdzUEdUcWs= \
+$ curl {{ site.parku.api }}/invitations/park4UAndMe= \
     -u 098f6bcd4621d373cade4e832627b4f6:parku \
     -X GET
 ```
