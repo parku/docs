@@ -9,6 +9,10 @@ title: Changelog
   Add new changes to the log in historically descending order.
 -->
 
+## {{ '2016-09-09' | date_to_string }}
+
+* Extended [coupon](/api/coupon) with error message 40.
+
 ## {{ '2016-05-19' | date_to_string }}
 
 * Extended [settings](/api/settings) with `provider`

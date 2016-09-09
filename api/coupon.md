@@ -73,3 +73,4 @@ Error Code | HTTP Status Code | Description
 30         | 422              | Coupon quota exhausted.
 31         | 422              | User usage quota for this coupon is exhausted.
 32         | 422              | User usage quota for a coupon is same grouping is exhausted.
+40         | 422              | Platform is not enabled.
