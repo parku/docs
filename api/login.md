@@ -38,16 +38,16 @@ Status: 200 OK
       "license_plate": "B-AB 1234",
       "vehicle": "Isetta",
       "country": null
-    }],
-    "phone_numbers": [{
-      "id": 16696,
-      "phone_number": "099028-237489"
-    }],
-    "attributes": [{
-      "id": 1,
-      "key": "adac",
-      "value": "1234567890"
-    }],
+  }],
+  "phone_numbers": [{
+    "id": 16696,
+    "phone_number": "099028-237489"
+  }],
+  "attributes": [{
+    "id": 1,
+    "key": "adac",
+    "value": "1234567890"
+  }],
   "token": "ce35e3504183c2f52f58263ce11004e0"
 }
 ```
