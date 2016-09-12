@@ -24,6 +24,7 @@ Status: 200 OK
 ```
 ```json
 {
+  "code": "KFJ32",
   "gender": "male",
   "email": "test@example.com",
   "firstname": "Firstname",
@@ -32,6 +33,21 @@ Status: 200 OK
   "currency": "CHF",
   "country": "CH",
   "facebook_id": "100006987966349",
+  "cars": [{
+      "id": 12,
+      "license_plate": "B-AB 1234",
+      "vehicle": "Isetta",
+      "country": null
+    }],
+    "phone_numbers": [{
+      "id": 16696,
+      "phone_number": "099028-237489"
+    }],
+    "attributes": [{
+      "id": 1,
+      "key": "adac",
+      "value": "1234567890"
+    }],
   "token": "ce35e3504183c2f52f58263ce11004e0"
 }
 ```
