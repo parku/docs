@@ -30,6 +30,7 @@ Status: 200 OK
     "postcode": "8045",
     "city": "Zürich",
     "country": "CH",
+    "bookable": true,
     "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
     "type": "off-street",
     "code": "ZHRTHW",
@@ -108,6 +109,7 @@ Field             | Element                | Type         | (Element and) Descri
                   | `maximum`              | `number`     | the overall number of parking spaces at this location
                   | `next_start`           | `time`       | the start of the next from now slot in which a parking space in this location is free and bookable, can be in the past
                   | `next_end`             | `time`       | the end of the next slot from now in which a parking space in this location is free and bookable, can be in the past
+`bookable`        |                        | `boolean`    | `true` if that locations can be booked via the parku API, `false` if the location is purely providing information
 `city`            |                        | `string`     | city of the location
 `code`            |                        | `string`     | short identification code of the location, not necessarily unique
 `country`         |                        | `string`     | country of the location in 2 character encoding
@@ -255,6 +257,7 @@ Status: 200 OK
         "postcode": "8045",
         "city": "Zürich",
         "country": "CH",
+        "bookable": true,
         "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
         "type": "off-street",
         "code": "ZHRTHW",
@@ -314,14 +317,18 @@ Status: 200 OK
 
 Parameter      | Value      | Description
 -------------- | ---------- | ----
-`sw`           | `decimal`  |Comma separated latitude and longitude of the southwest position. _Required.
-`ne`           | `decimal`  |Comma separated latitude and longitude of the northeast position. _Required.
+`sw`           | `decimal`  | Comma separated latitude and longitude of the southwest position. _Required.
+`ne`           | `decimal`  | Comma separated latitude and longitude of the northeast position. _Required.
 `date_start`   | `datetime` | Filter parking spaces for the start date. _Optional._
 `date_end`     | `datetime` | Filter parking spaces for the end date. _Optional._
 `availability` | `string`   | Filters returned locations regarding their availability if `start` and `end` are also given. Can be:
                | `"true"`   | only returns available locations (this is default if `availability` is not specified and `start` and `end` were given)
-               | `"false"`  |only returns non-available locations
-               | `"all"`    |return all locations, including ones that no availability information is available for
+               | `"false"`  | only returns non-available locations
+               | `"all"`    | return all locations, including ones that no availability information is available for
+`bookability`  | `string`   | Filters returned locations regarding their general bookability. Can be:
+               | `"true"`   | only returns locations that could be booked through the api if they are available ( _DEFAULT_)
+               | `"false"`  | only returns locations that can not be booked through the api, even though they might be available
+               | `"all"`    | return all locations, no matter if they would be bookable though the API or not
 
 When no `date_start` or `date_end` was provided, all locations are returned. That does not mean, that they are available.
 
