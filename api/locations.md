@@ -105,7 +105,7 @@ Field             | Element                | Type         | (Element and) Descri
 ----------------- | ---------------------- | ------------ | -----
 `address_slug`    |                        | `string`     | street name and number of the location in url address format
 `availability`    |                        | `dictionary` | describes the availability of the location in relation to the request
-                  | `current`              | `number`     | the currently available number of parking spaces at the location for the requested time period defined by `start` and `end`
+                  | `current`              | `number`     | the number of parking spaces available at the location for the requested time period defined by `start` and `end`
                   | `maximum`              | `number`     | the overall number of parking spaces at this location
                   | `next_start`           | `time`       | the start of the next from now slot in which a parking space in this location is free and bookable, can be in the past
                   | `next_end`             | `time`       | the end of the next slot from now in which a parking space in this location is free and bookable, can be in the past
@@ -114,7 +114,7 @@ Field             | Element                | Type         | (Element and) Descri
 `code`            |                        | `string`     | short identification code of the location, not necessarily unique
 `country`         |                        | `string`     | country of the location in 2 character encoding
 `currency`        |                        | `string`     | the currency that the price for the location is in, `EUR` for Euro or `CHF` for swiss franc.
-`description`     |                        | `string`     | the description of the location. The description is
+`description`     |                        | `string`     | the description of the location. The description is returned in the users language or in the language specified by the HTTP header `Accept-Language` if it was given.
 `id`              |                        | `rfc4122`    | unique identifier of the location used for referencing.
 `image_urls`      |                        | `list`       | urls of location images, can be **empty**
 `latitude`        |                        | `decimal`    | latitude part of the location geo coordinate
@@ -317,10 +317,10 @@ Status: 200 OK
 
 Parameter      | Value      | Description
 -------------- | ---------- | ----
-`sw`           | `decimal`  | Comma separated latitude and longitude of the southwest position. _Required.
-`ne`           | `decimal`  | Comma separated latitude and longitude of the northeast position. _Required.
-`date_start`   | `datetime` | Filter parking spaces for the start date. _Optional._
-`date_end`     | `datetime` | Filter parking spaces for the end date. _Optional._
+`sw`           | `decimal`  | Comma separated latitude and longitude of the southwest position. _Required_.
+`ne`           | `decimal`  | Comma separated latitude and longitude of the northeast position. _Required_.
+`date_start`   | `datetime` | Filter parking spaces for the start date. `date_start` will have no effect unless `date_end` is also provided. _Optional._
+`date_end`     | `datetime` | Filter parking spaces for the end date. `date_end` will have no effect unless `date_start` is also provided. _Optional._
 `availability` | `string`   | Filters returned locations regarding their availability if `start` and `end` are also given. Can be:
                | `"true"`   | only returns available locations (this is default if `availability` is not specified and `start` and `end` were given)
                | `"false"`  | only returns non-available locations
