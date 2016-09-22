@@ -127,29 +127,28 @@
   overflow: auto;
 }
 
-.markdown-body table td {
-  padding: .75rem;
-}
-
+.markdown-body table td,
 .markdown-body table th {
-  padding: .35rem .75rem;
-  border-bottom: 1px solid #eee;
-}
-
-.markdown-body table th,
-.markdown-body table td {
+  padding: .75rem;
+  border: solid #eee;
+  border-width: 1px 0 0 1px;
   text-align: left;
   vertical-align: top;
 }
 
+.markdown-body table th {
+  background-color: #eee;
+}
+
 .markdown-body table th:first-child,
 .markdown-body table td:first-child {
-  padding-left: 0;
+  padding-left: .5rem;
 }
 
 .markdown-body table th:last-child,
 .markdown-body table td:last-child {
   padding-right: 0;
+  border-right: 1px solid #eee;
 }
 
 .markdown-body table tr:last-child td {
