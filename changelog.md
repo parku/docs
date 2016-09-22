@@ -9,6 +9,11 @@ title: Changelog
   Add new changes to the log in historically descending order.
 -->
 
+## {{ '2016-09-22' | date_to_string }}
+
+* Extended [location](/api/locations) with `availability` and `bookability`
+* Reformatted [location](/api/locations)
+
 ## {{ '2016-09-09' | date_to_string }}
 
 * Extended [coupon](/api/coupon) with error message 40.
