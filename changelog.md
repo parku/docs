@@ -14,6 +14,10 @@ title: Changelog
 * Extended [location](/api/locations) with `availability` and `bookability`
 * Reformatted [location](/api/locations)
 
+## {{ '2016-09-12' | date_to_string }}
+
+* Extended [login](/api/login) with new information fields.
+
 ## {{ '2016-09-09' | date_to_string }}
 
 * Extended [coupon](/api/coupon) with error message 40.
