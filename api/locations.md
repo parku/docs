@@ -338,6 +338,8 @@ Returns a list of locations that provide the same format as the single location.
 
 ## Terms and Conditions
 
+@Deprecated  This endpoint is deprecated. Settings endpoint should be used instead.
+
 Each location can have different terms and conditions. With this endpoint you can retrieve location based terms and conditions.
 
 ```sh
