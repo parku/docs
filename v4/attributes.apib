@@ -1,0 +1,42 @@
+# Attributes [/attributes]
+## Create a new Attribute [POST /attributes{?key,value}]
+
++ Parameters
+
+    + key: adac (required) - The name of the attribute. Currently only 'adac' and 'test' are allowed
+    + value: 12345 (required) - The value of the attribute, eg. a membership number
+
++ Request
+    + Headers
+
+            Accept: application/json
+            Authorization: Basic
+
++ Response 200 (application/json)
+    + Body
+
+            {
+              "id": 32,
+              "key": "adac",
+              "value": "12345"
+            }
+
+## Retrieve an Attribute [GET /attributes/{attribute_id}]
+
++ Parameters
+
+    + attribute_id: 32 (int, required) - The identifier of the attribute to be retrieved
+
++ Request
+    + Headers
+
+            Accept: application/json
+            Authorization: Basic
++ Response 200 (application/json)
+    + Body
+
+            {
+              "id": 32,
+              "key": "adac",
+              "value": "12345"
+            }

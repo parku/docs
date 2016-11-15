@@ -1,0 +1,17 @@
+{
+  "name": "parku-docs",
+  "version": "1.0.0",
+  "description": "Parku API Reference",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+      "aglio": "^2.3.0"
+  },
+  "devDependencies": {
+    "aglio-theme-kaiten": "https://github.com/kaiten-hq/aglio-theme-kaiten.git#v1.6.7"
+  }
+}
