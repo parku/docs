@@ -1,10 +1,13 @@
 all: watch
 
-watch: clean
-	bundle exec jekyll serve --drafts --watch --port 9393
+generate-v4: clean
+	mkdir -p build
+	cp images build/images -r
+	ln -nfs `readlink -m ./images` `pwd`/v4/images
+	NOCACHE=1 aglio -i v4/parku.apib -o build/v4.html --theme-variables theme/variables-parku.less --theme-style theme/layout-parku.less --theme-full-width --theme-template triple --theme-condense-nav --verbose
 
 clean:
-	rm -fr .sass-cache/ _site/
+	rm -rf build
 
 linklint:
 	@cp robots_allow.txt _site/robots.txt

@@ -1,0 +1,24 @@
+# Devices [/devices]
+
+This endpoint is used to send the latest device identifier to the backend.
+The device identifier is used to send push notifications.
+
+Only the creation of identifiers is allowed. Retrieving is not allowed.
+
+## Create an Identifier [POST /devices{?ios_device_token,android_registration_id}]
+Send the latest device identifier to the backend.
+
+The iOS device token can change through time.
+[Apple suggests](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/IPhoneOSClientImp.html#//apple_ref/doc/uid/TP40008194-CH103-SW2)
+to send the device token every time the app launches.
+
++ Parameters
+    + `ios_device_token`: `A339F8BE4F...` (string,optional) - iOS push notification identifier via APNs.
+        Full integration and how to request a push notification Device Token through Apple's APM service is accessible
+        [here](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/APNSOverview.html).
+        Device Token may be raw format or in push format.
+    + `android_registration_id`: `A339F8BE4F...` (string,optional) - Android push notification identifier via GCM.
+        Full integration and how to request a push notification Registration ID through Android's GCM service is
+        accessible [here](http://developer.android.com/google/gcm/gs.html).
+
++ Response 204

@@ -1,0 +1,18 @@
+# Facebook [/facebook]
+
+## Facebook Login [POST /facebook/login{?access_token}]
+When a new user was created through Facebook, the country is not set.
+In this case, you must ask the user for the country and [update](#user-user-put) the user profile accordingly.
+
+All further requests using the token as _HTTP Basic Auth_ username are made on behalf of the user.
+
++ Parameters
+    + `access_token`: `1234...` (string,required) - The access token which is used to obtain information from Facebook.
+        The token must have the permissions to get the users email.
+
++ Request
+    + Headers
+
+            Authorization: Basic public_key:parku
+
++ Response 204

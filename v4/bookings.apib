@@ -1,4 +1,4 @@
-# Bookings
+# Bookings [/bookings]
 ## Create a new Booking [POST /bookings{?location_id,date_start,date_end,license_plate,phone_number,provider,provider_info,status}&required_fields%5Bfieldname%5D={required_field}]
 + Parameters
 
@@ -140,8 +140,8 @@
                 ]
               },
               "reference": "HRS5J",
-              "date_start": "{{ site.time | date: '%Y-%m-%d' }}T10:00:00{{ site.time | date: '%z' }}",
-              "date_end": "{{ site.time | date: '%Y-%m-%d' }}T16:30:00{{ site.time | date: '%z' }}",
+              "date_start": "2016-10-27T10:00:00+0000",
+              "date_end": "2016-10-27T16:30:00+0000",
               "price": 13.75,
               "currency": "CHF",
               "violation": null
@@ -150,7 +150,7 @@
 ## Retrieve a Booking [GET /bookings/{reference}]
 Retrieves the details of an existing booking. You need to supply either the id or the reference of a booking.
 
-+ Attributes
++ Parameters
 
     + reference: `005c4826-4e28-11e3-a675-d43d7eece53d` (string, required) - The id or code of the booking
 
@@ -272,15 +272,15 @@ Updates the booking by setting the values of the parameters passes. Any paramete
 + Parameters
     + `booking_id` : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
     + `license_plate`: `B-BC 4567` (string, optional) -
-        refer to the description of [`Create a new Booking`](#bookings-create-a-new-booking-post)
+        refer to the description of [`Create a new Booking`](#bookings-bookings-post)
     + `phone_number`: `+493057701871` (string, optional) -
-        refer to the description of [`Create a new Booking`](#bookings-create-a-new-booking-post)
+        refer to the description of [`Create a new Booking`](#bookings-bookings-post)
     + `date_end`: `2016-10-27T17:00:00+0000` (string, optional) -
-        refer to the description of [`Create a new Booking`](#bookings-create-a-new-booking-post)
+        refer to the description of [`Create a new Booking`](#bookings-bookings-post)
     + `provider`: `credit` (string, optional) -
-        refer to the description of [`Create a new Booking`](#bookings-create-a-new-booking-post)
+        refer to the description of [`Create a new Booking`](#bookings-bookings-post)
     + `provider_info`: `PAY-2CM399047K4649003KM4WJQQ` (string, optional) -
-        refer to the description of [`Create a new Booking`](#bookings-create-a-new-booking-post)
+        refer to the description of [`Create a new Booking`](#bookings-bookings-post)
 
 + Response 200
     + Body
@@ -426,7 +426,7 @@ Updates the booking by setting the values of the parameters passes. Any paramete
 
 + Response 200
     + Body
-    
+
             [
               {
                 "id": "0072c629-e622-11e2-8bf1-8a83f3373875",
@@ -508,7 +508,7 @@ Retrieving a booking returns a few prices for standard intervals. Use this endpo
 
 + Parameters
     + `booking_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
-    + `date_end`: 2016-10-27T10:10:20+00:00 (ISO 8601, required) - end date and time of the booking
+    + `date_end`: `2016-10-27T10:10:20+00:00` (ISO 8601, required) - end date and time of the booking
 
 + Response 200 (application/json)
     + Body

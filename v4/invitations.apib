@@ -1,0 +1,20 @@
+# Invitations [/invitations]
+## Check Invitation Code Validity [GET /invitations/{invitation_code}]
+
++ Parameters
+    + `invitation_code`: `d2VsbCBkb25lISBnZXQgYSBiZWVyIG5vdyA9RA==` (string,required) - Base64 encoded invitation code.
+
++ Request
+    + Headers
+
+            Authorization: Basic private_key:parku
+
++ Response 200
+|       |                                                                   |
+|-------|-------------------------------------------------------------------|
+| valid | `bool` _true_, if the invitation code is valid, _false_ otherwise |
+    + Body
+
+            {
+              "valid": true
+            }

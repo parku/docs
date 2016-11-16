@@ -1,0 +1,77 @@
+# Phone Numbers [/phone_numbers]
+
+## Create a New Phone Number [POST /phone_numbers]
+You can store multiple phone numbers for a user.
+
+#### Body Parameters
+|              |                                                                  |
+|--------------|------------------------------------------------------------------|
+| phone_number | `string` (required) - The phone number. Example: `+493057701873` |
+
++ Request (application/x-www-form-urlencoded)
+            phone_number=%2B493057701873
+    + Headers
+
+            Authorization: Basic private_key:parku
+
++ Response 201
+    + Body
+
+            {
+                "id": "151",
+                "phone_number": "+493057701873"
+            }
+
+## Retrieve a Phone Number [GET /phone_numbers/{phone_number_id}]
+
++ Parameters
+    + `phone_number_id`: 151 (number,required) - The identifier of the phone number to be retrieved.
+
++ Request
+    + Headers
+
+            Authorization: Basic private_key:parku
+
++ Response 200
+    + Body
+
+            {
+              "id": 151,
+              "phone_number": "+493057701873"
+            }
+
+## Update a Phone Number [PUT /phone_numbers/{phone_number_id}]
+#### Body Parameters
+|              |                                                                  |
+|--------------|------------------------------------------------------------------|
+| phone_number | `string` (required) - The phone number. Example: `+493057701874` |
+
++ Parameters
+    + `phone_number_id`: 151 (number,required) - The identifier of the phone number to be updated.
+
+
++ Request (application/x-www-form-urlencoded)
+            phone_number=%2B493057701873
+    + Headers
+
+            Authorization: Basic private_key:parku
+
++ Response 200
+    + Body
+
+            {
+                "id": "151",
+                "phone_number": "+493057701874"
+            }
+
+## Delete a Phone Number [DELETE /phone_numbers/{phone_number_id}]
++ Parameters
+    + `phone_number_id`: 151 (number,required) - The identifier of the phone number to be deleted.
+
+
++ Request
+    + Headers
+
+            Authorization: Basic private_key:parku
+
++ Response 200

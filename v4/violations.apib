@@ -1,0 +1,122 @@
+# Violations [/bookings/{booking_id}/violation]
+You can store one violation per booking. A violation report is done in two steps:
+1. Create a new violation
+2. Add a photo
+
+## Create a New Violation [POST /bookings/{booking_id}/violation]
+#### Body Parameters
+|               |                                                                       |
+|---------------|-----------------------------------------------------------------------|
+| license_plate | `string` (required) Example: `B-CD 4321`                              |
+| comment       | `string` (required) Example: `This car parked on my parking space!!!` |
+
++ Parameters
+    + `booking_id`: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
+        to which the violation belongs to.
+
++ Request (application/x-www-form-urlencoded)
+            license_plate=B-CD%2043211
+            &comment=This%20car%20parked%20on%20my%20parking%20space!!!
+
+    + Headers
+
+            Authorization: Basic private_key:parku
+
++ Response 200
+    + Body
+
+            {
+              "license_plate": "B-CD 4321",
+              "comment": "This car parked on my parking space!!!",
+              "image_url": null
+            }
+
+## Add a Photo [PUT /bookings/{booking_id}/violation/image]
+You can add one photo to the violation. If you add a new photo the previous one gets overwritten.
+
+The entire `PUT` body will be treated as the file. Make sure to add the Content-Type: `application/octet-stream`
+to your header.
+
++ Parameters
+    + `booking_id`: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
+        to which the violation belongs to.
+
++ Request (application/octet-stream)
+```
+$ curl https://parku.ch/v4/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation/image \
+-u 098f6bcd4621d373cade4e832627b4f6:parku \
+-X PUT \
+-T file.jpeg
+```
+    + Body
+
++ Response 200
+    + Body
+
+            {
+              "license_plate": "B-CD 4321",
+              "comment": "This car parked on my parking space!!!",
+              "image_url": "https://parku.ch/images/reports/12.jpeg"
+            }
+
+## Retrieve a Violation [GET /bookings/{booking_id}/violation]
+
++ Parameters
+    + `booking_id`: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
+        to which the violation belongs to.
+
++ Response 200
+    + Body
+
+            {
+              "license_plate": "B-CD 4321",
+              "comment": "This car parked on my parking space!!!",
+              "image_url": "https://parku.ch/images/reports/12.jpeg"
+            }
+
+## Update a Violation [PUT /bookings/{booking_id}/violation]
+Updates the violation by setting the values of the parameters passed.
+Any parameters not provided will be left unchanged. The photo can be updated through
+[adding a new photo](#header-add-a-photo).
+
+#### Body Parameters
+|               |                                                                       |
+|---------------|-----------------------------------------------------------------------|
+| license_plate | `string` (optional) Example: `B-CD 4321`                              |
+| comment       | `string` (optional) Example: `This car parked on my parking space!!!` |
+
++ Parameters
+    + `booking_id`: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
+        to which the violation belongs to.
+
++ Request (application/x-www-form-urlencoded)
+```
+$ curl https://parku.ch/v4/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation \
+-u 098f6bcd4621d373cade4e832627b4f6:parku \
+-X PUT \
+-d "license_plate=B-DC 4321"
+```
+    + Body
+
++ Response 200
+    + Body
+
+            {
+              "license_plate": "B-CD 4321",
+              "comment": "This car parked on my parking space!!!",
+              "image_url": "https://parku.ch/images/reports/12.jpeg"
+            }
+
+## Delete a Violation [DELETE /bookings/{booking_id}/violation]
+
++ Parameters
+    + `booking_id`: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
+        to which the violation belongs to.
++ Request (application/x-www-form-urlencoded)
+```
+$ curl https://parku.ch/v4/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation \
+-u 098f6bcd4621d373cade4e832627b4f6:parku \
+-X DELETE
+```
+    + Body
++ Response 204

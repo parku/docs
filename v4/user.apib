@@ -1,0 +1,157 @@
+# User [/user]
+
+## Create a User [POST /user]
+#### Body Parameters
+|               |                                                                                                                             |
+|---------------|-----------------------------------------------------------------------------------------------------------------------------|
+| email         | `string` (required) Example: `test@example.com`                                                                             |
+| password      | `string` (required) Example: `test`                                                                                         |
+| country       | Choices: `DE` `CH` (required) Example: `DE`                                                                                 |
+| firstname     | `string` (required) Example: `Max`                                                                                          |
+| lastname      | `string` (required) Example: `Power`                                                                                        |
+| gender        | Choices: `male` `female` (optional) Example: `male`                                                                         |
+| facebook_id   | `string` (optional) Example: `xxx`                                                                                          |
+| cars          | `object` (optional) Example: `cars[0][license_plate]=B-AB 1234` `cars[0][vehicle]=Isetta`                                   |
+| phone_numbers | `object` (optional) Example: `phone_numbers[0][phone_number]=+493057701873`  `phone_numbers[1][phone_number]=+401234567434` |
+| attributes    | `object` (optional) Example: `attributes[0][key]=adac` `attributes[0][value]=1234567890`                                    |
+
++ Request (application/x-www-form-urlencoded)
+            email=test@example.com
+            &password=test
+            &country=DE
+            &firstname=Test
+            &lastname=Name
+            &gender=female
+            &facebook_id=xxx
+            &cars[0][license_plate]=B-AB 1234
+            &cars[0][vehicle]=Isetta
+            &phone_numbers[0][phone_number]=+493057701873
+            &phone_numbers[1][phone_number]=+401234567434
+            &attributes[0][key]=adac
+            &attributes[0][value]=1234567890
+    + Headers
+
+            Authorization: Basic private_key:parku
++ Response 201
+    + Body
+
+            {
+              "code": "KFJ32",
+              "gender": "female",
+              "email": "test@example.com",
+              "firstname": "Test",
+              "lastname": "Name",
+              "credit": 0,
+              "currency": "EUR",
+              "country": "DE",
+              "facebook_id": null,
+              "cars": [{
+                "id": 12,
+                "license_plate": "B-AB 1234",
+                "vehicle": "Isetta",
+                "country": null
+              }],
+              "phone_numbers": [{
+                "id": 16696,
+                "phone_number": "099028-237489"
+              }],
+              "attributes": [{
+                "id": 1,
+                "key": "adac",
+                "value": "1234567890"
+              }],
+              "token": "098f6bcd4621d373cade4e832627b4f6"
+            }
+
+## Retrieve a User [GET /user]
+Returns the user object for the private key.
+
++ Response 200
+    + Body
+
+            {
+              "code": "KFJ32",
+              "gender": "female",
+              "email": "test@example.com",
+              "firstname": "Test",
+              "lastname": "Name",
+              "credit": 0,
+              "currency": "EUR",
+              "country": "DE",
+              "facebook_id": null,
+              "cars": [{
+                "id": 12,
+                "license_plate": "B-AB 1234",
+                "vehicle": "Isetta",
+                "country": null
+              }],
+              "phone_numbers": [{
+                "id": 16696,
+                "phone_number": "099028-237489"
+              }],
+              "attributes": [{
+                "id": 1,
+                "key": "adac",
+                "value": "1234567890"
+              }],
+              "token": "098f6bcd4621d373cade4e832627b4f6"
+            }
+
+## Update a user [PUT /user]
+Updates the user by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+
+This request accepts mostly the same arguments as the user creation call.
+Changing cars, phone_numbers, attributes and password is done via separate endpoints.
+
+#### Body Parameters
+|               |                                                                                                                             |
+|---------------|-----------------------------------------------------------------------------------------------------------------------------|
+| email         | `string` (required) Example: `test@example.com`                                                                             |
+| password      | `string` (required) Example: `test`                                                                                         |
+| country       | Choices: `DE` `CH` (required) Example: `DE`                                                                                 |
+| firstname     | `string` (required) Example: `Max`                                                                                          |
+| lastname      | `string` (required) Example: `Power`                                                                                        |
+| gender        | Choices: `male` `female` (optional) Example: `male`                                                                         |
+
++ Request (application/x-www-form-urlencoded)
+            email=test@example.com
+            &password=test
+            &country=DE
+            &firstname=Test
+            &lastname=Name
+            &gender=female
+            &facebook_id=xxx
+    + Headers
+
+            Authorization: Basic private_key:parku
+
++ Response 200
+    + Body
+
+            {
+              "code": "KFJ32",
+              "gender": "female",
+              "email": "test@example.com",
+              "firstname": "Test",
+              "lastname": "Name",
+              "credit": 0,
+              "currency": "CHF",
+              "country": "CH",
+              "facebook_id": null,
+              "cars": [{
+                "id": 12,
+                "license_plate": "B-AB 1234",
+                "vehicle": "Isetta",
+                "country": null
+              }],
+              "phone_numbers": [{
+                "id": 16696,
+                "phone_number": "099028-237489"
+              }],
+              "attributes": [{
+                "id": 1,
+                "key": "adac",
+                "value": "1234567890"
+              }],
+              "token": "098f6bcd4621d373cade4e832627b4f6"
+            }
