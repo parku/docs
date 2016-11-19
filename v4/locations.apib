@@ -1,6 +1,7 @@
-# Locations [/locations]
+# Group Locations
+## Locations [/locations]
 
-## Retrieve a Location [GET /locations/{location_id}{?date_start,date_end}]
+### Retrieve a Location [GET /locations/{location_id}{?date_start,date_end}]
 + Parameters
     + `location_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122, required) - Identifier of the location.
     + `date_start`: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Used to calculate the price for a location.
@@ -131,7 +132,7 @@ Location was not found, check the location id and that your user has the correct
 Request validation failed because the request data was malformed.
     + Body
 
-## List Locations [GET /locations{?sw,ne,date_start,date_end,availability,bookability}]
+### List Locations [GET /locations{?sw,ne,date_start,date_end,availability,bookability}]
 Returns a list of locations that provide the same format as the single location.
 When no `date_start` or `date_end` was provided, all locations are returned.
 That does not mean, that they are available.
@@ -230,7 +231,7 @@ That does not mean, that they are available.
                 { ... }
             ]
 
-## Get availability times for location [GET /locations/{location_id}/availability{?date_start,date_end}]
+### Get availability times for location [GET /locations/{location_id}/availability{?date_start,date_end}]
 
 + Parameters
     + `location_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - Identifier of the location.
@@ -290,7 +291,7 @@ That does not mean, that they are available.
                 }]
             }
 
-## Retrieve Terms and Conditions [GET /locations/{location_id}/terms]
+### Retrieve Terms and Conditions [GET /locations/{location_id}/terms]
 
 _Deprecated_ This endpoint is deprecated. `/settings` endpoint should be used instead.
 

@@ -1,11 +1,12 @@
-# Devices [/devices]
+# Group Devices
+## Devices [/devices]
 
 This endpoint is used to send the latest device identifier to the backend.
 The device identifier is used to send push notifications.
 
 Only the creation of identifiers is allowed. Retrieving is not allowed.
 
-## Create an Identifier [POST /devices{?ios_device_token,android_registration_id}]
+### Create an Identifier [POST /devices{?ios_device_token,android_registration_id}]
 Send the latest device identifier to the backend.
 
 The iOS device token can change through time.

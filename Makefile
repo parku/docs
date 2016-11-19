@@ -4,7 +4,7 @@ generate-v4: clean
 	mkdir -p build
 	cp images build/images -r
 	ln -nfs `readlink -m ./images` `pwd`/v4/images
-	NOCACHE=1 aglio -i v4/parku.apib -o build/v4.html --theme-variables theme/variables-parku.less --theme-style theme/layout-parku.less --theme-full-width --theme-template triple --theme-condense-nav --verbose
+	NOCACHE=1 aglio -i v4/parku.apib -o build/v4.html --theme 1984 --theme-variables theme/variables-parku.less --theme-style theme/layout-parku.less --theme-full-width --theme-template triple --verbose
 
 clean:
 	rm -rf build

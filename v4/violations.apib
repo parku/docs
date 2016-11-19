@@ -1,9 +1,10 @@
-# Violations [/bookings/{booking_id}/violation]
+# Group Violations
+## Violations [/bookings/{booking_id}/violation]
 You can store one violation per booking. A violation report is done in two steps:
 1. Create a new violation
 2. Add a photo
 
-## Create a New Violation [POST /bookings/{booking_id}/violation]
+### Create a New Violation [POST /bookings/{booking_id}/violation]
 #### Body Parameters
 |               |                                                                       |
 |---------------|-----------------------------------------------------------------------|
@@ -31,7 +32,7 @@ You can store one violation per booking. A violation report is done in two steps
               "image_url": null
             }
 
-## Add a Photo [PUT /bookings/{booking_id}/violation/image]
+### Add a Photo [PUT /bookings/{booking_id}/violation/image]
 You can add one photo to the violation. If you add a new photo the previous one gets overwritten.
 
 The entire `PUT` body will be treated as the file. Make sure to add the Content-Type: `application/octet-stream`
@@ -59,7 +60,7 @@ $ curl https://parku.ch/v4/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violati
               "image_url": "https://parku.ch/images/reports/12.jpeg"
             }
 
-## Retrieve a Violation [GET /bookings/{booking_id}/violation]
+### Retrieve a Violation [GET /bookings/{booking_id}/violation]
 
 + Parameters
     + `booking_id`: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
@@ -74,7 +75,7 @@ $ curl https://parku.ch/v4/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violati
               "image_url": "https://parku.ch/images/reports/12.jpeg"
             }
 
-## Update a Violation [PUT /bookings/{booking_id}/violation]
+### Update a Violation [PUT /bookings/{booking_id}/violation]
 Updates the violation by setting the values of the parameters passed.
 Any parameters not provided will be left unchanged. The photo can be updated through
 [adding a new photo](#header-add-a-photo).
@@ -107,7 +108,7 @@ $ curl https://parku.ch/v4/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violati
               "image_url": "https://parku.ch/images/reports/12.jpeg"
             }
 
-## Delete a Violation [DELETE /bookings/{booking_id}/violation]
+### Delete a Violation [DELETE /bookings/{booking_id}/violation]
 
 + Parameters
     + `booking_id`: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking

@@ -1,6 +1,8 @@
-# Cars [/cars]
+# Group Cars
 
-## List all cars [GET /cars]
+## Cars [/cars]
+
+### List all cars [GET /cars]
 Returns a list of all cars of the user. The cars are returned sorted by creation date,
 with the most recently created car appearing first.
 
@@ -29,7 +31,7 @@ with the most recently created car appearing first.
               {...},
               {...}
             ]
-## Create a new Car [POST /attributes{?license_plate,vehicle,country}]
+### Create a new Car [POST /attributes{?license_plate,vehicle,country}]
 You can store multiple cars for a user.
 
 + Parameters
@@ -105,7 +107,7 @@ Updates the car by setting the values of the parameters passed. Any parameters n
               "country": "DE"
             }
 
-## Delete a Car [DELETE /cars/{car_id}]
+### Delete a Car [DELETE /cars/{car_id}]
 
 + Parameters
     + `car_id`: 23 (number, required) - The identifier of the car to be deleted.

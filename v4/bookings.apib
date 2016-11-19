@@ -1,5 +1,7 @@
-# Bookings [/bookings]
-## Create a new Booking [POST /bookings{?location_id,date_start,date_end,license_plate,phone_number,provider,provider_info,status}&required_fields%5Bfieldname%5D={required_field}]
+# Group Bookings
+
+## Bookings [/bookings]
+### Create a new Booking [POST /bookings{?location_id,date_start,date_end,license_plate,phone_number,provider,provider_info,status}&required_fields%5Bfieldname%5D={required_field}]
 + Parameters
 
     + `location_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122, required) -
@@ -66,7 +68,22 @@
 
 + Request (application/x-www-form-urlencoded)
 
-+ Response 201
+          $ curl https://parku.ch/v4/bookings \
+          -u 098f6bcd4621d373cade4e832627b4f6:parku \
+          -d location_id=00cd7cfd-e42d-11e2-8bf1-8a83f3373875 \
+          --data-urlencode license_plate="B-AB 1234" \
+          --data-urlencode phone_number="+493057701873" \
+          --data-urlencode date_start="2016-10-27T10:00:00+0000" \
+          --data-urlencode date_end="2016-10-27T16:30:00+0000" \
+          -d provider=paypal \
+          -d provider_info=PAY-1CM399047K4649003KM4WJQQ
+          -d status=all \
+
+    + Headers
+
+            Authorization: Basic private_key:parku
+
++ Response 201 (application/json)
     + Body
 
             {
@@ -147,12 +164,18 @@
               "violation": null
             }
 
-## Retrieve a Booking [GET /bookings/{reference}]
+### Retrieve a Booking [GET /bookings/{reference}]
 Retrieves the details of an existing booking. You need to supply either the id or the reference of a booking.
 
 + Parameters
 
     + reference: `005c4826-4e28-11e3-a675-d43d7eece53d` (string, required) - The id or code of the booking
++ Request
+            $ curl https://parku.ch/v4/bookings/005c4826-4e28-11e3-a675-d43d7eece53d \
+            -u 098f6bcd4621d373cade4e832627b4f6:parku
+    + Headers
+
+            Authorization: Basic private_key:parku
 
 + Response 200 (application/json)
     + Body
@@ -266,7 +289,7 @@ Retrieves the details of an existing booking. You need to supply either the id o
               ]
             }
 
-## Update a Booking [PUT /bookings/{booking_id}{?license_plate,phone_number,date_end,provider,provider_info}]
+### Update a Booking [PUT /bookings/{booking_id}{?license_plate,phone_number,date_end,provider,provider_info}]
 Updates the booking by setting the values of the parameters passes. Any parameter not provided will be left unchanges.
 
 + Parameters
@@ -277,10 +300,23 @@ Updates the booking by setting the values of the parameters passes. Any paramete
         refer to the description of [`Create a new Booking`](#bookings-bookings-post)
     + `date_end`: `2016-10-27T17:00:00+0000` (string, optional) -
         refer to the description of [`Create a new Booking`](#bookings-bookings-post)
-    + `provider`: `credit` (string, optional) -
+    + `provider`: `paypal` (string, optional) -
         refer to the description of [`Create a new Booking`](#bookings-bookings-post)
     + `provider_info`: `PAY-2CM399047K4649003KM4WJQQ` (string, optional) -
         refer to the description of [`Create a new Booking`](#bookings-bookings-post)
+
++ Request  (application/x-www-form-urlencoded)
+            $ curl https://parku.ch/v4/bookings \
+            -u 098f6bcd4621d373cade4e832627b4f6:parku \
+            -X PUT \
+            --data-urlencode license_plate="B-BC 4567" \
+            --data-urlencode phone_number="+493057701871" \
+            --data-urlencode date_end="2016-10-27T17:00:00+0000" \
+            -d provider=paypal \
+            -d provider_info="PAY-2CM399047K4649003KM4WJQQ"
+    + Headers
+
+            Authorization: Basic private_key:parku
 
 + Response 200
     + Body
@@ -395,17 +431,24 @@ Updates the booking by setting the values of the parameters passes. Any paramete
               ]
             }
 
-## Cancel a Booking [DELETE /bookings/{booking_id}]
+### Cancel a Booking [DELETE /bookings/{booking_id}]
 
 + Parameters
     + `booking_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
 
++ Request
+            $ curl https://parku.ch/v4/bookings/005c4826-4e28-11e3-a675-d43d7eece53d \
+            -u 098f6bcd4621d373cade4e832627b4f6:parku \
+            -X DELETE
+    + Headers
+
+            Authorization: Basic private_key:parku
 + Response 204
 
-## List all bookings [GET /bookings{?count,offset,date_start,date_end,status}]
+### List all bookings [GET /bookings{?count,offset,date_start,date_end,status}]
 
 + Parameters
-    + `count`: 100 (number, optional) - A limit on the number of objects to be returned.
+    + `count`: 3 (number, optional) - A limit on the number of objects to be returned.
         Count can range between 1 and 100 items.
         + Default: 10
     + `offset`: 10 (number, optional) - An offset into the list of returned items.
@@ -424,7 +467,14 @@ Updates the booking by setting the values of the parameters passes. Any paramete
             + cancelled
         + Default: all
 
-+ Response 200
++ Request
+            $ curl https://parku.ch/v4/bookings?count=3 \
+            -u 098f6bcd4621d373cade4e832627b4f6:parku
+    + Headers
+
+            Authorization: Basic private_key:parku
+
++ Response 200 (application/json)
     + Body
 
             [
@@ -503,12 +553,19 @@ Updates the booking by setting the values of the parameters passes. Any paramete
               {...},
               {...}
             ]
-## Retrieve Custom Extend Prices [GET /bookings/{booking_id}/extend{?date_end}]
+### Retrieve Custom Extend Prices [GET /bookings/{booking_id}/extend{?date_end}]
 Retrieving a booking returns a few prices for standard intervals. Use this endpoint for custom intervals.
 
 + Parameters
     + `booking_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
     + `date_end`: `2016-10-27T10:10:20+00:00` (ISO 8601, required) - end date and time of the booking
+
++ Request
+            $ curl https://parku.ch/v4/bookings/005c4826-4e28-11e3-a675-d43d7eece53d/extend?date_end=2016-10-27T17:45:00+0000 \
+            -u 098f6bcd4621d373cade4e832627b4f6:parku
+    + Headers
+
+            Authorization: Basic private_key:parku
 
 + Response 200 (application/json)
     + Body

@@ -265,6 +265,7 @@ table {
 }
 
 nav {
+    font-size: 100%;
     position: fixed;
     top: @padding * 2;
     bottom: 0;
@@ -275,14 +276,14 @@ nav {
     .resource-group {
       padding: 0;
       border: 0;
+      margin-bottom: 1px;
 
       .heading {
         position: relative;
-        font-weight: bold;
 
         .chevron {
           position: absolute;
-          top: @padding;
+          top: @padding / 2;
           right: @padding;
           opacity: 0.5;
         }
@@ -710,7 +711,7 @@ nav {
 
 nav .resource-group{
   .heading a {
-    padding: @padding;
+    padding: @padding / 2 @padding;
     margin-bottom: 0;
   }
 
@@ -751,14 +752,15 @@ nav .resource-group{
         margin: -@padding -@padding @padding -@padding;
         overflow: hidden;
         border: none;
-
         .name {
-            float: right;
-            font-weight: normal;
+            float: left;
+            display: inline-block;
+            font-weight: bold;
             padding: @padding / 2 @padding / 2;
         }
 
         .method {
+            float: right;
             padding: @padding / 2 @padding / 2;
             margin-right: @padding;
             display: inline-block;
@@ -768,6 +770,7 @@ nav .resource-group{
         }
 
         code {
+            float: right;
             color: @title-code-color;
             background-color: @title-code-background-color;
             border: none;

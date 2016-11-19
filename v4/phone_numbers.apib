@@ -1,6 +1,7 @@
-# Phone Numbers [/phone_numbers]
+# Group Phone Numbers
+## Phone Numbers [/phone_numbers]
 
-## Create a New Phone Number [POST /phone_numbers]
+### Create a New Phone Number [POST /phone_numbers]
 You can store multiple phone numbers for a user.
 
 #### Body Parameters
@@ -22,7 +23,7 @@ You can store multiple phone numbers for a user.
                 "phone_number": "+493057701873"
             }
 
-## Retrieve a Phone Number [GET /phone_numbers/{phone_number_id}]
+### Retrieve a Phone Number [GET /phone_numbers/{phone_number_id}]
 
 + Parameters
     + `phone_number_id`: 151 (number,required) - The identifier of the phone number to be retrieved.
@@ -40,7 +41,7 @@ You can store multiple phone numbers for a user.
               "phone_number": "+493057701873"
             }
 
-## Update a Phone Number [PUT /phone_numbers/{phone_number_id}]
+### Update a Phone Number [PUT /phone_numbers/{phone_number_id}]
 #### Body Parameters
 |              |                                                                  |
 |--------------|------------------------------------------------------------------|
@@ -64,7 +65,7 @@ You can store multiple phone numbers for a user.
                 "phone_number": "+493057701874"
             }
 
-## Delete a Phone Number [DELETE /phone_numbers/{phone_number_id}]
+### Delete a Phone Number [DELETE /phone_numbers/{phone_number_id}]
 + Parameters
     + `phone_number_id`: 151 (number,required) - The identifier of the phone number to be deleted.
 
