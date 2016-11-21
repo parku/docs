@@ -1,36 +1,21 @@
-all: watch
+BUILD_DIR=./
+COMMON_DEPS=$(BUILD_DIR)/images/* Makefile
+PAGE_V4=index
+PAGE_V5=v5
 
-generate-v4: clean
-	mkdir -p build
-	cp images build/images -r
-	ln -nfs `readlink -m ./images` `pwd`/v4/images
-	NOCACHE=1 aglio -i v4/parku.apib -o build/v4.html --theme 1984 --theme-variables theme/variables-parku.less --theme-style theme/layout-parku.less --theme-full-width --theme-template triple --verbose
+all: generate
 
-generate-v5: generate-v4
-	mkdir -p build
-	cp images build/images -r
-	ln -nfs `readlink -m ./images` `pwd`/v5/images
-	NOCACHE=1 aglio -i v5/parku.apib -o build/v5.html --theme 1984 --theme-variables theme/variables-parku.less --theme-style theme/layout-parku.less --theme-full-width --theme-template triple --verbose
+generate-v4: $(BUILD_DIR)/$(PAGE_V4).html
 
-generate: generate-v4 generate-v5
+generate-v5: $(BUILD_DIR)/$(PAGE_V5).html
+
+$(BUILD_DIR)/$(PAGE_V4).html: $(COMMON_DEPS) v4/*
+	NOCACHE=1 aglio -i v4/parku.apib -o $(BUILD_DIR)/$(PAGE_V4).html --theme w00tw00t --theme-variables theme/variables-parku.less --theme-style theme/layout-parku.less --theme-full-width --theme-template triple --verbose
+
+$(BUILD_DIR)/$(PAGE_V5).html: $(COMMON_DEPS) v4/* v5/*
+	NOCACHE=1 aglio -i v5/parku.apib -o $(BUILD_DIR)/$(PAGE_V5).html --theme w00tw00t --theme-variables theme/variables-parku.less --theme-style theme/layout-parku.less --theme-full-width --theme-template triple --verbose
+
+generate: $(BUILD_DIR)/$(PAGE_V4).html $(BUILD_DIR)/$(PAGE_V5).html
 
 clean:
-	rm -rf build
-
-linklint:
-	@cp robots_allow.txt _site/robots.txt
-	linklint -http -host localhost:9393 -limit 1000 -doc linklint /@
-	@cp robots.txt _site/robots.txt
-
-install: uninstall
-	gem install bundler --user-install
-	bundle install --binstubs vendor/bundle/bin --path vendor/bundle --without production
-	rm -rf vendor/bundle/ruby/*/gems/jekyll-*/test
-	rm -fr vendor/bundle/ruby/*/gems/jekyll-*/lib/site_template
-	rm -fr vendor/bundle/ruby/*/gems/jekyll-*/site
-
-uninstall: clean
-	rm -rf Gemfile.lock vendor/ .bundle/
-
-deploy:
-	git push origin gh-pages
+	rm -rf index.html v5.html

@@ -272,6 +272,7 @@ nav {
     overflow-y: auto;
     padding-top: image-height('images/logo_parku.png') + 10px;
     background: url('images/logo_parku.png') no-repeat;
+    background-color: @nav-background-color;
 
     .resource-group {
       padding: 0;
@@ -423,7 +424,6 @@ nav {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
-    background-color: @middle-collapse-background-color;
 }
 
 .middle .collapse-content {
@@ -678,7 +678,7 @@ nav {
     border-top-right-radius: 3px;
 }
 
-.resource-group {
+.middle .resource-group {
     padding: @group-padding;
     margin-bottom: @padding;
     background-color: @group-background-color;
