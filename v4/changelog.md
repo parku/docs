@@ -2,6 +2,10 @@
   Add new changes to the log in historically descending order.
 -->
 
+### 2016-11-21
+
+* New examples and formatting
+
 ### 2016-09-22
 
 * Extended location with `availability` and `bookability`
