@@ -5,3 +5,4 @@ RUN git clone https://github.com/christiangoltz/aglio.git aglio_theme
 RUN cd aglio_theme && git checkout w00tw00t_theme
 RUN cd aglio_theme && npm install
 RUN cd aglio_theme && npm run build && npm install -g
+RUN npm install -g apib2swagger
