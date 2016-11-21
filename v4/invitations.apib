@@ -6,11 +6,16 @@
     + `invitation_code`: `d2VsbCBkb25lISBnZXQgYSBiZWVyIG5vdyA9RA==` (string,required) - Base64 encoded invitation code.
 
 + Request
+
+            $ curl https://parku.ch/v4/invitations/park4UAndMe= \
+            -u 098f6bcd4621d373cade4e832627b4f6:parku \
+            -X GET
+
     + Headers
 
             Authorization: Basic private_key:parku
 
-+ Response 200
++ Response 200 (application/json)
 |       |                                                                   |
 |-------|-------------------------------------------------------------------|
 | valid | `bool` _true_, if the invitation code is valid, _false_ otherwise |

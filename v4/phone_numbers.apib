@@ -1,6 +1,36 @@
 # Group Phone Numbers
 ## Phone Numbers [/phone_numbers]
 
+### List all Phone Numbers [GET /phone_numbers]
+Returns a list of all phone numbers of the user.
+The phone numbers are returned sorted by creation date, with the most recently created phone number appearing first.
+
++ Request
+
+            $ curl https://parku.ch/v4/phone_numbers \
+            -u 098f6bcd4621d373cade4e832627b4f6:parku
+
+    + Headers
+
+            Authorization: Basic private_key:parku
+
++ Response 200 (application/json)
+    + Body
+
+            [
+              {
+                "id": 150,
+                "phone_number": "+493057701872"
+              },
+              {
+                "id": 149,
+                "phone_number": "+493057701871"
+              },
+              {...},
+              {...}
+            ]
+
+
 ### Create a New Phone Number [POST /phone_numbers]
 You can store multiple phone numbers for a user.
 
@@ -10,12 +40,16 @@ You can store multiple phone numbers for a user.
 | phone_number | `string` (required) - The phone number. Example: `+493057701873` |
 
 + Request (application/x-www-form-urlencoded)
-            phone_number=%2B493057701873
+
+            $ curl https://parku.ch/v4/phone_numbers \
+            -u 098f6bcd4621d373cade4e832627b4f6:parku \
+            -d "phone_number=+493057701873"
+
     + Headers
 
             Authorization: Basic private_key:parku
 
-+ Response 201
++ Response 201 (application/json)
     + Body
 
             {
@@ -29,11 +63,15 @@ You can store multiple phone numbers for a user.
     + `phone_number_id`: 151 (number,required) - The identifier of the phone number to be retrieved.
 
 + Request
+
+            $ curl https://parku.ch/v4/phone_numbers/151 \
+            -u 098f6bcd4621d373cade4e832627b4f6:parku
+
     + Headers
 
             Authorization: Basic private_key:parku
 
-+ Response 200
++ Response 200 (application/json)
     + Body
 
             {
@@ -52,17 +90,18 @@ You can store multiple phone numbers for a user.
 
 
 + Request (application/x-www-form-urlencoded)
-            phone_number=%2B493057701873
-    + Headers
 
-            Authorization: Basic private_key:parku
+            $ curl https://parku.ch/v4/phone_numbers/151 \
+            -u 098f6bcd4621d373cade4e832627b4f6:parku \
+            -X PUT
+            -d "phone_number=+493057701874"
 
-+ Response 200
++ Response 200 (application/json)
     + Body
 
             {
-                "id": "151",
-                "phone_number": "+493057701874"
+              "id": 151,
+              "phone_number": "+493057701874"
             }
 
 ### Delete a Phone Number [DELETE /phone_numbers/{phone_number_id}]
@@ -71,6 +110,11 @@ You can store multiple phone numbers for a user.
 
 
 + Request
+
+            $ curl https://parku.ch/v4/phone_numbers/151 \
+            -u 098f6bcd4621d373cade4e832627b4f6:parku
+            -X DELETE
+
     + Headers
 
             Authorization: Basic private_key:parku

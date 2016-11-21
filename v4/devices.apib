@@ -22,4 +22,14 @@ to send the device token every time the app launches.
         Full integration and how to request a push notification Registration ID through Android's GCM service is
         accessible [here](http://developer.android.com/google/gcm/gs.html).
 
++ Request (application/x-www-form-urlencoded)
+
+          $ curl https://parku.ch/v4/devices \
+          -u 098f6bcd4621d373cade4e832627b4f6:parku \
+          -d ios_device_token=A339F8BE4F…
+
+    + Headers
+
+            Authorization: Basic private_key:parku
+
 + Response 204

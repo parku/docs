@@ -2,15 +2,22 @@
 ## Coupon [/coupon]
 
 ### Test a Coupon [GET /coupon/{encoded_code}{?action,amount}]
-#### Response
 + Parameters
     + `encoded_code`: Zm9vYmFyMTIz (string, required) - A base64url encoded coupon code string.
     + action: test (enum, required) - Action to do.
         + Members
             + test
     + amount: 42 (number, required) - Amount coupon has to be tested against.
++ Request
 
-+ Response 200
+            $ curl https://parku.ch/v4/coupon/Zm9vYmFyMTIz?action=test&amount=42 \
+            -u 098f6bcd4621d373cade4e832627b4f6:parku
+
+    + Headers
+
+            Authorization: Basic private_key:parku
+
++ Response 200 (application/json)
 |           |                                         |
 |-----------|-----------------------------------------|
 | code      | `string` Decoded, sanitized coupon code |
@@ -24,7 +31,7 @@
               "deduction": 10
             }
 
-+ Response 422
++ Response 422 (application/json)
 | Code |                                         Description                                         |
 |------|---------------------------------------------------------------------------------------------|
 | 10   | "amount" is faulty, probably below 0.                                                       |
@@ -44,7 +51,7 @@
               ]
             }
 
-+ Response 404
++ Response 404 (application/json)
 | Code |                                         Description                                         |
 |------|---------------------------------------------------------------------------------------------|
 | 20   | Coupon not found.                                                                           |

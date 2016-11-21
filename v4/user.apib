@@ -17,23 +17,27 @@
 | attributes    | `object` (optional) Example: `attributes[0][key]=adac` `attributes[0][value]=1234567890`                                    |
 
 + Request (application/x-www-form-urlencoded)
-            email=test@example.com
-            &password=test
-            &country=DE
-            &firstname=Test
-            &lastname=Name
-            &gender=female
-            &facebook_id=xxx
-            &cars[0][license_plate]=B-AB 1234
-            &cars[0][vehicle]=Isetta
-            &phone_numbers[0][phone_number]=+493057701873
-            &phone_numbers[1][phone_number]=+401234567434
-            &attributes[0][key]=adac
-            &attributes[0][value]=1234567890
+            $ curl https://parku.ch/v4/user \
+            -u 6f1ed002ab5595859014ebf0951522d9:parku \
+            -d email=test@example.com \
+            -d password=test \
+            -d country=DE \
+            -d firstname=Test \
+            -d lastname=Name \
+            -d gender=female \
+            -d facebook_id=xxx \
+            -d "cars[0][license_plate]=B-AB 1234 \
+            -d &cars[0][vehicle]=Isetta" \
+            -d "phone_numbers[0][phone_number]=+493057701873 \
+            -d &phone_numbers[1][phone_number]=+401234567434" \
+            -d "attributes[0][key]=adac \
+            -d &attributes[0][value]=1234567890"
+
     + Headers
 
             Authorization: Basic private_key:parku
-+ Response 201
+
++ Response 201 (application/json)
     + Body
 
             {
@@ -67,7 +71,16 @@
 ### Retrieve a User [GET /user]
 Returns the user object for the private key.
 
-+ Response 200
++ Request
+
+            $ curl https://parku.ch/v4/user \
+            -u 098f6bcd4621d373cade4e832627b4f6:parku
+
+    + Headers
+
+            Authorization: Basic private_key:parku
+
++ Response 200 (application/json)
     + Body
 
             {
@@ -115,13 +128,11 @@ Changing cars, phone_numbers, attributes and password is done via separate endpo
 | gender        | Choices: `male` `female` (optional) Example: `male`                                                                         |
 
 + Request (application/x-www-form-urlencoded)
-            email=test@example.com
-            &password=test
-            &country=DE
-            &firstname=Test
-            &lastname=Name
-            &gender=female
-            &facebook_id=xxx
+
+            $ curl https://parku.ch/v4/user \
+            -u 098f6bcd4621d373cade4e832627b4f6:parku \
+            -X PUT \
+            -d country=CH
     + Headers
 
             Authorization: Basic private_key:parku

@@ -5,11 +5,15 @@
 Shows all credit cards the user used before.
 
 + Request
+
+            $ curl https://parku.ch/v4/payment/creditcards \
+            -u 098f6bcd4621d373cade4e832627b4f6:parku
+
     + Headers
 
             Authorization: Basic private_key:parku
 
-+ Response 200
++ Response 200 (application/json)
     + Body
 
             [
@@ -29,11 +33,21 @@ Shows all credit cards the user used before.
                 }
             ]
 
-### Update a Credit Card [DELETE /payment/credit_cards/{credit_card_id}]
+### Delete a Credit Card [DELETE /payment/credit_cards/{credit_card_id}]
 
 + Parameters
     + `credit_card_id`: gphsyb (string,required) - The identifier of the credit card to delete.
         You'll receive a list of the users credit cards through the `GET /payment/creditcards` request.
+
++ Request
+
+            $ curl https://parku.ch/v4/payment/creditcards/gphsyb \
+            -u 098f6bcd4621d373cade4e832627b4f6:parku
+            -X DELETE
+
+    + Headers
+
+            Authorization: Basic private_key:parku
 
 + Response 204
 
@@ -42,14 +56,27 @@ __Deprecated__: this will be removed in __v5__.
 
 + Parameters
     + `amount`: 10 (number,required) - The amount.
-    + `provider`: braintree (enum,required) The payment method.
+    + `provider`: paypal (enum,required) The payment method.
         + Members
             + paypal
             + braintree
     + `provider_info`: `PAY-1CM399047K4649003KM4WJQQ` (object,required) - refer to the description
           of [`Create a new Booking`](#bookings-bookings-post)
 
-+ Response 200
++ Request
+
+            $ curl https://parku.ch/v4/payment/credit \
+            -u 098f6bcd4621d373cade4e832627b4f6:parku \
+            -X PUT \
+            -d amount=10 \
+            -d provider=braintree \
+            -d provider_info[id]=6tvts6
+
+    + Headers
+
+            Authorization: Basic private_key:parku
+
++ Response 200 (application/json)
     + Body
 
             {

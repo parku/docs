@@ -123,6 +123,17 @@
                 }
             }
 
++ Request
+
+            $ curl https://parku.ch/v4/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875 \
+            ?date_start=2016-10-27T10:00:00+0000 \
+            &date_end=2016-10-27T16:30:00+0000 \
+            -u 6f1ed002ab5595859014ebf0951522d9:parku
+
+    + Headers
+
+            Authorization: Basic private_key:parku
+
 + Response 404
 Location was not found, check the location id and that your user has the correct access rights to see the location.
     + Body
@@ -166,9 +177,18 @@ That does not mean, that they are available.
         + Default: true
 
 + Request
+
+            $ curl https://parku.ch/v4/locations \
+            ?sw=45.74001,5.67868 \
+            &ne=47.74236,10.24900 \
+            &date_start=2016-10-27T10:00:00+0000 \
+            &date_end=2016-10-27T16:30:00+0000 \
+            -u 6f1ed002ab5595859014ebf0951522d9:parku
+
     + Headers
 
             Authorization: Basic private_key:parku
+
 
 + Response 200
     + Body
@@ -240,6 +260,12 @@ That does not mean, that they are available.
     + `date_end`: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - see `date_start`.
 
 + Request
+
+            $ curl https://parku.ch/v4/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/availability \
+            ?date_start=2016-04-12 \
+            &date_end=2016-04-14 \
+            -u 6f1ed002ab5595859014ebf0951522d9:parku
+
     + Headers
 
             Authorization: Basic private_key:parku
@@ -302,6 +328,10 @@ With this endpoint you can retrieve location based terms and conditions.
     + `location_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - Identifier of the location.
 
 + Request
+
+            $ curl https://parku.ch/v4/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/terms \
+            -u 6f1ed002ab5595859014ebf0951522d9:parku
+
     + Headers
 
             Authorization: Basic private_key:parku

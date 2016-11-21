@@ -7,10 +7,13 @@ Returns a list of all cars of the user. The cars are returned sorted by creation
 with the most recently created car appearing first.
 
 + Request
+
+            $ curl https://parku.ch/v4/cars \
+            -u 098f6bcd4621d373cade4e832627b4f6:parku
+
     + Headers
 
-            Accept: application/json
-            Authorization: Basic
+            Authorization: Basic private_key:parku
 
 + Response 201 (application/json)
     + Body
@@ -31,6 +34,7 @@ with the most recently created car appearing first.
               {...},
               {...}
             ]
+
 ### Create a new Car [POST /attributes{?license_plate,vehicle,country}]
 You can store multiple cars for a user.
 
@@ -41,11 +45,18 @@ You can store multiple cars for a user.
         + Members
             + DE
             + CH
-+ Request
+
++ Request (application/x-www-form-urlencoded)
+
+          $ curl https://parku.ch/v4/cars \
+          -u 098f6bcd4621d373cade4e832627b4f6:parku \
+          -d "license_plate=B-AB 1234" \
+          -d vehicle=Isetta \
+          -d country=DE
+
     + Headers
 
-            Accept: application/json
-            Authorization: Basic
+            Authorization: Basic private_key:parku
 
 + Response 201 (application/json)
     + Body
@@ -64,10 +75,13 @@ You can store multiple cars for a user.
     + car_id: 23 (int, required) - The identifier of the car to be retrieved
 
 + Request
+
+            curl https://parku.ch/v4/cars/23 \
+            -u 098f6bcd4621d373cade4e832627b4f6:parku
+
     + Headers
 
-            Accept: application/json
-            Authorization: Basic
+            Authorization: Basic private_key:parku
 
 + Response 200 (application/json)
     + Body
@@ -91,11 +105,17 @@ Updates the car by setting the values of the parameters passed. Any parameters n
             + DE
             + CH
 
-+ Request
++ Request  (application/x-www-form-urlencoded)
+
+            $ curl https://parku.ch/v4/cars/23 \
+            -u 098f6bcd4621d373cade4e832627b4f6:parku \
+            -X PUT
+            -d vehicle=Polo
+
     + Headers
 
-            Accept: application/json
-            Authorization: Basic
+            Authorization: Basic private_key:parku
+
 
 + Response 200 (application/json)
     + Body
@@ -111,5 +131,15 @@ Updates the car by setting the values of the parameters passed. Any parameters n
 
 + Parameters
     + `car_id`: 23 (number, required) - The identifier of the car to be deleted.
+
++ Request
+
+            $ curl https://parku.ch/v4/cars/23 \
+            -u 098f6bcd4621d373cade4e832627b4f6:parku
+            -X DELETE
+
+    + Headers
+
+            Authorization: Basic private_key:parku
 
 + Response 204

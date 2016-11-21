@@ -14,6 +14,12 @@ Login through Facebook is described in a separate endpoint.
     + `password`: `1234pwd` (string,required) - The users password.
 
 + Request
+
+            $ curl https://parku.ch/v4/login \
+            -u 6f1ed002ab5595859014ebf0951522d9:parku \
+            -d email=test@example.com \
+            -d password=1234pwd
+
     + Headers
 
             Authorization: Basic public_key:parku
