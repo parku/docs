@@ -11,7 +11,7 @@ Changing the settings is not possible.
 
 + Request
 
-            $ curl https://parku.ch/v4/settings \
+            $ curl https://parku.ch/{{apiversion}}/settings \
             ?lat=52.53568811 \
             &lon=13.39412887 \
             -u 098f6bcd4621d373cade4e832627b4f6:parku \
@@ -225,7 +225,7 @@ Changing the settings is not possible.
 
 + Request (application/x-www-form-urlencoded)
 
-            $ curl https://parku.ch/v4/settings/booking/notifiction/time_to_leave \
+            $ curl https://parku.ch/{{apiversion}}/settings/booking/notifiction/time_to_leave \
             -u 098f6bcd4621d373cade4e832627b4f6:parku \
             -X PUT \
             -d enabled=false

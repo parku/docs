@@ -17,7 +17,7 @@
 | attributes    | `object` (optional) Example: `attributes[0][key]=adac` `attributes[0][value]=1234567890`                                    |
 
 + Request (application/x-www-form-urlencoded)
-            $ curl https://parku.ch/v4/user \
+            $ curl https://parku.ch/{{apiversion}}/user \
             -u 6f1ed002ab5595859014ebf0951522d9:parku \
             -d email=test@example.com \
             -d password=test \
@@ -73,7 +73,7 @@ Returns the user object for the private key.
 
 + Request
 
-            $ curl https://parku.ch/v4/user \
+            $ curl https://parku.ch/{{apiversion}}/user \
             -u 098f6bcd4621d373cade4e832627b4f6:parku
 
     + Headers
@@ -129,7 +129,7 @@ Changing cars, phone_numbers, attributes and password is done via separate endpo
 
 + Request (application/x-www-form-urlencoded)
 
-            $ curl https://parku.ch/v4/user \
+            $ curl https://parku.ch/{{apiversion}}/user \
             -u 098f6bcd4621d373cade4e832627b4f6:parku \
             -X PUT \
             -d country=CH

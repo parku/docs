@@ -126,7 +126,7 @@ Which level is returned depends on the bounding box size of your request.
 
 + Request
 
-            $ curl https://parku.ch/v4/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875 \
+            $ curl https://parku.ch/{{apiversion}}/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875 \
             ?date_start=2016-10-27T10:00:00+0000 \
             &date_end=2016-10-27T16:30:00+0000 \
             -u 6f1ed002ab5595859014ebf0951522d9:parku
@@ -267,7 +267,7 @@ AND (properties1 AND properties2 AND ...)
 
 + Request
 
-            $ curl https://parku.ch/v4/locations \
+            $ curl https://parku.ch/{{apiversion}}/locations \
             ?sw=45.74001,5.67868 \
             &ne=47.74236,10.24900 \
             &date_start=2016-10-27T10:00:00+0000 \
@@ -402,7 +402,7 @@ AND (properties1 AND properties2 AND ...)
 
 + Request
 
-            $ curl https://parku.ch/v4/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/availability \
+            $ curl https://parku.ch/{{apiversion}}/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/availability \
             ?date_start=2016-04-12 \
             &date_end=2016-04-14 \
             -u 6f1ed002ab5595859014ebf0951522d9:parku
@@ -470,7 +470,7 @@ With this endpoint you can retrieve location based terms and conditions.
 
 + Request
 
-            $ curl https://parku.ch/v4/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/terms \
+            $ curl https://parku.ch/{{apiversion}}/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/terms \
             -u 6f1ed002ab5595859014ebf0951522d9:parku
 
     + Headers

@@ -8,9 +8,17 @@ HTTP response codes to indicate API errors. We use built-in HTTP features, like 
 which can be understood by off-the-shelf HTTP clients. JSON will be returned in all responses from the API,
 including errors.
 
-#### Versions
+### Versions
 - latest stable: [v4](index.html)
 - beta: __v5__
+
+#### Changes in v5
+- Replaced locations model with an hierarchical one. This affects the [Locations Endpoint](#locations-locations) and
+  [Bookings Endpoint](#bookings-bookings). Find the description of the new model at:
+  + [Location Model](#header-location-model)
+  + [Parking Space Group Model](#header-parking-space-group-model)
+  + [Cluster Model](#header-cluster-model)
+- `voucher` endpoint removed
 
 <!-- include(../v4/attributes.apib) -->
 <!-- include(../v4/bookings.apib) -->
@@ -29,7 +37,6 @@ including errors.
 <!-- include(../v4/static_pages.apib) -->
 <!-- include(../v4/user.apib) -->
 <!-- include(../v4/violations.apib) -->
-<!-- include(../v4/voucher.apib) -->
 
 # Group Changelog
 <!-- include(changelog.md) -->

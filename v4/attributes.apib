@@ -10,7 +10,7 @@
 
 + Request (application/x-www-form-urlencoded)
 
-            $ curl https://parku.ch/v4/attributes \
+            $ curl https://parku.ch/{{apiversion}}/attributes \
             -u 098f6bcd4621d373cade4e832627b4f6:parku \
             -d key=adac \
             -d value=12345
@@ -35,7 +35,7 @@
     + attribute_id: 32 (int, required) - The identifier of the attribute to be retrieved
 
 + Request
-            $ curl https://parku.ch/v4/attributes/32 -u 098f6bcd4621d373cade4e832627b4f6:parku
+            $ curl https://parku.ch/{{apiversion}}/attributes/32 -u 098f6bcd4621d373cade4e832627b4f6:parku
     + Headers
 
             Authorization: Basic private_key:parku

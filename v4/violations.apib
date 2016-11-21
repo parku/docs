@@ -17,7 +17,7 @@ You can store one violation per booking. A violation report is done in two steps
 
 + Request (application/x-www-form-urlencoded)
 
-            $ curl https://parku.ch/v4/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation \
+            $ curl https://parku.ch/{{apiversion}}/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation \
             -u 098f6bcd4621d373cade4e832627b4f6:parku \
             -d "license_plate=B-CD 4321" \
             -d "comment=This car parked on my parking space!!!"
@@ -46,7 +46,7 @@ to your header.
         to which the violation belongs to.
 
 + Request (application/octet-stream)
-            $ curl https://parku.ch/v4/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation/image \
+            $ curl https://parku.ch/{{apiversion}}/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation/image \
             -u 098f6bcd4621d373cade4e832627b4f6:parku \
             -X PUT \
             -T file.jpeg
@@ -71,7 +71,7 @@ to your header.
         to which the violation belongs to.
 
 + Request (application/octet-stream)
-            $ curl https://parku.ch/v4/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation \
+            $ curl https://parku.ch/{{apiversion}}/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation \
             -u 098f6bcd4621d373cade4e832627b4f6:parku
 
     + Headers
@@ -104,7 +104,7 @@ Any parameters not provided will be left unchanged. The photo can be updated thr
 
 + Request (application/x-www-form-urlencoded)
 
-            $ curl https://parku.ch/v4/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation \
+            $ curl https://parku.ch/{{apiversion}}/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation \
             -u 098f6bcd4621d373cade4e832627b4f6:parku \
             -X PUT \
             -d "license_plate=B-DC 4321"
@@ -129,7 +129,7 @@ Any parameters not provided will be left unchanged. The photo can be updated thr
         to which the violation belongs to.
 + Request (application/x-www-form-urlencoded)
 
-            $ curl https://parku.ch/v4/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation \
+            $ curl https://parku.ch/{{apiversion}}/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation \
             -u 098f6bcd4621d373cade4e832627b4f6:parku \
             -X DELETE
 

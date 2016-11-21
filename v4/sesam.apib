@@ -18,7 +18,7 @@ _Both QR codes are valid and activate a sesam device in the parku office._
 
 + Request
 
-            $ curl https://parku.ch/v4/sesam/1234abcd \
+            $ curl https://parku.ch/{{apiversion}}/sesam/1234abcd \
             -u 098f6bcd4621d373cade4e832627b4f6:parku \
             -X PUT
 
@@ -44,7 +44,7 @@ This endpoint gives you the information whether the user can open a sesam device
 
 + Request
 
-            $ curl https://parku.ch/v4/sesam \
+            $ curl https://parku.ch/{{apiversion}}/sesam \
             -u 098f6bcd4621d373cade4e832627b4f6:parku
 
     + Headers

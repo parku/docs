@@ -6,7 +6,7 @@ Shows all credit cards the user used before.
 
 + Request
 
-            $ curl https://parku.ch/v4/payment/creditcards \
+            $ curl https://parku.ch/{{apiversion}}/payment/creditcards \
             -u 098f6bcd4621d373cade4e832627b4f6:parku
 
     + Headers
@@ -41,7 +41,7 @@ Shows all credit cards the user used before.
 
 + Request
 
-            $ curl https://parku.ch/v4/payment/creditcards/gphsyb \
+            $ curl https://parku.ch/{{apiversion}}/payment/creditcards/gphsyb \
             -u 098f6bcd4621d373cade4e832627b4f6:parku
             -X DELETE
 
@@ -65,7 +65,7 @@ __Deprecated__: this will be removed in __v5__.
 
 + Request
 
-            $ curl https://parku.ch/v4/payment/credit \
+            $ curl https://parku.ch/{{apiversion}}/payment/credit \
             -u 098f6bcd4621d373cade4e832627b4f6:parku \
             -X PUT \
             -d amount=10 \

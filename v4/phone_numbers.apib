@@ -7,7 +7,7 @@ The phone numbers are returned sorted by creation date, with the most recently c
 
 + Request
 
-            $ curl https://parku.ch/v4/phone_numbers \
+            $ curl https://parku.ch/{{apiversion}}/phone_numbers \
             -u 098f6bcd4621d373cade4e832627b4f6:parku
 
     + Headers
@@ -41,7 +41,7 @@ You can store multiple phone numbers for a user.
 
 + Request (application/x-www-form-urlencoded)
 
-            $ curl https://parku.ch/v4/phone_numbers \
+            $ curl https://parku.ch/{{apiversion}}/phone_numbers \
             -u 098f6bcd4621d373cade4e832627b4f6:parku \
             -d "phone_number=+493057701873"
 
@@ -64,7 +64,7 @@ You can store multiple phone numbers for a user.
 
 + Request
 
-            $ curl https://parku.ch/v4/phone_numbers/151 \
+            $ curl https://parku.ch/{{apiversion}}/phone_numbers/151 \
             -u 098f6bcd4621d373cade4e832627b4f6:parku
 
     + Headers
@@ -91,7 +91,7 @@ You can store multiple phone numbers for a user.
 
 + Request (application/x-www-form-urlencoded)
 
-            $ curl https://parku.ch/v4/phone_numbers/151 \
+            $ curl https://parku.ch/{{apiversion}}/phone_numbers/151 \
             -u 098f6bcd4621d373cade4e832627b4f6:parku \
             -X PUT
             -d "phone_number=+493057701874"
@@ -111,7 +111,7 @@ You can store multiple phone numbers for a user.
 
 + Request
 
-            $ curl https://parku.ch/v4/phone_numbers/151 \
+            $ curl https://parku.ch/{{apiversion}}/phone_numbers/151 \
             -u 098f6bcd4621d373cade4e832627b4f6:parku
             -X DELETE
 
