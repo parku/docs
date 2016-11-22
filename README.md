@@ -1,4 +1,4 @@
-# developer guides to parku
+# Developer Documentation for the ParkU API
 
 Use them as a basic start into developing parku applications.
 
