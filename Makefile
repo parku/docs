@@ -3,12 +3,15 @@ SHELL=/bin/bash -O extglob -c
 
 # output build files into current directory as github expects them in
 # the root directory
-BUILD_DIR=.
-COMMON_DEPS=$(BUILD_DIR)/images/* Makefile theme/* ./tmp
+BUILD_DIR=./build
+GENERATED_DIR=./build/generated
+COMMON_DEPS=$(BUILD_DIR)/images/* Makefile theme/* | ./tmp
 
  # current stable version gets index assigned
 PAGE_V4=index
 PAGE_V5=v5
+
+PUBLISH_TO_BRANCH=gh-pages
 
 # files to use for building v4
 V4_SRC:=$(addprefix v4/, \
@@ -56,20 +59,23 @@ V5_SRC:=v5/parku.apib \
 	violations.apib \
 	voucher.apib)
 
-all: generate generated/v4.apib generated/v4.swagger.json generated/v5.apib generated/v5.swagger.json
+all: generate $(GENERATED_DIR)/v4.apib $(GENERATED_DIR)/v4.swagger.json $(GENERATED_DIR)/v5.apib $(GENERATED_DIR)/v5.swagger.json meta-files
 
 clean:
-	rm -rf index.html v5.html generated tmp
+	rm -rf $(GENERATED_DIR) $(BUILD_DIR) $(PUBLISH_TO_BRANCH) tmp
+
+meta-files: CNAME robots_allow.txt robots.txt | $(BUILD_DIR)
+	cp CNAME robots.txt robots_allow.txt build
 
 # Build version v4 from v4 sources
-$(BUILD_DIR)/$(PAGE_V4).html: $(COMMON_DEPS) v4/*
+$(BUILD_DIR)/$(PAGE_V4).html: v4/*  $(COMMON_DEPS)
 	mkdir tmp/v4 -p
 	cp $(V4_SRC) tmp/v4/ -r
 	sed -i -e 's/{{apiversion}}/v4/g' tmp/v4/*
 	NOCACHE=1 aglio -i tmp/v4/parku.apib -o $(BUILD_DIR)/$(PAGE_V4).html --theme w00tw00t --theme-variables theme/variables-parku.less --theme-style theme/layout-parku.less --theme-full-width --theme-template triple --verbose
 
 # Build version v5 from v5 sources
-$(BUILD_DIR)/$(PAGE_V5).html: $(COMMON_DEPS) v4/* v5/*
+$(BUILD_DIR)/$(PAGE_V5).html: v4/* v5/* $(COMMON_DEPS)
 	mkdir tmp/v5 -p
 	cp $(V5_SRC) tmp/v5/ -r
 	sed -i -e 's/{{apiversion}}/v5/g' tmp/v5/*
@@ -79,17 +85,23 @@ $(BUILD_DIR)/$(PAGE_V5).html: $(COMMON_DEPS) v4/* v5/*
 generate: $(BUILD_DIR)/$(PAGE_V4).html $(BUILD_DIR)/$(PAGE_V5).html
 
 # directory targets
-./generated:
-	mkdir generated -p
+$(GENERATED_DIR):
+	mkdir $(GENERATED_DIR) -p
 
 ./tmp:
 	mkdir tmp -p
 
-generated/%.apib: ./tmp ./generated v4/*
+$(BUILD_DIR):
+	mkdir $(BUILD_DIR) -p
+
+$(BUILD_DIR)/images/*: |images/* $(BUILD_DIR)
+	cp images $(BUILD_DIR)/images -r
+
+$(GENERATED_DIR)/%.apib: ./tmp ./$(GENERATED_DIR) v4/*
 	cat tmp/$*/!(parku*).apib > $@
 
-generated/%.swagger.json: generated/%.apib
-	apib2swagger -i generated/$*.apib -o $@
+$(GENERATED_DIR)/%.swagger.json: $(GENERATED_DIR)/%.apib
+	apib2swagger -i $(GENERATED_DIR)/$*.apib -o $@
 
 # Docker targets
 dev-docs-docker-image:
@@ -100,3 +112,11 @@ all-in-docker: dev-docs-docker-image
 
 clean-in-docker: dev-docs-docker-image
 	docker run -v `pwd`:/docs -it parku-dev-docs /bin/bash -c 'cd /docs && make clean'
+
+publish: all
+	$(eval GIT_COMMIT:=`git rev-parse HEAD`)
+	rm -rf $(PUBLISH_TO_BRANCH)
+	git clone -b $(PUBLISH_TO_BRANCH) git@github.com:parku/docs.git $(PUBLISH_TO_BRANCH)
+	rm -rf $(PUBLISH_TO_BRANCH)/*
+	cp $(BUILD_DIR)/* -r $(PUBLISH_TO_BRANCH)/
+	cd gh-pages && git add . && git commit -m "Updated documentation from commit $(GIT_COMMIT)"

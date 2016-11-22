@@ -10,10 +10,8 @@ node {
     }
 
     stage 'Store'
-    archive '*.html'
-    archive 'images/**'
-    archive 'generated/**'
+    archive 'build/**'
 
     stage 'Test Publish'
-    publishHTML(target: [allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: './', reportFiles: 'index.html', reportName: 'Parku Developer Documentation'])
+    publishHTML(target: [allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'build', reportFiles: 'index.html', reportName: 'Parku Developer Documentation'])
 }
