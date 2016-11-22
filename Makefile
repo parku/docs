@@ -97,8 +97,11 @@ $(BUILD_DIR):
 $(BUILD_DIR)/images/*: |images/* $(BUILD_DIR)
 	cp images $(BUILD_DIR)/images -r
 
-$(GENERATED_DIR)/%.apib: ./tmp ./$(GENERATED_DIR) v4/*
-	cat tmp/$*/!(parku*).apib > $@
+$(GENERATED_DIR)/v4.apib: ./tmp ./$(GENERATED_DIR) v4/*
+	cat $(addprefix tmp/, $(V4_SRC)) > $@
+
+$(GENERATED_DIR)/v5.apib: ./tmp ./$(GENERATED_DIR) v5/*
+	cat $(addprefix tmp/, $(V5_SRC)) > $@
 
 $(GENERATED_DIR)/%.swagger.json: $(GENERATED_DIR)/%.apib
 	apib2swagger -i $(GENERATED_DIR)/$*.apib -o $@
