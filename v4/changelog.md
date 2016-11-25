@@ -1,6 +1,4 @@
-<!--
-  Add new changes to the log in historically descending order.
--->
+# Group Changelog
 
 ### 2016-11-21
 

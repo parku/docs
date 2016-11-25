@@ -1,5 +1,6 @@
 # Group Settings
 ## Settings [/settings]
+Access needs at least a __public key__.
 ### Retrieve Settings [GET /settings{?lat,lon}]
 
 This endpoint exposes the global settings for the ParkU-platform.
@@ -10,16 +11,9 @@ Changing the settings is not possible.
     + lon: `13.39412887` (float,optional) - Longitude of current location.
 
 + Request
-
-            $ curl https://parku.ch/{{apiversion}}/settings \
-            ?lat=52.53568811 \
-            &lon=13.39412887 \
-            -u 098f6bcd4621d373cade4e832627b4f6:parku \
-            -X GET
-
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
 
@@ -210,10 +204,6 @@ Changing the settings is not possible.
 
 ### Enable/Disable Notification [PUT /settings/booking/notification/{notification_key}]
 #### Body Parameters
-|         |                                     |
-|---------|-------------------------------------|
-| enabled | `bool` (required) `true` or `false` |
-
 + Parameters
     + `notification_key`: `time_to_leave` (enum,required) - A notification key.
         + Members
@@ -224,15 +214,11 @@ Changing the settings is not possible.
             + over
 
 + Request (application/x-www-form-urlencoded)
-
-            $ curl https://parku.ch/{{apiversion}}/settings/booking/notifiction/time_to_leave \
-            -u 098f6bcd4621d373cade4e832627b4f6:parku \
-            -X PUT \
-            -d enabled=false
-
+    + Attributes
+        + `enabled`: true (boolean,required) - The value for the notification key.
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 204
     Updated successfully.

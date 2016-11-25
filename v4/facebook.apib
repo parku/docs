@@ -1,4 +1,6 @@
 # Group Facebook
+Access needs a __public key__.
+
 ## Facebook [/facebook]
 
 ### Facebook Login [POST /facebook/login{?access_token}]
@@ -7,19 +9,12 @@ In this case, you must ask the user for the country and [update](#user-user-put)
 
 All further requests using the token as _HTTP Basic Auth_ username are made on behalf of the user.
 
-+ Parameters
-    + `access_token`: `1234...` (string,required) - The access token which is used to obtain information from Facebook.
-        The token must have the permissions to get the users email.
-
-
 + Request (application/x-www-form-urlencoded)
-
-          $ curl https://parku.ch/{{apiversion}}/facebook/login \
-          -u 6f1ed002ab5595859014ebf0951522d9:parku \
-          -d access_token=1234...
-
+    + Attributes
+        + `access_token`: `1234...` (string,required) - The access token which is used to obtain information from Facebook.
+            The token must have the permissions to get the users email.
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 204

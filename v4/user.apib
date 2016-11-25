@@ -2,40 +2,41 @@
 ## User [/user]
 
 ### Create a User [POST /user]
-#### Body Parameters
-|               |                                                                                                                             |
-|---------------|-----------------------------------------------------------------------------------------------------------------------------|
-| email         | `string` (required) Example: `test@example.com`                                                                             |
-| password      | `string` (required) Example: `test`                                                                                         |
-| country       | Choices: `DE` `CH` (required) Example: `DE`                                                                                 |
-| firstname     | `string` (required) Example: `Max`                                                                                          |
-| lastname      | `string` (required) Example: `Power`                                                                                        |
-| gender        | Choices: `male` `female` (optional) Example: `male`                                                                         |
-| facebook_id   | `string` (optional) Example: `xxx`                                                                                          |
-| cars          | `object` (optional) Example: `cars[0][license_plate]=B-AB 1234` `cars[0][vehicle]=Isetta`                                   |
-| phone_numbers | `object` (optional) Example: `phone_numbers[0][phone_number]=+493057701873`  `phone_numbers[1][phone_number]=+401234567434` |
-| attributes    | `object` (optional) Example: `attributes[0][key]=adac` `attributes[0][value]=1234567890`                                    |
+Access needs a __public key__.
 
 + Request (application/x-www-form-urlencoded)
-            $ curl https://parku.ch/{{apiversion}}/user \
-            -u 6f1ed002ab5595859014ebf0951522d9:parku \
-            -d email=test@example.com \
-            -d password=test \
-            -d country=DE \
-            -d firstname=Test \
-            -d lastname=Name \
-            -d gender=female \
-            -d facebook_id=xxx \
-            -d "cars[0][license_plate]=B-AB 1234 \
-            -d &cars[0][vehicle]=Isetta" \
-            -d "phone_numbers[0][phone_number]=+493057701873 \
-            -d &phone_numbers[1][phone_number]=+401234567434" \
-            -d "attributes[0][key]=adac \
-            -d &attributes[0][value]=1234567890"
-
+    + Attributes
+        + `email`: `test@example.com` (string,required)
+        + `password`: `test` (string,required)
+        + `country`: `DE` (enum,required)
+            + Members
+                + DE
+                + CH
+        + `firstname`: `Max` (string,required)
+        + `lastname`: `Power` (string,required)
+        + `gender`: `female` (enum,optional)
+            + Members
+                + female
+                + male
+        + `facebook_id`: `xxx` (string,optional)
+        + `cars` (object,optional)
+            + 0, 1 (array)
+                + `license_plate`: `B-AB 1234` (string,optional)
+                + `vehicle`: `Isetta` (string,optional)
+                + `country`: `DE` (enum,optional)
+                    + Members
+                        + DE
+                        + CH
+        + `phone_numbers` (object,optional)
+            + 0, 1 (array)
+                + `phone_number`: `099028-237489` (string,optional)
+        + `attributes` (object,optional)
+            + 0, 1 (array)
+                + `key`: `adac` (string,optional)
+                + `value`: `1234567890` (string,optional)
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 201 (application/json)
     + Body
@@ -69,16 +70,14 @@
             }
 
 ### Retrieve a User [GET /user]
+Access needs a __private key__.
+
 Returns the user object for the private key.
 
 + Request
-
-            $ curl https://parku.ch/{{apiversion}}/user \
-            -u 098f6bcd4621d373cade4e832627b4f6:parku
-
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
     + Body
@@ -112,30 +111,30 @@ Returns the user object for the private key.
             }
 
 ### Update a user [PUT /user]
+Access needs a __private key__.
+
 Updates the user by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
 
 This request accepts mostly the same arguments as the user creation call.
 Changing cars, phone_numbers, attributes and password is done via separate endpoints.
 
-#### Body Parameters
-|               |                                                                                                                             |
-|---------------|-----------------------------------------------------------------------------------------------------------------------------|
-| email         | `string` (required) Example: `test@example.com`                                                                             |
-| password      | `string` (required) Example: `test`                                                                                         |
-| country       | Choices: `DE` `CH` (required) Example: `DE`                                                                                 |
-| firstname     | `string` (required) Example: `Max`                                                                                          |
-| lastname      | `string` (required) Example: `Power`                                                                                        |
-| gender        | Choices: `male` `female` (optional) Example: `male`                                                                         |
-
 + Request (application/x-www-form-urlencoded)
-
-            $ curl https://parku.ch/{{apiversion}}/user \
-            -u 098f6bcd4621d373cade4e832627b4f6:parku \
-            -X PUT \
-            -d country=CH
+    + Attributes
+        + `email`: `test@example.com` (string,optional)
+        + `password`: `test` (string,optional)
+        + `country`: `DE` (enum,optional)
+            + Members
+                + DE
+                + CH
+        + `firstname`: `Max` (string,optional)
+        + `lastname`: `Power` (string,optional)
+        + `gender`: `female` (enum,optional)
+            + Members
+                + female
+                + male
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200
     + Body

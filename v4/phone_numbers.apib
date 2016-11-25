@@ -1,18 +1,15 @@
 # Group Phone Numbers
 ## Phone Numbers [/phone_numbers]
+Access needs a __private key__.
 
 ### List all Phone Numbers [GET /phone_numbers]
 Returns a list of all phone numbers of the user.
 The phone numbers are returned sorted by creation date, with the most recently created phone number appearing first.
 
 + Request
-
-            $ curl https://parku.ch/{{apiversion}}/phone_numbers \
-            -u 098f6bcd4621d373cade4e832627b4f6:parku
-
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
     + Body
@@ -35,19 +32,12 @@ The phone numbers are returned sorted by creation date, with the most recently c
 You can store multiple phone numbers for a user.
 
 #### Body Parameters
-|              |                                                                  |
-|--------------|------------------------------------------------------------------|
-| phone_number | `string` (required) - The phone number. Example: `+493057701873` |
-
 + Request (application/x-www-form-urlencoded)
-
-            $ curl https://parku.ch/{{apiversion}}/phone_numbers \
-            -u 098f6bcd4621d373cade4e832627b4f6:parku \
-            -d "phone_number=+493057701873"
-
+    + Attributes
+        + `phone_number`: `+493057701873` (string,required) - The phone number.
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 201 (application/json)
     + Body
@@ -63,13 +53,9 @@ You can store multiple phone numbers for a user.
     + `phone_number_id`: 151 (number,required) - The identifier of the phone number to be retrieved.
 
 + Request
-
-            $ curl https://parku.ch/{{apiversion}}/phone_numbers/151 \
-            -u 098f6bcd4621d373cade4e832627b4f6:parku
-
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
     + Body
@@ -81,20 +67,12 @@ You can store multiple phone numbers for a user.
 
 ### Update a Phone Number [PUT /phone_numbers/{phone_number_id}]
 #### Body Parameters
-|              |                                                                  |
-|--------------|------------------------------------------------------------------|
-| phone_number | `string` (required) - The phone number. Example: `+493057701874` |
-
-+ Parameters
-    + `phone_number_id`: 151 (number,required) - The identifier of the phone number to be updated.
-
-
 + Request (application/x-www-form-urlencoded)
+    + Attributes
+        + `phone_number_id`: 151 (number,required) - The identifier of the phone number to be updated.
+    + Headers
 
-            $ curl https://parku.ch/{{apiversion}}/phone_numbers/151 \
-            -u 098f6bcd4621d373cade4e832627b4f6:parku \
-            -X PUT
-            -d "phone_number=+493057701874"
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
     + Body
@@ -108,15 +86,9 @@ You can store multiple phone numbers for a user.
 + Parameters
     + `phone_number_id`: 151 (number,required) - The identifier of the phone number to be deleted.
 
-
 + Request
-
-            $ curl https://parku.ch/{{apiversion}}/phone_numbers/151 \
-            -u 098f6bcd4621d373cade4e832627b4f6:parku
-            -X DELETE
-
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200

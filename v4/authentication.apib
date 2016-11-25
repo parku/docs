@@ -1,0 +1,17 @@
+# Group Authentication
+
+## Http Basic Auth
+Authentication to the API occurs via HTTP Basic Auth. Provide your API key as the basic auth username.
+The password is always parku.
+All API requests must be made over HTTPS. Calls made over plain HTTP will fail. You must authenticate for all requests.
+
+## Private and public keys
+There are two types of keys: public and private. Public keys are used to obtain publicly available
+informations (eg. parking spaces). Private keys are used to identify users.
+Whenever user information are requested or bookings on behalf of a user is made, the private key is necessary.
+
+## Retrieving a private key
+You retrieve a user specific private key by logging in as a user.
+
+## Private vs. public urls
+For the public urls you need a public key. With a private key you can access public urls.

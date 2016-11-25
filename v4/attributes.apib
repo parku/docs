@@ -1,23 +1,16 @@
 # Group Attributes
 
 ## Attributes [/attributes]
+Access needs a __private key__.
+
 ### Create a new Attribute [POST /attributes{?key,value}]
-
-+ Parameters
-
-    + key: adac (required) - The name of the attribute. Currently only 'adac' and 'test' are allowed
-    + value: 12345 (required) - The value of the attribute, eg. a membership number
-
 + Request (application/x-www-form-urlencoded)
-
-            $ curl https://parku.ch/{{apiversion}}/attributes \
-            -u 098f6bcd4621d373cade4e832627b4f6:parku \
-            -d key=adac \
-            -d value=12345
-
+    + Attributes
+        + key: adac (required) - The name of the attribute. Currently only 'adac' and 'test' are allowed
+        + value: 12345 (required) - The value of the attribute, eg. a membership number
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
     + Body
@@ -31,14 +24,13 @@
 ### Retrieve an Attribute [GET /attributes/{attribute_id}]
 
 + Parameters
-
     + attribute_id: 32 (int, required) - The identifier of the attribute to be retrieved
 
+
 + Request
-            $ curl https://parku.ch/{{apiversion}}/attributes/32 -u 098f6bcd4621d373cade4e832627b4f6:parku
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
     + Body

@@ -1,19 +1,16 @@
 # Group Invitations
 ## Invitations [/invitations]
+Access needs a __private key__.
+
 ### Check Invitation Code Validity [GET /invitations/{invitation_code}]
 
 + Parameters
     + `invitation_code`: `d2VsbCBkb25lISBnZXQgYSBiZWVyIG5vdyA9RA==` (string,required) - Base64 encoded invitation code.
 
 + Request
-
-            $ curl https://parku.ch/{{apiversion}}/invitations/park4UAndMe= \
-            -u 098f6bcd4621d373cade4e832627b4f6:parku \
-            -X GET
-
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
 |       |                                                                   |

@@ -1,16 +1,13 @@
 # Group Static Pages
 ## Static Pages [/]
+Access needs at least a __public key__.
 
 ### Terms and Conditions [GET /terms]
 
 + Request
-
-            $ curl https://parku.ch/{{apiversion}}/terms \
-            -u 6f1ed002ab5595859014ebf0951522d9:parku
-
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/xhtml+xml)
     + Body
@@ -21,13 +18,9 @@
 ### Imprint [GET /imprint]
 
 + Request
-
-            $ curl https://parku.ch/{{apiversion}}/imprint \
-            -u 6f1ed002ab5595859014ebf0951522d9:parku
-
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/xhtml+xml)
     + Body
@@ -38,13 +31,9 @@
 ### Privacy Policy [GET /privacy_policy]
 
 + Request
-
-            $ curl https://parku.ch/{{apiversion}}/privacy_policy \
-            -u 6f1ed002ab5595859014ebf0951522d9:parku
-
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/xhtml+xml)
     + Body

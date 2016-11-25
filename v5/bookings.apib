@@ -513,6 +513,62 @@ Updates the booking by setting the values of the parameters passed. Any paramete
               {...},
               {...}
             ]
+
+### Stop a Booking [POST /bookings/{booking_id}/stop]
+Currently supports stopping onstreet bookings only.
+
++ Parameters
+    + `booking_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string,required) - the booking id
+
++ Request (application/x-www-form-urlencoded)
+    + Attributes
+        + `stop`: `2009-06-30T18:30:00+02:00` (string,required) - device time when the booking was stopped
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes
+          + `id`: `0000bb3e-506d-11e5-9781-d43d7eece658` (string) - the booking id
+          + `price` (object)
+              + `amount`: `4.25` (number) - the overall amount to pay for the booking
+              + `transaction_fee`: `0.25` (number) - the transaction fee included in `amount`
+              + `currency`: `EUR` (enum) - the currency of `amount` and `transaction_fee`
+                  + Members
+                      + EUR
+                      + CHF
+          + `zone` (string) - a onstreet zone object as returned by the [Retrieve Onstreet Zone Information](#onstreet-onstreet-get) Request.
+    + Body
+
+                {
+                   id: "0000bb3e-506d-11e5-9781-d43d7eece658",
+                   payment: {
+                     method: '[paypal, credits]',
+                     type: 'post'
+                   },
+                   price: {
+                     amount: 4.25,
+                     transaction_fee: 0.25,
+                     currency 'EUR'
+                   }
+                   zone:
+                   {
+                     id: "101012",
+                     name: "Berlin 101012",
+                     hours: "Mon-Fri, 08:00 - 22:30",
+                     price: {
+                       unit_cost: 0.05,
+                       unit_interval_minutes: 3,
+                       currency: "EUR",
+                       transaction_fee: 0.25,
+                     },
+                     date_end: "2016-11-29...",
+                     duration_max: "2 hrs",
+                     available_payment_methods: ['paypal', 'credits'],
+                     available_payment_types: ['post']
+                  }
+                }
+
 ### Retrieve Custom Extend Prices [GET /bookings/{booking_id}/extend{?date_end}]
 Retrieving a booking returns a few prices for standard intervals. Use this endpoint for custom intervals.
 

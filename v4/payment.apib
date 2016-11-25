@@ -1,17 +1,14 @@
 # Group Payment
 ## Payment [/payment]
+Access needs a __private key__.
 
 ### List Credit Cards [GET /payment/creditcards]
 Shows all credit cards the user used before.
 
 + Request
-
-            $ curl https://parku.ch/{{apiversion}}/payment/creditcards \
-            -u 098f6bcd4621d373cade4e832627b4f6:parku
-
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
     + Body
@@ -40,41 +37,27 @@ Shows all credit cards the user used before.
         You'll receive a list of the users credit cards through the `GET /payment/creditcards` request.
 
 + Request
-
-            $ curl https://parku.ch/{{apiversion}}/payment/creditcards/gphsyb \
-            -u 098f6bcd4621d373cade4e832627b4f6:parku
-            -X DELETE
-
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 204
 
 ### Update Credit [PUT /payment/credit/{?amount,provider,provider_info}]
 __Deprecated__: this will be removed in __v5__.
 
-+ Parameters
-    + `amount`: 10 (number,required) - The amount.
-    + `provider`: paypal (enum,required) The payment method.
-        + Members
-            + paypal
-            + braintree
-    + `provider_info`: `PAY-1CM399047K4649003KM4WJQQ` (object,required) - refer to the description
-          of [`Create a new Booking`](#bookings-bookings-post)
-
 + Request
-
-            $ curl https://parku.ch/{{apiversion}}/payment/credit \
-            -u 098f6bcd4621d373cade4e832627b4f6:parku \
-            -X PUT \
-            -d amount=10 \
-            -d provider=braintree \
-            -d provider_info[id]=6tvts6
-
+    + Attributes
+        + `amount`: 10 (number,required) - The amount.
+        + `provider`: paypal (enum,required) The payment method.
+            + Members
+                + paypal
+                + braintree
+        + `provider_info`: `PAY-1CM399047K4649003KM4WJQQ` (string,required) - refer to the description
+              of [`Create a new Booking`](#bookings-bookings-post)
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
     + Body

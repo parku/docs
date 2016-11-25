@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro');
 
-@base-font: 400 14px ~"/" 1.42 'Open+Sans', Helvetica, sans-serif;
-@title-font: 200 36px 'Open+Sans', Helvetica, sans-serif;
-@code-font: 200 12px 'Source+Code+Pro', monospace;
-@uri-font: 200 12px 'Source+Code+Pro', monospace;
+@base-font: 400 14px 'Open Sans', Helvetica, sans-serif;
+@title-font: 200 36px 'Open Sans', Helvetica, sans-serif;
+@code-font: 200 12px 'Source Code Pro', monospace;
+@uri-font: 200 12px 'Source Code Pro', monospace;
 
 @parku-blue: #0075bf;
 @parku-green: #76b82a;
 @parku-dark-gray: #666;
-@parku-gray: #eee;
+@parku-gray: #e0e0e0;
 @parku-light-gray: #F7F7F7;
 @parku-text-on-white: #000000;
 @parku-text-on-blue: #FFFFFF;
@@ -25,10 +25,10 @@
 @nav-hover-background-color: @parku-gray;
 @nav-background-color: @parku-light-gray;
 @nav-border-color: @parku-gray;
-@right-background-color: @parku-light-gray;
-@right-table-background-color: @parku-light-gray;
-@right-description-background-color: @parku-light-gray;
-@right-text-color: @parku-text-on-white;
+@right-background-color: #2D3134;
+@right-table-background-color: @parku-gray;
+@right-description-background-color: @parku-gray;
+@right-text-color: rgb(221, 228, 232);
 @right-border-color: @parku-gray;
 @middle-border-color: @parku-gray;
 @middle-collapse-background-color: #FFFFFF;
@@ -54,12 +54,17 @@
 @code-block-text-color: #000000;
 @code-block-background-color: #FFFFFF;
 
-@tabs-background-color: @parku-light-gray;
+@right-code-block-text-color: @right-text-color;
+@right-code-block-background-color: rgb(39, 43, 45);
+
+@tabs-background-color: @right-background-color;
+@tabs-inactive-background-color: @right-background-color;
+@tabs-active-background-color: #33373A;
 @example-color: @parku-green;
 
 @highlight-literal: @parku-green;
-@highlight-string: @parku-dark-gray;
-@highlight-value: #000000;
+@highlight-string: @right-text-color;
+@highlight-value: @right-text-color;
 
 @middle-table-background-color: #FFFFFF;
 @table-background-color: @parku-light-gray;
@@ -69,3 +74,9 @@
 @changelog-description-color: @parku-text-on-white;
 @changelog-description-background-color: #FFFFFF;
 @changelog-border-color: #FFFFFF;
+
+@button-background-color: @right-code-block-background-color;
+@button-active-background-color: @tabs-active-background-color;
+@button-color: @right-text-color;
+@button-active-color: @right-text-color;
+@curl-background-color: @right-code-block-background-color;

@@ -1,5 +1,6 @@
 # Group Locations
 ## Locations [/locations]
+Access needs at least a __public key__.
 
 ### Retrieve a Location [GET /locations/{location_id}{?date_start,date_end}]
 + Parameters
@@ -12,7 +13,7 @@
 + Request
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200
     | Field                         | Description                                                                                                                                                                                                                          |
@@ -124,15 +125,9 @@
             }
 
 + Request
-
-            $ curl https://parku.ch/{{apiversion}}/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875 \
-            ?date_start=2016-10-27T10:00:00+0000 \
-            &date_end=2016-10-27T16:30:00+0000 \
-            -u 6f1ed002ab5595859014ebf0951522d9:parku
-
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 404
 Location was not found, check the location id and that your user has the correct access rights to see the location.
@@ -177,17 +172,9 @@ That does not mean, that they are available.
         + Default: true
 
 + Request
-
-            $ curl https://parku.ch/{{apiversion}}/locations \
-            ?sw=45.74001,5.67868 \
-            &ne=47.74236,10.24900 \
-            &date_start=2016-10-27T10:00:00+0000 \
-            &date_end=2016-10-27T16:30:00+0000 \
-            -u 6f1ed002ab5595859014ebf0951522d9:parku
-
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 
 + Response 200
@@ -260,15 +247,9 @@ That does not mean, that they are available.
     + `date_end`: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - see `date_start`.
 
 + Request
-
-            $ curl https://parku.ch/{{apiversion}}/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/availability \
-            ?date_start=2016-04-12 \
-            &date_end=2016-04-14 \
-            -u 6f1ed002ab5595859014ebf0951522d9:parku
-
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200
     Displays the availability times. For every affected availability period there will be one entry in the json.
@@ -319,7 +300,7 @@ That does not mean, that they are available.
 
 ### Retrieve Terms and Conditions [GET /locations/{location_id}/terms]
 
-__Deprecated__  This endpoint is deprecated. `/settings` endpoint should be used instead.
+__Deprecated__ This endpoint is deprecated. `/settings` endpoint should be used instead.
 
 Each location can have different terms and conditions.
 With this endpoint you can retrieve location based terms and conditions.
@@ -328,13 +309,9 @@ With this endpoint you can retrieve location based terms and conditions.
     + `location_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - Identifier of the location.
 
 + Request
-
-            $ curl https://parku.ch/{{apiversion}}/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/terms \
-            -u 6f1ed002ab5595859014ebf0951522d9:parku
-
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/xhtml+xml)
     + Body

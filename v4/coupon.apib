@@ -1,5 +1,6 @@
 # Group Coupon
 ## Coupon [/coupon]
+Access needs a __private key__.
 
 ### Test a Coupon [GET /coupon/{encoded_code}{?action,amount}]
 + Parameters
@@ -10,12 +11,9 @@
     + amount: 42 (number, required) - Amount coupon has to be tested against.
 + Request
 
-            $ curl https://parku.ch/{{apiversion}}/coupon/Zm9vYmFyMTIz?action=test&amount=42 \
-            -u 098f6bcd4621d373cade4e832627b4f6:parku
-
     + Headers
 
-            Authorization: Basic MTIzNDU2Nzg5MDpwYXJrdQ==
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
 |           |                                         |

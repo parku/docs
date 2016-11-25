@@ -52,7 +52,7 @@ h2 {
 }
 
 h3 {
-    padding: 0 @padding;
+    padding: 0;
 }
 
 h4 {
@@ -62,6 +62,7 @@ h4 {
 h5 {
     font-size: 100%;
     font-weight: normal;
+    padding: 0 @padding;
 }
 
 p {
@@ -127,6 +128,10 @@ blockquote {
     }
 }
 
+.right pre {
+      background-color: @right-code-block-background-color;
+      color: @right-code-block-text-color;
+}
 pre {
     background-color: @code-block-background-color;
     padding: @padding;
@@ -141,6 +146,11 @@ pre {
         padding: 0;
         border: none;
     }
+}
+
+.right code {
+    color: @right-code-block-text-color;
+    background-color: @right-code-block-background-color;
 }
 
 .code {
@@ -504,6 +514,7 @@ nav {
     float: right;
     width: @right-panel-width;
     padding-left: @padding;
+    color: @right-text-color;
 
     a {
         color: @right-link-color;
@@ -511,6 +522,7 @@ nav {
 
     h1, h2, h3, h4, h5, p, div {
         color: @right-text-color;
+        font-weight: normal;
     }
 
     h5 {
@@ -549,25 +561,24 @@ nav {
   }
 }
 
-.example-names {
-  background-color: @right-background-color;
-  padding: @padding 0;
+.tab-names {
+  display: table;
+  width:100%;
+  table-layout: fixed;
+
+  background-color: @tabs-inactive-background-color;
+  padding: 0;
   border-radius: @border-radius;
+  margin: 0;
+  width: 100%;
 
-  span:nth-child(1) {
-      font-weight: bold;
-  }
-
-  h5 {
-      padding: 0;
-  }
-
-.tab-button {
+  .tab-button {
+    display: table-cell;
     cursor: pointer;
-    color: @text-color;
-    border: 1px solid @tabs-active-background-color;
+    color: @right-text-color;
+    text-align: center;
     padding: @padding / 2;
-    margin-left: @padding;
+    background-color: @tabs-inactive-background-color;
 
     &.active {
       background-color: @tabs-active-background-color;
@@ -577,6 +588,11 @@ nav {
 
 .tabs {
     background-color: @tabs-background-color;
+
+    h4 {
+      padding: @padding @padding;
+      margin: 0;
+    }
 }
 
 #nav-background {
@@ -689,6 +705,7 @@ nav {
 
     h2.group-heading, .heading a {
         padding: @group-padding;
+        padding-left: 0;
         margin: @group-header-margin;
         background-color: @group-title-background-color;
         border-bottom: 1px solid @group-border-color;
@@ -833,23 +850,66 @@ nav .resource-group{
         }
     }
 
-h3:before {
-content: "";
-height: 1px;
-background: linear-gradient(to left, rgba(147,147,147,1) 0%,rgba(0,0,0,0) 100%);
-
-display: block;
-margin-bottom: 10px;
-margin-top: 10px;
-}
+    h3:before {
+        content: "";
+        height: 1px;
+        background: linear-gradient(to left, rgba(147,147,147,1) 0%,rgba(0,0,0,0) 100%);
+        display: block;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
 
     ul:before {
-    content: "";
-    height: 1px;
-    background: linear-gradient(to right, rgba(147,147,147,1) 0%,rgba(0,0,0,0) 100%);
+        content: "";
+        height: 1px;
+        background: linear-gradient(to right, rgba(147,147,147,1) 0%,rgba(0,0,0,0) 100%);
 
-    display: block;
-margin-bottom: 10px;
-    margin-top: 10px;
+        display: block;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
 }
+
+.curl {
+    background-color: @curl-background-color;
+    width: 100%;
+
+    .copy {
+        margin: 0;
+        width: 100%;
+        button {
+            font-size: small;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            padding: @padding / 2 @padding;
+            color: @button-color;
+            background-color: @button-background-color;
+            border: none;
+            &:hover {
+                 color: @button-active-color;
+                 background-color: @button-active-background-color;
+            }
+        }
+        float: right;
+    }
+
+
+    .command {
+      font: @code-font;
+      pre {
+        margin: 0;
+      }
+    }
+
+    &::after {
+        clear: both;
+        content: "";
+    }
+}
+
+.curl:after {
+    content: '';
+    display: block;
+    clear: both;
 }
