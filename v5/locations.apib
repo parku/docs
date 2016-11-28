@@ -29,6 +29,7 @@ A [location cluster](#header-cluster-model) contains information about how many 
 | latitude                | `decimal` latitude part of the location geo coordinate                                                                        |
 | longitude               | `decimal` longitude part of the location geo                                                                                  |
 | parking_space_groups    | `object` different parking space groups for this location. See [Parking Space Group Data](#header-parking-space-group-data)   |
+| payment                 | `object` available payment methods and types for the current user in this location                                            |
 | post_code               | `string` post code of the location                                                                                            |
 | street                  | `string` the street name of the location without number                                                                       |
 | street_number           | `string` the street number of the location                                                                                    |
@@ -117,6 +118,15 @@ Which level is returned depends on the bounding box size of your request.
 | city             | `string` parent city the cluster belongs to, only shown if the cluster `type` is `postcode`              |
 | country          | `string` parent country the cluster belongs to, only shown if the cluster `type` is `postcode` or `city` |
 
+#### Payment Model
+The payment methods and types depend on the private key of the logged in user. For locations requests using public keys
+these arrays will be empty.
+
+|  Field  |                         Description                         |
+|---------|-------------------------------------------------------------|
+| methods | `array` Possible payment methods for this location and user |
+| types   | `array` Possible payment types for this location and user   |
+
 ### Retrieve a Location [GET /locations/{location_id}{?date_start,date_end}]
 
 + Parameters
@@ -127,12 +137,6 @@ Which level is returned depends on the bounding box size of your request.
     + `date_end`: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - see `date_start`.
 
 + Request
-
-            $ curl https://parku.ch/{{apiversion}}/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875 \
-            ?date_start=2016-10-27T10:00:00+0000 \
-            &date_end=2016-10-27T16:30:00+0000 \
-            -u 6f1ed002ab5595859014ebf0951522d9:parku
-
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
@@ -153,6 +157,10 @@ Which level is returned depends on the bounding box size of your request.
               "city": "Hennigsdorf",
               "country": "Deutschland",
               "bookable": true,
+              "payment": {
+                  "methods": ["paypal", "credits", "braintree"]
+                  "types": ["immediate", "post"]
+              },
               "parking_space_groups": [
                 {
                   "id": "1644c5dc-4c5c-11e4-a24a-d43d7eecedd2",

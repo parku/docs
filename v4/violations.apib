@@ -11,7 +11,7 @@ You can store one violation per booking. A violation report is done in two steps
     + `booking_id`: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
         to which the violation belongs to.
 
-+ Request (application/x-www-form-urlencoded)
++ Request (application/json)
     + Attributes
         + `license_plate`: `B-CD 4321` (string,required)
         + `comment`: `This car parked on my parking space!!!` (string,required)
@@ -80,7 +80,7 @@ Any parameters not provided will be left unchanged. The photo can be updated thr
     + `booking_id`: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
         to which the violation belongs to.
 
-+ Request (application/x-www-form-urlencoded)
++ Request (application/json)
     + Attributes
         + `license_plate`: `B-CD 4321` (string,required)
         + `comment`: `This car parked on my parking space!!!` (string,required)
@@ -102,7 +102,7 @@ Any parameters not provided will be left unchanged. The photo can be updated thr
 + Parameters
     + `booking_id`: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
         to which the violation belongs to.
-+ Request (application/x-www-form-urlencoded)
++ Request (application/json)
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1

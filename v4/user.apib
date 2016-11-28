@@ -4,7 +4,7 @@
 ### Create a User [POST /user]
 Access needs a __public key__.
 
-+ Request (application/x-www-form-urlencoded)
++ Request (application/json)
     + Attributes
         + `email`: `test@example.com` (string,required)
         + `password`: `test` (string,required)
@@ -19,19 +19,19 @@ Access needs a __public key__.
                 + female
                 + male
         + `facebook_id`: `xxx` (string,optional)
-        + `cars` (object,optional)
-            + 0, 1 (array)
+        + `cars` (array,optional)
+            + (object)
                 + `license_plate`: `B-AB 1234` (string,optional)
                 + `vehicle`: `Isetta` (string,optional)
                 + `country`: `DE` (enum,optional)
                     + Members
                         + DE
                         + CH
-        + `phone_numbers` (object,optional)
-            + 0, 1 (array)
+        + `phone_numbers` (array,optional)
+            + (object)
                 + `phone_number`: `099028-237489` (string,optional)
-        + `attributes` (object,optional)
-            + 0, 1 (array)
+        + `attributes` (array,optional)
+            + (object)
                 + `key`: `adac` (string,optional)
                 + `value`: `1234567890` (string,optional)
     + Headers
@@ -118,7 +118,7 @@ Updates the user by setting the values of the parameters passed. Any parameters 
 This request accepts mostly the same arguments as the user creation call.
 Changing cars, phone_numbers, attributes and password is done via separate endpoints.
 
-+ Request (application/x-www-form-urlencoded)
++ Request (application/json)
     + Attributes
         + `email`: `test@example.com` (string,optional)
         + `password`: `test` (string,optional)

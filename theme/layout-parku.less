@@ -102,17 +102,19 @@ hr.split {
 }
 
 dl {
+    overflow: hidden;
     dt {
         float: left;
-        width: 130px;
+        width: 150px;
         clear: left;
         text-align: right;
-        overflow: visible;
         .wrap;
     }
 
     dd {
-        margin-left: 150px;
+        float: left;
+        max-width: calc(~'100% - 180px');
+        margin-left: 20px;
     }
 }
 
@@ -507,6 +509,10 @@ nav {
     box-sizing: border-box;
     width: 100% - @right-panel-width;
     padding-right: @padding;
+
+    p {
+        margin-left: 0;
+    }
 }
 
 .right {
@@ -740,7 +746,7 @@ nav .resource-group{
 }
 
 .example {
-    > strong {
+    strong {
         opacity: 0.5;
     }
     > span {
@@ -898,8 +904,10 @@ nav .resource-group{
     .command {
       font: @code-font;
       pre {
-        margin: 0;
+        text-indent: -2em;
+        padding-left: 2em;
       }
+
     }
 
     &::after {

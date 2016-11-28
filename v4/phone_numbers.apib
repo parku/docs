@@ -32,7 +32,7 @@ The phone numbers are returned sorted by creation date, with the most recently c
 You can store multiple phone numbers for a user.
 
 #### Body Parameters
-+ Request (application/x-www-form-urlencoded)
++ Request (application/json)
     + Attributes
         + `phone_number`: `+493057701873` (string,required) - The phone number.
     + Headers
@@ -67,7 +67,7 @@ You can store multiple phone numbers for a user.
 
 ### Update a Phone Number [PUT /phone_numbers/{phone_number_id}]
 #### Body Parameters
-+ Request (application/x-www-form-urlencoded)
++ Request (application/json)
     + Attributes
         + `phone_number_id`: 151 (number,required) - The identifier of the phone number to be updated.
     + Headers

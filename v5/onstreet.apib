@@ -21,16 +21,17 @@ This request returns parking zone information about a specific point on the map.
         + id: `101012` (string) - the parking zone id
         + name: `Berlin 101012` (string) - the parking space zone name
         + hours: `Mon-Fri, 08:00 - 22:30` (string) - the translated availability time in this zone
-        + `price.unit_cost`: `0.05` (number) - cost per unit (which is defined by `unit_interval_minutes`)
-        + `price.unit_interval_minutes`: 3 (number) - how many minutes one unit is
-        + `price.currency`: EUR (enum) - the currency of the price
-            + Members
-                + EUR
-                + CHF
+        + `price` (object) - information about the price for this zone
+            + `unit_cost`: `0.05` (number) - cost per unit (which is defined by `unit_interval_minutes`)
+            + `unit_interval_minutes`: `3` (number) - how many minutes one unit is
+            + `currency`: EUR (enum) - the currency of the price
+                + Members
+                  + EUR
+                  + CHF
         + `max_datetime_end`: `2009-06-30T18:30:00+02:00` (string) - datetime when a booking has to end
         + `duration_max`: `2 hours` (string) - translated string of maximum general parking duration
-        + `available_payment_methods`: `['paypal', 'credits']` (array[string]) - available payment methods
-        + `available_payment_types`: [`post`] (array[string]) - available payment types
+        + `available_payment_methods`: `['paypal', 'credits']` (string) - available payment methods
+        + `available_payment_types`: [`post`] (string) - available payment types
     + Body
 
             {
@@ -54,17 +55,17 @@ Access needs at least a __private key__.
 
 Bookings can be stopped using the [Stop a Booking](#bookings-bookings-post-3) action.
 
-+ Request (application/x-www-form-urlencoded)
++ Request (application/json)
     + Attributes
         + `lat`: 53.12341234 (number,required) - latitude of the requested point
         + `lon`: 13.12341234 (number,required) - longitude of the requested point
         + `unit_cost`: 0.05 (number,required) - the cost per unit in `currency`
-        + `unit_interval_minutes` (number,required) - number of minutes per unit
+        + `unit_interval_minutes`: 3 (number,required) - number of minutes per unit
         + `currency`: `EUR`(enum[string],required) - the currency the cost information is in
             + Members
                 + EUR
                 + CHF
-        + `payment_methods`: paypal, credits (array[enum],required) - array containing the planned payment methods for this booking
+        + `payment_methods`: paypal, credits (array[string],required) - array containing the planned payment methods for this booking
         + `payment_type` (enum[string],required) - payment type
             + Members
                 + immediate

@@ -4,10 +4,10 @@
 Access needs a __private key__.
 
 ### Create a new Attribute [POST /attributes{?key,value}]
-+ Request (application/x-www-form-urlencoded)
++ Request (application/json)
     + Attributes
-        + key: adac (required) - The name of the attribute. Currently only 'adac' and 'test' are allowed
-        + value: 12345 (required) - The value of the attribute, eg. a membership number
+        + key: adac (string, required) - The name of the attribute. Currently only 'adac' and 'test' are allowed
+        + value: 12345 (string, required) - The value of the attribute, eg. a membership number
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1

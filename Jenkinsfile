@@ -1,12 +1,11 @@
 node {
     checkout scm
 
-    def image = docker.build('parku-dev-docs')
-    image.inside() {
+    sh 'docker build -t parku-dev-docs --build-arg CACHE_DATE=$(date +%Y-%m-%d:%H:%M:%S) .'
+
+    withDockerContainer('parku-dev-docs') {
         stage 'Build'
         sh "make clean all"
-
-
     }
 
     stage 'Store'

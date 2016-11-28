@@ -35,7 +35,7 @@ with the most recently created car appearing first.
 ### Create a new Car [POST /attributes{?license_plate,vehicle,country}]
 You can store multiple cars for a user.
 
-+ Request (application/x-www-form-urlencoded)
++ Request (application/json)
     + Attributes
         + `license_plate`: `B-AB 1234` (string, required) - The license plate for the stored car.
         + vehicle: Isetta (string, optional) - A name for the car to be identified easier.
@@ -82,7 +82,7 @@ You can store multiple cars for a user.
 ## Update a Car [PUT /cars/{car_id}{?license_plate,vehicle,country}]
 Updates the car by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
 
-+ Request  (application/x-www-form-urlencoded)
++ Request  (application/json)
     + Attributes
         + `car_id`: 23 (number, required) - The identifier of the car to be updated.
         + `license_plate`: `B-AB 1234` (string, required) - The license plate for the stored car.

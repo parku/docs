@@ -1,0 +1,342 @@
+# Group User
+## User [/user]
+
+### Create a User [POST /user]
+Access needs a __public key__.
+
++ Request (application/json)
+    + Attributes
+        + `email`: `test@example.com` (string,required)
+        + `password`: `test` (string,required)
+        + `country`: `DE` (enum,required)
+            + Members
+                + DE
+                + CH
+        + `firstname`: `Max` (string,required)
+        + `lastname`: `Power` (string,required)
+        + `gender`: `female` (enum,optional)
+            + Members
+                + female
+                + male
+        + `facebook_id`: `xxx` (string,optional)
+        + `cars` (array,optional)
+            + (object)
+                + `license_plate`: `B-AB 1234` (string,optional)
+                + `vehicle`: `Isetta` (string,optional)
+                + `country`: `DE` (enum,optional)
+                    + Members
+                        + DE
+                        + CH
+        + `phone_numbers` (array,optional)
+            + (object)
+                + `phone_number`: `099028-237489` (string,optional)
+        + `attributes` (array,optional)
+            + (object)
+                + `key`: `adac` (string,optional)
+                + `value`: `1234567890` (string,optional)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 201 (application/json)
+    + Body
+
+            {
+              "code": "KFJ32",
+              "gender": "female",
+              "email": "test@example.com",
+              "firstname": "Test",
+              "lastname": "Name",
+              "credit": 0,
+              "currency": "EUR",
+              "country": "DE",
+              "facebook_id": null,
+              "cars": [{
+                "id": 12,
+                "license_plate": "B-AB 1234",
+                "vehicle": "Isetta",
+                "country": null
+              }],
+              "phone_numbers": [{
+                "id": 16696,
+                "phone_number": "099028-237489"
+              }],
+              "attributes": [{
+                "id": 1,
+                "key": "adac",
+                "value": "1234567890"
+              }],
+              "token": "098f6bcd4621d373cade4e832627b4f6"
+            }
+
+### Retrieve a User [GET /user]
+Access needs a __private key__.
+
+Returns the user object for the private key.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Body
+
+            {
+              "code": "KFJ32",
+              "gender": "female",
+              "email": "test@example.com",
+              "firstname": "Test",
+              "lastname": "Name",
+              "credit": 0,
+              "currency": "EUR",
+              "country": "DE",
+              "facebook_id": null,
+              "cars": [{
+                "id": 12,
+                "license_plate": "B-AB 1234",
+                "vehicle": "Isetta",
+                "country": null
+              }],
+              "phone_numbers": [{
+                "id": 16696,
+                "phone_number": "099028-237489"
+              }],
+              "attributes": [{
+                "id": 1,
+                "key": "adac",
+                "value": "1234567890"
+              }],
+              "token": "098f6bcd4621d373cade4e832627b4f6"
+            }
+
+### Update a user [PUT /user]
+Access needs a __private key__.
+
+Updates the user by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+
+This request accepts mostly the same arguments as the user creation call.
+Changing cars, phone_numbers, attributes and password is done via separate endpoints.
+
++ Request (application/json)
+    + Attributes
+        + `email`: `test@example.com` (string,optional)
+        + `password`: `test` (string,optional)
+        + `country`: `DE` (enum,optional)
+            + Members
+                + DE
+                + CH
+        + `firstname`: `Max` (string,optional)
+        + `lastname`: `Power` (string,optional)
+        + `gender`: `female` (enum,optional)
+            + Members
+                + female
+                + male
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200
+    + Body
+
+            {
+              "code": "KFJ32",
+              "gender": "female",
+              "email": "test@example.com",
+              "firstname": "Test",
+              "lastname": "Name",
+              "credit": 0,
+              "currency": "CHF",
+              "country": "CH",
+              "facebook_id": null,
+              "cars": [{
+                "id": 12,
+                "license_plate": "B-AB 1234",
+                "vehicle": "Isetta",
+                "country": null
+              }],
+              "phone_numbers": [{
+                "id": 16696,
+                "phone_number": "099028-237489"
+              }],
+              "attributes": [{
+                "id": 1,
+                "key": "adac",
+                "value": "1234567890"
+              }],
+              "token": "098f6bcd4621d373cade4e832627b4f6"
+            }
+
+
+## User Payment Methods [/user/{user_id}/payment_methods]
+Access needs a __private key__.
+
+### List user payment methods [GET /user/{user_id}/payment_methods]
++ Parameters
+    + `user_id`: `0000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Body
+
+            [
+                {
+                    id: "0000bb3e-506d-11e5-9781-d43d7eece658",
+                    types: [
+                        "immediate"
+                    ],
+                    primary: false,
+                    validated: false,
+                    provider : {
+                        paypal : {
+                            token: "DEADBEEF"
+                        }
+                    }
+                },
+                {
+                    id: "1000bb3e-506d-11e5-9781-d43d7eece658",
+                    types: [
+                        "immediate",
+                        "post"
+                    ]
+                    primary: true,
+                    validated: true,
+                    provider : {
+                        braintree : {
+                            token: "DEADBEEF"
+                        }
+                    }
+                },
+            ]
+
+### Retrieve primary payment method [GET /user/{user_id}/payment_methods/primary]
++ Parameters
+    + `user_id`: `0000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
++ Request (application/)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                id: "1000bb3e-506d-11e5-9781-d43d7eece658",
+                types: [
+                    "immediate",
+                    "post"
+                ]
+                primary: true,
+                validated: true,
+                provider : {
+                    braintree : {
+                        token: "DEADBEEF"
+                    }
+                }
+            }
+
++ Response 404
+    Returned if no primary payment method is available.
+    + Body
+
+### Add a user payment method [POST /user/{user_id}/payment_methods]
+Adds a new payment method for the user.
+
++ Parameters
+    + `user_id`: `0000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
+
++ Request (application/json)
+    + Attributes
+        + `types` (array, required) - type of payment method
+            + (enum)
+                + post
+                + immediate
+        + `primary`: `true` (boolean, optional) - Wether the payment method should be activated as the users
+            primary payment method.
+            If another payment method of the user was set to be the primary method before,
+            that one will be be changed to not be the primary one anymore.
+            + Default: false
+        + `provider` (object) - the payment provider information
+            + braintree (object) - sepadebit provider
+                + token: `DEADBEEF` (string, required)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                id: "0000bb3e-506d-11e5-9781-d43d7eece658",
+                types: [
+                    "post",
+                    "immediate"
+                ],
+                primary: true,
+                validated: false,
+                provider : {
+                    braintree : {
+                        token: "DEADBEEF",
+                    }
+                }
+            }
+
+### Update a user payment method [PUT /user/{user_id}/payment_methods/{payment_method_id}]
+Updates a users payment method.
+
++ Parameters
+    + `user_id`: `0000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
+    + `payment_method_id`: `1000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
+
++ Request (application/json)
+    + Attributes
+        + `types` (array, optional) - type of payment method
+            + (enum)
+                + post
+                + immediate
+        + `primary`: `true` (boolean, optional) - Wether the payment method should be activated as the users
+            primary payment method.
+            If another payment method of the user was set to be the primary method before,
+            that one will be be changed to not be the primary one anymore.
+            + Default: false
+        + `provider` (object) - the payment provider information
+            + braintree (object) - sepadebit provider
+                + token: `DEADBEEF` (string, optional)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    Returned when the payment method was successfully activated/deactivated.
+    + Body
+
+            {
+                id: "0000bb3e-506d-11e5-9781-d43d7eece658",
+                type: "post",
+                primary: true,
+                provider : {
+                    sepadebit : {
+                        name: "Max Mustermann",
+                        iban: "NL50BANK1234567890",
+                        bic: "BANKNL2A"
+                    }
+                }
+            }
+
++ Response 422 (application/json)
+    Returned if an error occured, e.g. `active` was set to `true` for a non post payment.
+    + Body
+
+### Delete a user payment method [DELETE /user/{user_id}/payment_methods/{payment_method_id}]
+Deletes a user payment method.
+
++ Parameters
+    + `user_id`: `0000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
+    + `payment_method_id`: `1000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
+
++ Response 200 (application/json)
+    Returned when the payment method was successfully deleted.
+    + Body

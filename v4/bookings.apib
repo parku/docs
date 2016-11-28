@@ -4,7 +4,7 @@
 Access needs a __private key__.
 
 ### Create a new Booking [POST /bookings{?location_id,date_start,date_end,license_plate,phone_number,provider,provider_info,status,required_fields}]
-+ Request (application/x-www-form-urlencoded)
++ Request (application/json)
     + Attributes
         + `location_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) -
             The ID of the location you get returned from the locations request
@@ -51,8 +51,8 @@ Access needs a __private key__.
                 + cancelled
             + Default: all
         + `required_field` (object) - Parking space required fields defined in the locations request. The required fields should contain all required fields defined in location. All values should be sent as strings.
-            + car_color: `red` (string, optional)
-            + number_of_passengers: `5` (string, optional)
+            + car_color: `red` (string, optional) - the car color
+            + number_of_passengers: `5` (string, optional) - the number of passengers
 
     + Headers
 
@@ -265,7 +265,7 @@ Retrieves the details of an existing booking. You need to supply either the id o
 ### Update a Booking [PUT /bookings/{booking_id}]
 Updates the booking by setting the values of the parameters passed. Any parameter not provided will be left unchanged.
 
-+ Request  (application/x-www-form-urlencoded)
++ Request  (application/json)
     + Attributes
         + `booking_id` : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
         + `license_plate`: `B-BC 4567` (string, optional) -

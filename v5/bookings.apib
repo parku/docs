@@ -4,7 +4,7 @@
 Access needs a __private key__.
 
 ### Create a new Booking [POST /bookings{?location_id,date_start,date_end,license_plate,phone_number,provider,provider_info,status,required_fields}]
-+ Request (application/x-www-form-urlencoded)
++ Request (application/json)
     + Attributes
         + `location_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) -
             The ID of the location you get returned from the locations request
@@ -51,8 +51,8 @@ Access needs a __private key__.
                 + cancelled
             + Default: all
         + `required_field` (object) - Parking space required fields defined in the locations request. The required fields should contain all required fields defined in location. All values should be sent as strings.
-            + car_color: `red` (string, optional)
-            + number_of_passengers: `5` (string, optional)
+            + car_color: `red` (string, optional) - the car color
+            + number_of_passengers: `5` (string, optional) - the number of passengers
 
     + Headers
 
@@ -265,7 +265,7 @@ Retrieves the details of an existing booking. You need to supply either the id o
 ### Update a Booking [PUT /bookings/{booking_id}]
 Updates the booking by setting the values of the parameters passed. Any parameter not provided will be left unchanged.
 
-+ Request  (application/x-www-form-urlencoded)
++ Request  (application/json)
     + Attributes
         + `booking_id` : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
         + `license_plate`: `B-BC 4567` (string, optional) -
@@ -520,7 +520,7 @@ Currently supports stopping onstreet bookings only.
 + Parameters
     + `booking_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string,required) - the booking id
 
-+ Request (application/x-www-form-urlencoded)
++ Request (application/json)
     + Attributes
         + `stop`: `2009-06-30T18:30:00+02:00` (string,required) - device time when the booking was stopped
     + Headers
@@ -537,37 +537,63 @@ Currently supports stopping onstreet bookings only.
                   + Members
                       + EUR
                       + CHF
-          + `zone` (string) - a onstreet zone object as returned by the [Retrieve Onstreet Zone Information](#onstreet-onstreet-get) Request.
+          + `zone`: `` (string) - a onstreet zone object as returned by the [Retrieve Onstreet Zone Information](#onstreet-onstreet-get) Request.
     + Body
 
-                {
-                   id: "0000bb3e-506d-11e5-9781-d43d7eece658",
-                   payment: {
-                     method: '[paypal, credits]',
-                     type: 'post'
-                   },
-                   price: {
-                     amount: 4.25,
-                     transaction_fee: 0.25,
-                     currency 'EUR'
-                   }
-                   zone:
-                   {
-                     id: "101012",
-                     name: "Berlin 101012",
-                     hours: "Mon-Fri, 08:00 - 22:30",
-                     price: {
-                       unit_cost: 0.05,
-                       unit_interval_minutes: 3,
-                       currency: "EUR",
-                       transaction_fee: 0.25,
-                     },
-                     date_end: "2016-11-29...",
-                     duration_max: "2 hrs",
-                     available_payment_methods: ['paypal', 'credits'],
-                     available_payment_types: ['post']
-                  }
-                }
+            {
+               id: "0000bb3e-506d-11e5-9781-d43d7eece658",
+               payment: {
+                 method: '[paypal, credits]',
+                 type: 'post'
+               },
+               price: {
+                 amount: 4.25,
+                 transaction_fee: 0.25,
+                 currency 'EUR'
+               }
+               zone:
+               {
+                 id: "101012",
+                 name: "Berlin 101012",
+                 hours: "Mon-Fri, 08:00 - 22:30",
+                 price: {
+                   unit_cost: 0.05,
+                   unit_interval_minutes: 3,
+                   currency: "EUR",
+                   transaction_fee: 0.25,
+                 },
+                 date_end: "2016-11-29...",
+                 duration_max: "2 hrs",
+                 available_payment_methods: ['paypal', 'credits'],
+                 available_payment_types: ['post']
+              }
+            }
+
+### Pay a booking [POST /bookings/{booking_id}/payments]
+Pays for a booking.
+
++ Parameters
+    + `booking_id`: `0000bb3e-506d-11e5-9781-d43d7eece658` (string,required) - the booking id to pay for
+
++ Request (application/json)
+    + Attributes
+        + payments (array) - An array of payments
+            + (object) - A payment object
+                + type: `paypal` (enum,required) - Type of payment
+                    + Members
+                        + paypal
+                        + credits
+                + amount: `4.25` (number,required) - Amount to pay
+                + payload: `PAY-423454235` (string,required) - Payment provider information, required for every provider but `credits`
+            + (object)
+                + type: `credits` (string,required) - Type of payment
+                + amount: `2.0` (number,required) - Amount to pay
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 201 (application/json)
+
 
 ### Retrieve Custom Extend Prices [GET /bookings/{booking_id}/extend{?date_end}]
 Retrieving a booking returns a few prices for standard intervals. Use this endpoint for custom intervals.

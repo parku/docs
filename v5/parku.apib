@@ -1,6 +1,6 @@
 FORMAT: 1A
 HOST: https://parku.ch/{{apiversion}}
-CURL_HOST: https://sandbox.test.parku.ch/{{apiversion}}
+CURL_HOST: https://master.test.parku.ch/{{apiversion}}
 CURL_OPTIONS: --insecure
 
 # Parku API v5 Reference
@@ -20,10 +20,13 @@ including errors.
   + [Location Model](#header-location-model)
   + [Parking Space Group Model](#header-parking-space-group-model)
   + [Cluster Model](#header-cluster-model)
+- added [onstreet](#onstreet) endpoint
+- added [pay a booking](#pay-a-booking)
+- added [stop a booking](#stop-a-booking)
+- added [user payment methods](#user-user-payment-methods)
+
 - `voucher` endpoint removed
-- added [onstreet](#header-onstreet) endpoint
-- added booking [pay](#header-bookings-bookings-pay-post) actions
-- added post payment
+
 
 #### Api definition files
 - [Swagger definition](generated/v5.swagger.json) (readable by [Postman](https://www.getpostman.com/))

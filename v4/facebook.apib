@@ -9,7 +9,7 @@ In this case, you must ask the user for the country and [update](#user-user-put)
 
 All further requests using the token as _HTTP Basic Auth_ username are made on behalf of the user.
 
-+ Request (application/x-www-form-urlencoded)
++ Request (application/json)
     + Attributes
         + `access_token`: `1234...` (string,required) - The access token which is used to obtain information from Facebook.
             The token must have the permissions to get the users email.

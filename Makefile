@@ -56,14 +56,13 @@ V5_SRC:= \
 	v4/login.apib \
 	v5/onstreet.apib \
 	v4/password.apib \
-	v4/payment.apib \
+	v5/payment.apib \
 	v4/phone_numbers.apib \
 	v4/sesam.apib \
 	v4/settings.apib \
 	v4/static_pages.apib \
-	v4/user.apib \
+	v5/user.apib \
 	v4/violations.apib \
-	v4/voucher.apib \
 	v4/types.apib
 
 all: generate $(GENERATED_DIR)/v4.swagger.json $(GENERATED_DIR)/v5.swagger.json meta-files
