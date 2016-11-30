@@ -168,18 +168,17 @@ Changing cars, phone_numbers, attributes and password is done via separate endpo
             }
 
 
-## User Payment Methods [/user/{user_id}/payment_methods]
+## User Payment Methods [/user/payment_methods]
 Access needs a __private key__.
 
-### List user payment methods [GET /user/{user_id}/payment_methods]
-+ Parameters
-    + `user_id`: `0000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
+### List user payment methods [GET /user/payment_methods]
 + Request (application/json)
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
+    + Attributes (array[Payment Method])
     + Body
 
             [
@@ -212,15 +211,14 @@ Access needs a __private key__.
                 },
             ]
 
-### Retrieve primary payment method [GET /user/{user_id}/payment_methods/primary]
-+ Parameters
-    + `user_id`: `0000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
+### Retrieve primary payment method [GET /user/payment_methods/primary]
 + Request (application/)
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
+    + Attributes (Payment Method)
     + Body
 
             {
@@ -242,11 +240,8 @@ Access needs a __private key__.
     Returned if no primary payment method is available.
     + Body
 
-### Add a user payment method [POST /user/{user_id}/payment_methods]
+### Add a user payment method [POST /user/payment_methods]
 Adds a new payment method for the user.
-
-+ Parameters
-    + `user_id`: `0000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
 
 + Request (application/json)
     + Attributes
@@ -267,28 +262,12 @@ Adds a new payment method for the user.
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
-    + Body
+    + Attributes (Payment Method)
 
-            {
-                id: "0000bb3e-506d-11e5-9781-d43d7eece658",
-                types: [
-                    "post",
-                    "immediate"
-                ],
-                primary: true,
-                validated: false,
-                provider : {
-                    braintree : {
-                        token: "DEADBEEF",
-                    }
-                }
-            }
-
-### Update a user payment method [PUT /user/{user_id}/payment_methods/{payment_method_id}]
+### Update a user payment method [PUT /user/payment_methods/{payment_method_id}]
 Updates a users payment method.
 
 + Parameters
-    + `user_id`: `0000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
     + `payment_method_id`: `1000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
 
 + Request (application/json)
@@ -311,30 +290,16 @@ Updates a users payment method.
 
 + Response 200 (application/json)
     Returned when the payment method was successfully activated/deactivated.
-    + Body
-
-            {
-                id: "0000bb3e-506d-11e5-9781-d43d7eece658",
-                type: "post",
-                primary: true,
-                provider : {
-                    sepadebit : {
-                        name: "Max Mustermann",
-                        iban: "NL50BANK1234567890",
-                        bic: "BANKNL2A"
-                    }
-                }
-            }
+    + Attributes (Payment Method)
 
 + Response 422 (application/json)
     Returned if an error occured, e.g. `active` was set to `true` for a non post payment.
     + Body
 
-### Delete a user payment method [DELETE /user/{user_id}/payment_methods/{payment_method_id}]
+### Delete a user payment method [DELETE /user/payment_methods/{payment_method_id}]
 Deletes a user payment method.
 
 + Parameters
-    + `user_id`: `0000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
     + `payment_method_id`: `1000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
 
 + Response 200 (application/json)

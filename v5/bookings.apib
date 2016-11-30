@@ -3,6 +3,9 @@
 ## Bookings [/bookings]
 Access needs a __private key__.
 
++ Attributes
+    + `Booking Model` (Booking)
+
 ### Create a new Booking [POST /bookings{?location_id,date_start,date_end,license_plate,phone_number,provider,provider_info,status,required_fields}]
 + Request (application/json)
     + Attributes
@@ -528,16 +531,15 @@ Currently supports stopping onstreet bookings only.
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
-    + Attributes
-          + `id`: `0000bb3e-506d-11e5-9781-d43d7eece658` (string) - the booking id
-          + `price` (object)
-              + `amount`: `4.25` (number) - the overall amount to pay for the booking
-              + `transaction_fee`: `0.25` (number) - the transaction fee included in `amount`
-              + `currency`: `EUR` (enum) - the currency of `amount` and `transaction_fee`
-                  + Members
-                      + EUR
-                      + CHF
-          + `zone`: `` (string) - a onstreet zone object as returned by the [Retrieve Onstreet Zone Information](#onstreet-onstreet-get) Request.
+    + Attributes (Parking Zone Booking)
+        + `payment_urls` (object) - urls for user to visit for doing the payment, currently only available for `ideal`
+            + `urls` (object)
+                + `entrance`: `http://www.ideal.nl/asdf1234`(string)
+                + `success`: `http://www.ideal.nl/asdf1234`(string)
+                + `cancel`: `http://www.ideal.nl/asdf1234`(string)
+                + `failure`: `http://www.ideal.nl/asdf1234`(string)
+                + `pending`: `http://www.ideal.nl/asdf1234`(string)
+
     + Body
 
             {
@@ -564,8 +566,10 @@ Currently supports stopping onstreet bookings only.
                  },
                  date_end: "2016-11-29...",
                  duration_max: "2 hrs",
-                 available_payment_methods: ['paypal', 'credits'],
-                 available_payment_types: ['post']
+                 payment: {
+                   available_methods: ['paypal', 'credits'],
+                   available_types: ['post']
+                 }
               }
             }
 
@@ -616,3 +620,51 @@ Retrieving a booking returns a few prices for standard intervals. Use this endpo
               "price": 3.15,
               "currency": "CHF"
             }
+
+# Data Structures
+
+## Location Dummy (object)
++ id: `005c4826-4e28-11e3-a675-d43d7eece53d` (string)
+
+## Violation Dummy (object)
++ id: `005c4826-4e28-11e3-a675-d43d7eece53d` (string)
+
+## Booking Base (object)
++ `id`: `005c4826-4e28-11e3-a675-d43d7eece53d` (string)
++ `license_plate`: `B-AB 1234` (string)
++ `phone_number`: `+493057701872` (string)
++ `reference`: `HRS5J` (string)
++ `date_start`: `2016-10-27T10:00:00+0000` (string)
++ `date_end`: `2016-10-27T16:30:00+0000` (string) - is be null if type is `zone` and booking didn't end yet
++ `price` (object)
+    + `amount`: `4.25` (number) - the overall amount to pay for the booking
+    + `transaction_fee`: `0.25` (number) - the transaction fee included in `amount`
+    + `currency`: `EUR` (enum) - the currency of `amount` and `transaction_fee`
+        + Members
+            + EUR
+            + CHF
++ `currency`: `CHF` (enum)
+    + Members
+        + EUR
+        + CHF
++ `violation` (Violation Dummy)
+
+## Parking Space Booking (Booking Base)
++ `type`: `location` (enum)
+    + Members
+        + location
++ `location` (Parking Space Group) - the locaton that was booked, only available if `type` is `location`
+
+## Parking Zone Booking (Booking Base)
++ `type`: `zone` (enum)
+    + Members
+        + zone
++ `zone` (Parking Zone) - the zone that was booked, only available if `type` is `zone`
+
+## Booking (Booking Base)
++ `type`: `location` (enum)
+    + Members
+        + location
+        + zone
++ `location` (Location Dummy) - the locaton that was booked, only available if `type` is `location`
++ `zone` (Parking Zone) - the zone that was booked, only available if `type` is `zone`

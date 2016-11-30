@@ -8,6 +8,7 @@
 @parku-blue: #0075bf;
 @parku-green: #76b82a;
 @parku-dark-gray: #666;
+@parku-darker-gray: #242729;
 @parku-gray: #e0e0e0;
 @parku-light-gray: #F7F7F7;
 @parku-text-on-white: #000000;
@@ -52,7 +53,7 @@
 @inline-code-text-color: @parku-dark-gray;
 
 @code-block-text-color: #000000;
-@code-block-background-color: #FFFFFF;
+@code-block-background-color: @parku-gray;
 
 @right-code-block-text-color: @right-text-color;
 @right-code-block-background-color: rgb(39, 43, 45);
@@ -62,9 +63,13 @@
 @tabs-active-background-color: #33373A;
 @example-color: @parku-green;
 
+@right-highlight-literal: @parku-green;
+@right-highlight-string: @right-text-color;
+@right-highlight-value: @right-text-color;
+
 @highlight-literal: @parku-green;
-@highlight-string: @right-text-color;
-@highlight-value: @right-text-color;
+@highlight-string: @text-color;
+@highlight-value: @text-color;
 
 @middle-table-background-color: #FFFFFF;
 @table-background-color: @parku-light-gray;
@@ -80,3 +85,9 @@
 @button-color: @right-text-color;
 @button-active-color: @right-text-color;
 @curl-background-color: @right-code-block-background-color;
+
+@right-menu-background-color: @parku-darker-gray;
+@right-menu-active-background-color: @parku-blue;
+@right-menu-active-color: #FFFFFF;
+@right-menu-active-text-shadow-color: @parku-darker-gray;
+@menu-button-border-radius: 5px;

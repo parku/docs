@@ -2,130 +2,23 @@
 Access needs at least a __public key__.
 
 ## Locations [/locations]
-The [location model](#header-location-model) contains the directly location related information (e.g. street and city)
+The [location model](#location-model) contains the directly location related information (e.g. street and city)
 as well as one or more parking space groups.
 
-A [parking space group](#header-parking-space-group-model) is a group of parking spaces with similar properties.
+A [parking space group](#parking-space-group-model) is a group of parking spaces with similar properties.
 Bookings are made using parking space group ids.
 
-The [location list](#header-list-locations-get-1) can cover a large number of locations in its response. In order to
+The [location list](#list-locations) can cover a large number of locations in its response. In order to
 keep the responses reasonably fast and small that request will return a mix of locations and clusters.
-A [location cluster](#header-cluster-model) contains information about how many locations are in a certain area.
+A [location cluster](#first-level-cluster-model) contains information about how many locations are in a certain area.
 
-###  Location Model
-| Field                   | Description                                                                                                                   |
-| -----------------       | --------------------------------------------------------------------------------------                                        |
-| address_slug            | `string` street name and number of the location in url address format                                                         |
-| availability            | `dictionary` describes the availability of the location in relation to the request                                            |
-| availability.current    | `number` the number of parking spaces available at the location for the requested time period defined by `start` and `end`    |
-| availability.maximum    | `number` the overall number of parking spaces at this location                                                                |
-| availability.next_start | `time` the start of the next from now slot in which a parking space in this location is free and bookable, can be in the past |
-| availability.next_end   | `time` the end of the next slot from now in which a parking space in this location is free and bookable, can be in the past   |
-| bookable                | `boolean` `true` if that locations can be booked via the parku API, `false` if the location is purely providing information   |
-| city                    | `string` city of the location                                                                                                 |
-| country                 | `string` country of the location in 2 character encoding                                                                      |
-| currency                | `string` the currency that the price for the location is in, `EUR` for Euro or `CHF` for swiss franc.                         |
-| id                      | `uuid rfc4122` unique identifier of the location used for referencing.                                                        |
-| latitude                | `decimal` latitude part of the location geo coordinate                                                                        |
-| longitude               | `decimal` longitude part of the location geo                                                                                  |
-| parking_space_groups    | `object` different parking space groups for this location. See [Parking Space Group Data](#header-parking-space-group-data)   |
-| payment                 | `object` available payment methods and types for the current user in this location                                            |
-| post_code               | `string` post code of the location                                                                                            |
-| street                  | `string` the street name of the location without number                                                                       |
-| street_number           | `string` the street number of the location                                                                                    |
-
-### Parking Space Group Model
-| Field                         | Description                                                                                                                                                                                                                          |
-| -----------------             | --------------------------------------------------------------------------------------                                                                                                                                               |
-| availability                  | `dictionary` describes the availability of the group in relation to the request                                                                                                                                                      |
-| availability.current          | `number` the number of parking spaces available in the group for the requested time period defined by `start` and `end`                                                                                                              |
-| availability.maximum          | `number` the overall number of parking spaces at this group                                                                                                                                                                          |
-| availability.next_start       | `time` the start of the next from now slot in which a parking space in this group is free and bookable, can be in the past                                                                                                           |
-| availability.next_end         | `time` the end of the next slot from now in which a parking space in this group is free and bookable, can be in the past                                                                                                             |
-| description                   | `string` the description of the location. The description is returned in the users language or in the language specified by the HTTP header `Accept-Language` if it was given.                                                       |
-| id                            | `uuid rfc4122` unique identifier of the location used for referencing.                                                                                                                                                               |
-| image_urls                    | `list` urls of location images, can be **empty**                                                                                                                                                                                     |
-| options                       | `list` describes which options are available at the location and can contains each of the following elements. The list can be **empty**.                                                                                             |
-| options[excess length]        | the parking space can be used by cars with a small trailer                                                                                                                                                                           |
-| options[indoor]               | the parking space has a roof or can be an underground garage                                                                                                                                                                         |
-| options[disabled]             | parking space is accessible for disabled people                                                                                                                                                                                      |
-| options[patio]                | the parking space is located at an inner courtyard                                                                                                                                                                                   |
-| options[barrier]              | parking space has a barrier and user needs a smartphone to open it                                                                                                                                                                   |
-| options[charging station]     | parking space with an electric vehicle charging station                                                                                                                                                                              |
-| options[key_necessary]        | parking space can only be accessed with a key                                                                                                                                                                                        |
-| options[long_term_booking]    | parking space is bookable for longer time period                                                                                                                                                                                     |
-| options[surveillance]         | parking space has surveillance                                                                                                                                                                                                       |
-| options[valet_service]        | parking space contains valet service                                                                                                                                                                                                 |
-| price                         | `decimal` the actual price shown to the user, can be **null** if `start` or `end` were not provided                                                                                                                                  |
-| price_period                  | `string` contains the period for how long the price is valid, can be `day`, `week`, `month`, `timeframe`, can be **null** if `start` or `end` was not provided                                                                       |
-| pricing                       | `dictionary` contains information about the pricing and price prediction. It contains the keys                                                                                                                                       |
-| pricing.rate_hourly           | `decimal` shows the price for per hour                                                                                                                                                                                               |
-| pricing.rate_daily            | `decimal` shows the price per day                                                                                                                                                                                                    |
-| pricing.rate_weekly           | `decimal` shows the price per week                                                                                                                                                                                                   |
-| pricing.rate_monthly          | `decimal` shows the price per month                                                                                                                                                                                                  |
-| provider                      | `string` names the parking space provider. Additional information(terms and conditions, logo, ...) about the provider can found be using the provider key from the field in [settings](/api/settings/)                               |
-| required_fields               | `list` lists all additionally required fields when creating a booking for this location, can be **empty** if no fields are required. The field names correspond to the `booking.fields.*` entries in the settings endpoint which can |
-|                               | be used for retrieving translated strings for these fields.                                                                                                                                                                          |
-| settings                      | `dictionary` provides booking requirements for the location. The settings of a location are used in favor of the global settings that can be found in the settings endpoint.                                                         |
-| settings.bookable_range_start | `number` start of the range wherein a booking is allowed in minutes from now.                                                                                                                                                        |
-| settings.bookable_range_end   | `number` end of the range wherein a booking is allowed in minutes from now.                                                                                                                                                          |
-| settings.booking_duration_min | `number` minimum duration of a booking in minutes.                                                                                                                                                                                   |
-| settings.booking_duration_max | `number` maximum duration of a booking in minutes.                                                                                                                                                                                   |
-| support                       | `dictionary` contains field `phone_number` that returns the support center phone number for this location                                                                                                                            |
-| type                          | `string` describes the type of location and can be one of the following. Choices `off-street` `park-and-ride` `professional-garage` `airport-parking` `harbor-parking`                                                               |
-| user_owned                    | `boolean` `true` if the user who requested the location is also the owner of the parking space. This allows to determine if the user could block the parking space from bookings. The blocking feature itself is not yet             |
-
-### Cluster Model
-A cluster contains meta information about the locations inside a specific area. The cluster itself contains 2 levels.
-The first level groups the second level clusters that are given by the field `includes`.
-
-First level clusters are great for display on maps as we make sure that those clusters have a certain distance to
-each other.
-
-Second level clusters are great for being displayed in a list as they all have a distinct name and a parent
-city/country that can be used for grouping them. These clusters work on 3 predefined levels:
-- postcode: contains only locations with same postcode
-- city: contains only locations in same city
-- country: contains only locations in same country
-Which level is returned depends on the bounding box size of your request.
-
-#### First Level Cluster Model
-|      Field       |                                         Description                                         |
-|------------------|---------------------------------------------------------------------------------------------|
-| title            | `string` A presentable and translated title for the cluster. The content depends on `type`. |
-| type             | `string` The type of cluster. __Choices__: `postcode` `city` `country`                      |
-| count            | `number` The number of locations inside the cluster.                                        |
-| center_latitude  | `float` Latitude of the cluster center.                                                     |
-| center_longitude | `float` Longitude of the cluster center.                                                    |
-| sw_latitude      | `float` South west corner latitude of the cluster bounding boxes.                           |
-| sw_longitude     | `float` South west corner longitude of the cluster bounding boxes.                          |
-| ne_latitude      | `float` North east corner latitude of the cluster bounding boxes.                           |
-| ne_longitude     | `float` North east corner longitude of the cluster bounding boxes.                          |
-| includes         | `list` List of second level clusters contained in this cluster.                             |
-
-#### Second Level Cluster Model
-|      Field       |                                               Description                                                |
-|------------------|----------------------------------------------------------------------------------------------------------|
-| title            | `string` A presentable and translated title for the cluster. The content depends on `type`.              |
-| type             | `string` The type of cluster. __Choices__: `postcode` `city` `country`                                   |
-| count            | `number` The number of locations inside the cluster.                                                     |
-| center_latitude  | `float` Latitude of the cluster center.                                                                  |
-| center_longitude | `float` Longitude of the cluster center.                                                                 |
-| sw_latitude      | `float` South west corner latitude of the cluster bounding boxes.                                        |
-| sw_longitude     | `float` South west corner longitude of the cluster bounding boxes.                                       |
-| ne_latitude      | `float` North east corner latitude of the cluster bounding boxes.                                        |
-| ne_longitude     | `float` North east corner longitude of the cluster bounding boxes.                                       |
-| city             | `string` parent city the cluster belongs to, only shown if the cluster `type` is `postcode`              |
-| country          | `string` parent country the cluster belongs to, only shown if the cluster `type` is `postcode` or `city` |
-
-#### Payment Model
-The payment methods and types depend on the private key of the logged in user. For locations requests using public keys
-these arrays will be empty.
-
-|  Field  |                         Description                         |
-|---------|-------------------------------------------------------------|
-| methods | `array` Possible payment methods for this location and user |
-| types   | `array` Possible payment types for this location and user   |
++ Attributes
+    + `Locations and Clusters Model` (Locations and Clusters)
+    + `First Level Cluster Model` (First Level Cluster)
+    + `Second Level Cluster Model` (Second Level Cluster)
+    + `Location Model` (Location)
+    + `Parking Space Group Model` (Parking Space Group)
+    + `Availability Model` (Availability)
 
 ### Retrieve a Location [GET /locations/{location_id}{?date_start,date_end}]
 
@@ -141,65 +34,9 @@ these arrays will be empty.
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
-+ Response 200
-
++ Response 200 (application/json)
     See [Location Model](#header-location-model)
-
-    + Body
-
-            {
-              "id": "0644e4bc-4c5c-11e4-a24a-d43d7eecedd2",
-              "latitude": 52.60826,
-              "longitude": 13.19988,
-              "street": "Dorfstraße",
-              "street_number": "11",
-              "postcode": "16761",
-              "city": "Hennigsdorf",
-              "country": "Deutschland",
-              "bookable": true,
-              "payment": {
-                  "methods": ["paypal", "credits", "braintree"]
-                  "types": ["immediate", "post"]
-              },
-              "parking_space_groups": [
-                {
-                  "id": "1644c5dc-4c5c-11e4-a24a-d43d7eecedd2",
-                  "type": "off-street",
-                  "code": null,
-                  "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
-                  "image_urls": [],
-                  "options": [
-                    "patio"
-                  ],
-                  "support": {
-                    "phone_number": "+493012064329"
-                  },
-                  "price_period": "timeframe",
-                  "pricing": {
-                    "rate_hourly": 1,
-                    "rate_daily": 10,
-                    "rate_weekly": null,
-                    "rate_monthly": null
-                  },
-                  "address_slug": "dorfstrasse-11",
-                  "user_owned": false,
-                  "settings": {
-                    "bookable_range_start": -15,
-                    "bookable_range_end": 43200,
-                    "booking_duration_min": 30,
-                    "booking_duration_max": 43200
-                  },
-                  "required_fields": [],
-                  "provider": "parku"
-                }
-              ],
-              "availability": {
-                "current": 0,
-                "maximum": 1,
-                "next_start": null,
-                "next_end": null
-              }
-            }
+    + Attributes (Location)
 
 + Response 404
 Location was not found, check the location id and that your user has the correct access rights to see the location.
@@ -276,131 +113,13 @@ AND (properties1 AND properties2 AND ...)
         This can either be `all` or an comma separated list of field names from the response, e.g. `id,street,country`.
 
 + Request
-
-            $ curl https://parku.ch/{{apiversion}}/locations \
-            ?sw=45.74001,5.67868 \
-            &ne=47.74236,10.24900 \
-            &date_start=2016-10-27T10:00:00+0000 \
-            &date_end=2016-10-27T16:30:00+0000 \
-            &filter_available=true \
-            &filter_bookable=true \
-            &filter_type=off-street,airport-parking \
-            &filter_price=rate_daily \
-            &filter_properties=indoor,surveillance \
-            $fields=all
-            -u 6f1ed002ab5595859014ebf0951522d9:parku
-
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 
 + Response 200
-
-    |   Field   |                                                  Description                                                  |
-    |-----------|---------------------------------------------------------------------------------------------------------------|
-    | clusters  | Contains locations clusters grouping 2 or more locations together. See [Cluster Model](#header-cluster-model) |
-    | locations | Contains locations that were not clustered. See [Locations Model](#header-location-model)                     |
-
-    + Body
-
-            {
-                "clusters": [
-                  {
-                    "title": "13405",
-                    "type": "postcode",
-                    "count": 4,
-                    "center_latitude": 52.528809357143,
-                    "center_longitude": 13.379654547619,
-                    "sw_latitude": 52.505681,
-                    "sw_longitude": 13.285105,
-                    "ne_latitude": 52.576979,
-                    "ne_longitude": 13.47168,
-                    "includes": [
-                      {
-                        "title": "10115",
-                        "type": "postcode",
-                        "count": 2,
-                        "center_latitude": 52.5354003333,
-                        "center_longitude": 13.3896063333,
-                        "sw_latitude": 52.535261,
-                        "sw_longitude": 13.380199,
-                        "ne_latitude": 52.53547,
-                        "ne_longitude": 13.39431,
-                        "city": "Berlin",
-                        "country": "Deutschland"
-                      },
-                      {
-                        "title": "10117",
-                        "type": "postcode",
-                        "count": 2,
-                        "center_latitude": 52.5170895,
-                        "center_longitude": 13.3826421667,
-                        "sw_latitude": 52.516775,
-                        "sw_longitude": 13.381867,
-                        "ne_latitude": 52.518662,
-                        "ne_longitude": 13.386518,
-                        "city": "Berlin",
-                        "country": "Deutschland"
-                      },
-                    ]
-                  },
-                  ...
-                ],
-                "locations": [
-                  {
-                    "id": "e644e4bc-4c5c-11e4-a24a-d43d7eecedd2",
-                    "latitude": 52.60826,
-                    "longitude": 13.19988,
-                    "street": "Dorfstraße",
-                    "street_number": "11",
-                    "postcode": "16761",
-                    "city": "Hennigsdorf",
-                    "country": "Deutschland",
-                    "bookable": true,
-                    "parking_spaces": [
-                      {
-                        "id": "e644c5dc-4c5c-11e4-a24a-d43d7eecedd2",
-                        "type": "off-street",
-                        "code": null,
-                        "description": "Der Parkplatz ist auf dem Grundstück unserer Reihenhausanlage (orangene Klinker-Mauern). Es ist der letzte Stellplatz vor den Keller-Ersatzräumen (rotes Häuschen mit Schrägdach) zur Wasserseite. Zur Beetseite steht ein Holzregal.",
-                        "image_urls": [],
-                        "options": [
-                          "patio"
-                        ],
-                        "support": {
-                          "phone_number": "+493012064329"
-                        },
-                        "price_period": "timeframe",
-                        "pricing": {
-                          "rate_hourly": 1,
-                          "rate_daily": 10,
-                          "rate_weekly": null,
-                          "rate_monthly": null
-                        },
-                        "address_slug": "dorfstrasse-11",
-                        "user_owned": false,
-                        "settings": {
-                          "bookable_range_start": -15,
-                          "bookable_range_end": 43200,
-                          "booking_duration_min": 30,
-                          "booking_duration_max": 43200
-                        },
-                        "required_fields": [],
-                        "provider": "parku"
-                      }
-                    ],
-                    "availability": {
-                      "current": 0,
-                      "maximum": 1,
-                      "next_start": null,
-                      "next_end": null
-                    }
-                  },
-                  ...
-                ]
-              }
-
+    + Attributes (Locations and Clusters)
 
 ### Get availability times for location [GET /locations/{location_id}/availability{?date_start,date_end}]
 
@@ -411,12 +130,6 @@ AND (properties1 AND properties2 AND ...)
     + `date_end`: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - see `date_start`.
 
 + Request
-
-            $ curl https://parku.ch/{{apiversion}}/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/availability \
-            ?date_start=2016-04-12 \
-            &date_end=2016-04-14 \
-            -u 6f1ed002ab5595859014ebf0951522d9:parku
-
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
@@ -479,10 +192,6 @@ With this endpoint you can retrieve location based terms and conditions.
     + `location_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - Identifier of the location.
 
 + Request
-
-            $ curl https://parku.ch/{{apiversion}}/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/terms \
-            -u 6f1ed002ab5595859014ebf0951522d9:parku
-
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
@@ -492,3 +201,178 @@ With this endpoint you can retrieve location based terms and conditions.
 
             <!DOCTYPE html>
               <html xmlns="http://www.w3.org/1999/xhtml"...
+
+# Data Structures
+## Locations and Clusters (object)
++ clusters (array[First Level Cluster]) -
+    A cluster contains meta information about the locations inside a specific area. The cluster itself contains 2 levels.
+    The first level groups the second level clusters that are given by the field `includes`.
+
+    First level clusters are great for display on maps as we make sure that those clusters have a certain distance to
+    each other.
+
+    Second level clusters are great for being displayed in a list as they all have a distinct name and a parent
+    city/country that can be used for grouping them. These clusters work on 3 predefined levels:
+        - postcode: contains only locations with same postcode
+        - city: contains only locations in same city
+        - country: contains only locations in same country
+    Which level is returned depends on the bounding box size of your request.
++ locations (array[Location])
+
+## First Level Cluster (object)
++ title: `13405` (string)A presentable and translated title for the cluster. The content depends on `type`.
++ type: `postcode` (enum)The type of cluster.
+    + Members
+        + postcode
+        + city
+        + country
++ count: 4 (number) - The number of locations inside the cluster.
++ `center_latitude`: `52.528809357143` (number) - Latitude of the cluster center.
++ `center_longitude`: 13.379654547619 (number) - Longitude of the cluster center.
++ `sw_latitude`: 52.505681 (number) - South west corner latitude of the cluster bounding boxes.
++ `sw_longitude`: 13.285105 (number) - South west corner longitude of the cluster bounding boxes.
++ `ne_latitude`: 52.576979 (number) - North east corner latitude of the cluster bounding boxes.
++ `ne_longitude`: 13.47168 (number) - North east corner longitude of the cluster bounding boxes.
++ includes (array[Second Level Cluster]) - List of second level clusters contained in this cluster.
+
+## Second Level Cluster (object)
++ title: `10115` (string)A presentable and translated title for the cluster. The content depends on `type`.
++ type: `postcode` (enum)The type of cluster.
+    + Members
+        + postcode
+        + city
+        + country
++ count: 4 (number) - The number of locations inside the cluster.
++ `center_latitude`: `52.528809357143` (number) - Latitude of the cluster center.
++ `center_longitude`: 13.379654547619 (number) - Longitude of the cluster center.
++ `sw_latitude`: 52.505681 (number) - South west corner latitude of the cluster bounding boxes.
++ `sw_longitude`: 13.285105 (number) - South west corner longitude of the cluster bounding boxes.
++ `ne_latitude`: 52.576979 (number) - North east corner latitude of the cluster bounding boxes.
++ `ne_longitude`: 13.47168 (number) - North east corner longitude of the cluster bounding boxes.
++ `city`: `Berlin` (string) - parent city the cluster belongs to, only shown if the cluster `type` is `postcode`
++ `country`: `Deutschland` (string) - parent country the cluster belongs to, only shown if the cluster `type` is `postcode` or `city`
+
+## Location (object)
++ `id`: `e644e4bc-4c5c-11e4-a24a-d43d7eecedd2` (string) - unique identifier of the location used for referencing.
++ `address_slug`: `dorfstrasse-11` (string)street name and number of the location in url address format
++ `latitude`: `52.60826` (number) - latitude part of the location geo coordinate
++ `longitude`: `13.19988` (number) - longitude part of the location geo
++ `street`: `Dorfstraße` (string) - the street name of the location without number
++ `street_number`: `11` (string) - the street number of the location
++ `postcode`: `16761` (string) - post code of the location
++ `city`: `Hennigsdorf` (string) - city of the location
++ `country`: `Deutschland` (string) - country of the location in 2 character encoding  country of the location in 2
+    character encoding
++ `bookable`: `true` (boolean) -  `true` if that locations can be booked via the parku API, `false` if the location
+    is purely providing information
++  payment (object) - available payment methods and types for the current user in this location. The payment methods and types depend on the private key of the logged in user. For locations requests using public keys these arrays will be empty.
+    + methods (array) - Possible payment methods for this location and user
+        + (enum)
+            + paypal
+            + credits
+            + coupon
+            + braintree
+            + ideal
+    + types (array) - Possible payment types for this location and user
+        + (enum)
+            + post
+            + immediate
++ availability (Availability) - describes the availability of the location in relation to the request
++ `parking_space_groups` (array[Parking Space Group]) - different parking space groups for this location. See [Parking Space Group Data](#header-parking-space-group-data)
++ gates (array[Gate]) - the gates connected to the location
+
+## Gate (object)
++ type: `qrcode` (enum) - the type how the gate can be opened
+    + Members
+        + qrcode
+        + beacon
++ identifier: `PARKU3KU` (string) - the identifier for the access method, a short identification string for `qrcode` and the bluetooth id for `beacon`
++ gateways (array[Gateway])
+
+## Gateway (object)
++ type: `api` (enum) - the type of gateway
+    + Members
+        + api
+        + box
++ name: `PRK-123` (string) - the name of the box if `type` is `box`
+
+## Parking Space Group (object)
++ `id`: `1644c5dc-4c5c-11e4-a24a-d43d7eecedd2` - unique identifier of the location used for referencing.
++ `type`: `off-street` (enum) - describes the type of location and can be one of the following.
+    + Members
+        + `off-street`
+        + `park-and-ride`
+        + `professional-garage`
+        + `airport-parking`
+        + `harbor-parking`
++ `description`: `Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.` (string)
++ `image_urls`: `https://parku.de/images/parkingspace/020a81f5-c8b9-11e4-bfd2-d43d7eece658/640x286.jpg` (array[string]) - urls of location images, can be **empty**
++ `options` (array) - describes which options are available at the location and can contains each of the following elements. The list can be **empty**.
+    + (enum)
+      + `excess length` - the parking space can be used by cars with a small trailer
+      + indoor - the parking space has a roof or can be an underground garagethe parking space has a roof or can be an underground garage
+      + disabled - parking space is accessible for disabled peopleI
+      + patio - the parking space is located at an inner courtyard the parking space is located at an inner courtyard
+      + barrier - parking space has a barrier and user needs a smartphone to open it parking space has a barrier and user needs a smartphone to open it
+      + `charging station` - parking space with an electric vehicle charging station
+      + `key_necessary` - parking space can only be accessed with a keyparking space can only be accessed with a key
+      + `long_term_booking` - parking space is bookable for longer time period
+      + `surveillance` - parking space has surveillance
+      + `valet_service` - parking space contains valet serviceparking space contains valet service
++ `support` (object)
+    + `phone_number`: `+493012064329` - returns the support center phone number for this location
++ `price_period`: `timeframe` (enum) - contains the period for how long the price is valid, can be **null** if `start` or `end` was not provided
+    + Members
+      + timeframe
+      + day
+      + week
+      + month
++ `pricing` (object) - contains information about the pricing and price prediction.
+    + `rate_hourly`: 1 (number) - shows the price for per hour
+    + `rate_daily`: 10 (number) - shows the price per day
+    + `rate_weekly`: 30 (number) - shows the price per week
+    + `rate_monthly`: 150 (number) - shows the price per month
++ `user_owned`: false (boolean) - `true` if the user who requested the location is also the owner of the parking space. This allows to determine if the user could block the parking space from bookings.
++ `settings` (object) - provides booking requirements for the location. The settings of a location are used in favor of the global settings that can be found in the settings endpoint.
+    + `bookable_range_start`: `-15` (number) - start of the range wherein a booking is allowed in minutes from now.
+    + `bookable_range_end`: 43200 (number) - end of the range wherein a booking is allowed in minutes from now. end of the range wherein a booking is allowed in minutes from now.
+    + `booking_duration_min`: 30 (number) - minimum duration of a booking in minutes.
+    + `booking_duration_max`: 43200 (number) - maximum duration of a booking in minutes.
++ `required_fields` (array) - lists all additionally required fields when creating a booking for this location, can be **empty** if no fields are required. The field names correspond to the `booking.fields.*` entries in the settings endpoint which can be used for retrieving translated strings for these fields.
+    + (enum)
+        + car_registration_number
+        + car_make
+        + car_model
+        + car_colour
+        + number_of_passengers
+        + car_dropoff_time
+        + car_pickup_time
+        + outbound_flight_terminal
+        + outbound_flight_number
+        + inbound_flight_number
+        + outbound_flight_time
+        + inbound_flight_time
+        + user_mobile_number
+        + ship_name
+        + pier_name
+        + child_seat_required
+        + additional_services
+        + inbound_flight_terminal
++ provider: parku (enum) - names the parking space provider. Additional information(terms and conditions, logo, ...) about the provider can found be using the provider key from the field in [settings](/api/settings/)
+    + Members
+        + parku
+        + holidayextras
+        + inrix
++ availability (Availability) - describes the availability of the group in relation to the requestdescribes the
+    availability of the group in relation to the request
+
+## Availability (object)
++ `current`: 0 (number) - the number of parking spaces available in the group for the requested time period defined
+    by `start` and `end`the number of parking spaces available in the group for the requested time period defined by
+    `start` and `end`
++ `maximum`: 1 (number) - the overall number of parking spaces at this group the overall number of parking spaces at
+    this group
++ `next_start`: `2016-...15:00:..` (string) - the start of the next from now slot in which a parking space in this
+    group is free and bookable, can be in the past
++ `next_end`: `2016-...15:00:..` (string) - the end of the next slot from now in which a parking space in this group
+    is free and bookable, can be in the past

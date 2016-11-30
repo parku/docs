@@ -2,6 +2,8 @@ FORMAT: 1A
 HOST: https://parku.ch/{{apiversion}}
 CURL_HOST: https://master.test.parku.ch/{{apiversion}}
 CURL_OPTIONS: --insecure
+RESPONE_ATTRIBUTE_LEVELS: 4
+DATA_STRUCTURE_LEVELS: 1
 
 # Parku API v5 Reference
 
@@ -17,16 +19,17 @@ including errors.
 #### Changes in v5
 - Replaced locations model with an hierarchical one. This affects the [Locations Endpoint](#locations-locations) and
   [Bookings Endpoint](#bookings-bookings). Find the description of the new model at:
-  + [Location Model](#header-location-model)
-  + [Parking Space Group Model](#header-parking-space-group-model)
-  + [Cluster Model](#header-cluster-model)
+  + [Location Model](#location-model)
+  + [Parking Space Group Model](#parking-space-group-model)
+  + [First Level Cluster Model](#first-level-cluster-model)
+  + [Second Level Cluster Model](#second-level-cluster-model)
 - added [onstreet](#onstreet) endpoint
 - added [pay a booking](#pay-a-booking)
 - added [stop a booking](#stop-a-booking)
 - added [user payment methods](#user-user-payment-methods)
+- added [order history](#orders-order-history)
 
 - `voucher` endpoint removed
-
 
 #### Api definition files
 - [Swagger definition](generated/v5.swagger.json) (readable by [Postman](https://www.getpostman.com/))

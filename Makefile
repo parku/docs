@@ -42,7 +42,8 @@ V4_SRC:=$(addprefix v4/, \
 # files to use for building v5
 V5_SRC:= \
 	v5/parku.apib \
-	v4/attributes.apib \
+	v5/types.apib \
+	v5/attributes.apib \
 	v4/authentication.apib \
 	v5/bookings.apib \
 	v4/cars.apib \
@@ -55,6 +56,7 @@ V5_SRC:= \
 	v5/locations.apib \
 	v4/login.apib \
 	v5/onstreet.apib \
+	v5/orders.apib \
 	v4/password.apib \
 	v5/payment.apib \
 	v4/phone_numbers.apib \
@@ -62,8 +64,7 @@ V5_SRC:= \
 	v4/settings.apib \
 	v4/static_pages.apib \
 	v5/user.apib \
-	v4/violations.apib \
-	v4/types.apib
+	v4/violations.apib
 
 all: generate $(GENERATED_DIR)/v4.swagger.json $(GENERATED_DIR)/v5.swagger.json meta-files
 

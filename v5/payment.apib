@@ -73,3 +73,30 @@ __Deprecated__: this will be removed in __v5__.
               "facebook_id": null,
               "token": "098f6bcd4621d373cade4e832627b4f6"
             }
+
+
+# Data Structure
+
+## Payment Method (object)
++ id: `1000bb3e-506d-11e5-9781-d43d7eece658` (string) - the payment method id
++ types (array) - type of payment method
+    + (enum)
+        + post
+        + immediate
++ primary: true (boolean) - wether this is the primary payment method of the user
++ validated: true (boolean) -
+    Wether the payment method was already validated. Non validated payment methods cannot be used for paying.
++ provider (object) - the payment provider information, can be one of `braintree`, `credits`, `coupon`, `paypal`
+    + One Of
+        + braintree (object) - paid through braintree provider
+            + token: `DEADBEEF` (string) - braintree token
+            + name: `1234` (string) - the last 4 digits of the credit card
+        + credit (object) - paid by credit
+            + `balance_before`: `20.5` (number) - credit account balance before taking the credit payment
+        + coupon (object) - paid with a coupon
+            + code: `ASDF1234` (string) - the coupon code that was used
+        + paypal (object) - paid by paypal
+            + token: `DEADBEEF` (string) - paypal token
+
+## Payment (Payment Method)
++ amount: `5.35` (number)
