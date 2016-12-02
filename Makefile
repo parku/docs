@@ -47,7 +47,6 @@ V5_SRC:= \
 	v4/authentication.apib \
 	v5/bookings.apib \
 	v4/cars.apib \
-	v4/changelog.md \
 	v4/coupon.apib \
 	v4/devices.apib \
 	v4/errors.apib \
@@ -64,7 +63,8 @@ V5_SRC:= \
 	v4/settings.apib \
 	v4/static_pages.apib \
 	v5/user.apib \
-	v4/violations.apib
+	v4/violations.apib \
+	v5/changelog.md \
 
 all: generate $(GENERATED_DIR)/v4.swagger.json $(GENERATED_DIR)/v5.swagger.json meta-files
 
@@ -98,13 +98,13 @@ $(BUILD_DIR):
 $(BUILD_DIR)/images/*: |images/* $(BUILD_DIR)
 	cp images $(BUILD_DIR)/images -r
 
-$(GENERATED_DIR)/v4.apib: ./tmp ./$(GENERATED_DIR) v4/*
+$(GENERATED_DIR)/v4.apib: ./tmp ./$(GENERATED_DIR) $(V4_SRC)
 	mkdir tmp/v4 -p
 	cp $(V4_SRC) tmp/v4/ -r
 	sed -i -e 's/{{apiversion}}/v4/g' tmp/v4/*
 	cat $(addprefix tmp/, $(V4_SRC)) > $@
 
-$(GENERATED_DIR)/v5.apib: ./tmp ./$(GENERATED_DIR) v5/*
+$(GENERATED_DIR)/v5.apib: ./tmp ./$(GENERATED_DIR) $(V5_SRC)
 	mkdir tmp/v5 -p
 	cp $(V5_SRC) tmp/v5/ -r
 	sed -i -e 's/{{apiversion}}/v5/g' tmp/v5/*
@@ -115,7 +115,7 @@ $(GENERATED_DIR)/%.swagger.json: $(GENERATED_DIR)/%.apib
 
 # Docker targets
 dev-docs-docker-image:
-		docker build -t parku-dev-docs .
+	docker build -t parku-dev-docs .
 
 all-in-docker: dev-docs-docker-image
 	docker run -v `pwd`:/docs -it parku-dev-docs /bin/bash -c 'cd /docs && make all'
@@ -130,3 +130,14 @@ publish: all
 	rm -rf $(PUBLISH_TO_BRANCH)/*
 	cp $(BUILD_DIR)/* -r $(PUBLISH_TO_BRANCH)/
 	cd gh-pages && git add . && git commit -m "Updated documentation from commit $(GIT_COMMIT)"
+
+mock: build/generated/v4.swagger.json build/generated/v5.swagger.json
+	prism run --mock --list -s build/generated/*.swagger.json
+
+prepare-ecs:
+	sed -e "s/%BRANCH_NAME%/${BRANCH_NAME}/g" deploy/ecs_task.json > build/ecs_task.json
+
+deploy-ecs:
+	bash deploy/deploy_ecs.sh ${BRANCH_NAME}
+
+.PHONY: mock prepare-ecs

@@ -624,10 +624,10 @@ Retrieving a booking returns a few prices for standard intervals. Use this endpo
 # Data Structures
 
 ## Location Dummy (object)
-+ id: `005c4826-4e28-11e3-a675-d43d7eece53d` (string)
++ id: `005c4826-4e28-11e3-a675-d43d7eece53d` (string) - location id
 
 ## Violation Dummy (object)
-+ id: `005c4826-4e28-11e3-a675-d43d7eece53d` (string)
++ id: `005c4826-4e28-11e3-a675-d43d7eece53d` (string) - violation id
 
 ## Booking Base (object)
 + `id`: `005c4826-4e28-11e3-a675-d43d7eece53d` (string)
@@ -662,7 +662,7 @@ Retrieving a booking returns a few prices for standard intervals. Use this endpo
 + `zone` (Parking Zone) - the zone that was booked, only available if `type` is `zone`
 
 ## Booking (Booking Base)
-+ `type`: `location` (enum)
++ `type`: `location` (enum) - the booking type
     + Members
         + location
         + zone

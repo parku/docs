@@ -1,8 +1,8 @@
 FORMAT: 1A
-HOST: https://parku.ch/{{apiversion}}
-CURL_HOST: https://master.test.parku.ch/{{apiversion}}
+HOST: https://sandbox.test.parku.ch/{{apiversion}}
+CURL_HOST: https://sandbox.test.parku.ch/{{apiversion}}
 CURL_OPTIONS: --insecure
-RESPONE_ATTRIBUTE_LEVELS: 4
+RESPONSE_ATTRIBUTE_LEVELS: 4
 DATA_STRUCTURE_LEVELS: 1
 
 # Parku API v5 Reference
@@ -23,6 +23,7 @@ including errors.
   + [Parking Space Group Model](#parking-space-group-model)
   + [First Level Cluster Model](#first-level-cluster-model)
   + [Second Level Cluster Model](#second-level-cluster-model)
+- extended [booking model](#booking-model) with `type`, `zone` and `payment`
 - added [onstreet](#onstreet) endpoint
 - added [pay a booking](#pay-a-booking)
 - added [stop a booking](#stop-a-booking)

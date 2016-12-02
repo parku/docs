@@ -32,7 +32,7 @@ with the most recently created car appearing first.
               {...}
             ]
 
-### Create a new Car [POST /attributes{?license_plate,vehicle,country}]
+### Create a new Car [POST /cars{?license_plate,vehicle,country}]
 You can store multiple cars for a user.
 
 + Request (application/json)
@@ -58,7 +58,8 @@ You can store multiple cars for a user.
               "country": "DE"
             }
 
-## Retrieve a Car [GET /cars/{car_id}]
+## Car [/cars/{car_id}]
+### Retrieve a Car [GET]
 
 + Parameters
     + car_id: 23 (int, required) - The identifier of the car to be retrieved
@@ -79,7 +80,7 @@ You can store multiple cars for a user.
               "country": "DE"
             }
 
-## Update a Car [PUT /cars/{car_id}{?license_plate,vehicle,country}]
+### Update a Car [PUT /cars/{car_id}{?license_plate,vehicle,country}]
 Updates the car by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
 
 + Request  (application/json)

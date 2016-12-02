@@ -112,13 +112,13 @@ AND (properties1 AND properties2 AND ...)
     + `fields`: `all` (array[string],optional) - Response will only contain the fields mentioned in this parameter.
         This can either be `all` or an comma separated list of field names from the response, e.g. `id,street,country`.
 
-+ Request
++ Request (application/x-www-form-urlencode)
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Locations and Clusters)
 
 ### Get availability times for location [GET /locations/{location_id}/availability{?date_start,date_end}]
