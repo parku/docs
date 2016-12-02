@@ -134,9 +134,6 @@ publish: all
 mock: build/generated/v4.swagger.json build/generated/v5.swagger.json
 	prism run --mock --list -s build/generated/*.swagger.json
 
-prepare-ecs:
-	sed -e "s/%BRANCH_NAME%/${BRANCH_NAME}/g" deploy/ecs_task.json > build/ecs_task.json
-
 deploy-ecs:
 	bash deploy/deploy_ecs.sh ${BRANCH_NAME}
 
