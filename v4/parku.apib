@@ -1,5 +1,10 @@
 FORMAT: 1A
-HOST: https://master.test.parku.de/{{apiversion}}
+HOST: https://sandbox.test.parku.de/{{apiversion}}
+CURL_HOST: https://sandbox.test.parku.de/{{apiversion}}
+CURL_OPTIONS: --insecure
+RESPONSE_ATTRIBUTE_LEVELS: 4
+DATA_STRUCTURE_LEVELS: 1
+LOGO: images/logo_parku.png
 
 # Parku API v4 Reference
 
@@ -10,7 +15,7 @@ including errors.
 
 #### Versions
 - latest stable: __v4__
-- beta: [v5](v5.html)
+- coming soon: [v5](v5.html)
 
 #### Api definition files
 - [Swagger definition](generated/v4.swagger.json) (readable by [Postman](https://www.getpostman.com/))

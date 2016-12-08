@@ -5,7 +5,7 @@ SHELL=/bin/bash -O extglob -c
 # the root directory
 BUILD_DIR=./build
 GENERATED_DIR=./build/generated
-COMMON_DEPS=$(BUILD_DIR)/images/* Makefile theme/* | ./tmp
+COMMON_DEPS=$(BUILD_DIR)/images/* Makefile | ./tmp
 
  # current stable version gets index assigned
 PAGE_V4=index
@@ -16,11 +16,11 @@ PUBLISH_TO_BRANCH=gh-pages
 # files to use for building v4
 V4_SRC:=$(addprefix v4/, \
 	parku.apib \
+	types.apib \
 	attributes.apib \
 	authentication.apib \
 	bookings.apib \
 	cars.apib \
-	changelog.md \
 	coupon.apib \
 	devices.apib \
 	errors.apib \
@@ -37,7 +37,7 @@ V4_SRC:=$(addprefix v4/, \
 	user.apib \
 	violations.apib \
 	voucher.apib \
-	types.apib)
+	changelog.md)
 
 # files to use for building v5
 V5_SRC:= \
@@ -66,7 +66,7 @@ V5_SRC:= \
 	v4/violations.apib \
 	v5/changelog.md \
 
-all: generate $(GENERATED_DIR)/v4.swagger.json $(GENERATED_DIR)/v5.swagger.json meta-files
+all: generate $(GENERATED_DIR)/v4.swagger.json meta-files
 
 clean:
 	rm -rf $(GENERATED_DIR) $(BUILD_DIR) $(PUBLISH_TO_BRANCH) tmp
@@ -76,14 +76,14 @@ meta-files: CNAME robots_allow.txt robots.txt | $(BUILD_DIR)
 
 # Build version v4 from v4 sources
 $(BUILD_DIR)/$(PAGE_V4).html: $(GENERATED_DIR)/v4.apib  $(COMMON_DEPS)
-	NOCACHE=1 aglio -i $(GENERATED_DIR)/v4.apib -o $(BUILD_DIR)/$(PAGE_V4).html --theme w00tw00t --theme-variables theme/variables-parku.less --theme-style theme/layout-parku.less --theme-full-width --theme-template triple --verbose
+	NOCHACHE=1 aglio -i $(GENERATED_DIR)/v4.apib -o $(BUILD_DIR)/$(PAGE_V4).html --theme peperoncino --theme-full-width --theme-template triple --verbose
 
 # Build version v5 from v5 sources
 $(BUILD_DIR)/$(PAGE_V5).html: $(GENERATED_DIR)/v5.apib $(COMMON_DEPS)
-	NOCACHE=1 aglio -i $(GENERATED_DIR)/v5.apib -o $(BUILD_DIR)/$(PAGE_V5).html --theme w00tw00t --theme-variables theme/variables-parku.less --theme-style theme/layout-parku.less --theme-full-width --theme-template triple --verbose
+	NOCHACHE=1 aglio -i $(GENERATED_DIR)/v5.apib -o $(BUILD_DIR)/$(PAGE_V5).html --theme peperoncino --theme-full-width --theme-template triple --verbose
 
 # Build v4 and v5
-generate: $(BUILD_DIR)/$(PAGE_V4).html $(BUILD_DIR)/$(PAGE_V5).html
+generate: $(BUILD_DIR)/$(PAGE_V4).html
 
 # directory targets
 $(GENERATED_DIR):
@@ -131,8 +131,11 @@ publish: all
 	cp $(BUILD_DIR)/* -r $(PUBLISH_TO_BRANCH)/
 	cd gh-pages && git add . && git commit -m "Updated documentation from commit $(GIT_COMMIT)"
 
-mock: build/generated/v4.swagger.json build/generated/v5.swagger.json
-	prism run --mock --list -s build/generated/*.swagger.json
+prism-mock: $(wildcard build/generated/*.swagger.json)
+	prism run --mock --list -p 80 -s build/generated/*.swagger.json
+
+drakov-mock: $(GENERATED_DIR)/v4.apib
+	drakov -f build/generated/*.apib -p 80 --public
 
 deploy-ecs:
 	bash deploy/deploy_ecs.sh ${BRANCH_NAME}
