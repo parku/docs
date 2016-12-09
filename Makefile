@@ -8,13 +8,12 @@ GENERATED_DIR=./build/generated
 COMMON_DEPS=$(BUILD_DIR)/images/* Makefile | ./tmp
 
  # current stable version gets index assigned
-PAGE_V4=index
-PAGE_V5=v5
+INDEX=v4
 
 PUBLISH_TO_BRANCH=gh-pages
-
+GENERATE_VERSIONS=v4
 # files to use for building v4
-V4_SRC:=$(addprefix v4/, \
+v4_SRC:=$(addprefix v4/, \
 	parku.apib \
 	types.apib \
 	attributes.apib \
@@ -40,7 +39,7 @@ V4_SRC:=$(addprefix v4/, \
 	changelog.md)
 
 # files to use for building v5
-V5_SRC:= \
+v5_SRC:= \
 	v5/parku.apib \
 	v5/types.apib \
 	v5/attributes.apib \
@@ -64,9 +63,11 @@ V5_SRC:= \
 	v4/static_pages.apib \
 	v5/user.apib \
 	v4/violations.apib \
-	v5/changelog.md \
+	v5/changelog.md
 
-all: generate $(GENERATED_DIR)/v4.swagger.json meta-files
+MOCK_VERSION=v4
+
+all: generate-html generate-swagger generate-apib meta-files
 
 clean:
 	rm -rf $(GENERATED_DIR) $(BUILD_DIR) $(PUBLISH_TO_BRANCH) tmp
@@ -74,16 +75,17 @@ clean:
 meta-files: CNAME robots_allow.txt robots.txt | $(BUILD_DIR)
 	cp CNAME robots.txt robots_allow.txt build
 
-# Build version v4 from v4 sources
-$(BUILD_DIR)/$(PAGE_V4).html: $(GENERATED_DIR)/v4.apib  $(COMMON_DEPS)
-	NOCHACHE=1 aglio -i $(GENERATED_DIR)/v4.apib -o $(BUILD_DIR)/$(PAGE_V4).html --theme peperoncino --theme-full-width --theme-template triple --verbose
-
 # Build version v5 from v5 sources
-$(BUILD_DIR)/$(PAGE_V5).html: $(GENERATED_DIR)/v5.apib $(COMMON_DEPS)
-	NOCHACHE=1 aglio -i $(GENERATED_DIR)/v5.apib -o $(BUILD_DIR)/$(PAGE_V5).html --theme peperoncino --theme-full-width --theme-template triple --verbose
+$(BUILD_DIR)/%.html: $(GENERATED_DIR)/%.apib $(COMMON_DEPS)
+	NOCHACHE=1 aglio -i $(GENERATED_DIR)/$*.apib -o $(BUILD_DIR)/$*.html --theme peperoncino --theme-full-width --theme-template triple --verbose
 
 # Build v4 and v5
-generate: $(BUILD_DIR)/$(PAGE_V4).html
+generate-html: $(patsubst %, $(BUILD_DIR)/%.html, $(GENERATE_VERSIONS))
+	mv $(BUILD_DIR)/$(INDEX).html $(BUILD_DIR)/index.html
+
+generate-apib: $(patsubst %, $(GENERATED_DIR)/%.apib, $(GENERATE_VERSIONS))
+
+generate-swagger: $(patsubst %, $(GENERATED_DIR)/%.swagger.json, $(GENERATE_VERSIONS))
 
 # directory targets
 $(GENERATED_DIR):
@@ -98,17 +100,19 @@ $(BUILD_DIR):
 $(BUILD_DIR)/images/*: |images/* $(BUILD_DIR)
 	cp images $(BUILD_DIR)/images -r
 
-$(GENERATED_DIR)/v4.apib: ./tmp ./$(GENERATED_DIR) $(V4_SRC)
-	mkdir tmp/v4 -p
-	cp $(V4_SRC) tmp/v4/ -r
-	sed -i -e 's/{{apiversion}}/v4/g' tmp/v4/*
-	cat $(addprefix tmp/, $(V4_SRC)) > $@
+$(GENERATED_DIR)/%.no-headers: $(GENERATED_DIR)/%.apib
+	sed '/Authorization\: Basic.*/d' $(GENERATED_DIR)/$*.apib > $(GENERATED_DIR)/$*.no-headers
+	sed 's/\(POST \/\)/\1v4\//g' $(GENERATED_DIR)/$*.no-headers -i
+	sed 's/\(GET \/\)/\1v4\//g' $(GENERATED_DIR)/$*.no-headers -i
+	sed 's/\(PUT \/\)/\1v4\//g' $(GENERATED_DIR)/$*.no-headers -i
+	sed 's/\(DELETE \/\)/\1v4\//g' $(GENERATED_DIR)/$*.no-headers -i
+	sed 's/\(\[\/\)/\1v4\//g' $(GENERATED_DIR)/$*.no-headers -i
 
-$(GENERATED_DIR)/v5.apib: ./tmp ./$(GENERATED_DIR) $(V5_SRC)
-	mkdir tmp/v5 -p
-	cp $(V5_SRC) tmp/v5/ -r
-	sed -i -e 's/{{apiversion}}/v5/g' tmp/v5/*
-	cat $(addprefix tmp/, $(V5_SRC)) > $@
+$(GENERATED_DIR)/%.apib: ./tmp ./$(GENERATED_DIR) $($*_SRC)
+	mkdir tmp/$* -p
+	cp $($*_SRC) tmp/$*/ -r
+	sed -i -e 's/{{apiversion}}/$*/g' tmp/$*/*
+	cat $(addprefix tmp/$*/, $(notdir $($*_SRC))) > $@
 
 $(GENERATED_DIR)/%.swagger.json: $(GENERATED_DIR)/%.apib
 	apib2swagger -i $(GENERATED_DIR)/$*.apib -o $@
@@ -123,19 +127,23 @@ all-in-docker: dev-docs-docker-image
 clean-in-docker: dev-docs-docker-image
 	docker run -v `pwd`:/docs -it parku-dev-docs /bin/bash -c 'cd /docs && make clean'
 
-publish: all
+publish:
 	$(eval GIT_COMMIT:=`git rev-parse HEAD`)
 	rm -rf $(PUBLISH_TO_BRANCH)
 	git clone -b $(PUBLISH_TO_BRANCH) git@github.com:parku/docs.git $(PUBLISH_TO_BRANCH)
 	rm -rf $(PUBLISH_TO_BRANCH)/*
 	cp $(BUILD_DIR)/* -r $(PUBLISH_TO_BRANCH)/
 	cd gh-pages && git add . && git commit -m "Updated documentation from commit $(GIT_COMMIT)"
+	cd gh-pages && git push
 
-prism-mock: $(wildcard build/generated/*.swagger.json)
-	prism run --mock --list -p 80 -s build/generated/*.swagger.json
+$(GENERATED_DIR)/%-no-host.swagger.json: $(GENERATED_DIR)/%.swagger.json
+	sed '/\"host\"\:.*/d' $(GENERATED_DIR)/$*.swagger.json > $(GENERATED_DIR)/$*-no-host.swagger.json
 
-drakov-mock: $(GENERATED_DIR)/v4.apib
-	drakov -f build/generated/*.apib -p 80 --public
+prism-mock: $(patsubst %, $(GENERATED_DIR)/%-no-host.swagger.json, $(GENERATE_VERSIONS))
+	prism run --mockDynamic --list -p 80 -s build/generated/*-no-host.swagger.json
+
+drakov-mock: $(GENERATED_DIR)/$(MOCK_VERSION).no-headers
+	drakov -f build/generated/$(MOCK_VERSION).no-headers -p 80 --public
 
 deploy-ecs:
 	bash deploy/deploy_ecs.sh ${BRANCH_NAME}

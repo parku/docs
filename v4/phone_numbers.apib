@@ -1,7 +1,7 @@
 # Group Phone Numbers
-## Phone Numbers [/phone_numbers]
 Access needs a __private key__.
 
+## Phone Numbers [/phone_numbers]
 ### List all Phone Numbers [GET /phone_numbers]
 Returns a list of all phone numbers of the user.
 The phone numbers are returned sorted by creation date, with the most recently created phone number appearing first.
@@ -27,7 +27,6 @@ The phone numbers are returned sorted by creation date, with the most recently c
               {...}
             ]
 
-
 ### Create a New Phone Number [POST /phone_numbers]
 You can store multiple phone numbers for a user.
 
@@ -47,7 +46,8 @@ You can store multiple phone numbers for a user.
                 "phone_number": "+493057701873"
             }
 
-### Retrieve a Phone Number [GET /phone_numbers/{phone_number_id}]
+## Phone Number [/phone_numbers/{phone_number_id}]
+### Retrieve a Phone Number [GET /phphone_numbersone_numbers/{phone_number_id}]
 
 + Parameters
     + `phone_number_id`: 151 (number,required) - The identifier of the phone number to be retrieved.

@@ -1,7 +1,108 @@
 # Group Locations
-## Locations [/locations]
 Access needs at least a __public key__.
+## Locations [/locations]
 
+### List Locations [GET /locations{?sw,ne,date_start,date_end,availability,bookability}]
+Returns a list of locations that provide the same format as the single location.
+When no `date_start` or `date_end` was provided, all locations are returned.
+That does not mean, that they are available.
+
++ Parameters
+    + sw: `45.74001,5.67868` (string,required) - Comma separated latitude and longitude of the southwest position.
+    + ne: `47.74236,10.24900` (string,required) - Comma separated latitude and longitude of the northeast position.
+    + `date_start`: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the start date.
+        `date_start` will have no effect unless `date_end` is also provided.
+    + `date_end`: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the end date.
+        `date_end` will have no effect unless `date_start` is also provided.
+    + `availability`: all (string,optional) - Filters returned locations regarding their availability if start and end
+        are also given.
+        * `true` only returns available locations
+            (this is default if availability is not specified and start and end were given)
+        * `false` only returns non-available locations
+        * `all` return all locations, including ones that no availability information is available for
+        + Members
+            + true
+            + false
+            + all
+        + Default: true
+    + `bookability`: all (string,optional) - Filters returned locations regarding their general bookability.
+        * `true` only returns locations that could be booked through the api if they are available
+        * `false` only returns locations that can not be booked through the api, even though they might be available
+        * `all` return all locations, no matter if they would be bookable though the API or not
+        + Members
+            + true
+            + false
+            + all
+        + Default: true
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
+
++ Response 200
+    + Body
+
+            [
+                {
+                    "street": "Hopfenstrasse",
+                    "street_number": "20",
+                    "postcode": "8045",
+                    "city": "Zürich",
+                    "country": "CH",
+                    "bookable": true,
+                    "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
+                    "type": "off-street",
+                    "code": "ZHRTHW",
+                    "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
+                    "latitude": 52.505681,
+                    "longitude": 13.303608,
+                    "image_urls": [
+                        "https://parku.de/images/parkingspace/020a81f5-c8b9-11e4-bfd2-d43d7eece658/640x286.jpg"
+                    ],
+                    "options": [
+                        "excess length", "indoor", "disabled", "patio", "barrier"
+                    ],
+                    "support": {
+                        "phone_number": "+41 43 928 72 52"
+                    },
+                    "notifications": [],
+                    "currency": "EUR",
+                    "price": 3.5,
+                    "price_period": "timeframe",
+                    "pricing": {
+                        "rate_hourly": 2,
+                        "rate_daily": 10,
+                        "rate_weekly": null,
+                        "rate_monthly": null
+                    },
+                    "address_slug": "hopfenstrasse-20",
+                    "user_owned": false,
+                    "settings": {
+                        "bookable_range_start": -15,
+                        "bookable_range_end": 43200,
+                        "booking_duration_min": 30,
+                        "booking_duration_max": 43200
+                    },
+                    "required_fields": [
+                        "additional_services",
+                        "car_colour",
+                        "number_of_passengers"
+                    ],
+                    "provider": "parku",
+                    "availability": {
+                        "current": 13,
+                        "maximum": 15,
+                        "next_start": "2016-09-12T03:45:00+02:00",
+                        "next_end": "2016-10-13T04:00:00+02:00"
+                    }
+                },
+                { ... },
+                { ... }
+            ]
+
+## Location [/locations/{location_id}]
 ### Retrieve a Location [GET /locations/{location_id}{?date_start,date_end}]
 + Parameters
     + `location_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122, required) - Identifier of the location.
@@ -137,106 +238,6 @@ Location was not found, check the location id and that your user has the correct
 + Response 422
 Request validation failed because the request data was malformed.
     + Body
-
-### List Locations [GET /locations{?sw,ne,date_start,date_end,availability,bookability}]
-Returns a list of locations that provide the same format as the single location.
-When no `date_start` or `date_end` was provided, all locations are returned.
-That does not mean, that they are available.
-
-+ Parameters
-    + sw: `45.74001,5.67868` (string,required) - Comma separated latitude and longitude of the southwest position.
-    + ne: `47.74236,10.24900` (string,required) - Comma separated latitude and longitude of the northeast position.
-    + `date_start`: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the start date.
-        `date_start` will have no effect unless `date_end` is also provided.
-    + `date_end`: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the end date.
-        `date_end` will have no effect unless `date_start` is also provided.
-    + `availability`: all (string,optional) - Filters returned locations regarding their availability if start and end
-        are also given.
-        * `true` only returns available locations
-            (this is default if availability is not specified and start and end were given)
-        * `false` only returns non-available locations
-        * `all` return all locations, including ones that no availability information is available for
-        + Members
-            + true
-            + false
-            + all
-        + Default: true
-    + `bookability`: all (string,optional) - Filters returned locations regarding their general bookability.
-        * `true` only returns locations that could be booked through the api if they are available
-        * `false` only returns locations that can not be booked through the api, even though they might be available
-        * `all` return all locations, no matter if they would be bookable though the API or not
-        + Members
-            + true
-            + false
-            + all
-        + Default: true
-
-+ Request
-    + Headers
-
-            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
-
-
-+ Response 200
-    + Body
-
-            [
-                {
-                    "street": "Hopfenstrasse",
-                    "street_number": "20",
-                    "postcode": "8045",
-                    "city": "Zürich",
-                    "country": "CH",
-                    "bookable": true,
-                    "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
-                    "type": "off-street",
-                    "code": "ZHRTHW",
-                    "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
-                    "latitude": 52.505681,
-                    "longitude": 13.303608,
-                    "image_urls": [
-                        "https://parku.de/images/parkingspace/020a81f5-c8b9-11e4-bfd2-d43d7eece658/640x286.jpg"
-                    ],
-                    "options": [
-                        "excess length", "indoor", "disabled", "patio", "barrier"
-                    ],
-                    "support": {
-                        "phone_number": "+41 43 928 72 52"
-                    },
-                    "notifications": [],
-                    "currency": "EUR",
-                    "price": 3.5,
-                    "price_period": "timeframe",
-                    "pricing": {
-                        "rate_hourly": 2,
-                        "rate_daily": 10,
-                        "rate_weekly": null,
-                        "rate_monthly": null
-                    },
-                    "address_slug": "hopfenstrasse-20",
-                    "user_owned": false,
-                    "settings": {
-                        "bookable_range_start": -15,
-                        "bookable_range_end": 43200,
-                        "booking_duration_min": 30,
-                        "booking_duration_max": 43200
-                    },
-                    "required_fields": [
-                        "additional_services",
-                        "car_colour",
-                        "number_of_passengers"
-                    ],
-                    "provider": "parku",
-                    "availability": {
-                        "current": 13,
-                        "maximum": 15,
-                        "next_start": "2016-09-12T03:45:00+02:00",
-                        "next_end": "2016-10-13T04:00:00+02:00"
-                    }
-                },
-                { ... },
-                { ... }
-            ]
 
 ### Get availability times for location [GET /locations/{location_id}/availability{?date_start,date_end}]
 

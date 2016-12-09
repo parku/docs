@@ -1,8 +1,114 @@
 # Group Bookings
-
-## Bookings [/bookings]
 Access needs a __private key__.
+## Bookings [/bookings]
+### List all bookings [GET /bookings{?count,offset,date_start,date_end,status}]
 
++ Parameters
+    + `count`: 3 (number, optional) - A limit on the number of objects to be returned.
+        Count can range between 1 and 100 items.
+        + Default: 10
+    + `offset`: 10 (number, optional) - An offset into the list of returned items.
+        The API will return the requested number of items starting at that offset.
+        + Default: 0
+    + `date_start`: past (enum, optional) - Filter bookings, shows past bookings.
+        + Members
+            + past
+    + `date_end`: future (enum, optional) - Filter bookings, shows past bookings.
+        + Members
+            + future
+    + `status`: active (enum, optional) - Filter bookings for status.
+        + Members
+            + all
+            + active
+            + cancelled
+        + Default: all
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Body
+
+            [
+              {
+                "id": "0072c629-e622-11e2-8bf1-8a83f3373875",
+                "license_plate": "B-AB 1234",
+                "location": {
+                  "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
+                  "code": "ZHRTHW",
+                  "latitude": 47.365398,
+                  "longitude": 8.51987,
+                  "street": "Hopfenstrasse",
+                  "street_number": "20",
+                  "postcode": "8045",
+                  "city": "Zürich",
+                  "country": "CH",
+                  "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
+                  "post_booking_info": "Bitte holen sie den Schlüssel vorher ab und schließen das Tor",
+                  "image_urls": [
+                    "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
+                    "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"
+                  ],
+                  "options": [],
+                  "notifications": [],
+                  "currency": "CHF",
+                  "pricing": {
+                    "rate_hourly": 2,
+                    "rate_daily": 10,
+                    "rate_weekly": null,
+                    "rate_monthly": null
+                  },
+                  "support": {
+                    "phone_number": "+41 43 928 72 52"
+                  },
+                  "address_slug": "hopfenstrasse-20",
+                  "user_owned": false,
+                  "settings": {
+                    "bookable_range_start": -15,
+                    "bookable_range_end": 43200,
+                    "booking_duration_min": 30,
+                    "booking_duration_max": 43200
+                  },
+                  "gates": [
+                    {
+                      "type": "beacon",
+                      "identifier": "A97186B0-C879-4526-93AD-29A731AB0C39:12:F5",
+                      "gateways": [
+                        {
+                          "type": "box",
+                          "name": "PRK-123"
+                        },
+                        {
+                          "type": "api"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "qrcode",
+                      "identifier": "PARKU3KU",
+                      "gateways": [
+                        {
+                          "type": "api"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "phone_number": "+493057701872",
+                "reference": "HRS5J",
+                "date_start": "2016-10-27T10:00:00+0000",
+                "date_end": "2016-10-27T16:30:00+0000",
+                "price": 13.75,
+                "currency": "CHF",
+                "violation": null
+              },
+              {...},
+              {...}
+            ]
+
+## Booking [/bookings/{booking_id}]
 ### Create a new Booking [POST /bookings{?location_id,date_start,date_end,license_plate,phone_number,provider,provider_info,status,required_fields}]
 + Request (application/json)
     + Attributes
@@ -407,112 +513,7 @@ Updates the booking by setting the values of the parameters passed. Any paramete
 
 + Response 204
 
-### List all bookings [GET /bookings{?count,offset,date_start,date_end,status}]
-
-+ Parameters
-    + `count`: 3 (number, optional) - A limit on the number of objects to be returned.
-        Count can range between 1 and 100 items.
-        + Default: 10
-    + `offset`: 10 (number, optional) - An offset into the list of returned items.
-        The API will return the requested number of items starting at that offset.
-        + Default: 0
-    + `date_start`: past (enum, optional) - Filter bookings, shows past bookings.
-        + Members
-            + past
-    + `date_end`: future (enum, optional) - Filter bookings, shows past bookings.
-        + Members
-            + future
-    + `status`: active (enum, optional) - Filter bookings for status.
-        + Members
-            + all
-            + active
-            + cancelled
-        + Default: all
-
-+ Request
-    + Headers
-
-            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
-
-+ Response 200 (application/json)
-    + Body
-
-            [
-              {
-                "id": "0072c629-e622-11e2-8bf1-8a83f3373875",
-                "license_plate": "B-AB 1234",
-                "location": {
-                  "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
-                  "code": "ZHRTHW",
-                  "latitude": 47.365398,
-                  "longitude": 8.51987,
-                  "street": "Hopfenstrasse",
-                  "street_number": "20",
-                  "postcode": "8045",
-                  "city": "Zürich",
-                  "country": "CH",
-                  "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
-                  "post_booking_info": "Bitte holen sie den Schlüssel vorher ab und schließen das Tor",
-                  "image_urls": [
-                    "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
-                    "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"
-                  ],
-                  "options": [],
-                  "notifications": [],
-                  "currency": "CHF",
-                  "pricing": {
-                    "rate_hourly": 2,
-                    "rate_daily": 10,
-                    "rate_weekly": null,
-                    "rate_monthly": null
-                  },
-                  "support": {
-                    "phone_number": "+41 43 928 72 52"
-                  },
-                  "address_slug": "hopfenstrasse-20",
-                  "user_owned": false,
-                  "settings": {
-                    "bookable_range_start": -15,
-                    "bookable_range_end": 43200,
-                    "booking_duration_min": 30,
-                    "booking_duration_max": 43200
-                  },
-                  "gates": [
-                    {
-                      "type": "beacon",
-                      "identifier": "A97186B0-C879-4526-93AD-29A731AB0C39:12:F5",
-                      "gateways": [
-                        {
-                          "type": "box",
-                          "name": "PRK-123"
-                        },
-                        {
-                          "type": "api"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "qrcode",
-                      "identifier": "PARKU3KU",
-                      "gateways": [
-                        {
-                          "type": "api"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "phone_number": "+493057701872",
-                "reference": "HRS5J",
-                "date_start": "2016-10-27T10:00:00+0000",
-                "date_end": "2016-10-27T16:30:00+0000",
-                "price": 13.75,
-                "currency": "CHF",
-                "violation": null
-              },
-              {...},
-              {...}
-            ]
+## Extension Prices [/bookings/{booking_id}/extend]
 ### Retrieve Custom Extend Prices [GET /bookings/{booking_id}/extend{?date_end}]
 Retrieving a booking returns a few prices for standard intervals. Use this endpoint for custom intervals.
 

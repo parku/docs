@@ -1,6 +1,7 @@
 # Group Sesam
-## Sesam [/sesam]
 Access needs a __private key__.
+
+## Sesam Actions [/sesam/{sesam_id}]
 
 This endpoint is used to open gates and barriers. A private key is needed.
 The user scans a QR code which is attached somewhere near the gate or barrier.
@@ -36,6 +37,7 @@ _Both QR codes are valid and activate a sesam device in the parku office._
     Either no booking is made or the time for opening the sesam has expired.
     + Body
 
+## Sesam [/sesam]
 ### Check Sesam [GET /sesam]
 This endpoint gives you the information whether the user can open a sesam device now or in the near future.
 
