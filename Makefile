@@ -133,7 +133,7 @@ publish:
 	git clone -b $(PUBLISH_TO_BRANCH) git@github.com:parku/docs.git $(PUBLISH_TO_BRANCH)
 	rm -rf $(PUBLISH_TO_BRANCH)/*
 	cp $(BUILD_DIR)/* -r $(PUBLISH_TO_BRANCH)/
-	cd gh-pages && git add . && git commit -m "Updated documentation from commit $(GIT_COMMIT)"
+	cd gh-pages && git add . && git add -u && git commit -m "Updated documentation from commit $(GIT_COMMIT)"
 	cd gh-pages && git push
 
 $(GENERATED_DIR)/%-no-host.swagger.json: $(GENERATED_DIR)/%.swagger.json
