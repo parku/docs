@@ -18,11 +18,7 @@ node {
     stage 'Docker push to Amazon ECR'
 
     docker.withRegistry('https://715994263731.dkr.ecr.eu-central-1.amazonaws.com/parku/docs ', 'ecr:eu-central-1:jenkins-iam-credentials') {
-        if (env.BRANCH_NAME == "master") {
-            docker.image('parku/docs').push('latest')
-        } else {
-            docker.image('parku/docs').push(env.BRANCH_NAME)
-        }
+        docker.image('parku/docs').push(env.BRANCH_NAME)
     }
 
     stage 'Publish to website'

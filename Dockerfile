@@ -12,4 +12,4 @@ ARG CACHE_DATE=not_a_date
 RUN npm install -g aglio-theme-peperoncino
 ADD . /docs
 
-CMD cd /docs && make clean && make drakov-mock
+CMD ["make", "--directory", "/docs", "clean", "drakov-mock"]

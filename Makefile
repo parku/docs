@@ -133,8 +133,9 @@ publish:
 	git clone -b $(PUBLISH_TO_BRANCH) git@github.com:parku/docs.git $(PUBLISH_TO_BRANCH)
 	rm -rf $(PUBLISH_TO_BRANCH)/*
 	cp $(BUILD_DIR)/* -r $(PUBLISH_TO_BRANCH)/
-	cd gh-pages && git add . && git add -u && git commit -m "Updated documentation from commit $(GIT_COMMIT)"
-	cd gh-pages && git push
+	cd gh-pages && git add . && git add -u
+	# only commit if changes were available
+	cd gh-pages && if ! git diff-index --quiet HEAD; then git commit -m "Updated documentation from commit $(GIT_COMMIT)" && git push; fi
 
 $(GENERATED_DIR)/%-no-host.swagger.json: $(GENERATED_DIR)/%.swagger.json
 	sed '/\"host\"\:.*/d' $(GENERATED_DIR)/$*.swagger.json > $(GENERATED_DIR)/$*-no-host.swagger.json
