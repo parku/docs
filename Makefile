@@ -11,7 +11,7 @@ COMMON_DEPS=$(BUILD_DIR)/images/* Makefile | ./tmp
 INDEX=v4
 
 PUBLISH_TO_BRANCH=gh-pages
-GENERATE_VERSIONS=v4
+GENERATE_VERSIONS=v4 v5
 # files to use for building v4
 v4_SRC:=$(addprefix v4/, \
 	parku.apib \
