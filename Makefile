@@ -11,7 +11,7 @@ COMMON_DEPS=$(BUILD_DIR)/images/* Makefile | ./tmp
 INDEX=v4
 
 PUBLISH_TO_BRANCH=gh-pages
-GENERATE_VERSIONS=v4
+GENERATE_VERSIONS=v4 v5
 # files to use for building v4
 v4_SRC:=$(addprefix v4/, \
 	parku.apib \
@@ -65,7 +65,7 @@ v5_SRC:= \
 	v4/violations.apib \
 	v5/changelog.md
 
-MOCK_VERSION=v4
+MOCK_VERSION=v5
 
 all: generate-html generate-swagger generate-apib meta-files
 
@@ -77,11 +77,11 @@ meta-files: CNAME robots_allow.txt robots.txt | $(BUILD_DIR)
 
 # Build version v5 from v5 sources
 $(BUILD_DIR)/%.html: $(GENERATED_DIR)/%.apib $(COMMON_DEPS)
-	NOCHACHE=1 aglio -i $(GENERATED_DIR)/$*.apib -o $(BUILD_DIR)/$*.html --theme peperoncino --theme-full-width --theme-template triple --verbose
+	NOCACHE=1 aglio -i $(GENERATED_DIR)/$*.apib -o $(BUILD_DIR)/$*.html --theme peperoncino --theme-full-width --theme-template triple --verbose
 
 # Build v4 and v5
 generate-html: $(patsubst %, $(BUILD_DIR)/%.html, $(GENERATE_VERSIONS))
-	mv $(BUILD_DIR)/$(INDEX).html $(BUILD_DIR)/index.html
+	cp $(BUILD_DIR)/$(INDEX).html $(BUILD_DIR)/index.html
 
 generate-apib: $(patsubst %, $(GENERATED_DIR)/%.apib, $(GENERATE_VERSIONS))
 
@@ -101,18 +101,14 @@ $(BUILD_DIR)/images/*: |images/* $(BUILD_DIR)
 	cp images $(BUILD_DIR)/images -r
 
 $(GENERATED_DIR)/%.no-headers: $(GENERATED_DIR)/%.apib
-	sed '/Authorization\: Basic.*/d' $(GENERATED_DIR)/$*.apib > $(GENERATED_DIR)/$*.no-headers
-	sed 's/\(POST \/\)/\1v4\//g' $(GENERATED_DIR)/$*.no-headers -i
-	sed 's/\(GET \/\)/\1v4\//g' $(GENERATED_DIR)/$*.no-headers -i
-	sed 's/\(PUT \/\)/\1v4\//g' $(GENERATED_DIR)/$*.no-headers -i
-	sed 's/\(DELETE \/\)/\1v4\//g' $(GENERATED_DIR)/$*.no-headers -i
-	sed 's/\(\[\/\)/\1v4\//g' $(GENERATED_DIR)/$*.no-headers -i
-
-$(GENERATED_DIR)/%.apib: ./tmp ./$(GENERATED_DIR) $($*_SRC)
-	mkdir tmp/$* -p
-	cp $($*_SRC) tmp/$*/ -r
-	sed -i -e 's/{{apiversion}}/$*/g' tmp/$*/*
-	cat $(addprefix tmp/$*/, $(notdir $($*_SRC))) > $@
+	sed "/Authorization\: Basic.*/d" $(GENERATED_DIR)/$*.apib > $(GENERATED_DIR)/$*.no-headers
+	sed "s/\(POST \/\)/\1$*\//g" $(GENERATED_DIR)/$*.no-headers -i
+	sed "s/\(GET \/\)/\1$*\//g" $(GENERATED_DIR)/$*.no-headers -i
+	sed "s/\(PUT \/\)/\1$*\//g" $(GENERATED_DIR)/$*.no-headers -i
+	sed "s/\(DELETE \/\)/\1$*\//g" $(GENERATED_DIR)/$*.no-headers -i
+	sed "s/\(\[\/\)/\1$*\//g" $(GENERATED_DIR)/$*.no-headers -i
+test:
+	echo hello
 
 $(GENERATED_DIR)/%.swagger.json: $(GENERATED_DIR)/%.apib
 	apib2swagger -i $(GENERATED_DIR)/$*.apib -o $@
@@ -149,4 +145,11 @@ drakov-mock: $(GENERATED_DIR)/$(MOCK_VERSION).no-headers
 deploy-ecs:
 	bash deploy/deploy_ecs.sh ${BRANCH_NAME}
 
-.PHONY: mock prepare-ecs
+.PHONY: mock prepare-ecs test
+
+.SECONDEXPANSION:
+$(GENERATED_DIR)/%.apib: $$(%_SRC) $(GENERATED_DIR)
+	mkdir tmp/$* -p
+	cp $($*_SRC) tmp/$*/ -r
+	sed -i -e 's/{{apiversion}}/$*/g' tmp/$*/*
+	cat $(addprefix tmp/$*/, $(notdir $($*_SRC))) > $@
