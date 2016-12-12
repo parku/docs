@@ -1,0 +1,74 @@
+# Group Payment
+Access needs a __private key__.
+## Credit Cards [/payment/creditcards]
+### List Credit Cards [GET /payment/creditcards]
+Shows all credit cards the user used before.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Body
+
+            [
+                {
+                    "id": "gphsyb",
+                    "type": "Visa",
+                    "number": "400934******1881",
+                    "expiration_date": "05/2020",
+                    "image_url": "https://assets.braintreegateway.com/payment_method_logo/visa.png?environment=sandbox&merchant_id=8fbxty8dhjmy8g4j"
+                },
+                {
+                    "id": "6tvts6",
+                    "type": "Visa",
+                    "number": "411111******1111",
+                    "expiration_date": "01/2014",
+                    "image_url": "https://assets.braintreegateway.com/payment_method_logo/visa.png?environment=sandbox&merchant_id=8fbxty8dhjmy8g4j"
+                }
+            ]
+
+### Delete a Credit Card [DELETE /payment/credit_cards/{credit_card_id}]
+
++ Parameters
+    + `credit_card_id`: gphsyb (string,required) - The identifier of the credit card to delete.
+        You'll receive a list of the users credit cards through the `GET /payment/creditcards` request.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 204
+
+### Update Credit [PUT /payment/credit{?amount,provider,provider_info}]
+__Deprecated__: this will be removed in __v5__.
+
++ Request
+    + Attributes
+        + `amount`: 10 (number,required) - The amount.
+        + `provider`: paypal (enum,required) The payment method.
+            + Members
+                + paypal
+                + braintree
+        + `provider_info`: `PAY-1CM399047K4649003KM4WJQQ` (string,required) - refer to the description
+              of [Create a new Booking](#bookings-bookings-post)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Body
+
+            {
+              "gender": "female",
+              "email": "test@example.com",
+              "firstname": "Test",
+              "lastname": "Name",
+              "credit": 10,
+              "currency": "EUR",
+              "country": "DE",
+              "facebook_id": null,
+              "token": "098f6bcd4621d373cade4e832627b4f6"
+            }

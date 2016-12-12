@@ -1,30 +1,31 @@
-# developer guides to parku
+# Developer Documentation for the ParkU API
 
 Use them as a basic start into developing parku applications.
 
 ## Prerequisites
 
-You'll need Ruby in a fairly new version installed.
+For running the native version on Linux/Mac:
 
-## Installation
+- make
+- node
+- `npm -g aglio aglio-theme-w00tw00t apib2swagger`
 
-If you want to make improvements to our guidelines, make a pull requests with your changes.
+For running the containerized version, you will need
 
-```sh
-$ git clone git@github.com:parku/docs.git parku-docs
-$ make install
-$ make
-$ open http://localhost:9393
-```
+- make
+- docker
 
-You should have a open browser with the latest guides.
+## Building
+
+For building natively use:
+`$ make all`
+
+For building in the container:
+`$ make all-in-docker`
+
+The resulting files are in the repository root, you can start browsing using
+the index.html file.
 
 ## Deployment
 
-Make your changes and commit them. Push to GitHub.
-
-```sh
-$ git push origin gh-pages
-```
-
-Sites gets recreated in a few seconds.
+We use `gh-pages` for deployment.
