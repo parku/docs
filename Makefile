@@ -77,7 +77,7 @@ meta-files: CNAME robots_allow.txt robots.txt | $(BUILD_DIR)
 
 # Build version v5 from v5 sources
 $(BUILD_DIR)/%.html: $(GENERATED_DIR)/%.apib $(COMMON_DEPS)
-	NOCACHE=1 aglio -i $(GENERATED_DIR)/$*.apib -o $(BUILD_DIR)/$*.html --theme peperoncino --theme-full-width --theme-template triple --verbose
+	aglio -i $(GENERATED_DIR)/$*.apib -o $(BUILD_DIR)/$*.html --theme peperoncino --theme-full-width --theme-template triple --verbose
 
 # Build v4 and v5
 generate-html: $(patsubst %, $(BUILD_DIR)/%.html, $(GENERATE_VERSIONS))

@@ -519,6 +519,8 @@ Updates the booking by setting the values of the parameters passed. Any paramete
             ]
 
 ### Stop a Booking [POST /bookings/{booking_id}/stop]
+Stops and pays a booking.
+
 Currently supports stopping onstreet bookings only.
 
 + Parameters
@@ -527,6 +529,15 @@ Currently supports stopping onstreet bookings only.
 + Request (application/json)
     + Attributes
         + `stop`: `2009-06-30T18:30:00+02:00` (string,required) - device time when the booking was stopped
+        + payments (array) - An array of payments
+            + (object) - A payment object
+                + id: `1000bb3e-506d-11e5-9781-d43d7eece658` (string,required) - a payment method id from the users payment methods
+                + amount: `4.25` (number,required) - Amount to pay. This is mainly used as a sanity check, the actual deducated amount is calculated on the backend.
+                + currency: EUR (enum, required) - the currency of the price
+                    + Members
+                      + EUR
+                      + CHF
+                + payload: `PAY-423454235` (string,optional) - Additional payment provider information.
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
@@ -540,33 +551,6 @@ Currently supports stopping onstreet bookings only.
                 + `cancel`: `http://www.ideal.nl/asdf1234`(string)
                 + `failure`: `http://www.ideal.nl/asdf1234`(string)
                 + `pending`: `http://www.ideal.nl/asdf1234`(string)
-
-
-### Pay a booking [POST /bookings/{booking_id}/payments]
-Pays for a booking.
-
-+ Parameters
-    + `booking_id`: `0000bb3e-506d-11e5-9781-d43d7eece658` (string,required) - the booking id to pay for
-
-+ Request (application/json)
-    + Attributes
-        + payments (array) - An array of payments
-            + (object) - A payment object
-                + type: `paypal` (enum,required) - Type of payment
-                    + Members
-                        + paypal
-                        + credits
-                + amount: `4.25` (number,required) - Amount to pay
-                + payload: `PAY-423454235` (string,required) - Payment provider information, required for every provider but `credits`
-            + (object)
-                + type: `credits` (string,required) - Type of payment
-                + amount: `2.0` (number,required) - Amount to pay
-    + Headers
-
-            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
-
-+ Response 201 (application/json)
-
 
 ### Retrieve Custom Extend Prices [GET /bookings/{booking_id}/extend{?date_end}]
 Retrieving a booking returns a few prices for standard intervals. Use this endpoint for custom intervals.
@@ -598,6 +582,15 @@ Retrieving a booking returns a few prices for standard intervals. Use this endpo
 ## Violation Dummy (object)
 + id: `005c4826-4e28-11e3-a675-d43d7eece53d` (string) - violation id
 
+## Booking Price (object)
++ `amount`: `4.25` (number) - the overall amount to pay for the booking
++ `transaction_fee`: `0.25` (number) - the transaction fee included in `amount`
++ `currency`: `EUR` (enum) - the currency of `amount` and `transaction_fee`
+    + Members
+        + EUR
+        + CHF
+
+
 ## Booking Base (object)
 + `id`: `005c4826-4e28-11e3-a675-d43d7eece53d` (string)
 + `license_plate`: `B-AB 1234` (string)
@@ -605,17 +598,7 @@ Retrieving a booking returns a few prices for standard intervals. Use this endpo
 + `reference`: `HRS5J` (string)
 + `date_start`: `2016-10-27T10:00:00+0000` (string)
 + `date_end`: `2016-10-27T16:30:00+0000` (string)
-+ `price` (object)
-    + `amount`: `4.25` (number) - the overall amount to pay for the booking
-    + `transaction_fee`: `0.25` (number) - the transaction fee included in `amount`
-    + `currency`: `EUR` (enum) - the currency of `amount` and `transaction_fee`
-        + Members
-            + EUR
-            + CHF
-+ `currency`: `CHF` (enum)
-    + Members
-        + EUR
-        + CHF
++ `price` (Booking Price)
 + `violation` (Violation Dummy)
 
 ## Parking Space Booking (Booking Base)
@@ -630,6 +613,7 @@ Retrieving a booking returns a few prices for standard intervals. Use this endpo
     + Members
         + zone
 + `date_end`: null (string, nullable) - is null if booking didn't end yet
++ `price`: null (string, nullable) - is null if booking didn't end yet
 + `zone` (Parking Zone) - the zone that was booked, only available if `type` is `zone`
 
 ## Ended Parking Zone Booking (object)
