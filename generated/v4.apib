@@ -926,6 +926,12 @@ Returns a list of locations that provide the same format as the single location.
 When no `date_start` or `date_end` was provided, all locations are returned.
 That does not mean, that they are available.
 
+Some of the locations do not show all the location details in this request. A special flag `has_live_details` defines
+if a second request has to be done to retrieve valid location details like description, price and availability.
+If `has_live_details` is `true`, a request to the single location with the corresponding id has to be made before
+booking the location. If `has_live_details` is true, the list request will have an `availability.current` of `null` and
+a `price` of `null` as well as an empty `description` and `additional fields`.
+
 + Parameters
     + sw: `45.74001,5.67868` (string,required) - Comma separated latitude and longitude of the southwest position.
     + ne: `47.74236,10.24900` (string,required) - Comma separated latitude and longitude of the northeast position.
@@ -971,6 +977,7 @@ That does not mean, that they are available.
                     "city": "Zürich",
                     "country": "CH",
                     "bookable": true,
+                    "has_live_details": false,
                     "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
                     "type": "off-street",
                     "code": "ZHRTHW",
@@ -1052,6 +1059,8 @@ That does not mean, that they are available.
     | description                   | `string` the description of the location. The description is returned in the users language or in the language specified by the HTTP header `Accept-Language` if it was given.                                                       |
     | id                            | `uuid rfc4122` unique identifier of the location used for referencing.                                                                                                                                                               |
     | image_urls                    | `list` urls of location images, can be **empty**                                                                                                                                                                                     |
+    | has_live_details              | `boolean` if `true` for booking a request to the single location endpoint has to be made to retrieve valid location details (price, availability, description, additional fields)
+    |
     | latitude                      | `decimal` latitude part of the location geo coordinate                                                                                                                                                                               |
     | longitude                     | `decimal` longitude part of the location geo                                                                                                                                                                                         |
     | notification                  | `list` *deprecated* usually empty, ignore                                                                                                                                                                                            |
@@ -1097,6 +1106,7 @@ That does not mean, that they are available.
                 "city": "Zürich",
                 "country": "CH",
                 "bookable": true,
+                "has_live_details": false,
                 "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
                 "type": "off-street",
                 "code": "ZHRTHW",

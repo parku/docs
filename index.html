@@ -958,6 +958,7 @@ In this case, you must ask the user for the country and <a href="#user-user-put"
         <span class="hljs-string">"city"</span>: <span class="hljs-string">"Zürich"</span>,
         <span class="hljs-string">"country"</span>: <span class="hljs-string">"CH"</span>,
         <span class="hljs-string">"bookable"</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-string">"has_live_details"</span>: <span class="hljs-literal">false</span>,
         <span class="hljs-string">"id"</span>: <span class="hljs-string">"00cd7cfd-e42d-11e2-8bf1-8a83f3373875"</span>,
         <span class="hljs-string">"type"</span>: <span class="hljs-string">"off-street"</span>,
         <span class="hljs-string">"code"</span>: <span class="hljs-string">"ZHRTHW"</span>,
@@ -1009,6 +1010,11 @@ In this case, you must ask the user for the country and <a href="#user-user-put"
 ]</code></pre><div style="height: 1px;"></div></div></div></div></div></div></div></div></div><div class="middle"><div id="locations-locations-get" class="action get"><h4 class="action-heading"><div class="name">List Locations&nbsp;<a href="#list-locations" id="list-locations" class="permalink">&para;</a></div><a href="#locations-locations-get" class="method get">GET</a><code class="uri">/locations{?sw,ne}</code></h4><p>Returns a list of locations that provide the same format as the single location.
 When no <code>date_start</code> or <code>date_end</code> was provided, all locations are returned.
 That does not mean, that they are available.</p>
+<p>Some of the locations do not show all the location details in this request. A special flag <code>has_live_details</code> defines
+if a second request has to be done to retrieve valid location details like description, price and availability.
+If <code>has_live_details</code> is <code>true</code>, a request to the single location with the corresponding id has to be made before
+booking the location. If <code>has_live_details</code> is true, the list request will have an <code>availability.current</code> of <code>null</code> and
+a <code>price</code> of <code>null</code> as well as an empty <code>description</code> and <code>additional fields</code>.</p>
 <div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>sw</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>45.74001,5.67868</span></span><p>Comma separated latitude and longitude of the southwest position.</p>
 </dd><dt>ne</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>47.74236,10.24900</span></span><p>Comma separated latitude and longitude of the northeast position.</p>
 </dd><dt>`date_start`</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>2016</span></span><p>10-27T09:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the start date.
@@ -1104,6 +1110,14 @@ are also given.</p>
 <tr>
 <td>image_urls</td>
 <td><code>list</code> urls of location images, can be <strong>empty</strong></td>
+</tr>
+<tr>
+<td>has_live_details</td>
+<td><code>boolean</code> if <code>true</code> for booking a request to the single location endpoint has to be made to retrieve valid location details (price, availability, description, additional fields)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td>latitude</td>
@@ -1254,6 +1268,7 @@ are also given.</p>
   "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Zürich"</span></span>,
   "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"CH"</span></span>,
   "<span class="hljs-attribute">bookable</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+  "<span class="hljs-attribute">has_live_details</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
   "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"00cd7cfd-e42d-11e2-8bf1-8a83f3373875"</span></span>,
   "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"off-street"</span></span>,
   "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-string">"ZHRTHW"</span></span>,
@@ -2480,7 +2495,7 @@ character/number combination, unique to each customer.</li>
 <ul>
 <li>Removed the <code>currency</code> as a parameter for updating the users credit. <code>currency</code> is still accepted as a parameter, but is ignored. The users country currency setting will be used instead.</li>
 </ul>
-</section></div><div class="middle"><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 23 Dec 2016</p></div></div></div></div><script>/* eslint-env browser */
+</section></div><div class="middle"><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 02 Jan 2017</p></div></div></div></div><script>/* eslint-env browser */
 /* eslint quotes: [2, "single"] */
 'use strict';
 
