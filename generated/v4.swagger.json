@@ -110,24 +110,24 @@
                 ],
                 "parameters": [
                     {
-                        "name": "`count`",
-                        "in": "body",
+                        "name": "count",
+                        "in": "query",
                         "description": "A limit on the number of objects to be returned.\nCount can range between 1 and 100 items.\n",
                         "required": false,
                         "type": "number",
                         "default": 10
                     },
                     {
-                        "name": "`offset`",
-                        "in": "body",
+                        "name": "offset",
+                        "in": "query",
                         "description": "An offset into the list of returned items.\nThe API will return the requested number of items starting at that offset.\n",
                         "required": false,
                         "type": "number",
                         "default": 0
                     },
                     {
-                        "name": "`date_start`",
-                        "in": "body",
+                        "name": "date_start",
+                        "in": "query",
                         "description": "Filter bookings, shows past bookings.",
                         "required": false,
                         "type": "string",
@@ -136,8 +136,8 @@
                         ]
                     },
                     {
-                        "name": "`date_end`",
-                        "in": "body",
+                        "name": "date_end",
+                        "in": "query",
                         "description": "Filter bookings, shows past bookings.",
                         "required": false,
                         "type": "string",
@@ -146,8 +146,8 @@
                         ]
                     },
                     {
-                        "name": "`status`",
-                        "in": "body",
+                        "name": "status",
+                        "in": "query",
                         "description": "Filter bookings for status.",
                         "required": false,
                         "type": "string",
@@ -539,8 +539,8 @@
                 ],
                 "parameters": [
                     {
-                        "name": "`booking_id`",
-                        "in": "body",
+                        "name": "booking_id",
+                        "in": "path",
                         "description": "the booking id",
                         "required": true,
                         "type": "string"
@@ -571,15 +571,15 @@
                 ],
                 "parameters": [
                     {
-                        "name": "`booking_id`",
-                        "in": "body",
+                        "name": "booking_id",
+                        "in": "path",
                         "description": "the booking id",
                         "required": true,
                         "type": "string"
                     },
                     {
-                        "name": "`date_end`",
-                        "in": "body",
+                        "name": "date_end",
+                        "in": "query",
                         "description": "end date and time of the booking",
                         "required": true,
                         "type": "string"
@@ -771,8 +771,8 @@
                 ],
                 "parameters": [
                     {
-                        "name": "`car_id`",
-                        "in": "body",
+                        "name": "car_id",
+                        "in": "path",
                         "description": "The identifier of the car to be deleted.",
                         "required": true,
                         "type": "number"
@@ -832,8 +832,8 @@
                 ],
                 "parameters": [
                     {
-                        "name": "`encoded_code`",
-                        "in": "body",
+                        "name": "encoded_code",
+                        "in": "path",
                         "description": "A base64url encoded coupon code string.",
                         "required": true,
                         "type": "string"
@@ -952,8 +952,8 @@
                 ],
                 "parameters": [
                     {
-                        "name": "`invitation_code`",
-                        "in": "body",
+                        "name": "invitation_code",
+                        "in": "path",
                         "description": "Base64 encoded invitation code.",
                         "required": true,
                         "type": "string"
@@ -994,22 +994,22 @@
                         "type": "string"
                     },
                     {
-                        "name": "`date_start`",
-                        "in": "body",
+                        "name": "date_start",
+                        "in": "query",
                         "description": "10-27T09:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the start date.\n`date_start` will have no effect unless `date_end` is also provided.\n",
                         "required": true,
                         "type": "string"
                     },
                     {
-                        "name": "`date_end`",
-                        "in": "body",
+                        "name": "date_end",
+                        "in": "query",
                         "description": "10-27T10:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the end date.\n`date_end` will have no effect unless `date_start` is also provided.\n",
                         "required": true,
                         "type": "string"
                     },
                     {
-                        "name": "`availability`",
-                        "in": "body",
+                        "name": "availability",
+                        "in": "query",
                         "description": "Filters returned locations regarding their availability if start and end\nare also given.\n\n* `true` only returns available locations\n    (this is default if availability is not specified and start and end were given)\n\n* `false` only returns non-available locations\n\n* `all` return all locations, including ones that no availability information is available for",
                         "required": false,
                         "type": "string",
@@ -1021,8 +1021,8 @@
                         ]
                     },
                     {
-                        "name": "`bookability`",
-                        "in": "body",
+                        "name": "bookability",
+                        "in": "query",
                         "description": "Filters returned locations regarding their general bookability.\n\n* `true` only returns locations that could be booked through the api if they are available\n\n* `false` only returns locations that can not be booked through the api, even though they might be available\n\n* `all` return all locations, no matter if they would be bookable though the API or not",
                         "required": false,
                         "type": "string",
@@ -1062,24 +1062,24 @@
                 ],
                 "parameters": [
                     {
-                        "name": "`location_id`",
-                        "in": "body",
+                        "name": "location_id",
+                        "in": "path",
                         "description": "Identifier of the location.",
                         "required": true,
                         "type": "string"
                     },
                     {
-                        "name": "`date_start`",
-                        "in": "body",
-                        "description": "10-27T09:10:20+00:00 (ISO 8601, optional) - Used to calculate the price for a location.\nRequires the field `date_end` to be defined. If no `date_start` or `date_end` is specified,\nthe returned `price` field will be `null`.\n",
-                        "required": true,
+                        "name": "date_start",
+                        "in": "query",
+                        "description": "Used to calculate the price for a location.\nRequires the field `date_end` to be defined. If no `date_start` or `date_end` is specified,\nthe returned `price` field will be `null`.\n",
+                        "required": false,
                         "type": "string"
                     },
                     {
-                        "name": "`date_end`",
-                        "in": "body",
-                        "description": "10-27T10:10:20+00:00 (ISO 8601, optional) - see `date_start`.",
-                        "required": true,
+                        "name": "date_end",
+                        "in": "query",
+                        "description": "\nsee `date_start`.\n",
+                        "required": false,
                         "type": "string"
                     }
                 ]
@@ -1101,23 +1101,23 @@
                 ],
                 "parameters": [
                     {
-                        "name": "`location_id`",
-                        "in": "body",
+                        "name": "location_id",
+                        "in": "path",
                         "description": "Identifier of the location.",
                         "required": true,
                         "type": "string"
                     },
                     {
-                        "name": "`date_start`",
-                        "in": "body",
+                        "name": "date_start",
+                        "in": "query",
                         "description": "10-27T09:10:20+00:00 (ISO 8601, optional) - Start of time frame to include periods.\nIf `date_start` is provided, `date_end` is required and vice versa.\n",
                         "required": true,
                         "type": "string"
                     },
                     {
-                        "name": "`date_end`",
-                        "in": "body",
-                        "description": "10-27T10:10:20+00:00 (ISO 8601, optional) - see `date_start`.",
+                        "name": "date_end",
+                        "in": "query",
+                        "description": "10-27T10:10:20+00:00 (ISO 8601, optional)\nsee `date_start`.\n",
                         "required": true,
                         "type": "string"
                     }
@@ -1142,8 +1142,8 @@
                 ],
                 "parameters": [
                     {
-                        "name": "`location_id`",
-                        "in": "body",
+                        "name": "location_id",
+                        "in": "path",
                         "description": "Identifier of the location.",
                         "required": true,
                         "type": "string"
@@ -1247,8 +1247,8 @@
                 ],
                 "parameters": [
                     {
-                        "name": "`for`",
-                        "in": "body",
+                        "name": "for",
+                        "in": "query",
                         "description": "A valid email address of the user.",
                         "required": true,
                         "type": "string"
@@ -1309,8 +1309,8 @@
                 ],
                 "parameters": [
                     {
-                        "name": "`credit_card_id`",
-                        "in": "body",
+                        "name": "credit_card_id",
+                        "in": "path",
                         "description": "The identifier of the credit card to delete.\nYou'll receive a list of the users credit cards through the `GET /payment/creditcards` request.\n",
                         "required": true,
                         "type": "string"
@@ -1432,7 +1432,7 @@
                 ]
             }
         },
-        "/phphone_numbersone_numbers/{phone_number_id}": {
+        "/phone_numbers/{phone_number_id}": {
             "get": {
                 "responses": {
                     "200": {
@@ -1453,8 +1453,8 @@
                 ],
                 "parameters": [
                     {
-                        "name": "`phone_number_id`",
-                        "in": "body",
+                        "name": "phone_number_id",
+                        "in": "path",
                         "description": "The identifier of the phone number to be retrieved.",
                         "required": true,
                         "type": "number"
@@ -1463,9 +1463,7 @@
                 "produces": [
                     "application/json"
                 ]
-            }
-        },
-        "/phone_numbers/{phone_number_id}": {
+            },
             "put": {
                 "responses": {
                     "200": {
@@ -1522,8 +1520,8 @@
                 ],
                 "parameters": [
                     {
-                        "name": "`phone_number_id`",
-                        "in": "body",
+                        "name": "phone_number_id",
+                        "in": "path",
                         "description": "The identifier of the phone number to be deleted.",
                         "required": true,
                         "type": "number"
@@ -1557,8 +1555,8 @@
                 ],
                 "parameters": [
                     {
-                        "name": "`sesam_id`",
-                        "in": "body",
+                        "name": "sesam_id",
+                        "in": "path",
                         "description": "The sesam ID which is hidden in the QR code.",
                         "required": true,
                         "type": "string"
@@ -1652,9 +1650,9 @@
                 ],
                 "parameters": [
                     {
-                        "name": "`notification_key`",
-                        "in": "body",
-                        "description": "A notification key.",
+                        "name": "notification_key",
+                        "in": "path",
+                        "description": "\nA notification key\n",
                         "required": true,
                         "type": "string",
                         "enum": [
@@ -2042,8 +2040,8 @@
                 ],
                 "parameters": [
                     {
-                        "name": "`booking_id`",
-                        "in": "body",
+                        "name": "booking_id",
+                        "in": "path",
                         "description": "The identifier of the booking\nto which the violation belongs to.\n",
                         "required": true,
                         "type": "string"
@@ -2094,8 +2092,8 @@
                 ],
                 "parameters": [
                     {
-                        "name": "`booking_id`",
-                        "in": "body",
+                        "name": "booking_id",
+                        "in": "path",
                         "description": "The identifier of the booking\nto which the violation belongs to.\n",
                         "required": true,
                         "type": "string"
@@ -2126,8 +2124,8 @@
                 ],
                 "parameters": [
                     {
-                        "name": "`booking_id`",
-                        "in": "body",
+                        "name": "booking_id",
+                        "in": "path",
                         "description": "The identifier of the booking\nto which the violation belongs to.\n",
                         "required": true,
                         "type": "string"
@@ -2172,8 +2170,8 @@
                 ],
                 "parameters": [
                     {
-                        "name": "`booking_id`",
-                        "in": "body",
+                        "name": "booking_id",
+                        "in": "path",
                         "description": "The identifier of the booking\nto which the violation belongs to.\n",
                         "required": true,
                         "type": "string"
@@ -2203,8 +2201,8 @@
                 ],
                 "parameters": [
                     {
-                        "name": "`booking_id`",
-                        "in": "body",
+                        "name": "booking_id",
+                        "in": "path",
                         "description": "The identifier of the booking\nto which the violation belongs to.\n",
                         "required": true,
                         "type": "string"

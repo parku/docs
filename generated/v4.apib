@@ -87,19 +87,19 @@ Access needs a __private key__.
 ### List all bookings [GET /bookings{?count,offset,date_start,date_end,status}]
 
 + Parameters
-    + `count`: 3 (number, optional) - A limit on the number of objects to be returned.
+    + count: 3 (number, optional) - A limit on the number of objects to be returned.
         Count can range between 1 and 100 items.
         + Default: 10
-    + `offset`: 10 (number, optional) - An offset into the list of returned items.
+    + offset: 10 (number, optional) - An offset into the list of returned items.
         The API will return the requested number of items starting at that offset.
         + Default: 0
-    + `date_start`: past (enum, optional) - Filter bookings, shows past bookings.
+    + date_start: past (enum, optional) - Filter bookings, shows past bookings.
         + Members
             + past
-    + `date_end`: future (enum, optional) - Filter bookings, shows past bookings.
+    + date_end: future (enum, optional) - Filter bookings, shows past bookings.
         + Members
             + future
-    + `status`: active (enum, optional) - Filter bookings for status.
+    + status: active (enum, optional) - Filter bookings for status.
         + Members
             + all
             + active
@@ -195,20 +195,20 @@ Access needs a __private key__.
 ### Create a new Booking [POST /bookings{?location_id,date_start,date_end,license_plate,phone_number,provider,provider_info,status,required_fields}]
 + Request (application/json)
     + Attributes
-        + `location_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) -
+        + location_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) -
             The ID of the location you get returned from the locations request
-        + `date_start`: `2016-10-27T09:10:20+00:00` (string, required) - start date and time of the booking
-        + `date_end`: `2016-10-27T10:10:20+00:00` (string, required) - end date and time of the booking
-        + `license_plate`: `B-AB 1234` (string, required) - The license plate of the used car.
+        + date_start: `2016-10-27T09:10:20+00:00` (string, required) - start date and time of the booking
+        + date_end: `2016-10-27T10:10:20+00:00` (string, required) - end date and time of the booking
+        + license_plate: `B-AB 1234` (string, required) - The license plate of the used car.
             Get all cars of a user from the [cars](#user-cars-get) request.
-        + `phone_number`: `+493057701872` (string, required) - The phone number.
+        + phone_number: `+493057701872` (string, required) - The phone number.
             Get all phone numbers of a user from the [phone_numbers](`#user-phone_numbers-get`) request.
-        + `provider`: paypal (enum[string], required) - The payment method.
+        + provider: paypal (enum[string], required) - The payment method.
             + Members
                 + paypal - pay by paypal
                 + credit - pay by credit
                 + braintree - pay by braintree
-        + `provider_info`: `PAY-1CM399047K4649003KM4WJQQ` (string, optional) -
+        + provider_info: `PAY-1CM399047K4649003KM4WJQQ` (string, optional) -
             The information of the payment provider to perform a payment.  Required for `paypal` and `braintree`.
 
             The field `provider_info` should contain required payment information.
@@ -233,13 +233,13 @@ Access needs a __private key__.
                     provider_info[cvv]=EncryptedCvv
                     ```
 
-        + `status`: all (enum[string], optional) - Get bookings by status.
+        + status: all (enum[string], optional) - Get bookings by status.
             + Members
                 + all
                 + active
                 + cancelled
             + Default: all
-        + `required_field` (object) - Parking space required fields defined in the locations request. The required fields should contain all required fields defined in location. All values should be sent as strings.
+        + required_field (object) - Parking space required fields defined in the locations request. The required fields should contain all required fields defined in location. All values should be sent as strings.
             + car_color: `red` (string, optional) - the car color
             + number_of_passengers: `5` (string, optional) - the number of passengers
 
@@ -456,16 +456,16 @@ Updates the booking by setting the values of the parameters passed. Any paramete
 
 + Request  (application/json)
     + Attributes
-        + `booking_id` : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
-        + `license_plate`: `B-BC 4567` (string, optional) -
+        + booking_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
+        + license_plate: `B-BC 4567` (string, optional) -
             refer to the description of [`Create a new Booking`](#bookings-bookings-post)
-        + `phone_number`: `+493057701871` (string, optional) -
+        + phone_number: `+493057701871` (string, optional) -
             refer to the description of [`Create a new Booking`](#bookings-bookings-post)
-        + `date_end`: `2016-10-27T17:00:00+0000` (string, optional) -
+        + date_end: `2016-10-27T17:00:00+0000` (string, optional) -
             refer to the description of [`Create a new Booking`](#bookings-bookings-post)
-        + `provider`: `paypal` (string, optional) -
+        + provider: `paypal` (string, optional) -
             refer to the description of [`Create a new Booking`](#bookings-bookings-post)
-        + `provider_info`: `PAY-2CM399047K4649003KM4WJQQ` (string, optional) -
+        + provider_info: `PAY-2CM399047K4649003KM4WJQQ` (string, optional) -
             refer to the description of [`Create a new Booking`](#bookings-bookings-post)
     + Headers
 
@@ -587,7 +587,7 @@ Updates the booking by setting the values of the parameters passed. Any paramete
 ### Cancel a Booking [DELETE /bookings/{booking_id}]
 
 + Parameters
-    + `booking_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
+    + booking_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
 
 + Request
     + Headers
@@ -601,8 +601,8 @@ Updates the booking by setting the values of the parameters passed. Any paramete
 Retrieving a booking returns a few prices for standard intervals. Use this endpoint for custom intervals.
 
 + Parameters
-    + `booking_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
-    + `date_end`: `2016-10-27T10:10:20+00:00` (ISO 8601, required) - end date and time of the booking
+    + booking_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
+    + date_end: `2016-10-27T10:10:20+00:00` (ISO 8601, required) - end date and time of the booking
 
 + Request
     + Headers
@@ -657,7 +657,7 @@ You can store multiple cars for a user.
 
 + Request (application/json)
     + Attributes
-        + `license_plate`: `B-AB 1234` (string, required) - The license plate for the stored car.
+        + license_plate: `B-AB 1234` (string, required) - The license plate for the stored car.
         + vehicle: Isetta (string, optional) - A name for the car to be identified easier.
         + country: DE (enum, optional) - The country code the license plate.
             + Members
@@ -705,8 +705,8 @@ Updates the car by setting the values of the parameters passed. Any parameters n
 
 + Request  (application/json)
     + Attributes
-        + `car_id`: 23 (number, required) - The identifier of the car to be updated.
-        + `license_plate`: `B-AB 1234` (string, required) - The license plate for the stored car.
+        + car_id: 23 (number, required) - The identifier of the car to be updated.
+        + license_plate: `B-AB 1234` (string, required) - The license plate for the stored car.
         + vehicle: Polo (string, optional) - A name for the car to be identified easier.
         + country: DE (enum, optional) - The country code the license plate.
             + Members
@@ -730,7 +730,7 @@ Updates the car by setting the values of the parameters passed. Any parameters n
 ### Delete a Car [DELETE /cars/{car_id}]
 
 + Parameters
-    + `car_id`: 23 (number, required) - The identifier of the car to be deleted.
+    + car_id: 23 (number, required) - The identifier of the car to be deleted.
 
 + Request
     + Headers
@@ -744,7 +744,7 @@ Access needs a __private key__.
 
 ### Test a Coupon [GET /coupon/{encoded_code}{?action,amount}]
 + Parameters
-    + `encoded_code`: Zm9vYmFyMTIz (string, required) - A base64url encoded coupon code string.
+    + encoded_code: Zm9vYmFyMTIz (string, required) - A base64url encoded coupon code string.
     + action: test (enum, required) - Action to do.
         + Members
             + test
@@ -901,7 +901,7 @@ Access needs a __private key__.
 ### Check Invitation Code Validity [GET /invitations/{invitation_code}]
 
 + Parameters
-    + `invitation_code`: `d2VsbCBkb25lISBnZXQgYSBiZWVyIG5vdyA9RA==` (string,required) - Base64 encoded invitation code.
+    + invitation_code: `d2VsbCBkb25lISBnZXQgYSBiZWVyIG5vdyA9RA==` (string,required) - Base64 encoded invitation code.
 
 + Request
     + Headers
@@ -935,11 +935,11 @@ a `price` of `null` as well as an empty `description` and `additional fields`.
 + Parameters
     + sw: `45.74001,5.67868` (string,required) - Comma separated latitude and longitude of the southwest position.
     + ne: `47.74236,10.24900` (string,required) - Comma separated latitude and longitude of the northeast position.
-    + `date_start`: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the start date.
+    + date_start: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the start date.
         `date_start` will have no effect unless `date_end` is also provided.
-    + `date_end`: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the end date.
+    + date_end: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the end date.
         `date_end` will have no effect unless `date_start` is also provided.
-    + `availability`: all (string,optional) - Filters returned locations regarding their availability if start and end
+    + availability: all (string,optional) - Filters returned locations regarding their availability if start and end
         are also given.
         * `true` only returns available locations
             (this is default if availability is not specified and start and end were given)
@@ -950,7 +950,7 @@ a `price` of `null` as well as an empty `description` and `additional fields`.
             + false
             + all
         + Default: true
-    + `bookability`: all (string,optional) - Filters returned locations regarding their general bookability.
+    + bookability: all (string,optional) - Filters returned locations regarding their general bookability.
         * `true` only returns locations that could be booked through the api if they are available
         * `false` only returns locations that can not be booked through the api, even though they might be available
         * `all` return all locations, no matter if they would be bookable though the API or not
@@ -1031,11 +1031,12 @@ a `price` of `null` as well as an empty `description` and `additional fields`.
 ## Location [/locations/{location_id}]
 ### Retrieve a Location [GET /locations/{location_id}{?date_start,date_end}]
 + Parameters
-    + `location_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122, required) - Identifier of the location.
-    + `date_start`: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Used to calculate the price for a location.
+    + location_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122, required) - Identifier of the location.
+    + date_start: `2016-10-27T09:10:20+00:00` (ISO 8601, optional) - Used to calculate the price for a location.
         Requires the field `date_end` to be defined. If no `date_start` or `date_end` is specified,
         the returned `price` field will be `null`.
-    + `date_end`: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - see `date_start`.
+    + date_end: `2016-10-27T10:10:20+00:00` (ISO 8601, optional)
+        see `date_start`.
 
 + Request
     + Headers
@@ -1171,10 +1172,11 @@ Request validation failed because the request data was malformed.
 ### Get availability times for location [GET /locations/{location_id}/availability{?date_start,date_end}]
 
 + Parameters
-    + `location_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - Identifier of the location.
-    + `date_start`: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Start of time frame to include periods.
+    + location_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - Identifier of the location.
+    + date_start: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Start of time frame to include periods.
         If `date_start` is provided, `date_end` is required and vice versa.
-    + `date_end`: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - see `date_start`.
+    + date_end: 2016-10-27T10:10:20+00:00 (ISO 8601, optional)
+        see `date_start`.
 
 + Request
     + Headers
@@ -1236,7 +1238,7 @@ Each location can have different terms and conditions.
 With this endpoint you can retrieve location based terms and conditions.
 
 + Parameters
-    + `location_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - Identifier of the location.
+    + location_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - Identifier of the location.
 
 + Request
     + Headers
@@ -1321,7 +1323,7 @@ Access needs a __public key__.
 This sends an email with the newly set password to the users email address.
 
 + Parameters
-    + `for`: `test@example.com` (string,required) - A valid email address of the user.
+    + for: `test@example.com` (string,required) - A valid email address of the user.
 
 
 + Request
@@ -1368,7 +1370,7 @@ Shows all credit cards the user used before.
 ### Delete a Credit Card [DELETE /payment/credit_cards/{credit_card_id}]
 
 + Parameters
-    + `credit_card_id`: gphsyb (string,required) - The identifier of the credit card to delete.
+    + credit_card_id: gphsyb (string,required) - The identifier of the credit card to delete.
         You'll receive a list of the users credit cards through the `GET /payment/creditcards` request.
 
 + Request
@@ -1457,10 +1459,10 @@ You can store multiple phone numbers for a user.
             }
 
 ## Phone Number [/phone_numbers/{phone_number_id}]
-### Retrieve a Phone Number [GET /phphone_numbersone_numbers/{phone_number_id}]
+### Retrieve a Phone Number [GET /phone_numbers/{phone_number_id}]
 
 + Parameters
-    + `phone_number_id`: 151 (number,required) - The identifier of the phone number to be retrieved.
+    + phone_number_id: 151 (number,required) - The identifier of the phone number to be retrieved.
 
 + Request
     + Headers
@@ -1479,7 +1481,7 @@ You can store multiple phone numbers for a user.
 #### Body Parameters
 + Request (application/json)
     + Attributes
-        + `phone_number_id`: 151 (number,required) - The identifier of the phone number to be updated.
+        + phone_number_id: 151 (number,required) - The identifier of the phone number to be updated.
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
@@ -1494,7 +1496,7 @@ You can store multiple phone numbers for a user.
 
 ### Delete a Phone Number [DELETE /phone_numbers/{phone_number_id}]
 + Parameters
-    + `phone_number_id`: 151 (number,required) - The identifier of the phone number to be deleted.
+    + phone_number_id: 151 (number,required) - The identifier of the phone number to be deleted.
 
 + Request
     + Headers
@@ -1521,7 +1523,7 @@ _Both QR codes are valid and activate a sesam device in the parku office._
 ### Open Sesam [PUT /sesam/{sesam_id}]
 
 + Parameters
-    + `sesam_id`: 1234abcd (string,required) - The sesam ID which is hidden in the QR code.
+    + sesam_id: 1234abcd (string,required) - The sesam ID which is hidden in the QR code.
 
 + Request
     + Headers
@@ -1773,7 +1775,8 @@ Changing the settings is not possible.
 ### Enable/Disable Notification [PUT /settings/booking/notification/{notification_key}]
 #### Body Parameters
 + Parameters
-    + `notification_key`: `time_to_leave` (enum,required) - A notification key.
+    + notification_key: `entry` (enum,required)
+        A notification key
         + Members
             + time_to_leave
             + near_location
@@ -2031,13 +2034,13 @@ You can store one violation per booking. A violation report is done in two steps
 
 ### Create a New Violation [POST /bookings/{booking_id}/violation]
 + Parameters
-    + `booking_id`: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
+    + booking_id: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
         to which the violation belongs to.
 
 + Request (application/json)
     + Attributes
-        + `license_plate`: `B-CD 4321` (string,required)
-        + `comment`: `This car parked on my parking space!!!` (string,required)
+        + license_plate: `B-CD 4321` (string,required)
+        + comment: `This car parked on my parking space!!!` (string,required)
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
@@ -2054,7 +2057,7 @@ You can store one violation per booking. A violation report is done in two steps
 ### Retrieve a Violation [GET /bookings/{booking_id}/violation]
 
 + Parameters
-    + `booking_id`: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
+    + booking_id: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
         to which the violation belongs to.
 
 + Request
@@ -2076,7 +2079,7 @@ Updates the violation by setting the values of the parameters passed.
 Any parameters not provided will be left unchanged. The photo can be updated through
 [adding a new photo](#header-add-a-photo).
 + Parameters
-    + `booking_id`: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
+    + booking_id: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
         to which the violation belongs to.
 
 + Request (application/json)
@@ -2099,7 +2102,7 @@ Any parameters not provided will be left unchanged. The photo can be updated thr
 ### Delete a Violation [DELETE /bookings/{booking_id}/violation]
 
 + Parameters
-    + `booking_id`: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
+    + booking_id: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
         to which the violation belongs to.
 + Request (application/json)
     + Headers
@@ -2116,7 +2119,7 @@ The entire `PUT` body will be treated as the file. Make sure to add the Content-
 to your header.
 
 + Parameters
-    + `booking_id`: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
+    + booking_id: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
         to which the violation belongs to.
 
 + Request (application/octet-stream)
@@ -2164,6 +2167,10 @@ __DEPRECATED__ This resource is deprecated and will be removed in __v5__. Use co
               "token": "098f6bcd4621d373cade4e832627b4f6"
             }
 # Group Changelog
+
+### 2016-12-23
+
+* `has_live_details` field for locations model
 
 ### 2016-11-21
 
