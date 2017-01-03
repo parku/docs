@@ -16,11 +16,11 @@ a `price` of `null` as well as an empty `description` and `additional fields`.
 + Parameters
     + sw: `45.74001,5.67868` (string,required) - Comma separated latitude and longitude of the southwest position.
     + ne: `47.74236,10.24900` (string,required) - Comma separated latitude and longitude of the northeast position.
-    + `date_start`: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the start date.
+    + date_start: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the start date.
         `date_start` will have no effect unless `date_end` is also provided.
-    + `date_end`: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the end date.
+    + date_end: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the end date.
         `date_end` will have no effect unless `date_start` is also provided.
-    + `availability`: all (string,optional) - Filters returned locations regarding their availability if start and end
+    + availability: all (string,optional) - Filters returned locations regarding their availability if start and end
         are also given.
         * `true` only returns available locations
             (this is default if availability is not specified and start and end were given)
@@ -31,7 +31,7 @@ a `price` of `null` as well as an empty `description` and `additional fields`.
             + false
             + all
         + Default: true
-    + `bookability`: all (string,optional) - Filters returned locations regarding their general bookability.
+    + bookability: all (string,optional) - Filters returned locations regarding their general bookability.
         * `true` only returns locations that could be booked through the api if they are available
         * `false` only returns locations that can not be booked through the api, even though they might be available
         * `all` return all locations, no matter if they would be bookable though the API or not
@@ -112,11 +112,12 @@ a `price` of `null` as well as an empty `description` and `additional fields`.
 ## Location [/locations/{location_id}]
 ### Retrieve a Location [GET /locations/{location_id}{?date_start,date_end}]
 + Parameters
-    + `location_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122, required) - Identifier of the location.
-    + `date_start`: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Used to calculate the price for a location.
+    + location_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122, required) - Identifier of the location.
+    + date_start: `2016-10-27T09:10:20+00:00` (ISO 8601, optional) - Used to calculate the price for a location.
         Requires the field `date_end` to be defined. If no `date_start` or `date_end` is specified,
         the returned `price` field will be `null`.
-    + `date_end`: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - see `date_start`.
+    + date_end: `2016-10-27T10:10:20+00:00` (ISO 8601, optional)
+        see `date_start`.
 
 + Request
     + Headers
@@ -252,10 +253,11 @@ Request validation failed because the request data was malformed.
 ### Get availability times for location [GET /locations/{location_id}/availability{?date_start,date_end}]
 
 + Parameters
-    + `location_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - Identifier of the location.
-    + `date_start`: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Start of time frame to include periods.
+    + location_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - Identifier of the location.
+    + date_start: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Start of time frame to include periods.
         If `date_start` is provided, `date_end` is required and vice versa.
-    + `date_end`: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - see `date_start`.
+    + date_end: 2016-10-27T10:10:20+00:00 (ISO 8601, optional)
+        see `date_start`.
 
 + Request
     + Headers
@@ -317,7 +319,7 @@ Each location can have different terms and conditions.
 With this endpoint you can retrieve location based terms and conditions.
 
 + Parameters
-    + `location_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - Identifier of the location.
+    + location_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - Identifier of the location.
 
 + Request
     + Headers

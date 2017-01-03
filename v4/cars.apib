@@ -37,7 +37,7 @@ You can store multiple cars for a user.
 
 + Request (application/json)
     + Attributes
-        + `license_plate`: `B-AB 1234` (string, required) - The license plate for the stored car.
+        + license_plate: `B-AB 1234` (string, required) - The license plate for the stored car.
         + vehicle: Isetta (string, optional) - A name for the car to be identified easier.
         + country: DE (enum, optional) - The country code the license plate.
             + Members
@@ -85,8 +85,8 @@ Updates the car by setting the values of the parameters passed. Any parameters n
 
 + Request  (application/json)
     + Attributes
-        + `car_id`: 23 (number, required) - The identifier of the car to be updated.
-        + `license_plate`: `B-AB 1234` (string, required) - The license plate for the stored car.
+        + car_id: 23 (number, required) - The identifier of the car to be updated.
+        + license_plate: `B-AB 1234` (string, required) - The license plate for the stored car.
         + vehicle: Polo (string, optional) - A name for the car to be identified easier.
         + country: DE (enum, optional) - The country code the license plate.
             + Members
@@ -110,7 +110,7 @@ Updates the car by setting the values of the parameters passed. Any parameters n
 ### Delete a Car [DELETE /cars/{car_id}]
 
 + Parameters
-    + `car_id`: 23 (number, required) - The identifier of the car to be deleted.
+    + car_id: 23 (number, required) - The identifier of the car to be deleted.
 
 + Request
     + Headers

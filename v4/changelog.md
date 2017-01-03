@@ -1,5 +1,9 @@
 # Group Changelog
 
+### 2016-12-23
+
+* `has_live_details` field for locations model
+
 ### 2016-11-21
 
 * New examples and formatting

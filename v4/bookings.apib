@@ -4,19 +4,19 @@ Access needs a __private key__.
 ### List all bookings [GET /bookings{?count,offset,date_start,date_end,status}]
 
 + Parameters
-    + `count`: 3 (number, optional) - A limit on the number of objects to be returned.
+    + count: 3 (number, optional) - A limit on the number of objects to be returned.
         Count can range between 1 and 100 items.
         + Default: 10
-    + `offset`: 10 (number, optional) - An offset into the list of returned items.
+    + offset: 10 (number, optional) - An offset into the list of returned items.
         The API will return the requested number of items starting at that offset.
         + Default: 0
-    + `date_start`: past (enum, optional) - Filter bookings, shows past bookings.
+    + date_start: past (enum, optional) - Filter bookings, shows past bookings.
         + Members
             + past
-    + `date_end`: future (enum, optional) - Filter bookings, shows past bookings.
+    + date_end: future (enum, optional) - Filter bookings, shows past bookings.
         + Members
             + future
-    + `status`: active (enum, optional) - Filter bookings for status.
+    + status: active (enum, optional) - Filter bookings for status.
         + Members
             + all
             + active
@@ -112,20 +112,20 @@ Access needs a __private key__.
 ### Create a new Booking [POST /bookings{?location_id,date_start,date_end,license_plate,phone_number,provider,provider_info,status,required_fields}]
 + Request (application/json)
     + Attributes
-        + `location_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) -
+        + location_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) -
             The ID of the location you get returned from the locations request
-        + `date_start`: `2016-10-27T09:10:20+00:00` (string, required) - start date and time of the booking
-        + `date_end`: `2016-10-27T10:10:20+00:00` (string, required) - end date and time of the booking
-        + `license_plate`: `B-AB 1234` (string, required) - The license plate of the used car.
+        + date_start: `2016-10-27T09:10:20+00:00` (string, required) - start date and time of the booking
+        + date_end: `2016-10-27T10:10:20+00:00` (string, required) - end date and time of the booking
+        + license_plate: `B-AB 1234` (string, required) - The license plate of the used car.
             Get all cars of a user from the [cars](#user-cars-get) request.
-        + `phone_number`: `+493057701872` (string, required) - The phone number.
+        + phone_number: `+493057701872` (string, required) - The phone number.
             Get all phone numbers of a user from the [phone_numbers](`#user-phone_numbers-get`) request.
-        + `provider`: paypal (enum[string], required) - The payment method.
+        + provider: paypal (enum[string], required) - The payment method.
             + Members
                 + paypal - pay by paypal
                 + credit - pay by credit
                 + braintree - pay by braintree
-        + `provider_info`: `PAY-1CM399047K4649003KM4WJQQ` (string, optional) -
+        + provider_info: `PAY-1CM399047K4649003KM4WJQQ` (string, optional) -
             The information of the payment provider to perform a payment.  Required for `paypal` and `braintree`.
 
             The field `provider_info` should contain required payment information.
@@ -150,13 +150,13 @@ Access needs a __private key__.
                     provider_info[cvv]=EncryptedCvv
                     ```
 
-        + `status`: all (enum[string], optional) - Get bookings by status.
+        + status: all (enum[string], optional) - Get bookings by status.
             + Members
                 + all
                 + active
                 + cancelled
             + Default: all
-        + `required_field` (object) - Parking space required fields defined in the locations request. The required fields should contain all required fields defined in location. All values should be sent as strings.
+        + required_field (object) - Parking space required fields defined in the locations request. The required fields should contain all required fields defined in location. All values should be sent as strings.
             + car_color: `red` (string, optional) - the car color
             + number_of_passengers: `5` (string, optional) - the number of passengers
 
@@ -373,16 +373,16 @@ Updates the booking by setting the values of the parameters passed. Any paramete
 
 + Request  (application/json)
     + Attributes
-        + `booking_id` : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
-        + `license_plate`: `B-BC 4567` (string, optional) -
+        + booking_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
+        + license_plate: `B-BC 4567` (string, optional) -
             refer to the description of [`Create a new Booking`](#bookings-bookings-post)
-        + `phone_number`: `+493057701871` (string, optional) -
+        + phone_number: `+493057701871` (string, optional) -
             refer to the description of [`Create a new Booking`](#bookings-bookings-post)
-        + `date_end`: `2016-10-27T17:00:00+0000` (string, optional) -
+        + date_end: `2016-10-27T17:00:00+0000` (string, optional) -
             refer to the description of [`Create a new Booking`](#bookings-bookings-post)
-        + `provider`: `paypal` (string, optional) -
+        + provider: `paypal` (string, optional) -
             refer to the description of [`Create a new Booking`](#bookings-bookings-post)
-        + `provider_info`: `PAY-2CM399047K4649003KM4WJQQ` (string, optional) -
+        + provider_info: `PAY-2CM399047K4649003KM4WJQQ` (string, optional) -
             refer to the description of [`Create a new Booking`](#bookings-bookings-post)
     + Headers
 
@@ -504,7 +504,7 @@ Updates the booking by setting the values of the parameters passed. Any paramete
 ### Cancel a Booking [DELETE /bookings/{booking_id}]
 
 + Parameters
-    + `booking_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
+    + booking_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
 
 + Request
     + Headers
@@ -518,8 +518,8 @@ Updates the booking by setting the values of the parameters passed. Any paramete
 Retrieving a booking returns a few prices for standard intervals. Use this endpoint for custom intervals.
 
 + Parameters
-    + `booking_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
-    + `date_end`: `2016-10-27T10:10:20+00:00` (ISO 8601, required) - end date and time of the booking
+    + booking_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
+    + date_end: `2016-10-27T10:10:20+00:00` (ISO 8601, required) - end date and time of the booking
 
 + Request
     + Headers

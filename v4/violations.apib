@@ -8,13 +8,13 @@ You can store one violation per booking. A violation report is done in two steps
 
 ### Create a New Violation [POST /bookings/{booking_id}/violation]
 + Parameters
-    + `booking_id`: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
+    + booking_id: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
         to which the violation belongs to.
 
 + Request (application/json)
     + Attributes
-        + `license_plate`: `B-CD 4321` (string,required)
-        + `comment`: `This car parked on my parking space!!!` (string,required)
+        + license_plate: `B-CD 4321` (string,required)
+        + comment: `This car parked on my parking space!!!` (string,required)
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
@@ -31,7 +31,7 @@ You can store one violation per booking. A violation report is done in two steps
 ### Retrieve a Violation [GET /bookings/{booking_id}/violation]
 
 + Parameters
-    + `booking_id`: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
+    + booking_id: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
         to which the violation belongs to.
 
 + Request
@@ -53,7 +53,7 @@ Updates the violation by setting the values of the parameters passed.
 Any parameters not provided will be left unchanged. The photo can be updated through
 [adding a new photo](#header-add-a-photo).
 + Parameters
-    + `booking_id`: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
+    + booking_id: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
         to which the violation belongs to.
 
 + Request (application/json)
@@ -76,7 +76,7 @@ Any parameters not provided will be left unchanged. The photo can be updated thr
 ### Delete a Violation [DELETE /bookings/{booking_id}/violation]
 
 + Parameters
-    + `booking_id`: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
+    + booking_id: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
         to which the violation belongs to.
 + Request (application/json)
     + Headers
@@ -93,7 +93,7 @@ The entire `PUT` body will be treated as the file. Make sure to add the Content-
 to your header.
 
 + Parameters
-    + `booking_id`: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
+    + booking_id: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
         to which the violation belongs to.
 
 + Request (application/octet-stream)
