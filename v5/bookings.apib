@@ -402,7 +402,7 @@ Updates the booking by setting the values of the parameters passed. Any paramete
 ### Cancel a Booking [DELETE /bookings/{booking_id}]
 
 + Parameters
-    + `booking_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
+    + booking_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
 
 + Request
     + Headers
@@ -414,19 +414,19 @@ Updates the booking by setting the values of the parameters passed. Any paramete
 ### List all bookings [GET /bookings{?count,offset,date_start,date_end,status}]
 
 + Parameters
-    + `count`: 3 (number, optional) - A limit on the number of objects to be returned.
+    + count: 3 (number, optional) - A limit on the number of objects to be returned.
         Count can range between 1 and 100 items.
         + Default: 10
-    + `offset`: 10 (number, optional) - An offset into the list of returned items.
+    + offset: 10 (number, optional) - An offset into the list of returned items.
         The API will return the requested number of items starting at that offset.
         + Default: 0
-    + `date_start`: past (enum, optional) - Filter bookings, shows past bookings.
+    + date_start: past (enum, optional) - Filter bookings, shows past bookings.
         + Members
             + past
-    + `date_end`: future (enum, optional) - Filter bookings, shows past bookings.
+    + date_end: future (enum, optional) - Filter bookings, shows past bookings.
         + Members
             + future
-    + `status`: active (enum, optional) - Filter bookings for status.
+    + status: active (enum, optional) - Filter bookings for status.
         + Members
             + all
             + active
@@ -524,7 +524,7 @@ Stops and pays a booking.
 Currently supports stopping onstreet bookings only.
 
 + Parameters
-    + `booking_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string,required) - the booking id
+    + booking_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string,required) - the booking id
 
 + Request (application/json)
     + Attributes
@@ -556,8 +556,8 @@ Currently supports stopping onstreet bookings only.
 Retrieving a booking returns a few prices for standard intervals. Use this endpoint for custom intervals.
 
 + Parameters
-    + `booking_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
-    + `date_end`: `2016-10-27T10:10:20+00:00` (ISO 8601, required) - end date and time of the booking
+    + booking_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
+    + date_end: `2016-10-27T10:10:20+00:00` (ISO 8601, required) - end date and time of the booking
 
 + Request
     + Headers

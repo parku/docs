@@ -23,11 +23,12 @@ A [location cluster](#first-level-cluster-model) contains information about how 
 ### Retrieve a Location [GET /locations/{location_id}{?date_start,date_end}]
 
 + Parameters
-    + `location_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122, required) - Identifier of the location.
-    + `date_start`: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Used to calculate the price for a location.
+    + location_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122, required) - Identifier of the location.
+    + date_start: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Used to calculate the price for a location.
         Requires the field `date_end` to be defined. If no `date_start` or `date_end` is specified,
         the returned `price` field will be `null`.
-    + `date_end`: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - see `date_start`.
+    + date_end: 2016-10-27T10:10:20+00:00 (ISO 8601, optional)
+        see `date_start`.
 
 + Request
     + Headers
@@ -64,11 +65,11 @@ AND (properties1 AND properties2 AND ...)
 + Parameters
     + sw: `45.74001,5.67868` (string,required) - Comma separated latitude and longitude of the southwest position.
     + ne: `47.74236,10.24900` (string,required) - Comma separated latitude and longitude of the northeast position.
-    + `date_start`: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the start date.
+    + date_start: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the start date.
         `date_start` will have no effect unless `date_end` is also provided.
-    + `date_end`: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the end date.
+    + date_end: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the end date.
         `date_end` will have no effect unless `date_start` is also provided.
-    + `filter_available`: true (boolean,optional) - Filters returned locations regarding their availability if start and
+    + filter_available: true (boolean,optional) - Filters returned locations regarding their availability if start and
         end are also given.
         * `true` only returns available locations
             (this is default if availability is not specified and start and end were given)
@@ -76,13 +77,13 @@ AND (properties1 AND properties2 AND ...)
         + Members
             + true
             + false
-    + `filter_bookable`: true (boolean,optional) - Filters returned locations regarding their general bookability.
+    + filter_bookable: true (boolean,optional) - Filters returned locations regarding their general bookability.
         * `true` only returns locations that could be booked through the api if they are available
         * `false` only returns locations that can not be booked through the api, even though they might be available
         + Members
             + true
             + false
-    + `filter_type`: `airport-parking` (array[string],optional) - Filters the result to only show parking spaces with
+    + filter_type: `airport-parking` (array[string],optional) - Filters the result to only show parking spaces with
         with either of the provided types.
         + Members
             + `off-street`
@@ -90,14 +91,15 @@ AND (properties1 AND properties2 AND ...)
             + `professional-garage`
             + `airport-parking`
             + `harbor-parking`
-    + `filter_price`: `rate_hourly` (array[string],optional) - Filters the result to only show parking spaces with
+    + filter_price: (array[string],optional)
+        Filters the result to only show parking spaces with
         either of the provided rates.
         + Members
             + `rate_hourly`
             + `rate_daily`
             + `rate_weekly`
             + `rate_monthly`
-    + `filter_properties`: `excess_length` (array[string],optional) - Filters the result to only show parking spaces
+    + filter_properties: `indoor` (array[string],optional) - Filters the result to only show parking spaces
         all the provided properties.
         + Members
             + `excess_length`
@@ -109,7 +111,7 @@ AND (properties1 AND properties2 AND ...)
             + `long_term_booking`
             + `surveillance`
             + `valet_service`
-    + `fields`: `all` (array[string],optional) - Response will only contain the fields mentioned in this parameter.
+    + fields: `all` (array[string],optional) - Response will only contain the fields mentioned in this parameter.
         This can either be `all` or an comma separated list of field names from the response, e.g. `id,street,country`.
 
 + Request (application/x-www-form-urlencode)
@@ -124,10 +126,11 @@ AND (properties1 AND properties2 AND ...)
 ### Get availability times for location [GET /locations/{location_id}/availability{?date_start,date_end}]
 
 + Parameters
-    + `location_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - Identifier of the location.
-    + `date_start`: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Start of time frame to include periods.
+    + location_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - Identifier of the location.
+    + date_start: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Start of time frame to include periods.
         If `date_start` is provided, `date_end` is required and vice versa.
-    + `date_end`: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - see `date_start`.
+    + date_end: 2016-10-27T10:10:20+00:00 (ISO 8601, optional)
+        see `date_start`.
 
 + Request
     + Headers
@@ -183,13 +186,13 @@ AND (properties1 AND properties2 AND ...)
 
 ### Retrieve Terms and Conditions [GET /locations/{location_id}/terms]
 
-_Deprecated_ This endpoint is deprecated. `/settings` endpoint should be used instead.
+_Deprecated_ This endpoint is deprecated. `/settings` endpoint should be used instead.
 
 Each location can have different terms and conditions.
 With this endpoint you can retrieve location based terms and conditions.
 
 + Parameters
-    + `location_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - Identifier of the location.
+    + location_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - Identifier of the location.
 
 + Request
     + Headers
