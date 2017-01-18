@@ -3,7 +3,7 @@ node {
 
     timestamps {
         stage('Docker Build') {
-            sh 'docker build -t parku/docs --build-arg CACHE_DATE=$(date +%Y-%m-%d:%H:%M:%S) .'
+            sh 'docker build -t parku/docs:${BRANCH_NAME} --build-arg CACHE_DATE=$(date +%Y-%m-%d:%H:%M:%S) .'
         }
 
         stage('Build Docs') {
@@ -21,8 +21,8 @@ node {
         }
 
         stage('Docker push to Amazon ECR') {
-            sh '`aws ecr get-login`'
-            docker.image('parku/docs').push(env.BRANCH_NAME)
+            sh 'docker tag parku/docs:${BRANCH_NAME} 715994263731.dkr.ecr.eu-central-1.amazonaws.com/parku/docs:${BRANCH_NAME}'
+            sh 'docker push 715994263731.dkr.ecr.eu-central-1.amazonaws.com/parku/docs:${BRANCH_NAME}'
         }
 
         if (env.BRANCH_NAME == "master") {
