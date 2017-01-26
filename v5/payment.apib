@@ -76,7 +76,48 @@ __Deprecated__: this will be removed in __v5__.
 
 
 # Data Structure
+## Pre Booking Payment Input (object)
++ `type`: paypal (enum[string], required) - The payment method.
+    + Members
+        + paypal - pay by paypal
+        + credit - pay by credit
+        + braintree - pay by braintree
++ amount: 12.00 (number, required) - the amount to pay with this method
++ `payload`: `PAY-1CM399047K4649003KM4WJQQ` (string, optional) -
+    The information of the payment provider to perform a payment.  Required for `paypal` and `braintree`.
 
+    The field `provider_info` should contain required payment information.
+    Typically you just forward the info from your request to the payment provider into this field.
+
+    * **PayPal**
+        You can either use the complete PayPal response or just add the payment ID:
+        ```
+        payments.payload=PAY-1CM399047K4649003KM4WJQQ
+        ```
+    * **Braintree**
+        There are two ways to pay with braintree:
+        1. _CreditCard-ID_
+
+            Retrieve the Card ID through the payment endpoint and add it to the request:
+
+            ```
+            payments.payload[id]=gphsyb
+            ```
+        2. _CreditCard Credentials_
+
+            ```
+            payments.payload[number]=EncryptedCreditCardNumber
+            payments.payload[expiration_date]=EncryptedExpirationDate
+            payments.payload[cvv]=EncryptedCvv
+            ```
+
+## Payment Method Input (object)
++ id: `1000bb3e-506d-11e5-9781-d43d7eece658` (string) - the payment method id
++ type: post (enum[string], optional) - how to execute the payment
+    + Members
+        + post
+        + immediate
+    + Default: post
 ## Payment Method (object)
 + id: `1000bb3e-506d-11e5-9781-d43d7eece658` (string) - the payment method id
 + created_at: `2009-06-30T18:30:00+02:00` (string) - date when the payment method was created

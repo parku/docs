@@ -18,36 +18,13 @@ Access needs a __private key__.
             Get all cars of a user from the [cars](#user-cars-get) request.
         + `phone_number`: `+493057701872` (string, required) - The phone number.
             Get all phone numbers of a user from the [phone_numbers](`#user-phone_numbers-get`) request.
-        + `provider`: paypal (enum[string], required) - The payment method.
-            + Members
-                + paypal - pay by paypal
-                + credit - pay by credit
-                + braintree - pay by braintree
-        + `provider_info`: `PAY-1CM399047K4649003KM4WJQQ` (string, optional) -
-            The information of the payment provider to perform a payment.  Required for `paypal` and `braintree`.
-
-            The field `provider_info` should contain required payment information.
-            Typically you just forward the info from your request to the payment provider into this field.
-
-            * **PayPal**
-                You can either use the complete PayPal response or just add the payment ID: provider_info=PAY-1CM399047K4649003KM4WJQQ
-            * **Braintree**
-                There are two ways to pay with braintree:
-                1. _CreditCard-ID_
-
-                    Retrieve the Card ID through the payment endpoint and add it to the request:
-
-                    ```
-                    provider_info[id]=gphsyb
-                    ```
-                2. _CreditCard Credentials_
-
-                    ```
-                    provider_info[number]=EncryptedCreditCardNumber
-                    provider_info[expiration_date]=EncryptedExpirationDate
-                    provider_info[cvv]=EncryptedCvv
-                    ```
-
+        + payments (array[Pre Booking Payment Input], optional)
+          The payments to use for paying. This can be credits, coupons,
+          paypal and braintree payments that have been authorized on the frontend.
+        + payment_method (Payment Method Input, optional)
+          The payment method to use for paying. This method will be used for paying the fee of the booking
+          after all payments from the `payments` field have been applied. E.g. if you provided a 5 Euro
+          voucher via `payments`, the payment method will be used on 5 Euro less than the actual booking fee.
         + `status`: all (enum[string], optional) - Get bookings by status.
             + Members
                 + all
