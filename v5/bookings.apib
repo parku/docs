@@ -10,7 +10,7 @@ Access needs a __private key__.
 ### Create a new Booking [POST /bookings{?location_id,date_start,date_end,license_plate,phone_number,provider,provider_info,status,required_fields}]
 + Request (application/json)
     + Attributes
-        + `location_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) -
+        + `group_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) -
             The ID of the location you get returned from the locations request
         + `date_start`: `2016-10-27T09:10:20+00:00` (string, required) - start date and time of the booking
         + `date_end`: `2016-10-27T10:10:20+00:00` (string, required) - end date and time of the booking
@@ -18,7 +18,7 @@ Access needs a __private key__.
             Get all cars of a user from the [cars](#user-cars-get) request.
         + `phone_number`: `+493057701872` (string, required) - The phone number.
             Get all phone numbers of a user from the [phone_numbers](`#user-phone_numbers-get`) request.
-        + payments (array[Pre Booking Payment Input], optional)
+        + payment (array[Pre Booking Payment Input], optional)
           The payments to use for paying. This can be credits, coupons,
           paypal and braintree payments that have been authorized on the frontend.
         + payment_method (Payment Method Input, optional)
