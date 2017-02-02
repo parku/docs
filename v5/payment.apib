@@ -112,13 +112,14 @@ __Deprecated__: this will be removed in __v5__.
             ```
 
 ## Payment Method Input (object)
-+ id: `1000bb3e-506d-11e5-9781-d43d7eece658` (string) - the payment method id
-+ type: post (enum[string], optional) - how to execute the payment
++ id: `1000bb3e-506d-11e5-9781-d43d7eece658` (string, optional) - the payment method id,
+    only needed if type is `immediate`, post payments are paid with the primary
+    payment post payment method
++ type: post (enum[string], required) - How to execute the payment. If `post` is selected
+    here, the primary payment method of the user will be used and the id is ignored.
     + Members
         + post
         + immediate
-    + Default: post
-+ amount: 5.2 (number,required) - amount to cover with this method
 
 ## Payment Method (object)
 + id: `1000bb3e-506d-11e5-9781-d43d7eece658` (string) - the payment method id
