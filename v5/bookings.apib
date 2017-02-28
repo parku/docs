@@ -40,91 +40,12 @@ Access needs a __private key__.
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 201 (application/json)
-    + Body
-
-            {
-              "id": "005c4826-4e28-11e3-a675-d43d7eece53d",
-              "license_plate": "B-AB 1234",
-              "phone_number": "+493057701872",
-              "location": {
-                "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
-                "code": "ZHRTHW",
-                "latitude": 47.365398,
-                "longitude": 8.51987,
-                "street": "Hopfenstrasse",
-                "street_number": "20",
-                "postcode": "8045",
-                "city": "Zürich",
-                "country": "CH",
-                "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
-                "post_booking_info": "Bitte holen sie den Schlüssel vorher ab und schließen das Tor",
-                "image_urls": [
-                  "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
-                  "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"
-                ],
-                "options": [],
-                "notifications": [],
-                "currency": "CHF",
-                "pricing": {
-                  "rate_hourly": 2,
-                  "rate_daily": 10,
-                  "rate_weekly": null,
-                  "rate_monthly": null
-                },
-                "support": {
-                  "phone_number": "+41 43 928 72 52"
-                },
-                "address_slug": "hopfenstrasse-20",
-                "user_owned": false,
-                "settings": {
-                  "bookable_range_start": -15,
-                  "bookable_range_end": 43200,
-                  "booking_duration_min": 30,
-                  "booking_duration_max": 43200
-                },
-                "required_fields":[
-                  "additional_services",
-                  "car_colour",
-                  "number_of_passengers"
-                ],
-                "gates": [
-                  {
-                    "type": "beacon",
-                    "identifier": "A97186B0-C879-4526-93AD-29A731AB0C39:12:F5",
-                    "gateways": [
-                      {
-                        "type": "box",
-                        "name": "PRK-123"
-                      },
-                      {
-                        "type": "api"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "qrcode",
-                    "identifier": "PARKU3KU",
-                    "gateways": [
-                      {
-                        "type": "api"
-                      }
-                    ]
-                  }
-                ]
-              },
-              "reference": "HRS5J",
-              "date_start": "2016-10-27T10:00:00+0000",
-              "date_end": "2016-10-27T16:30:00+0000",
-              "price": 13.75,
-              "currency": "CHF",
-              "violation": null
-            }
+    + Attributes (Booking)
 
 ### Retrieve a Booking [GET /bookings/{reference}]
 Retrieves the details of an existing booking. You need to supply either the id or the reference of a booking.
 
 + Parameters
-
     + reference: `005c4826-4e28-11e3-a675-d43d7eece53d` (string, required) - The id or code of the booking
 + Request
     + Headers
@@ -132,116 +53,7 @@ Retrieves the details of an existing booking. You need to supply either the id o
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
-    + Body
-
-            {
-              "id": "005c4826-4e28-11e3-a675-d43d7eece53d",
-              "license_plate": "B-AB 1234",
-              "phone_number": "+493057701872",
-              "location": {
-                "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
-                "code": "ZHRTHW",
-                "latitude": 47.365398,
-                "longitude": 8.51987,
-                "street": "Hopfenstrasse",
-                "street_number": "20",
-                "postcode": "8045",
-                "city": "Zürich",
-                "country": "CH",
-                "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
-                "post_booking_info": "Bitte holen sie den Schlüssel vorher ab und schließen das Tor",
-                "image_urls": [
-                  "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
-                  "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"
-                ],
-                "options": [],
-                "notifications": [],
-                "currency": "CHF",
-                "pricing": {
-                  "rate_hourly": 2,
-                  "rate_daily": 10,
-                  "rate_weekly": null,
-                  "rate_monthly": null
-                },
-                "support": {
-                  "phone_number": "+41 43 928 72 52"
-                },
-                "address_slug": "hopfenstrasse-20",
-                "user_owned": false,
-                "settings": {
-                  "bookable_range_start": -15,
-                  "bookable_range_end": 43200,
-                  "booking_duration_min": 30,
-                  "booking_duration_max": 43200
-                },
-                "gates": [
-                  {
-                    "type": "beacon",
-                    "identifier": "A97186B0-C879-4526-93AD-29A731AB0C39:12:F5",
-                    "gateways": [
-                      {
-                        "type": "box",
-                        "name": "PRK-123"
-                      },
-                      {
-                        "type": "api"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "qrcode",
-                    "identifier": "PARKU3KU",
-                    "gateways": [
-                      {
-                        "type": "api"
-                      }
-                    ]
-                  }
-                ]
-              },
-              "reference": "HRS5J",
-              "date_start": "2016-10-27T10:00:00+0000",
-              "date_end": "2016-10-27T16:30:00+0000",
-              "price": 13.75,
-              "currency": "CHF",
-              "violation": {
-                "license_plate": "B-DC 4321",
-                "comment": "This car parked on my parking space!!!",
-                "image_url": "https://parku.ch/images/reports/12.jpeg"
-              },
-              "extend": [
-                {
-                  "date_start": "2016-10-27T10:00:00+0000",
-                  "date_end": "2016-10-27T16:30:00+0000",
-                  "price": 1.25,
-                  "currency": "CHF"
-                },
-                {
-                  "date_start": "2016-10-27T10:00:00+0000",
-                  "date_end": "2016-10-27T17:30:00+0000",
-                  "price": 2.5,
-                  "currency": "CHF"
-                },
-                {
-                  "date_start": "2016-10-27T10:00:00+0000",
-                  "date_end": "2016-10-27T18:30:00+0000",
-                  "price": 5,
-                  "currency": "CHF"
-                },
-                {
-                  "date_start": "2016-10-27T10:00:00+0000",
-                  "date_end": "2016-10-27T19:30:00+0000",
-                  "price": 7.5,
-                  "currency": "CHF"
-                },
-                {
-                  "date_start": "2016-10-27T10:00:00+0000",
-                  "date_end": "2016-10-27T21:30:00+0000",
-                  "price": 7.5,
-                  "currency": "CHF"
-                }
-              ]
-            }
+    + Attributes (Booking)
 
 ### Update a Booking [PUT /bookings/{booking_id}]
 Updates the booking by setting the values of the parameters passed. Any parameter not provided will be left unchanged.
@@ -264,117 +76,8 @@ Updates the booking by setting the values of the parameters passed. Any paramete
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200
-    + Body
+    + Attributes (Booking)
 
-
-            {
-              "id": "005c4826-4e28-11e3-a675-d43d7eece53d",
-              "license_plate": "B-BC 1234",
-              "phone_number": "+493057701871",
-              "location": {
-                "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
-                "code": "ZHRTHW",
-                "latitude": 47.365398,
-                "longitude": 8.51987,
-                "street": "Hopfenstrasse",
-                "street_number": "20",
-                "postcode": "8045",
-                "city": "Zürich",
-                "country": "CH",
-                "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
-                "post_booking_info": "Bitte holen sie den Schlüssel vorher ab und schließen das Tor",
-                "image_urls": [
-                  "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
-                  "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"
-                ],
-                "options": [],
-                "notifications": [],
-                "currency": "CHF",
-                "pricing": {
-                  "rate_hourly": 2,
-                  "rate_daily": 10,
-                  "rate_weekly": null,
-                  "rate_monthly": null
-                },
-                "support": {
-                  "phone_number": "+41 43 928 72 52"
-                },
-                "address_slug": "hopfenstrasse-20",
-                "user_owned": false,
-                "settings": {
-                  "bookable_range_start": -15,
-                  "bookable_range_end": 43200,
-                  "booking_duration_min": 30,
-                  "booking_duration_max": 43200
-                },
-                "gates": [
-                  {
-                    "type": "beacon",
-                    "identifier": "A97186B0-C879-4526-93AD-29A731AB0C39:12:F5",
-                    "gateways": [
-                      {
-                        "type": "box",
-                        "name": "PRK-123"
-                      },
-                      {
-                        "type": "api"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "qrcode",
-                    "identifier": "PARKU3KU",
-                    "gateways": [
-                      {
-                        "type": "api"
-                      }
-                    ]
-                  }
-                ]
-              },
-              "reference": "HRS5J",
-              "date_start": "2016-10-27T10:00:00+0000",
-              "date_end": "2016-10-27T16:30:00+0000",
-              "price": 13.75,
-              "currency": "CHF",
-              "violation": {
-                "license_plate": "B-DC 4321",
-                "comment": "This car parked on my parking space!!!",
-                "image_url": "https://parku.ch/images/reports/12.jpeg"
-              },
-              "extend": [
-                {
-                  "date_start": "2016-10-27T10:00:00+0000",
-                  "date_end": "2016-10-27T16:30:00+0000",
-                  "price": 1.25,
-                  "currency": "CHF"
-                },
-                {
-                  "date_start": "2016-10-27T10:00:00+0000",
-                  "date_end": "2016-10-27T17:30:00+0000",
-                  "price": 2.5,
-                  "currency": "CHF"
-                },
-                {
-                  "date_start": "2016-10-27T10:00:00+0000",
-                  "date_end": "2016-10-27T18:30:00+0000",
-                  "price": 5,
-                  "currency": "CHF"
-                },
-                {
-                  "date_start": "2016-10-27T10:00:00+0000",
-                  "date_end": "2016-10-27T19:30:00+0000",
-                  "price": 7.5,
-                  "currency": "CHF"
-                },
-                {
-                  "date_start": "2016-10-27T10:00:00+0000",
-                  "date_end": "2016-10-27T21:30:00+0000",
-                  "price": 7.5,
-                  "currency": "CHF"
-                }
-              ]
-            }
 
 ### Cancel a Booking [DELETE /bookings/{booking_id}]
 
@@ -416,84 +119,7 @@ Updates the booking by setting the values of the parameters passed. Any paramete
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
-    + Body
-
-            [
-              {
-                "id": "0072c629-e622-11e2-8bf1-8a83f3373875",
-                "license_plate": "B-AB 1234",
-                "location": {
-                  "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
-                  "code": "ZHRTHW",
-                  "latitude": 47.365398,
-                  "longitude": 8.51987,
-                  "street": "Hopfenstrasse",
-                  "street_number": "20",
-                  "postcode": "8045",
-                  "city": "Zürich",
-                  "country": "CH",
-                  "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
-                  "post_booking_info": "Bitte holen sie den Schlüssel vorher ab und schließen das Tor",
-                  "image_urls": [
-                    "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image",
-                    "http://parku.ch/parkingspace/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/image"
-                  ],
-                  "options": [],
-                  "notifications": [],
-                  "currency": "CHF",
-                  "pricing": {
-                    "rate_hourly": 2,
-                    "rate_daily": 10,
-                    "rate_weekly": null,
-                    "rate_monthly": null
-                  },
-                  "support": {
-                    "phone_number": "+41 43 928 72 52"
-                  },
-                  "address_slug": "hopfenstrasse-20",
-                  "user_owned": false,
-                  "settings": {
-                    "bookable_range_start": -15,
-                    "bookable_range_end": 43200,
-                    "booking_duration_min": 30,
-                    "booking_duration_max": 43200
-                  },
-                  "gates": [
-                    {
-                      "type": "beacon",
-                      "identifier": "A97186B0-C879-4526-93AD-29A731AB0C39:12:F5",
-                      "gateways": [
-                        {
-                          "type": "box",
-                          "name": "PRK-123"
-                        },
-                        {
-                          "type": "api"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "qrcode",
-                      "identifier": "PARKU3KU",
-                      "gateways": [
-                        {
-                          "type": "api"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "phone_number": "+493057701872",
-                "reference": "HRS5J",
-                "date_start": "2016-10-27T10:00:00+0000",
-                "date_end": "2016-10-27T16:30:00+0000",
-                "price": 13.75,
-                "currency": "CHF",
-                "violation": null
-              },
-              {...},
-              {...}
-            ]
+     + Attributes (array[Booking])
 
 ### Stop a Booking [POST /bookings/{booking_id}/stop]
 Stops and pays a booking.
@@ -553,9 +179,6 @@ Retrieving a booking returns a few prices for standard intervals. Use this endpo
 
 # Data Structures
 
-## Location Dummy (object)
-+ id: `005c4826-4e28-11e3-a675-d43d7eece53d` (string) - location id
-
 ## Violation Dummy (object)
 + id: `005c4826-4e28-11e3-a675-d43d7eece53d` (string) - violation id
 
@@ -582,7 +205,7 @@ Retrieving a booking returns a few prices for standard intervals. Use this endpo
 + `type`: `location` (enum)
     + Members
         + location
-+ `location` (Parking Space Group) - the locaton that was booked, only available if `type` is `location`
++ `location` (Parking Space Group) - the location that was booked, only available if `type` is `location`
 
 ## Parking Zone Booking (object)
 + Include Booking Base
@@ -602,5 +225,6 @@ Retrieving a booking returns a few prices for standard intervals. Use this endpo
     + Members
         + location
         + zone
-+ `location` (Location Dummy) - the locaton that was booked, only available if `type` is `location`
++ `group_id` '123c4826-4e28-11e3-a675-d43d7eece53d' (string) - the id of the booked parking space group
++ `location` (Location) - the location that was booked, only available if `type` is `location`
 + `zone` (Parking Zone) - the zone that was booked, only available if `type` is `zone`
