@@ -451,29 +451,29 @@ Retrieves the details of an existing booking. You need to supply either the id o
               ]
             }
 
-### Update a Booking [PUT /bookings/{booking_id}]
+### Update a Booking [PUT /bookings/{booking_id}{?license_plate,phone_number,date_end,provider,provider_info}]
 Updates the booking by setting the values of the parameters passed. Any parameter not provided will be left unchanged.
 
-+ Request  (application/json)
-    + Attributes
-        + booking_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
-        + license_plate: `B-BC 4567` (string, optional) -
-            refer to the description of [`Create a new Booking`](#bookings-bookings-post)
-        + phone_number: `+493057701871` (string, optional) -
-            refer to the description of [`Create a new Booking`](#bookings-bookings-post)
-        + date_end: `2016-10-27T17:00:00+0000` (string, optional) -
-            refer to the description of [`Create a new Booking`](#bookings-bookings-post)
-        + provider: `paypal` (string, optional) -
-            refer to the description of [`Create a new Booking`](#bookings-bookings-post)
-        + provider_info: `PAY-2CM399047K4649003KM4WJQQ` (string, optional) -
-            refer to the description of [`Create a new Booking`](#bookings-bookings-post)
++ Parameters
+    + booking_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
+    + license_plate: `B-BC 4567` (string, optional) -
+        refer to the description of [`Create a new Booking`](#bookings-bookings-post)
+    + phone_number: `+493057701871` (string, optional) -
+        refer to the description of [`Create a new Booking`](#bookings-bookings-post)
+    + date_end: `2016-10-27T17:00:00+0000` (string, optional) -
+        refer to the description of [`Create a new Booking`](#bookings-bookings-post)
+    + provider: `paypal` (string, optional) -
+        refer to the description of [`Create a new Booking`](#bookings-bookings-post)
+    + provider_info: `PAY-2CM399047K4649003KM4WJQQ` (string, optional) -
+        refer to the description of [`Create a new Booking`](#bookings-bookings-post)
+
++ Request
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200
     + Body
-
 
             {
               "id": "005c4826-4e28-11e3-a675-d43d7eece53d",
