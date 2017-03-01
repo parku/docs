@@ -212,20 +212,7 @@ Access needs a __private key__.
 Adds a new payment method for the user.
 
 + Request (application/json)
-    + Attributes
-        + `types` (array, required) - type of payment method
-            + (enum)
-                + post
-                + immediate
-        + `primary`: `true` (boolean, optional)
-            Wether the payment method should be activated as the users
-            primary payment method.
-            If another payment method of the user was set to be the primary method before,
-            that one will be be changed to not be the primary one anymore.
-            + Default: false
-        + `provider` (object) - the payment provider information
-            + sepa (object) - sepa provider
-                + iban: `DEADBEEF` (string, required)
+    + Attributes (Payment Method Input)
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1

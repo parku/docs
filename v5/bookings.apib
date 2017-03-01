@@ -21,7 +21,7 @@ Access needs a __private key__.
         + payment (array[Pre Booking Payment Input], optional)
           The payments to use for paying. This can be credits, coupons,
           paypal and braintree payments that have been authorized on the frontend.
-        + payment_method (Payment Method Input, optional)
+        + payment_method (Used Payment Method Input, optional)
           The payment method to use for paying. This method will be used for paying the fee of the booking
           after all payments from the `payments` field have been applied. E.g. if you provided a 5 Euro
           voucher via `payments`, the payment method will be used on 5 Euro less than the actual booking fee.

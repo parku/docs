@@ -110,16 +110,31 @@ __Deprecated__: this will be removed in __v5__.
             payments.payload[expiration_date]=EncryptedExpirationDate
             payments.payload[cvv]=EncryptedCvv
             ```
-
 ## Payment Method Input (object)
++ `types` (array, required) - type of payment method
+    + (enum)
+        + post
++ `primary`: `true` (boolean, optional)
+    Wether the payment method should be activated as the users primary payment method.
+    If another payment method of the user was set to be the primary method before,
+    that one will be be changed to not be the primary one anymore.
+    + Default: false
++ `provider` (Payment Method Provider Input) - the payment provider information
+
+## Payment Method Provider Input (object)
++ stripe (object) - sepa provider
+    + `source_id`: `tok_1234567890` (string, required)
+        the stripe source id for a credit card or a token representing a credit
+        card as returned by various stripe libraries, see https://stripe.com/docs/checkout
+
+## Used Payment Method Input (object)
 + id: `1000bb3e-506d-11e5-9781-d43d7eece658` (string, optional) - the payment method id,
     only needed if type is `immediate`, post payments are paid with the primary
-    payment post payment method
+    post payment method
 + type: post (enum[string], required) - How to execute the payment. If `post` is selected
     here, the primary payment method of the user will be used and the id is ignored.
     + Members
         + post
-        + immediate
 
 ## Payment Method (object)
 + id: `1000bb3e-506d-11e5-9781-d43d7eece658` (string) - the payment method id
@@ -127,20 +142,31 @@ __Deprecated__: this will be removed in __v5__.
 + types (array) - type of payment method
     + (enum)
         + post
-        + immediate
+
 + primary: true (boolean) - wether this is the primary payment method of the user
 + validated: true (boolean) -
     Wether the payment method was already validated. Non validated payment methods cannot be used for paying.
 + provider (object) - the payment provider information, can be one of `braintree`, `credits`, `coupon`, `paypal`
     + One Of
-        + sepa (object) - paid through braintree provider
-            + iban: `DEADBEEF` (string) - the iban
-        + credit (object) - paid by credit
-            + `balance`: `20.5` (number) - credit account balance
-        + coupon (object) - paid with a coupon
-            + codes: `ASDF1234` (array[string]) - used coupon codes
-        + paypal (object) - paid by paypal
-            + created_at: `2009-06-30T18:30:00+02:00` (string) - date when the payment method was created
+        + stripe (Stripe Payment Method) - payment using stripe
 
 ## Payment (Payment Method)
 + amount: `5.35` (number)
+
+## Stripe Payment Method (object)
++ `customer_id`: `cus_123456789` (string, required) - stripe customer id
++ `source_id`: `src_123456789` (string, required) - stripe source id
++ `credit_card` (Credit Card Payment Method) - the credit card information
+
+## Credit Card Payment Method (object)
++ number: 6789 (string, required) - last 4 digits of credit card
++ type: 'Visa' (string, required) - card type as defined by `brand` at https://stripe.com/docs/api#card_object
++ `expire_month`: 12 (number, required) - expiration month of the credit card
++ `expire_year`: 2067 (number, required) - expiration year of the credit card
++ country: DE (string, required) - two letter ISO code representing the country of the card
++ `cvc_check`: pass(enum, required) - result of the cvc check if cvc was provided
+    + Members
+        + pass
+        + fail
+        + unavailable
+        + unchecked
