@@ -263,7 +263,7 @@ Updates the booking by setting the values of the parameters passed. Any paramete
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
-+ Response 200
++ Response 200 (application/json)
     + Body
 
 
@@ -506,15 +506,7 @@ Currently supports stopping onstreet bookings only.
 + Request (application/json)
     + Attributes
         + `stop`: `2009-06-30T18:30:00+02:00` (string,required) - device time when the booking was stopped
-        + payments (array) - An array of payments
-            + (object) - A payment object
-                + id: `1000bb3e-506d-11e5-9781-d43d7eece658` (string,required) - a payment method id from the users payment methods
-                + amount: `4.25` (number,required) - Amount to pay. This is mainly used as a sanity check, the actual deducated amount is calculated on the backend.
-                + currency: EUR (enum, required) - the currency of the price
-                    + Members
-                      + EUR
-                      + CHF
-                + payload: `PAY-423454235` (string,optional) - Additional payment provider information.
+        + payment_method (Payment Method Input, optional)
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
