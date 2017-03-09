@@ -17,7 +17,7 @@ This request returns parking zone information about a specific point on the map.
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
-    + Attributes (Parking Zone)
+    + Attributes (Onstreet)
 
 ### Start an Onstreet Booking [POST /onstreet/start]
 Access needs at least a __private key__.
@@ -32,6 +32,7 @@ is as expected. The optional attributes of the parking zone object here are main
 + Request (application/json)
     + Attributes
         + `zone` (Parking Zone, required) - the parking zone object to start the booking on
+        + `payment_method` (object) - information about payment method.
         + `license_plate`: `AB 1234` (string, required) - the license plate of the car used for parking
         + `phone_number`: `01234567890` (string, required) - the customer phone number
         + `start`: `2009-06-30T18:30:00+02:00` (string, required) - the start date of the booking
@@ -57,12 +58,6 @@ Returned if either one of the provided zone fields didnt match or the payment in
 + longitude: 13.12341234 (number, required) - longitude of the requested point
 + hours: `Mon-Fri, 08:00 - 22:30` (string, optional) - the translated availability time in this zone
 + price (Zone Price, required) - information about the price for this zone
-+ payment_method (object) - information about payment method.
-    + type: `post` (enum[string], optional) - available payment types
-      + Members
-          + `post`
-          + `immediate`
-      + Default: `post`
 + max_datetime_end: `2009-06-30T18:30:00+02:00` (string, optional) - datetime when a booking has to end
 + duration_max: `2.0 hours` (string, optional) - translated string of maximum general parking duration.
 + possible_duraitons: (array[number], optional) - array containing the possilbe parking durations.
@@ -85,3 +80,7 @@ Returned if either one of the provided zone fields didnt match or the payment in
     + Members
       + EUR
       + CHF
+
+## Onstreet (object)
++ zone (Parking Zone) - the zone that was booked.
++ payment_method (Payment Method Input)- used payment method.
