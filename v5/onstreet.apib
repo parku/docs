@@ -35,13 +35,14 @@ is as expected. The optional attributes of the parking zone object here are main
         + `license_plate`: `AB 1234` (string, required) - the license plate of the car used for parking
         + `phone_number`: `01234567890` (string, required) - the customer phone number
         + `start`: `2009-06-30T18:30:00+02:00` (string, required) - the start date of the booking
+        + `duration`: `15` (number, optional) - the parking duration, some locations require them.
 
 + Response 201 (application/json)
     Returned if a booking was created
     + Attributes (Parking Zone Booking)
 
 + Response 404
-Returned if parking zone was not found.
+Returned if parking zone was not found, or it is already booked.
     + Body
 
 + Response 422
@@ -52,18 +53,28 @@ Returned if either one of the provided zone fields didnt match or the payment in
 ## Parking Zone (object)
 + id: `101012` (string, required) - the parking zone id
 + name: `Berlin 101012` (string, optional) - the parking space zone name
++ latitude: 53.12341234 (number, required) - latitude of the requested point
++ longitude: 13.12341234 (number, required) - longitude of the requested point
 + hours: `Mon-Fri, 08:00 - 22:30` (string, optional) - the translated availability time in this zone
 + price (Zone Price, required) - information about the price for this zone
-+ `max_datetime_end`: `2009-06-30T18:30:00+02:00` (string, optional) - datetime when a booking has to end
-+ `duration_max`: `2 hours` (string, optional) - translated string of maximum general parking duration
-+ payment (object) - asdf
-    + methods: `1000bb3e-506d-11e5-9781-d43d7eece658`, `2000bb3e-506d-11e5-9781-d43d7eece658` (array[string], required) - array containing the planned payment methods for this booking
-    + `types` (array, optional) - available payment types
-        + (enum)
-            + immediate
-            + post
++ payment_method (object) - information about payment method.
+    + type: `post` (enum[string], optional) - available payment types
+      + Members
+          + `post`
+          + `immediate`
+      + Default: `post`
++ max_datetime_end: `2009-06-30T18:30:00+02:00` (string, optional) - datetime when a booking has to end
++ duration_max: `2.0 hours` (string, optional) - translated string of maximum general parking duration.
++ possible_duraitons: (array[number], optional) - array containing the possilbe parking durations.
+    + Members
+      + 15
+      + 30
+      + 60
+      + 90
+      + 120
 
 ## Zone Price (object)
++ `free_minutes`: `30` (number, required) - number of free minutes at the interval's begining.
 + `unit_cost`: `5` (number, required) - cost per unit time(which is defined by `unit_interval_minutes`).
     `unit_cost` is a value in floating point format as suggested by `IEEE 754` with the base `unit_base` and exponent
     `unit_exponent`. The actual cost in the currency is calculated using `unit_cost * unit_base ^ unit_exponent`.
