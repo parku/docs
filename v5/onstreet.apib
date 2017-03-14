@@ -32,7 +32,7 @@ is as expected. The optional attributes of the parking zone object here are main
 + Request (application/json)
     + Attributes
         + `zone` (Parking Zone, required) - the parking zone object to start the booking on
-        + `payment_method` (object) - information about payment method.
+        + `payment_method` (Payment Method Input) - information about payment method.
         + `license_plate`: `AB 1234` (string, required) - the license plate of the car used for parking
         + `phone_number`: `01234567890` (string, required) - the customer phone number
         + `start`: `2009-06-30T18:30:00+02:00` (string, required) - the start date of the booking
@@ -47,7 +47,7 @@ Returned if parking zone was not found, or it is already booked.
     + Body
 
 + Response 422
-Returned if either one of the provided zone fields didnt match or the payment information was not processable.
+Returned if either one of the provided zone fields didn't match or the payment information was not processable.
     + Body
 
 # Data Structures
@@ -60,16 +60,10 @@ Returned if either one of the provided zone fields didnt match or the payment in
 + price (Zone Price, required) - information about the price for this zone
 + max_datetime_end: `2009-06-30T18:30:00+02:00` (string, optional) - datetime when a booking has to end
 + duration_max: `2.0 hours` (string, optional) - translated string of maximum general parking duration.
-+ possible_duraitons: (array[number], optional) - array containing the possilbe parking durations.
-    + Members
-      + 15
-      + 30
-      + 60
-      + 90
-      + 120
++ `possible_durations`: 15,30,45 (array[number], optional) - array containing the possible parking durations.
 
 ## Zone Price (object)
-+ `free_minutes`: `30` (number, required) - number of free minutes at the interval's begining.
++ `free_minutes`: `30` (number, required) - number of free minutes at the interval's beginning.
 + `unit_cost`: `5` (number, required) - cost per unit time(which is defined by `unit_interval_minutes`).
     `unit_cost` is a value in floating point format as suggested by `IEEE 754` with the base `unit_base` and exponent
     `unit_exponent`. The actual cost in the currency is calculated using `unit_cost * unit_base ^ unit_exponent`.
