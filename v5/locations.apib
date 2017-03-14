@@ -72,11 +72,11 @@ AND (properties1 AND properties2 AND ...)
     + filter_available: true (boolean,optional) - Filters returned locations regarding their availability if start and
         end are also given.
         * `true` only returns available locations
-            (this is default if availability is not specified and start and end were given)
-        * `false` only returns non-available locations
+        * `false` return all locations
         + Members
             + true
             + false
+        + Default: false
     + filter_bookable: true (boolean,optional) - Filters returned locations regarding their general bookability.
         * `true` only returns locations that could be booked through the api if they are available
         * `false` only returns locations that can not be booked through the api, even though they might be available
@@ -111,6 +111,7 @@ AND (properties1 AND properties2 AND ...)
             + `long_term_booking`
             + `surveillance`
             + `valet_service`
+            + `barrier`
     + fields: `all` (array[string],optional) - Response will only contain the fields mentioned in this parameter.
         This can either be `all` or an comma separated list of field names from the response, e.g. `id,street,country`.
 
