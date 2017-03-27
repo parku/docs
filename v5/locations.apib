@@ -49,9 +49,86 @@ Request validation failed because the request data was malformed.
     + Body
 
 ### List Locations [GET /locations{?sw,ne,date_start,date_end,filter_available,filter_bookable,filter_type,filter_price,filter_properties,fields}]
-Returns a list of locations that provide the same format as the single location.
-When no `date_start` or `date_end` was provided, all locations are returned.
-That does not mean, that they are available.
+Returns a list of locations for a given bounding box. This request returns the highest ranking 42 locations
+in the bounding box and does not return any other locations if there are more than 42. For retrieving all locations
+in a hierarchical manner, you can use the [List Clusters](#locations-locations-get-2) request.
+
+The parameters named `filter_*` filter the returned results using the following logic:
+```
+available
+AND bookable
+AND (type1 OR type2 OR ...)
+AND (price1 OR price2 OR ...)
+AND (properties1 AND properties2 AND ...)
+```
+
++ Parameters
+    + sw: `45.74001,5.67868` (string,required) - Comma separated latitude and longitude of the southwest position.
+    + ne: `47.74236,10.24900` (string,required) - Comma separated latitude and longitude of the northeast position.
+    + date_start: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the start date.
+        `date_start` will have no effect unless `date_end` is also provided.
+    + date_end: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the end date.
+        `date_end` will have no effect unless `date_start` is also provided.
+    + filter_available: true (boolean,optional) - Filters returned locations regarding their availability if start and
+        end are also given.
+        * `true` only returns available locations
+        * `false` return all locations
+        + Members
+            + true
+            + false
+        + Default: false
+    + filter_bookable: true (boolean,optional) - Filters returned locations regarding their general bookability.
+        * `true` only returns locations that could be booked through the api if they are available
+        * `false` only returns locations that can not be booked through the api, even though they might be available
+        + Members
+            + true
+            + false
+    + filter_type: `airport-parking` (array[string],optional) - Filters the result to only show parking spaces with
+        with either of the provided types.
+        + Members
+            + `off-street`
+            + `park-and-ride`
+            + `professional-garage`
+            + `airport-parking`
+            + `harbor-parking`
+    + filter_price: (array[string],optional)
+        Filters the result to only show parking spaces with
+        either of the provided rates.
+        + Members
+            + `rate_hourly`
+            + `rate_daily`
+            + `rate_weekly`
+            + `rate_monthly`
+    + filter_properties: `indoor` (array[string],optional) - Filters the result to only show parking spaces
+        all the provided properties.
+        + Members
+            + `excess_length`
+            + `indoor`
+            + `patio`
+            + `disabled`
+            + `charging_station`
+            + `key_necessary`
+            + `long_term_booking`
+            + `surveillance`
+            + `valet_service`
+            + `barrier`
+    + fields: `all` (array[string],optional) - Response will only contain the fields mentioned in this parameter.
+        This can either be `all` or an comma separated list of field names from the response, e.g. `id,street,country`.
+
++ Request (application/x-www-form-urlencode)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes
+      + locations (array[Location])
+
+### List Clusters [GET /locations/clusters{?sw,ne,date_start,date_end,filter_available,filter_bookable,filter_type,filter_price,filter_properties,fields}]
+Returns a list of locations and clusters. Clusters are returned if there are too
+many locations to return for a specific part of the bounding box.
+You have to execute multiple hierarchical requests to get all locations from the
+clusters.
 
 The parameters named `filter_*` filter the returned results using the following logic:
 ```
