@@ -17,7 +17,11 @@ This request returns parking zone information about a specific point on the map.
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
-    + Attributes (Onstreet)
+    + Attributes (Parking Zone)
+
++ Response 404 (application/json)
+Returned when there is no zone available at this latitude/longitude.
+    + Body
 
 ### Start an Onstreet Booking [POST /onstreet/start]
 Access needs at least a __private key__.
@@ -59,21 +63,18 @@ Returned if either one of the provided zone fields didn't match or the payment i
 + price (Zone Price, required) - information about the price for this zone
 + max_datetime_end: `2009-06-30T18:30:00+02:00` (string, optional) - datetime when a booking has to end
 + duration_max: `2.0 hours` (string, optional) - translated string of maximum general parking duration.
-+ `possible_durations`: 15,30,45 (array[number], optional) - array containing the possible parking durations.
++ `available_durations`: 15,30,45 (array[number], optional) - array containing the possible parking durations.
++ `available_payment_methods`: `28aded77-138f-11e7-bae4-0242ac120005` (array[string], optional) - list of payment method ids that can be used to pay for a booking in this zone.
++ `currently_valid`: true (boolean, required) - defines it is valid to book the zone at the current point in time, if this is `false` that means that that you are out of the opening hours of the zone.
 
 ## Zone Price (object)
 + `free_minutes`: `30` (number, optional) - number of free minutes at the interval's beginning.
 + `unit_cost`: `5` (number, optional) - cost per unit time(which is defined by `unit_interval_minutes`).
-    `unit_cost` is a value in floating point format as suggested by `IEEE 754` with the base `unit_base` and exponent
-    `unit_exponent`. The actual cost in the currency is calculated using `unit_cost * unit_base ^ unit_exponent`.
+    `unit_cost` is a value in floating point format as suggested by `IEEE 754` with the base `10` and exponent
+    `unit_exponent`. The actual cost in the currency is calculated using `unit_cost * 10 ^ unit_exponent`.
 + `unit_interval_minutes`: `3` (number, optional) - how many minutes one unit is
-+ `unit_base`: `10` (number, optional) - base of the unit_cost
 + `unit_exponent` `-2` (number, optional) - exponent of the unit cost
 + `currency`: EUR (enum, optional) - the currency of the price
     + Members
       + EUR
       + CHF
-
-## Onstreet (object)
-+ zone (Parking Zone) - the zone that was booked.
-+ payment_method (Payment Method Input)- used payment method.

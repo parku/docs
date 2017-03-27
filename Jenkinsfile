@@ -7,9 +7,7 @@ node {
         }
 
         stage('Build Docs') {
-            withDockerContainer('parku/docs') {
-                sh "make clean all"
-            }
+            sh 'docker run -v `pwd`:/docs -t parku/docs:${BRANCH_NAME} /bin/bash -c "cd /docs && make clean && make all"'
         }
 
         stage('Store') {
