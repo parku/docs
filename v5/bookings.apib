@@ -91,7 +91,7 @@ Updates the booking by setting the values of the parameters passed. Any paramete
 
 + Response 204
 
-### List all bookings [GET /bookings{?count,offset,date_start,date_end,status}]
+### List bookings [GET /bookings{?count,offset,date_start,date_end,status}]
 
 + Parameters
     + count: 3 (number, optional) - A limit on the number of objects to be returned.
@@ -204,7 +204,7 @@ Retrieving a booking returns a few prices for standard intervals. Use this endpo
         + offstreet
 + `date_end`: null (string, nullable) - is null if booking didn't end yet
 + `price`: null (string, nullable) - is null if booking didn't end yet
-+ `zone` (Parking Zone) - the zone that was booked, only available if `type` is `zone`
++ `zone` (Parking Zone Base Data) - the zone that was booked, only available if `type` is `zone`
 
 ## Ended Parking Zone Booking (object)
 + Include Parking Zone Booking
@@ -217,4 +217,4 @@ Retrieving a booking returns a few prices for standard intervals. Use this endpo
         + zone
 + `group_id`: `123c4826-4e28-11e3-a675-d43d7eece53d` (string) - the id of the booked parking space group
 + `location` (Location) - the location that was booked, only available if `type` is `location`.
-+ `zone` (Parking Zone) - the zone that was booked, only available if `type` is `zone`.
++ `zone` (Parking Zone Base Data) - the zone that was booked, only available if `type` is `zone`.
