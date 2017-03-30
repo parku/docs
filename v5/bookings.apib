@@ -19,18 +19,12 @@ Access needs a __private key__.
         + `phone_number`: `+493057701872` (string, required) - The phone number.
             Get all phone numbers of a user from the [phone_numbers](`#user-phone_numbers-get`) request.
         + payment (array[Pre Booking Payment Input], optional)
-          The payments to use for paying. This can be credits, coupons,
+          The payments to use for paying (optional). This can be credits, coupons,
           paypal and braintree payments that have been authorized on the frontend.
         + payment_method (Used Payment Method Input, optional)
           The payment method to use for paying. This method will be used for paying the fee of the booking
           after all payments from the `payments` field have been applied. E.g. if you provided a 5 Euro
           voucher via `payments`, the payment method will be used on 5 Euro less than the actual booking fee.
-        + `status`: all (enum[string], optional) - Get bookings by status.
-            + Members
-                + all
-                + active
-                + cancelled
-            + Default: all
         + `required_field` (object) - Parking space required fields defined in the locations request. The required fields should contain all required fields defined in location. All values should be sent as strings.
             + car_color: `red` (string, optional) - the car color
             + number_of_passengers: `5` (string, optional) - the number of passengers
@@ -67,10 +61,11 @@ Updates the booking by setting the values of the parameters passed. Any paramete
             refer to the description of [`Create a new Booking`](#bookings-bookings-post)
         + `date_end`: `2016-10-27T17:00:00+0000` (string, optional) -
             refer to the description of [`Create a new Booking`](#bookings-bookings-post)
-        + `provider`: `paypal` (string, optional) -
-            refer to the description of [`Create a new Booking`](#bookings-bookings-post)
-        + `provider_info`: `PAY-2CM399047K4649003KM4WJQQ` (string, optional) -
-            refer to the description of [`Create a new Booking`](#bookings-bookings-post)
+        + payment (array[Pre Booking Payment Input], optional)
+            The payments to use for paying (optional). This can be credits, coupons,
+            paypal and braintree payments that have been authorized on the frontend.
+        + payment_method (Used Payment Method Input, optional)
+            The payment method to use for paying.
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
