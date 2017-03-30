@@ -113,6 +113,7 @@ __Deprecated__: this will be removed in __v5__.
 ## Payment Method Input (object)
 + `types` (array, required) - type of payment method
     + (enum)
+        + immediate
         + post
 + `primary`: `true` (boolean, optional)
     Wether the payment method should be activated as the users primary payment method.
@@ -122,9 +123,9 @@ __Deprecated__: this will be removed in __v5__.
 + `provider` (Payment Method Provider Input) - the payment provider information
 
 ## Payment Method Provider Input (object)
-+ stripe (object) - sepa provider
++ stripe (object) - stripe provider
     + `source_id`: `tok_1234567890` (string, required)
-        the stripe source id for a credit card or a token representing a credit
+        the stripe source token for a credit card or a token representing a credit
         card as returned by various stripe libraries, see https://stripe.com/docs/checkout
 
 ## Used Payment Method Input (object)
@@ -157,7 +158,7 @@ __Deprecated__: this will be removed in __v5__.
 
 ## Stripe Payment Method (object)
 + `customer_id`: `cus_123456789` (string, required) - stripe customer id
-+ `source_id`: `src_123456789` (string, required) - stripe source id
++ `source_id`: `card_123456789` (string, required) - stripe source id
 + `credit_card` (Credit Card Payment Method) - the credit card information
 
 ## Credit Card Payment Method (object)
