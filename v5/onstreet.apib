@@ -43,7 +43,7 @@ is as expected. The optional attributes of the parking zone object here are main
 
 + Response 201 (application/json)
     Returned if a booking was created
-    + Attributes (Parking Zone Booking)
+    + Attributes (Booking)
 
 + Response 404
 Returned if parking zone was not found, or it is already booked.
@@ -76,7 +76,7 @@ Returned if either one of the provided zone fields didn't match or the payment i
     `unit_cost` is a value in floating point format as suggested by `IEEE 754` with the base `10` and exponent
     `unit_exponent`. The actual cost in the currency is calculated using `unit_cost * 10 ^ unit_exponent`.
 + `unit_interval_minutes`: `3` (number, optional) - how many minutes one unit is
-+ `unit_exponent` `-2` (number, optional) - exponent of the unit cost
++ `unit_exponent`: `-2` (number, optional) - exponent of the unit cost
 + `currency`: EUR (enum, optional) - the currency of the price
     + Members
       + EUR

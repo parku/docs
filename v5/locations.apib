@@ -386,7 +386,7 @@ With this endpoint you can retrieve location based terms and conditions.
         + `professional-garage`
         + `airport-parking`
         + `harbor-parking`
-+ `description`: `Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.` (string)
++ `description`: `Doppelparkplatz. Jedoch nur für ein Auto zu vermieten.` (string)
 + `image_urls`: `https://parku.de/images/parkingspace/020a81f5-c8b9-11e4-bfd2-d43d7eece658/640x286.jpg` (array[string]) - urls of location images, can be **empty**
 + `options` (array) - describes which options are available at the location and can contains each of the following elements. The list can be **empty**.
     + (enum)
@@ -402,6 +402,7 @@ With this endpoint you can retrieve location based terms and conditions.
       + `valet_service` - parking space contains valet serviceparking space contains valet service
 + `support` (object)
     + `phone_number`: `+493012064329` - returns the support center phone number for this location
++ `price`: 1.50 (number) - the price for booking a parking space of this group if `start` and `end` was provided, null otherwise
 + `price_period`: `timeframe` (enum) - contains the period for how long the price is valid, can be **null** if `start` or `end` was not provided
     + Members
       + timeframe

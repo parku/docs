@@ -3,10 +3,6 @@
 ## Bookings [/bookings]
 Access needs a __private key__.
 
-+ Attributes
-    + `Parking Space Booking Model` (Parking Space Booking)
-    + `Parking Zone Booking Model` (Parking Zone Booking)
-
 ### Create a new Booking [POST /bookings{?location_id,date_start,date_end,license_plate,phone_number,provider,provider_info,status,required_fields}]
 + Request (application/json)
     + Attributes
@@ -130,7 +126,7 @@ Currently supports stopping onstreet bookings only.
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
-    + Attributes (Ended Parking Zone Booking)
+    + Attributes (Booking)
         + `payment_urls` (object) - urls for user to visit for doing the payment, currently only available for `ideal`
             + `urls` (object)
                 + `entrance`: `http://www.ideal.nl/asdf1234`(string)
@@ -163,19 +159,7 @@ Retrieving a booking returns a few prices for standard intervals. Use this endpo
 
 # Data Structures
 
-## Violation Dummy (object)
-+ id: `005c4826-4e28-11e3-a675-d43d7eece53d` (string) - violation id
-
-## Booking Price (object)
-+ `amount`: `4.25` (number) - the overall amount to pay for the booking
-+ `transaction_fee`: `0.25` (number) - the transaction fee included in `amount`
-+ `currency`: `EUR` (enum) - the currency of `amount` and `transaction_fee`
-    + Members
-        + EUR
-        + CHF
-
-
-## Booking Base (object)
+## Booking (object)
 + `id`: `005c4826-4e28-11e3-a675-d43d7eece53d` (string)
 + `license_plate`: `B-AB 1234` (string)
 + `phone_number`: `+493057701872` (string)
@@ -184,32 +168,22 @@ Retrieving a booking returns a few prices for standard intervals. Use this endpo
 + `date_end`: `2016-10-27T16:30:00+0000` (string)
 + `price` (Booking Price)
 + `violation` (Violation Dummy)
-
-## Parking Space Booking (Booking Base)
-+ `type`: `location` (enum)
-    + Members
-        + location
-+ `location` (Parking Space Group) - the location that was booked, only available if `type` is `location`
-
-## Parking Zone Booking (object)
-+ Include Booking Base
-+ `type`: `zone` (enum)
-    + Members
-        + onstreet
-        + offstreet
-+ `date_end`: null (string, nullable) - is null if booking didn't end yet
-+ `price`: null (string, nullable) - is null if booking didn't end yet
-+ `zone` (Parking Zone Base Data) - the zone that was booked, only available if `type` is `zone`
-
-## Ended Parking Zone Booking (object)
-+ Include Parking Zone Booking
-+ `date_end`: `2016-10-27T16:30:00+0000` (string, nullable)
-
-## Booking (Booking Base)
++ status: active (string) - status of the booking, can be `active` or `canceled` for `offstreet` bookings and `running` and `finished` for `onstreet` bookings
 + `type`: `location` (enum) - the booking type
     + Members
-        + location
-        + zone
+        + offstreet
+        + onstreet
 + `group_id`: `123c4826-4e28-11e3-a675-d43d7eece53d` (string) - the id of the booked parking space group
-+ `location` (Location) - the location that was booked, only available if `type` is `location`.
-+ `zone` (Parking Zone Base Data) - the zone that was booked, only available if `type` is `zone`.
++ `location` (Location) - the location that was booked, only available if `type` is `offstreet`.
++ `zone` (Parking Zone Base Data) - the zone that was booked, only available if `type` is `onstreet`.
+
+## Violation Dummy (object)
++ id: `005c4826-4e28-11e3-a675-d43d7eece53d` (string) - violation id
+
+## Booking Price (object)
++ `amount`: `4.25` (number, nullable) - the overall amount to pay for the booking
++ `transaction_fee`: `0.25` (number) - the transaction fee included in `amount`
++ `currency`: `EUR` (enum) - the currency of `amount` and `transaction_fee`
+    + Members
+        + EUR
+        + CHF
