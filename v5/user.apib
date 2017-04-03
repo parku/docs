@@ -231,7 +231,7 @@ Updates a users payment method.
     + payment_method_id: `1000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
 
 + Request (application/json)
-    + Attributes (Payment Method Input)
+    + Attributes (Payment Method Update Input)
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
@@ -250,6 +250,15 @@ Deletes a user payment method.
 + Parameters
     + payment_method_id: `1000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
 
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
 + Response 200 (application/json)
     Returned when the payment method was successfully deleted.
     + Body
+
++ Response 422 (application/json)
+    Returned if an error occured, e.g. a booking exists that waits for a payment from this method.
+    + Attributes (Api Error)

@@ -122,6 +122,13 @@ __Deprecated__: this will be removed in __v5__.
 + One Of
     + provider (Stripe Payment Method Input, required) - provider information
 
+## Payment Method Update Input (object)
++ `primary`: `true` (boolean, optional)
+    Wether the payment method should be activated as the users primary payment method.
+    If another payment method of the user was set to be the primary method before,
+    that one will be be changed to not be the primary one anymore.
+    + Default: false
+
 ## Stripe Payment Method Input
 + `source_id`: `tok_1234567890` (string, required)
     the stripe source token for a credit card or a token representing a credit
