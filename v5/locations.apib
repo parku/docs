@@ -402,6 +402,10 @@ With this endpoint you can retrieve location based terms and conditions.
       + `valet_service` - parking space contains valet serviceparking space contains valet service
 + `support` (object)
     + `phone_number`: `+493012064329` - returns the support center phone number for this location
++ `currency`: EUR (enum[string]) - the currency of the `price` field
+    + Members
+      + EUR
+      + CHF
 + `price`: 1.50 (number) - the price for booking a parking space of this group if `start` and `end` was provided, null otherwise
 + `price_period`: `timeframe` (enum) - contains the period for how long the price is valid, can be **null** if `start` or `end` was not provided
     + Members

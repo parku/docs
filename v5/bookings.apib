@@ -82,7 +82,7 @@ Updates the booking by setting the values of the parameters passed. Any paramete
 
 + Response 204
 
-### List bookings [GET /bookings{?count,offset,date_start,date_end,status}]
+### List bookings [GET /bookings{?count,offset,date_start,date_end,status,type}]
 
 + Parameters
     + count: 3 (number, optional) - A limit on the number of objects to be returned.
@@ -102,6 +102,12 @@ Updates the booking by setting the values of the parameters passed. Any paramete
             + all
             + active
             + cancelled
+        + Default: all
+    + type: all (enum, optional) - Filter bookings for their type
+        + Members
+            + all
+            + offstreet
+            + onstreet
         + Default: all
 
 + Request
