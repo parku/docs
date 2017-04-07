@@ -402,22 +402,19 @@ With this endpoint you can retrieve location based terms and conditions.
       + `valet_service` - parking space contains valet serviceparking space contains valet service
 + `support` (object)
     + `phone_number`: `+493012064329` - returns the support center phone number for this location
-+ `currency`: EUR (enum[string]) - the currency of the `price` field
-    + Members
-      + EUR
-      + CHF
-+ `price`: 1.50 (number) - the price for booking a parking space of this group if `start` and `end` was provided, null otherwise
++ Include Currency
++ `price`: 150 (number) - the price for booking a parking space of this group if `start` and `end` was provided, null otherwise. Use `currency_exponent` to convert the price to a decimal.
 + `price_period`: `timeframe` (enum) - contains the period for how long the price is valid, can be **null** if `start` or `end` was not provided
     + Members
       + timeframe
       + day
       + week
       + month
-+ `pricing` (object) - contains information about the pricing and price prediction.
-    + `rate_hourly`: 1 (number) - shows the price for per hour
-    + `rate_daily`: 10 (number) - shows the price per day
-    + `rate_weekly`: 30 (number) - shows the price per week
-    + `rate_monthly`: 150 (number) - shows the price per month
++ `pricing` (object) - contains information about the pricing and price prediction. Use `currency_exponent` to convert the prices to decimals.
+    + `rate_hourly`: 10 (number) - shows the price for per hour
+    + `rate_daily`: 100 (number) - shows the price per day
+    + `rate_weekly`: 300 (number) - shows the price per week
+    + `rate_monthly`: 1500 (number) - shows the price per month
 + `user_owned`: false (boolean) - `true` if the user who requested the location is also the owner of the parking space. This allows to determine if the user could block the parking space from bookings.
 + `settings` (object) - provides booking requirements for the location. The settings of a location are used in favor of the global settings that can be found in the settings endpoint.
     + `bookable_range_start`: `-15` (number) - start of the range wherein a booking is allowed in minutes from now.

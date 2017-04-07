@@ -43,38 +43,6 @@ Shows all credit cards the user used before.
 
 + Response 204
 
-### Update Credit [PUT /payment/credit/{?amount,provider,provider_info}]
-__Deprecated__: this will be removed in __v5__.
-
-+ Request
-    + Attributes
-        + `amount`: 10 (number,required) - The amount.
-        + `provider`: paypal (enum,required) The payment method.
-            + Members
-                + paypal
-                + braintree
-        + `provider_info`: `PAY-1CM399047K4649003KM4WJQQ` (string,required) - refer to the description
-              of [Create a new Booking](#bookings-bookings-post)
-    + Headers
-
-            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
-
-+ Response 200 (application/json)
-    + Body
-
-            {
-              "gender": "female",
-              "email": "test@example.com",
-              "firstname": "Test",
-              "lastname": "Name",
-              "credit": 10,
-              "currency": "EUR",
-              "country": "DE",
-              "facebook_id": null,
-              "token": "098f6bcd4621d373cade4e832627b4f6"
-            }
-
-
 # Data Structure
 ## Pre Booking Payment Input (object)
 + `type`: paypal (enum[string], required) - The payment method.
@@ -157,6 +125,13 @@ __Deprecated__: this will be removed in __v5__.
     + stripe
 + One Of
     + provider (Stripe Payment Method) - payment using stripe
++ `fee`
+    + `percent`: `1.4` (number) - the payment provider fee percentage. This percentage is added on top of the overall booking cost. The overall booking cost is calculated by `booking_fee + booking_fee * fee_percentage + fee_fixed`.
+    + `fixed`: 25 (number) - fixed payment provider fee. This is an integer, calculate the decimal value using the `currency_exponent`.
+    + `minimum_total`: 50 (number) - minimum total amount for a booking transaction. If a booking is cheaper than this, the payment provider fee will be adapted.
+    + Include Currency
+
+
 
 ## Payment (Payment Method)
 + amount: `5.35` (number)

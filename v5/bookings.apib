@@ -91,17 +91,13 @@ Updates the booking by setting the values of the parameters passed. Any paramete
     + offset: 10 (number, optional) - An offset into the list of returned items.
         The API will return the requested number of items starting at that offset.
         + Default: 0
-    + date_start: past (enum, optional) - Filter bookings, shows past bookings.
-        + Members
-            + past
-    + date_end: future (enum, optional) - Filter bookings, shows past bookings.
-        + Members
-            + future
     + status: active (enum, optional) - Filter bookings for status.
         + Members
             + all
             + active
             + cancelled
+            + running
+            + finished
         + Default: all
     + type: all (enum, optional) - Filter bookings for their type
         + Members
@@ -159,8 +155,9 @@ Retrieving a booking returns a few prices for standard intervals. Use this endpo
             {
               "date_start": "2016-10-27T10:00:00+0000",
               "date_end": "2016-10-27T17:45:00+0000",
-              "price": 3.15,
-              "currency": "CHF"
+              "price": 315,
+              "currency": "CHF",
+              "currency_exponent": -2
             }
 
 # Data Structures
@@ -187,9 +184,7 @@ Retrieving a booking returns a few prices for standard intervals. Use this endpo
 + id: `005c4826-4e28-11e3-a675-d43d7eece53d` (string) - violation id
 
 ## Booking Price (object)
-+ `amount`: `4.25` (number, nullable) - the overall amount to pay for the booking
-+ `transaction_fee`: `0.25` (number) - the transaction fee included in `amount`
-+ `currency`: `EUR` (enum) - the currency of `amount` and `transaction_fee`
-    + Members
-        + EUR
-        + CHF
++ `amount`: `425` (number, nullable) - the overall amount to pay for the booking
++ `transaction_fee`: `25` (number) - the transaction fee included in `amount`
++ `payment_provider_fee`: `25` (number) - the payment provider fee included in `amount`
++ Include Currency

@@ -69,9 +69,9 @@ Returned if either one of the provided zone fields didn't match or the payment i
 
 ## Parking Zone (object)
 + Include Parking Zone Base Data
-+ `available_durations`: 15,30,45 (array[number], optional) - array containing the possible parking durations.
-+ `available_payment_methods`: `28aded77-138f-11e7-bae4-0242ac120005` (array[string], optional) - list of payment method ids that can be used to pay for a booking in this zone.
-+ `currently_valid`: true (boolean, required) - defines it is valid to book the zone at the current point in time, if this is `false` that means that that you are out of the opening hours of the zone.
++ `available_durations`: 15,30,45 (array[number]) - array containing the possible parking durations.
++ `available_payment_methods`: `28aded77-138f-11e7-bae4-0242ac120005` (array[string]) - list of payment method ids that can be used to pay for a booking in this zone.
++ `currently_valid`: true (boolean) - defines it is valid to book the zone at the current point in time, if this is `false` that means that that you are out of the opening hours of the zone.
 
 ## Zone Price (object)
 + `free_minutes`: `30` (number, optional) - number of free minutes at the interval's beginning.
@@ -79,8 +79,11 @@ Returned if either one of the provided zone fields didn't match or the payment i
     `unit_cost` is a value in floating point format as suggested by `IEEE 754` with the base `10` and exponent
     `unit_exponent`. The actual cost in the currency is calculated using `unit_cost * 10 ^ unit_exponent`.
 + `unit_interval_minutes`: `3` (number, optional) - how many minutes one unit is
-+ `unit_exponent`: `-2` (number, optional) - exponent of the unit cost
-+ `currency`: EUR (enum, optional) - the currency of the price
-    + Members
-      + EUR
-      + CHF
++ Include Currency
+
+## Currency (object)
++ `currency` (enum) - the currency of the price
+  + Members
+    + EUR
+    + CHF
++ `currency_exponent`: `-2` (number, optional) - Exponent used for calculating price. All prices are integers, actual decimal prices are calculated by `price * (10 ^ currency_exponent)`.
