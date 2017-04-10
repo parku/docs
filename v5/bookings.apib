@@ -184,7 +184,8 @@ Retrieving a booking returns a few prices for standard intervals. Use this endpo
 + id: `005c4826-4e28-11e3-a675-d43d7eece53d` (string) - violation id
 
 ## Booking Price (object)
-+ `amount`: `425` (number, nullable) - the overall amount to pay for the booking
++ `total`: `425` (number, nullable) - the overall amount to pay for the booking
++ `parking_fee`: `375` (number) - the transaction fee included in `amount`
 + `transaction_fee`: `25` (number) - the transaction fee included in `amount`
 + `payment_provider_fee`: `25` (number) - the payment provider fee included in `amount`
 + Include Currency
