@@ -49,10 +49,10 @@ v5_SRC:= \
 	v4/coupon.apib \
 	v4/devices.apib \
 	v5/errors.apib \
-	v4/facebook.apib \
+	v5/facebook.apib \
 	v4/invitations.apib \
 	v5/locations.apib \
-	v4/login.apib \
+	v5/login.apib \
 	v5/onstreet.apib \
 	v5/orders.apib \
 	v4/password.apib \
