@@ -80,7 +80,8 @@ Updates the booking by setting the values of the parameters passed. Any paramete
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
-+ Response 204
++ Response 200
+    + Attributes (Booking)
 
 ### List bookings [GET /bookings{?count,offset,date_start,date_end,status,type}]
 
@@ -137,29 +138,6 @@ Currently supports stopping onstreet bookings only.
                 + `failure`: `http://www.ideal.nl/asdf1234`(string)
                 + `pending`: `http://www.ideal.nl/asdf1234`(string)
 
-### Retrieve Custom Extend Prices [GET /bookings/{booking_id}/extend{?date_end}]
-Retrieving a booking returns a few prices for standard intervals. Use this endpoint for custom intervals.
-
-+ Parameters
-    + booking_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
-    + date_end: `2016-10-27T10:10:20+00:00` (ISO 8601, required) - end date and time of the booking
-
-+ Request
-    + Headers
-
-            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
-
-+ Response 200 (application/json)
-    + Body
-
-            {
-              "date_start": "2016-10-27T10:00:00+0000",
-              "date_end": "2016-10-27T17:45:00+0000",
-              "price": 315,
-              "currency": "CHF",
-              "currency_exponent": -2
-            }
-
 # Data Structures
 
 ## Booking (object)
@@ -184,6 +162,7 @@ Retrieving a booking returns a few prices for standard intervals. Use this endpo
 ## Booking Extend Times (object)
 + `date_start`: `2016-10-27T10:00:00+0000` (string) - start date of the extended booking
 + `date_end`: `2016-10-27T12:00:00+0000` (string) - end date of the extended booking
++ `minutes`: 60 (number) - length of extension in minutes
 + `price`: 125 (number) - price of the extension
 + Include Currency
 
