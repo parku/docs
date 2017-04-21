@@ -118,8 +118,12 @@ Shows all credit cards the user used before.
 + `post_payment`: false (boolean, optional) - wether this payment method is usable for post payments
     + Default: false
 + primary: true (boolean) - wether this is the primary payment method of the user
-+ validated: true (boolean) -
-    Wether the payment method was already validated. Non validated payment methods cannot be used for paying.
++ validated: successful (enum[string]) -
+    Wether the payment method was already validated successfully. Non validated payment methods cannot be used for paying.
+    + Members
+        + successful
+        + failed
+        + pending
 + provider_type: stripe (enum[string], required) - provider type
   + Members
     + stripe
