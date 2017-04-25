@@ -46,7 +46,7 @@ v5_SRC:= \
 	v4/authentication.apib \
 	v5/bookings.apib \
 	v4/cars.apib \
-	v4/coupon.apib \
+	v5/coupon.apib \
 	v4/devices.apib \
 	v5/errors.apib \
 	v5/facebook.apib \
@@ -58,8 +58,9 @@ v5_SRC:= \
 	v4/password.apib \
 	v5/payment.apib \
 	v4/phone_numbers.apib \
+	v5/prices.apib \
 	v4/sesam.apib \
-	v4/settings.apib \
+	v5/settings.apib \
 	v4/static_pages.apib \
 	v5/user.apib \
 	v4/violations.apib \
