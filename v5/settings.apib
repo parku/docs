@@ -1,0 +1,155 @@
+# Group Settings
+## Settings [/settings]
+Access needs at least a __public key__.
+### Retrieve Settings [GET /settings{?lat,lon}]
+
+This endpoint exposes the global settings for the ParkU-platform.
+Changing the settings is not possible.
+
++ Parameters
+    + lat: `52.53568811` (float,optional) - Latitude of current location.
+    + lon: `13.39412887` (float,optional) - Longitude of current location.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (User Settings)
+
+## Notification [/settings/booking/notification/{notification_key}]
+### Enable/Disable Notification [PUT /settings/booking/notification/{notification_key}]
+#### Body Parameters
++ Parameters
+    + notification_key: `entry` (enum,required)
+        A notification key
+        + Members
+            + time_to_leave
+            + near_location
+            + entry
+            + expiring
+            + over
+
++ Request (application/json)
+    + Attributes
+        + `enabled`: true (boolean,required) - The value for the notification key.
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 204
+    Updated successfully.
+    + Body
+
++ Response 304
+    Value of notification was not modified.
+    + Body
+
+# Data Structures
+
+## User Settings (object)
++ location (User Settings Location) - provides the booking requirements for a parking space.
+  Every location can have its own settings but these will always be the same or within the limits of the global settings.
++ sesam (User Settings Sesam) - contains informations about how to work with the sesam boxes.
++ gps (User Settings GPS) - contains information on how to handle GPS data.
++ booking (User Settings Booking) - contains information on how to handle bookings.
++ features (User Settings Features) - Feature flags that enables or disables certaint features based parameters given in header. These feature flags can be different for each operation systems.
++ provider (User Settings Provider) - Information for parking space provider. Key is linked with location response field `provider`.
++ currencies (array[User Settings Currencies]) - Information about currencies
+
+## User Settings Location (object)
++ bookable_range_start: `-15` (number) - start of the range wherein a booking is allowed in minutes from now.
++ bookable_range_end: 43200 (number) - end of the range wherein a booking is allowed in minutes from now.
++ booking_duration_min: 30 (number) - minimum duration of a booking in minutes.
++ booking_duration_max: 43200 (number) - maximum duration of a booking in minutes.
+
+## User Settings Sesam (object)
++ connection_trials: 2 (number) - Amount of tries to connect to a sesam box.
++ connection_timeout: 2 (number) - Amount of seconds allowed to connect to a box.
++ communication_timeout: 2 (number) - Second until canceling the communication with the sesam box.
+
+## User Settings GPS
++ ttl: 60 (number) - Time-To-Live for previously retrieved GPS data i.e. by operation system
++ accuracy: 1000 (number) - Accuracy of GPS data in meters, renders data invalid if exceeded
+
+## User Settings Booking
++ collection
+  + ttl: 60 (number) - Time-To-Live for previously retrieved booking list
++ notification - Each notification contains an enabled flag. If set to `true`, the notification is enabled and should appear. If set to `false`, that notification is disabled.
+  + time_to_leave
+      + Include User Settings Notification
+      + time (User Settings Notification Time)
+  + near_location
+      + Include User Settings Notification
+      + radius: 500 (number)
+  + near_entry
+      + Include User Settings Notification
+      + radius: 50 (number)
+  + expiring
+      + Include User Settings Notification
+      + time (User Settings Notification Time)
+  + over
+      + Include User Settings Notification
+      + time (User Settings Notification Time)
++ fields - Each additional field uses its name as a `key` to a dictionary containing the field `label` and `type`. label contains the translated name of the field. The translation of the label is determined by the language of user who is identified by the provided user token.
+  + additional_services (User Settings Additional Field)
+
+## User Settings Notification
++ enabled: true (boolean) - wether the notification is enabled
++ type: time (enum[string]) - type of the notification
+  + Members
+    + time
+    + region
+
+## User Settings Features (object)
++ recommend_update (User Settings Feature Flag)
++ force_update (User Settings Feature Flag)
++ non_bookable_ps_visible (User Settings Feature Flag)
++ smart_device_link_enabled (User Settings Feature Flag)
+
+## User Settings Provider (object)
++ image: `http://provider/image.png` (string) - Large provider logo.
++ thumbnail: `http://provider/thumbnail.png` (string) - Provider logo thumbnail.
++ header: `Please provide the data necessary for booking the parking space.` (string) - Translated header text for required fields.
++ legal - Contains two lists for terms and conditions entries where you can find text and url for each.
+    + accept (User Settings Provider Terms) - List of terms and conditions entries which the user needs to accept by some action (like checkbox).
+    + show (User Settings Provider Terms) - List of terms and conditions entries which the user needs only to see.
+
+## User Settings Provider Terms (object)
++ url: `http://www.provider.com/terms_and_conditions.html` (string) - link to terms and conditions
++ text: `Please accept the parking providers' %TERMS_LINK%.` (string) - prompt for accepting the terms and conditions. Replace `%TERMS_LINK%` with the `url`
+
+## User Settings Notification Time (object)
++ minutes: `-5` (number)
++ relative_to: begin (enum[string])
+  + Members
+    + begin
+    + end
++ include_distance: true (boolean)
+
+## User Settings Additional Field (object)
++ label: `zusätzliche Dienste` (string)
++ type: text (enum[string])
+  + Members
+    + text
+    + datetime
+    + date
+    + time
+    + number
+    + tel
+    + boolean
+
+## User Settings Feature Flag (object)
++ enabled: true (boolean) - defines wether the flag is enabled
+
+## User Settings Currencies (object)
++ default_exponent: `-2` (number) - default exponent for money value conversions. This exponent applies to the conversion if the currency is not listed in `exponents`
++ exponents (array[User Settings Currency Exponent])
+
+## User Settings Currency Exponent (object)
++ currency: `EUR` (enum[string]) - 3 letter currency code
+  + Members
+    + EUR
+    + CHF
++ exponent: `-2` (number) - exponent for money value conversions
