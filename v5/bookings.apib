@@ -24,6 +24,9 @@ Access needs a __private key__.
         + `required_field` (object) - Parking space required fields defined in the locations request. The required fields should contain all required fields defined in location. All values should be sent as strings.
             + car_color: `red` (string, optional) - the car color
             + number_of_passengers: `5` (string, optional) - the number of passengers
+        + user_metadata (User Metadata Input, optional)
+          Additional information about a user (optional). This is for example latitude/longitude parameters
+          for the users current position.
 
     + Headers
 
@@ -176,3 +179,7 @@ Currently supports stopping onstreet bookings only.
 + `transaction_fee`: `25` (number) - the transaction fee included in `amount`
 + `payment_provider_fee`: `25` (number) - the payment provider fee included in `amount`
 + Include Currency
+
+## User Metadata Input (object)
++ `latitude`: `52.521381` (number, optional) - users latitude
++ `longitude`: `13.3920158` (number, optional) - users longitude
