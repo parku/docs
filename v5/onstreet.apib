@@ -40,6 +40,9 @@ is as expected. The optional attributes of the parking zone object here are main
         + `license_plate`: `AB 1234` (string, required) - the license plate of the car used for parking
         + `phone_number`: `01234567890` (string, required) - the customer phone number
         + `duration_minutes`: `15` (number, optional) - the parking duration, required if the retrieved zone had entries in the `available_durations` field.
+        + `user_metadata` (User Metadata Input, optional)
+          Additional information about a user (optional). This is for example latitude/longitude parameters
+          for the users current position.
 
 + Response 201 (application/json)
     Returned if a booking was created
