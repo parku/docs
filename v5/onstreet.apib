@@ -69,6 +69,7 @@ Returned if either one of the provided zone fields didn't match or the payment i
 + price (Zone Price, required) - information about the price for this zone
 + max_datetime_end: `2009-06-30T18:30:00+02:00` (string, required) - Latest time when a booking has to end. Bookings that are not stopped after this time will be automatically stopped on backend side.
 + duration_max_minutes`: 760 (number, required) - Maximum time the booking can be running in minutes. Bookings that are not stopped after this amount of time will be automatically stopped on backend side.
++ duration_minutes: 15 (number) - Duration of the booking, can be null if the booking is still running. If this value is not null while the booking is running, then this is a duration based booking.
 
 ## Parking Zone (object)
 + Include Parking Zone Base Data
