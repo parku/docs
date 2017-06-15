@@ -21,7 +21,7 @@ Access needs a __private key__.
           The payment method to use for paying. This method will be used for paying the fee of the booking
           after all payments from the `payments` field have been applied. E.g. if you provided a 5 Euro
           voucher via `payments`, the payment method will be used on 5 Euro less than the actual booking fee.
-        + `required_field` (object) - Parking space required fields defined in the locations request. The required fields should contain all required fields defined in location. All values should be sent as strings.
+        + `required_fields` (object) - Parking space required fields defined in the locations request. The required fields should contain all required fields defined in location. All values should be sent as strings.
             + car_color: `red` (string, optional) - the car color
             + number_of_passengers: `5` (string, optional) - the number of passengers
         + user_metadata (User Metadata Input, optional)
