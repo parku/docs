@@ -8,7 +8,7 @@ GENERATED_DIR=./build/generated
 COMMON_DEPS=$(BUILD_DIR)/images/* Makefile | ./tmp
 
  # current stable version gets index assigned
-INDEX=v4
+INDEX=v5
 
 PUBLISH_TO_BRANCH=gh-pages
 GENERATE_VERSIONS=v4 v5
