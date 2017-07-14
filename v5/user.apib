@@ -194,37 +194,6 @@ Access needs a __private key__.
 
 + Response 200 (application/json)
     + Attributes (array[Payment Method])
-    + Body
-
-            [
-                {
-                    id: "0000bb3e-506d-11e5-9781-d43d7eece658",
-                    types: [
-                        "immediate"
-                    ],
-                    primary: false,
-                    validated: false,
-                    provider : {
-                        paypal : {
-                            token: "DEADBEEF"
-                        }
-                    }
-                },
-                {
-                    id: "1000bb3e-506d-11e5-9781-d43d7eece658",
-                    types: [
-                        "immediate",
-                        "post"
-                    ]
-                    primary: true,
-                    validated: true,
-                    provider : {
-                        braintree : {
-                            token: "DEADBEEF"
-                        }
-                    }
-                },
-            ]
 
 ### Retrieve primary payment method [GET /user/payment_methods/primary]
 + Request (application/)
@@ -234,22 +203,6 @@ Access needs a __private key__.
 
 + Response 200 (application/json)
     + Attributes (Payment Method)
-    + Body
-
-            {
-                id: "1000bb3e-506d-11e5-9781-d43d7eece658",
-                types: [
-                    "immediate",
-                    "post"
-                ]
-                primary: true,
-                validated: true,
-                provider : {
-                    braintree : {
-                        token: "DEADBEEF"
-                    }
-                }
-            }
 
 + Response 404
     Returned if no primary payment method is available.
@@ -259,19 +212,7 @@ Access needs a __private key__.
 Adds a new payment method for the user.
 
 + Request (application/json)
-    + Attributes
-        + `types` (array, required) - type of payment method
-            + (enum)
-                + post
-                + immediate
-        + `primary`: `true` (boolean, optional) - Wether the payment method should be activated as the users
-            primary payment method.
-            If another payment method of the user was set to be the primary method before,
-            that one will be be changed to not be the primary one anymore.
-            + Default: false
-        + `provider` (object) - the payment provider information
-            + braintree (object) - sepadebit provider
-                + token: `DEADBEEF` (string, required)
+    + Attributes (Payment Method Input)
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
@@ -279,26 +220,18 @@ Adds a new payment method for the user.
 + Response 200 (application/json)
     + Attributes (Payment Method)
 
++ Response 422 (application/json)
+    Returned if an error occured, e.g. `primary` was set to true for a payment method that doesn't support post payment
+    + Attributes (Api Error)
+
 ### Update a user payment method [PUT /user/payment_methods/{payment_method_id}]
 Updates a users payment method.
 
 + Parameters
-    + `payment_method_id`: `1000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
+    + payment_method_id: `1000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
 
 + Request (application/json)
-    + Attributes
-        + `types` (array, optional) - type of payment method
-            + (enum)
-                + post
-                + immediate
-        + `primary`: `true` (boolean, optional) - Wether the payment method should be activated as the users
-            primary payment method.
-            If another payment method of the user was set to be the primary method before,
-            that one will be be changed to not be the primary one anymore.
-            + Default: false
-        + `provider` (object) - the payment provider information
-            + braintree (object) - sepadebit provider
-                + token: `DEADBEEF` (string, optional)
+    + Attributes (Payment Method Update Input)
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
@@ -308,15 +241,24 @@ Updates a users payment method.
     + Attributes (Payment Method)
 
 + Response 422 (application/json)
-    Returned if an error occured, e.g. `active` was set to `true` for a non post payment.
-    + Body
+    Returned if an error occured, e.g. `primary` was set to true for a payment method that doesn't support post payment
+    + Attributes (Api Error)
 
 ### Delete a user payment method [DELETE /user/payment_methods/{payment_method_id}]
 Deletes a user payment method.
 
 + Parameters
-    + `payment_method_id`: `1000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
+    + payment_method_id: `1000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
 
-+ Response 200 (application/json)
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 204 (application/json)
     Returned when the payment method was successfully deleted.
     + Body
+
++ Response 422 (application/json)
+    Returned if an error occured, e.g. a booking exists that waits for a payment from this method.
+    + Attributes (Api Error)

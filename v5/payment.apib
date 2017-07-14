@@ -33,7 +33,7 @@ Shows all credit cards the user used before.
 ### Delete a Credit Card [DELETE /payment/credit_cards/{credit_card_id}]
 
 + Parameters
-    + `credit_card_id`: gphsyb (string,required) - The identifier of the credit card to delete.
+    + credit_card_id: gphsyb (string,required) - The identifier of the credit card to delete.
         You'll receive a list of the users credit cards through the `GET /payment/creditcards` request.
 
 + Request
@@ -43,60 +43,118 @@ Shows all credit cards the user used before.
 
 + Response 204
 
-### Update Credit [PUT /payment/credit/{?amount,provider,provider_info}]
-__Deprecated__: this will be removed in __v5__.
-
-+ Request
-    + Attributes
-        + `amount`: 10 (number,required) - The amount.
-        + `provider`: paypal (enum,required) The payment method.
-            + Members
-                + paypal
-                + braintree
-        + `provider_info`: `PAY-1CM399047K4649003KM4WJQQ` (string,required) - refer to the description
-              of [Create a new Booking](#bookings-bookings-post)
-    + Headers
-
-            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
-
-+ Response 200 (application/json)
-    + Body
-
-            {
-              "gender": "female",
-              "email": "test@example.com",
-              "firstname": "Test",
-              "lastname": "Name",
-              "credit": 10,
-              "currency": "EUR",
-              "country": "DE",
-              "facebook_id": null,
-              "token": "098f6bcd4621d373cade4e832627b4f6"
-            }
-
-
 # Data Structure
+## Pre Booking Payment Input (object)
++ `type`: paypal (enum[string], required) - The payment method.
+    + Members
+        + paypal - pay by paypal
+        + credit - pay by credit
+        + braintree - pay by braintree
++ amount: 1200 (number, required) - The amount to pay with this method as an integer where `amount = 100 * decimal_amount`.
++ `payload`: `PAY-1CM399047K4649003KM4WJQQ` (string, optional) -
+    The information of the payment provider to perform a payment.  Required for `paypal` and `braintree`.
+
+    The field `provider_info` should contain required payment information.
+    Typically you just forward the info from your request to the payment provider into this field.
+
+    * **PayPal**
+        You can either use the complete PayPal response or just add the payment ID:
+        ```
+        payments.payload=PAY-1CM399047K4649003KM4WJQQ
+        ```
+    * **Braintree**
+        There are two ways to pay with braintree:
+        1. _CreditCard-ID_
+
+            Retrieve the Card ID through the payment endpoint and add it to the request:
+
+            ```
+            payments.payload[id]=gphsyb
+            ```
+        2. _CreditCard Credentials_
+
+            ```
+            payments.payload[number]=EncryptedCreditCardNumber
+            payments.payload[expiration_date]=EncryptedExpirationDate
+            payments.payload[cvv]=EncryptedCvv
+            ```
+## Payment Method Input (object)
++ `primary`: `true` (boolean, optional)
+    Wether the payment method should be activated as the users primary payment method.
+    If another payment method of the user was set to be the primary method before,
+    that one will be be changed to not be the primary one anymore.
+    + Default: false
++ provider_type: stripe (enum[string], required) - provider type
+    + Members
+        + stripe
++ One Of
+    + provider (Stripe Payment Method Input, required) - provider information
+
+## Payment Method Update Input (object)
++ `primary`: `true` (boolean, optional)
+    Wether the payment method should be activated as the users primary payment method.
+    If another payment method of the user was set to be the primary method before,
+    that one will be be changed to not be the primary one anymore.
+    + Default: false
+
+## Stripe Payment Method Input
++ `source_id`: `tok_1234567890` (string, required)
+    the stripe source token for a credit card or a token representing a credit
+    card as returned by various stripe libraries, see https://stripe.com/docs/checkout
+
+## Used Payment Method Input (object)
++ id: `1000bb3e-506d-11e5-9781-d43d7eece658` (string, optional) - the payment method id,
+    only needed if type is `immediate`, post payments are paid with the primary
+    post payment method
++ type: post (enum[string], required) - How to execute the payment. If `post` is selected
+    here, the primary payment method of the user will be used and the id is ignored.
+    + Members
+        + immediate
+        + post
 
 ## Payment Method (object)
 + id: `1000bb3e-506d-11e5-9781-d43d7eece658` (string) - the payment method id
-+ types (array) - type of payment method
-    + (enum)
-        + post
-        + immediate
++ created_at: `2009-06-30T18:30:00+02:00` (string) - date when the payment method was created
++ `post_payment`: false (boolean, optional) - wether this payment method is usable for post payments
+    + Default: false
 + primary: true (boolean) - wether this is the primary payment method of the user
-+ validated: true (boolean) -
-    Wether the payment method was already validated. Non validated payment methods cannot be used for paying.
-+ provider (object) - the payment provider information, can be one of `braintree`, `credits`, `coupon`, `paypal`
-    + One Of
-        + braintree (object) - paid through braintree provider
-            + token: `DEADBEEF` (string) - braintree token
-            + name: `1234` (string) - the last 4 digits of the credit card
-        + credit (object) - paid by credit
-            + `balance_before`: `20.5` (number) - credit account balance before taking the credit payment
-        + coupon (object) - paid with a coupon
-            + code: `ASDF1234` (string) - the coupon code that was used
-        + paypal (object) - paid by paypal
-            + token: `DEADBEEF` (string) - paypal token
++ validated: successful (enum[string]) -
+    Wether the payment method was already validated successfully. Non validated payment methods cannot be used for paying.
+    + Members
+        + successful
+        + failed
+        + pending
++ provider_type: stripe (enum[string], required) - provider type
+  + Members
+    + stripe
++ One Of
+    + provider (Stripe Payment Method) - payment using stripe
++ `fee`
+    + `percent`: `1.4` (number) - the payment provider fee percentage. This percentage is added on top of the overall booking cost. The overall booking cost is calculated by `booking_fee + booking_fee * fee_percentage + fee_fixed`.
+    + `fixed`: 25 (number) - fixed payment provider fee.
+    + `minimum_total`: 50 (number) - minimum total amount for a booking transaction. If a booking is cheaper than this, the payment provider fee will be adapted.
+
+
 
 ## Payment (Payment Method)
 + amount: `5.35` (number)
+
+## Stripe Payment Method (object)
++ `customer_id`: `cus_123456789` (string, required) - stripe customer id
++ `source_id`: `card_123456789` (string, required) - stripe source id
++ `instrument_type`: `credit_card` (string, required) - type of payment instrument used for charging
++ One Of
+    + `instrument` (Credit Card Payment Method, required) - the credit card information
+
+## Credit Card Payment Method (object)
++ number: 6789 (string, required) - last 4 digits of credit card
++ type: `Visa` (string, required) - card type as defined by `brand` at https://stripe.com/docs/api#card_object
++ `expire_month`: 12 (number, required) - expiration month of the credit card
++ `expire_year`: 2067 (number, required) - expiration year of the credit card
++ country: DE (string, required) - two letter ISO code representing the country of the card
++ `cvc_check`: pass(enum, required) - result of the cvc check if cvc was provided
+    + Members
+        + pass
+        + fail
+        + unavailable
+        + unchecked

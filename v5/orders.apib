@@ -3,10 +3,12 @@
 
 Access needs a __private key__.
 
-### List orders [GET /orders/history?{date_start,date_end}]
+### List orders [GET /orders?{date_start,date_end}]
 + Parameters
-    + `date_start`: `2015-10-27T09:10:20+00:00` (string, optional) - only return bookings newer than `date_start`
-    + `date_end`: `2016-10-27T10:10:20+00:00` (string, optional) - only return bookings older than `date_start`
+    + date_start: `2015-10-27T09:10:20+00:00` (string, optional)
+        only return bookings newer than `date_start`
+    + date_end: `2016-10-27T10:10:20+00:00` (string, optional)
+        only return bookings older than `date_start`
 
 + Request (application/json)
     + Headers
