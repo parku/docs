@@ -3,7 +3,7 @@
     "info": {
         "title": "Parku API v4 Reference",
         "version": "",
-        "description": "The parku API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and to use\nHTTP response codes to indicate API errors. We use built-in HTTP features, like HTTP authentication and HTTP verbs,\nwhich can be understood by off-the-shelf HTTP clients. JSON will be returned in all responses from the API,\nincluding errors.\n\n#### Versions\n\n- latest stable: __v4__\n\n#### Api definition files\n\n- [Swagger definition](generated/v4.swagger.json) (readable by [Postman](https://www.getpostman.com/))\n\n- [Api Blueprint](generated/v4.apib)"
+        "description": "The parku API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and to use\nHTTP response codes to indicate API errors. We use built-in HTTP features, like HTTP authentication and HTTP verbs,\nwhich can be understood by off-the-shelf HTTP clients. JSON will be returned in all responses from the API,\nincluding errors.\n\n#### Versions\n\n- latest stable: __v4__\n\n- beta: [v5](v5.html)\n\n#### Api definition files\n\n- [Swagger definition](generated/v4.swagger.json) (readable by [Postman](https://www.getpostman.com/))\n\n- [Api Blueprint](generated/v4.apib)"
     },
     "host": "sandbox.test.parku.de",
     "basePath": "/v4",
@@ -122,8 +122,7 @@
                         "in": "query",
                         "description": "An offset into the list of returned items.\nThe API will return the requested number of items starting at that offset.\n",
                         "required": false,
-                        "type": "number",
-                        "default": 0
+                        "type": "number"
                     },
                     {
                         "name": "date_start",
@@ -1365,7 +1364,11 @@
                                     "type": "number"
                                 },
                                 "provider": {
-                                    "type": "enum"
+                                    "type": "string",
+                                    "enum": [
+                                        "paypal",
+                                        "braintree"
+                                    ]
                                 },
                                 "provider_info": {
                                     "type": "string"
