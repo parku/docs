@@ -104,13 +104,11 @@ Shows all credit cards the user used before.
 
 ## Used Payment Method Input (object)
 + id: `1000bb3e-506d-11e5-9781-d43d7eece658` (string, optional) - the payment method id,
-    only needed if type is `immediate`, post payments are paid with the primary
-    post payment method
-+ type: post (enum[string], required) - How to execute the payment. If `post` is selected
-    here, the primary payment method of the user will be used and the id is ignored.
+    only needed if type is `immediate`
++ type: post (enum[string], required) - How to execute the payment. Currently only immediate
+    payments are supported.
     + Members
         + immediate
-        + post
 
 ## Payment Method (object)
 + id: `1000bb3e-506d-11e5-9781-d43d7eece658` (string) - the payment method id
