@@ -534,15 +534,14 @@
                                     "properties": {
                                         "id": {
                                             "type": "string",
-                                            "description": "the payment method id,\n\nonly needed if type is `immediate`, post payments are paid with the primary\npost payment method"
+                                            "description": "the payment method id,\n\nonly needed if type is `immediate`"
                                         },
                                         "type": {
                                             "type": "string",
                                             "enum": [
-                                                "immediate",
-                                                "post"
+                                                "immediate"
                                             ],
-                                            "description": "How to execute the payment. If `post` is selected\n\nhere, the primary payment method of the user will be used and the id is ignored."
+                                            "description": "How to execute the payment. Currently only immediate\n\npayments are supported."
                                         }
                                     },
                                     "required": [
@@ -1255,15 +1254,14 @@
                                     "properties": {
                                         "id": {
                                             "type": "string",
-                                            "description": "the payment method id,\n\nonly needed if type is `immediate`, post payments are paid with the primary\npost payment method"
+                                            "description": "the payment method id,\n\nonly needed if type is `immediate`"
                                         },
                                         "type": {
                                             "type": "string",
                                             "enum": [
-                                                "immediate",
-                                                "post"
+                                                "immediate"
                                             ],
-                                            "description": "How to execute the payment. If `post` is selected\n\nhere, the primary payment method of the user will be used and the id is ignored."
+                                            "description": "How to execute the payment. Currently only immediate\n\npayments are supported."
                                         }
                                     },
                                     "required": [
@@ -3520,15 +3518,14 @@
                                     "properties": {
                                         "id": {
                                             "type": "string",
-                                            "description": "the payment method id,\n\nonly needed if type is `immediate`, post payments are paid with the primary\npost payment method"
+                                            "description": "the payment method id,\n\nonly needed if type is `immediate`"
                                         },
                                         "type": {
                                             "type": "string",
                                             "enum": [
-                                                "immediate",
-                                                "post"
+                                                "immediate"
                                             ],
-                                            "description": "How to execute the payment. If `post` is selected\n\nhere, the primary payment method of the user will be used and the id is ignored."
+                                            "description": "How to execute the payment. Currently only immediate\n\npayments are supported."
                                         }
                                     },
                                     "required": [
@@ -6548,8 +6545,7 @@
                 "type": {
                     "type": "string",
                     "enum": [
-                        "immediate",
-                        "post"
+                        "immediate"
                     ]
                 }
             }
