@@ -28,7 +28,6 @@ including errors.
 - added [onstreet](#onstreet) endpoint
 - added [stop a booking](#stop-a-booking)
 - added [user payment methods](#user-user-payment-methods)
-- added [order history](#orders-order-history)
 
 - `voucher` endpoint removed
 
@@ -1191,39 +1190,6 @@ Returned if either one of the provided zone fields didn't match or the payment i
   + Members
     + EUR
     + CHF
-# Group Orders
-## Order History [/orders/history]
-
-Access needs a __private key__.
-
-### List orders [GET /orders?{date_start,date_end}]
-+ Parameters
-    + date_start: `2015-10-27T09:10:20+00:00` (string, optional)
-        only return bookings newer than `date_start`
-    + date_end: `2016-10-27T10:10:20+00:00` (string, optional)
-        only return bookings older than `date_start`
-
-+ Request (application/json)
-    + Headers
-
-            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
-
-+ Response 200 (applicaton/json)
-    + Attributes
-        + `orders` (array[Order])
-
-# Data Structures
-## Order (object)
-+ id: `0000bb3e-506d-11e5-9781-d43d7eece658` (string) - the order id
-+ reference: `123456` (string) - human readable order identifier
-+ type: `immediate` (enum) - type of payment
-    + Members
-        + post
-        + immediate
-+ date: `2016-10-27T10:10:20+00:00` (string) - date of the order execution
-+ amount: `25.5` (number) - total charged amount
-+ bookings (array[Booking]) - the bookings that were paid with the order
-+ payments (array[Payment]) - the payments that were executed for the order
 # Group Password
 ## Password [/password]
 
