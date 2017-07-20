@@ -54,7 +54,6 @@ v5_SRC:= \
 	v5/locations.apib \
 	v5/login.apib \
 	v5/onstreet.apib \
-	v5/orders.apib \
 	v4/password.apib \
 	v5/payment.apib \
 	v4/phone_numbers.apib \
