@@ -2828,7 +2828,7 @@
             "get": {
                 "responses": {
                     "200": {
-                        "description": "Displays the availability times. For every affected availability period there will be one entry in the json.\nThis sub json contains 9 keys, one for every weekday including the day's times and also the period start and end.\n\n__Caution__: This does not include bookings\n\nA period is affected, if one of the following holds:\n\n* `date_start` is between period start and period end\n\n* `date_end` is between period start and end\n\n* `date_start` and `date_end` overlay the period",
+                        "description": "Displays the availability times. For every affected availability period there will be one entry in the json.\nThis sub json contains 9 keys, one for every weekday including the day's times and also the period start and end.\n`weekday_1` is a Monday.\n\n__Caution__: This does not include bookings\n\nA period is affected, if one of the following holds:\n\n* `date_start` is between period start and period end\n\n* `date_end` is between period start and end\n\n* `date_start` and `date_end` overlay the period",
                         "headers": {},
                         "examples": {}
                     }
