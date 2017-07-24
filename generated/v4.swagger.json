@@ -1089,7 +1089,7 @@
                 ]
             }
         },
-        "/locations/{location_id}/availability": {
+        "/locations/{parking_space_id}/availability": {
             "get": {
                 "responses": {
                     "200": {
@@ -1105,9 +1105,9 @@
                 ],
                 "parameters": [
                     {
-                        "name": "location_id",
+                        "name": "parking_space_id",
                         "in": "path",
-                        "description": "Identifier of the location.",
+                        "description": "Identifier of a parking space.",
                         "required": true,
                         "type": "string"
                     },

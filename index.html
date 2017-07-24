@@ -7068,22 +7068,14 @@ either of the provided rates.</p>
 all the provided properties.</p>
 <p class="choices"><strong>Choices:&nbsp;</strong><code>excess_length</code> <code>indoor</code> <code>patio</code> <code>disabled</code> <code>charging_station</code> <code>key_necessary</code> <code>long_term_booking</code> <code>surveillance</code> <code>valet_service</code> <code>barrier</code> </p></dd><dt>fields</dt><dd><code>array[string]</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>all</span></span><p>Response will only contain the fields mentioned in this parameter.
 This can either be <code>all</code> or an comma separated list of field names from the response, e.g. <code>id,street,country</code>.</p>
-</dd></dl></div></div></div><hr class="split"><div class="right"><div class="definition"></div><h4>Example Request</h4><div class="tabs"><div class="tab-names"></div><div class="tab"><div class="tabs"><div tab-toggle-name="curl" tab-toggle-group="examples" class="tab curl"><div class="curl"><div class="command"><pre id="curl-locations-locations-get-3">curl 'https://sandbox.test.parku.io/v5/locations/<span class="hljs-attribute" title="location_id">00cd7cfd-e42d-11e2-8bf1-8a83f3373875</span>/availability?<span class="hljs-attribute">date_start=</span><span class="hljs-literal">2016</span>&<span class="hljs-attribute">date_end=</span><span class="hljs-literal">2016</span>'&nbsp;\<br>--insecure&nbsp;\<br>--user 012345678abcdef:parku</pre></div><div class="copy"><button onclick="copyToClipboardWithoutNewlines('curl-locations-locations-get-3')">copy curl command</button></div></div></div><div tab-toggle-name="details" tab-toggle-group="examples" class="tab details"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1</span></code></pre><div style="height: 1px;"></div></div></div><h4>Example Response</h4><div class="tabs"><div class="tab-names"><span tab-toggle="tab-0" tab-toggle-group="Get availability times for location" class="tab-button active">200</span></div><div tab-toggle-name="tab-0" tab-toggle-group="Get availability times for location" class="tab"><div class="inner"><div class="description"><p>Displays the availability times. For every affected availability period there will be one entry in the json.
-This sub json contains 9 keys, one for every weekday including the day’s times and also the period start and end.
-<code>weekday_1</code> is a Monday.</p>
-<p><strong>Caution</strong>: This does not include bookings</p>
-<p>A period is affected, if one of the following holds:</p>
-<ul>
-<li>
-<p><code>date_start</code> is between period start and period end</p>
-</li>
-<li>
-<p><code>date_end</code> is between period start and end</p>
-</li>
-<li>
-<p><code>date_start</code> and <code>date_end</code> overlay the period</p>
-</li>
-</ul>
+</dd></dl></div></div></div><hr class="split"><div class="right"><div class="definition"></div><h4>Example Request</h4><div class="tabs"><div class="tab-names"></div><div class="tab"><div class="tabs"><div tab-toggle-name="curl" tab-toggle-group="examples" class="tab curl"><div class="curl"><div class="command"><pre id="curl-locations-locations-get-3">curl 'https://sandbox.test.parku.io/v5/locations/<span class="hljs-attribute" title="parking_space_group_id">00cd7cfd-e42d-11e2-8bf1-8a83f3373875</span>/availability?<span class="hljs-attribute">date_start=</span><span class="hljs-literal">2016</span>&<span class="hljs-attribute">date_end=</span><span class="hljs-literal">2016</span>'&nbsp;\<br>--insecure&nbsp;\<br>--user 012345678abcdef:parku</pre></div><div class="copy"><button onclick="copyToClipboardWithoutNewlines('curl-locations-locations-get-3')">copy curl command</button></div></div></div><div tab-toggle-name="details" tab-toggle-group="examples" class="tab details"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1</span></code></pre><div style="height: 1px;"></div></div></div><h4>Example Response</h4><div class="tabs"><div class="tab-names"><span tab-toggle="tab-0" tab-toggle-group="Get availability times for location" class="tab-button active">200</span></div><div tab-toggle-name="tab-0" tab-toggle-group="Get availability times for location" class="tab"><div class="inner"><div class="description"><p>Displays the availability times for a parking space group. Availability times are based on week days, but can also
+have a specific date for their beginning and end, in which case you might get different results based on the <code>date_start</code>
+and <code>date_end</code> parameters. All availability times that are valid between a specific begin and end date form an availability period.</p>
+<p>The result contains the times for every weekday,
+while weekday 1 is monday and a weekday can contain multiple non overlapping times.
+If the availability period has no defined <code>begin</code> and <code>end</code>, then these values will be <code>null</code> and the period is
+valid from infinite past to infinite future.</p>
+<p><strong>Caution</strong>: This is the general availablity and does not include bookings and reservations.</p>
 </div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">begin</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-09T00:00:00+02:00"</span></span>,
   "<span class="hljs-attribute">end</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-18T00:00:00+02:00"</span></span>,
@@ -7129,7 +7121,7 @@ This sub json contains 9 keys, one for every weekday including the day’s times
       "<span class="hljs-attribute">end</span>": <span class="hljs-value"><span class="hljs-string">"17:00"</span>
     </span>}
   ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></div></div></div><div class="middle"><div id="locations-locations-get-3" class="action get"><h4 class="action-heading"><div class="name">Get availability times for location&nbsp;<a href="#get-availability-times-for-location" id="get-availability-times-for-location" class="permalink">&para;</a></div><a href="#locations-locations-get-3" class="method get">GET</a><code class="uri">/locations/{location_id}/availability{?date_start,date_end}</code></h4><div class="title"><strong>URI Parameters</strong></div><div class="parameter-content"><dl class="inner"><dt>location_id</dt><dd><code>uuid rfc4122</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>00cd7cfd-e42d-11e2-8bf1-8a83f3373875</span></span><p>Identifier of the location.</p>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></div></div></div><div class="middle"><div id="locations-locations-get-3" class="action get"><h4 class="action-heading"><div class="name">Get availability times for location&nbsp;<a href="#get-availability-times-for-location" id="get-availability-times-for-location" class="permalink">&para;</a></div><a href="#locations-locations-get-3" class="method get">GET</a><code class="uri">/locations/{parking_space_group_id}/availability{?date_start,date_end}</code></h4><div class="title"><strong>URI Parameters</strong></div><div class="parameter-content"><dl class="inner"><dt>parking_space_group_id</dt><dd><code>uuid rfc4122</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>00cd7cfd-e42d-11e2-8bf1-8a83f3373875</span></span><p>Identifier of a parking space group.</p>
 </dd><dt>date_start</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>2016</span></span><p>10-27T09:10:20+00:00 (ISO 8601, optional) - Start of time frame to include periods.
 If <code>date_start</code> is provided, <code>date_end</code> is required and vice versa.</p>
 </dd><dt>date_end</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>2016</span></span><p>10-27T10:10:20+00:00 (ISO 8601, optional)
@@ -10102,7 +10094,7 @@ to which the violation belongs to.</p>
 to your header.</p>
 <div class="title"><strong>URI Parameters</strong></div><div class="parameter-content"><dl class="inner"><dt>booking_id</dt><dd><code>uuid rfc4122</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>0072c629-e622-11e2-8bf1-8a83f3373875</span></span><p>The identifier of the booking
 to which the violation belongs to.</p>
-</dd></dl></div></div></div><hr class="split"><div class="middle"><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 20 Jul 2017</p></div></div></div></div><script>/* eslint-env browser */
+</dd></dl></div></div></div><hr class="split"><div class="middle"><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 24 Jul 2017</p></div></div></div></div><script>/* eslint-env browser */
 /* eslint quotes: [2, "single"] */
 'use strict';
 

@@ -785,10 +785,10 @@ AND (properties1 AND properties2 AND ...)
 + Response 200 (application/json)
     + Attributes (Locations and Clusters)
 
-### Get availability times for location [GET /locations/{location_id}/availability{?date_start,date_end}]
+### Get availability times for location [GET /locations/{parking_space_group_id}/availability{?date_start,date_end}]
 
 + Parameters
-    + location_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - Identifier of the location.
+    + parking_space_group_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - Identifier of a parking space group.
     + date_start: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Start of time frame to include periods.
         If `date_start` is provided, `date_end` is required and vice versa.
     + date_end: 2016-10-27T10:10:20+00:00 (ISO 8601, optional)
@@ -800,17 +800,16 @@ AND (properties1 AND properties2 AND ...)
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200
-    Displays the availability times. For every affected availability period there will be one entry in the json.
-    This sub json contains 9 keys, one for every weekday including the day's times and also the period start and end.
-    `weekday_1` is a Monday.
+    Displays the availability times for a parking space group. Availability times are based on week days, but can also
+    have a specific date for their beginning and end, in which case you might get different results based on the `date_start`
+    and `date_end` parameters. All availability times that are valid between a specific begin and end date form an availability period.
 
-    __Caution__: This does not include bookings
+    The result contains the times for every weekday,
+    while weekday 1 is monday and a weekday can contain multiple non overlapping times.
+    If the availability period has no defined `begin` and `end`, then these values will be `null` and the period is
+    valid from infinite past to infinite future.
 
-    A period is affected, if one of the following holds:
-
-    * `date_start` is between period start and period end
-    * `date_end` is between period start and end
-    * `date_start` and `date_end` overlay the period
+    __Caution__: This is the general availablity and does not include bookings and reservations.
 
     + Body
 

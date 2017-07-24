@@ -2824,11 +2824,11 @@
                 ]
             }
         },
-        "/locations/{location_id}/availability": {
+        "/locations/{parking_space_group_id}/availability": {
             "get": {
                 "responses": {
                     "200": {
-                        "description": "Displays the availability times. For every affected availability period there will be one entry in the json.\nThis sub json contains 9 keys, one for every weekday including the day's times and also the period start and end.\n`weekday_1` is a Monday.\n\n__Caution__: This does not include bookings\n\nA period is affected, if one of the following holds:\n\n* `date_start` is between period start and period end\n\n* `date_end` is between period start and end\n\n* `date_start` and `date_end` overlay the period",
+                        "description": "Displays the availability times for a parking space group. Availability times are based on week days, but can also\nhave a specific date for their beginning and end, in which case you might get different results based on the `date_start`\nand `date_end` parameters. All availability times that are valid between a specific begin and end date form an availability period.\n\nThe result contains the times for every weekday,\nwhile weekday 1 is monday and a weekday can contain multiple non overlapping times.\nIf the availability period has no defined `begin` and `end`, then these values will be `null` and the period is\nvalid from infinite past to infinite future.\n\n__Caution__: This is the general availablity and does not include bookings and reservations.",
                         "headers": {},
                         "examples": {}
                     }
@@ -2840,9 +2840,9 @@
                 ],
                 "parameters": [
                     {
-                        "name": "location_id",
+                        "name": "parking_space_group_id",
                         "in": "path",
-                        "description": "Identifier of the location.",
+                        "description": "Identifier of a parking space group.",
                         "required": true,
                         "type": "string"
                     },
