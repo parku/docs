@@ -1,0 +1,59 @@
+# Group Statements
+
+## Attributes [/statements]
+Access needs a __private key__.
+
+### Retrieve statement details [GET /statements/{statement_id}]
+
++ Parameters
+    + statement_id: `00052fd9-a5bf-11e6-a803-0661ff1183ad` (uuid rfc4122, required) - The identifier of the statement to be retrieved
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    See [Location Model](#header-location-model)
+    + Attributes (Detailed Statement)
+
+### List a users statements [GET /statements{?page,limit}]
+
++ Parameters
+  + page: 3 (number) - page to load, first page is `1`
+  + limit: 10 (number) - number of items to return per page
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    See [Location Model](#header-location-model)
+    + Attributes (array[Statement])
+
+# Data Structures
+## Statement (object)
++ id: `00052fd9-a5bf-11e6-a803-0661ff1183ad` (string) - The identifier
++ date: `2016-10-27T10:00:00+0000` (string) - the execution date
++ code: `DE-17-07-RE3HF-REF-2` - (string) reference code
++ price - pricing information
+  + `total`: `4200` (number, nullable) - the total transferred amount of the statement
+  + `payment_provider_fee`: `120` (number) - payment provider fee for the transfer
+  + Include Currency
+
+## Detailed Statement (object)
++ Include Statement
++ transactions (array[Transaction])
++ payment_method (Payment Method) - ayment method that was used for paying the statement
+
+## Transaction (object)
++ date: `2016-10-27T10:00:00+0000` (string) - the creation date of the transaction
++ type: `onstreet` (enum[string]) - type of the related booking
+  + Members
+    + onstreet
+    + offstreet
++ code: `DBMEA` (string) - booking code of related booking
++ price - pricing information
+  + `total`: 1100 (number) - total amount
+  + Include Currency

@@ -60,6 +60,7 @@ v5_SRC:= \
 	v5/prices.apib \
 	v4/sesam.apib \
 	v5/settings.apib \
+	v5/statements.apib \
 	v4/static_pages.apib \
 	v5/user.apib \
 	v4/violations.apib \
