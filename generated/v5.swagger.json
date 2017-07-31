@@ -4811,7 +4811,6 @@
                                 {
                                     "id": "1000bb3e-506d-11e5-9781-d43d7eece658",
                                     "created_at": "2009-06-30T18:30:00+02:00",
-                                    "post_payment": false,
                                     "primary": true,
                                     "validated": "successful",
                                     "provider_type": "stripe",
@@ -4861,7 +4860,6 @@
                             "application/json": {
                                 "id": "1000bb3e-506d-11e5-9781-d43d7eece658",
                                 "created_at": "2009-06-30T18:30:00+02:00",
-                                "post_payment": false,
                                 "primary": true,
                                 "validated": "successful",
                                 "provider_type": "stripe",
@@ -4895,11 +4893,6 @@
                                 "created_at": {
                                     "type": "string",
                                     "description": "date when the payment method was created"
-                                },
-                                "post_payment": {
-                                    "type": "boolean",
-                                    "description": "wether this payment method is usable for post payments",
-                                    "default": false
                                 },
                                 "primary": {
                                     "type": "boolean",
@@ -5119,7 +5112,6 @@
                             "application/json": {
                                 "id": "1000bb3e-506d-11e5-9781-d43d7eece658",
                                 "created_at": "2009-06-30T18:30:00+02:00",
-                                "post_payment": false,
                                 "primary": true,
                                 "validated": "successful",
                                 "provider_type": "stripe",
@@ -5153,11 +5145,6 @@
                                 "created_at": {
                                     "type": "string",
                                     "description": "date when the payment method was created"
-                                },
-                                "post_payment": {
-                                    "type": "boolean",
-                                    "description": "wether this payment method is usable for post payments",
-                                    "default": false
                                 },
                                 "primary": {
                                     "type": "boolean",
@@ -5311,7 +5298,6 @@
                             "application/json": {
                                 "id": "1000bb3e-506d-11e5-9781-d43d7eece658",
                                 "created_at": "2009-06-30T18:30:00+02:00",
-                                "post_payment": false,
                                 "primary": true,
                                 "validated": "successful",
                                 "provider_type": "stripe",
@@ -5345,11 +5331,6 @@
                                 "created_at": {
                                     "type": "string",
                                     "description": "date when the payment method was created"
-                                },
-                                "post_payment": {
-                                    "type": "boolean",
-                                    "description": "wether this payment method is usable for post payments",
-                                    "default": false
                                 },
                                 "primary": {
                                     "type": "boolean",
@@ -6482,9 +6463,6 @@
                 },
                 "created_at": {
                     "type": "string"
-                },
-                "post_payment": {
-                    "type": "boolean"
                 },
                 "primary": {
                     "type": "boolean"
