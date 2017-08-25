@@ -40,41 +40,16 @@ Access needs a __public key__.
             + (object)
                 + `key`: `adac` (string,optional)
                 + `value`: `1234567890` (string,optional)
+        + `device_id`: `f00bar` (string, optional) - identifier for the mobile device on that the registration is done, e.g. advertisement id for Android or iOS
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
-+ Response 201 (application/json)
-    + Body
 
-            {
-              "code": "KFJ32",
-              "gender": "female",
-              "age_range": "26 - 35",
-              "email": "test@example.com",
-              "firstname": "Test",
-              "lastname": "Name",
-              "credit": 0,
-              "currency": "EUR",
-              "country": "DE",
-              "facebook_id": null,
-              "cars": [{
-                "id": 12,
-                "license_plate": "B-AB 1234",
-                "vehicle": "Isetta",
-                "country": null
-              }],
-              "phone_numbers": [{
-                "id": 16696,
-                "phone_number": "099028-237489"
-              }],
-              "attributes": [{
-                "id": 1,
-                "key": "adac",
-                "value": "1234567890"
-              }],
-              "token": "098f6bcd4621d373cade4e832627b4f6"
-            }
++ Response 201 (application/json)
+    Returned when the user was successfully created
+    + Attributes (User)
+
 
 ### Retrieve a User [GET /user]
 Access needs a __private key__.
@@ -87,36 +62,7 @@ Returns the user object for the private key.
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
-    + Body
-
-            {
-              "code": "KFJ32",
-              "gender": "female",
-              "age_range": "26 - 35",
-              "email": "test@example.com",
-              "firstname": "Test",
-              "lastname": "Name",
-              "credit": 0,
-              "currency": "EUR",
-              "country": "DE",
-              "facebook_id": null,
-              "cars": [{
-                "id": 12,
-                "license_plate": "B-AB 1234",
-                "vehicle": "Isetta",
-                "country": null
-              }],
-              "phone_numbers": [{
-                "id": 16696,
-                "phone_number": "099028-237489"
-              }],
-              "attributes": [{
-                "id": 1,
-                "key": "adac",
-                "value": "1234567890"
-              }],
-              "token": "098f6bcd4621d373cade4e832627b4f6"
-            }
+    + Attributes (User)
 
 ### Update a user [PUT /user]
 Access needs a __private key__.
@@ -151,36 +97,7 @@ Changing cars, phone_numbers, attributes and password is done via separate endpo
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 
 + Response 200 (application/json)
-    + Body
-
-            {
-              "code": "KFJ32",
-              "gender": "female",
-              "age_range": "26 - 35",
-              "email": "test@example.com",
-              "firstname": "Test",
-              "lastname": "Name",
-              "credit": 0,
-              "currency": "CHF",
-              "country": "CH",
-              "facebook_id": null,
-              "cars": [{
-                "id": 12,
-                "license_plate": "B-AB 1234",
-                "vehicle": "Isetta",
-                "country": null
-              }],
-              "phone_numbers": [{
-                "id": 16696,
-                "phone_number": "099028-237489"
-              }],
-              "attributes": [{
-                "id": 1,
-                "key": "adac",
-                "value": "1234567890"
-              }],
-              "token": "098f6bcd4621d373cade4e832627b4f6"
-            }
+    + Attributes (User)
 
 
 ## User Payment Methods [/user/payment_methods]
@@ -262,3 +179,54 @@ Deletes a user payment method.
 + Response 422 (application/json)
     Returned if an error occured, e.g. a booking exists that waits for a payment from this method.
     + Attributes (Api Error)
+
+## User Tracking [/user/tracking]
+Access needs a __public key__.
+
+### Tracking App Installation [POST /user/tracking/installation]
++ Request (application/json)
+    + Attributes (User Tracking Installation)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 201 (application/json)
+    + Body
+
+# Data Structures
+
+## User
++ code: `KFJ32`
++ gender: `female`
++ age_range: `26 - 35`
++ email: `test@example.com`
++ firstname: `Test`
++ lastname: `Name`
++ credit: 0,
++ currency: `EUR`
++ country: `DE`
++ facebook_id: null
++ cars
+  + id: 12
+  + license_plate: `B-AB 1234`
+  + vehicle: `Isetta`
+  + country: null
++ phone_numbers
+  + id: 16696
+  + phone_number: `099028-237489`
++ attributes
+  + id: 1
+  + key: adac
+  + value: 1234567890
++ token: 098f6bcd4621d373cade4e832627b4f6
+
+## User Tracking Installation (object)
++ device_id: 'f00bar' (string, required) - identifier for the mobile device on that the installation was done, e.g. advertisement id for Android or iOS
++ campaigns (array[User Tracking Campaign]) - array of campaigns that the installation is coming from, contains at least one element
+
+## User Tracking Campaign
++ id: d34db33f (string, required) - identifier for the campaign that the installation is coming from
++ type: adjust (enum, required) - name of the platform that the campaign belongs to
+  + Members
+    + adjust
+    + facebook
