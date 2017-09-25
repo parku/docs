@@ -1,0 +1,449 @@
+# Group Owner
+
+## Owner [/owner]
+Access needs a __private key__.
+
+### List parking spaces [GET /owner/parking-spaces]
+Returns all parking spaces that are owned by the user given by the used private token for the request.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (Parking space)
+
+### Retrieve a Parking space [GET /owner/parking-spaces/{parking_space_id}]
+Retrieves the details of one singe parking space.
+
++ Parameters
+    + parking_space_id: `005c4826-4e28-11e3-a675-d43d7eece53d` (string, required) - The id or code of the parking space
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (Parking space)
+
++ Response 404
+Returned if parking space was not found or it doesn't belong to the user.
+    + Body
+
+### Update a Parking space [PUT /owner/parking-spaces/{parking_space_id}]
+Updates the parking space by setting the values of the parameters passed. Any parameter not provided will be left unchanged.
+
++ Parameters
+    + parking_space_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+
++ Request  (application/json)
+    + Attributes
+        + `status`: `inactive` (string)
+        + `code`: `ASDF12` (string)
+        + `type`: `offstreet` (string)
+        + `price` (Owner Price)
+        + `options` (array) - describes which options are available at the location and can contains each of the following elements. The list can be **empty**.
+            + (enum)
+              + `excess length`
+              + `indoor`
+        + `post_booking_info`: `Hallo, bitte lassen Sie mich allein.`
+        + `earliest_start`: `-15` (number) - bookable_range_start in minutes
+        + `latest_end`: `43200` (number) - bookable_range_end in minutes (should be max 183 days)
+        + `minimum_duration`: 30 - booking_duration_min
+        + `maximum_duration`: 43200 - booking_duration_max (should be max 183 days)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200
+    + Attributes (Parking space)
+
++ Response 404
+Returned if parking space was not found ot it doesn't belong to the user.
+    + Body
+
++ Response 422
+Returned if an error occurred.
+    + Attributes (Api Error)
+
+### List parking space descriptions [GET /owner/parking-spaces/{parking_space_id}/descriptions]
+Returns all descriptions for one parking space
+
++ Parameters
+    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (Description)
+
++ Response 404
+Returned if parking space was not found or it doesn't belong to the user.
+    + Body
+
+### Create a new Description [POST /owner/parking-spaces/{parking_space_id}/descriptions]
++ Request (application/json)
+    + Attributes
+        + `locale`: `de_DE` (string, required)
+        + `content`: `Hallo, ich bin ein Parkplatz.` (string, required)
+
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 201 (application/json)
+    + Attributes (Description)
+
++ Response 404
+Returned if parking space was not found or it doesn't belong to the user.
+    + Body
+
++ Response 422
+Returned if content is null, content is too long, locale is null, locale already exists or an error occurred.
+    + Attributes (Api Error)
+
+### Update a Description [PUT /owner/parking-spaces/{parking_space_id}/description/{description_id}]
+Updates the description by setting the values of the parameters passed.
+
++ Parameters
+    + parking_space_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+
++ Request  (application/json)
+    + Attributes
+        + `content`: `Hallo, ich bin auch ein Parkplatz.` (string)
+
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200
+    + Attributes (Description)
+
++ Response 404
+Returned if parking space was not found or it doesn't belong to the user.
+    + Body
+
++ Response 422
+Returned if content is null, content is too long or an error occurred.
+    + Attributes (Api Error)
+
+### Delete a Description [DELETE /owner/parking-spaces/{parking_space_id}/descriptions/{description_id}]
+
++ Parameters
+    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+    + description_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the description id
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200
+    + Attributes (Description)
+
++ Response 404
+Returned if parking space or description was not found, if the parking space doesn't belong to the user or description doesn't belong to the parking space.
+    + Body
+
++ Response 422
+Returned if an error occurred.
+    + Attributes (Api Error)
+
+### List images [GET /owner/parking-spaces/{parking_space_id}/images]
+Returns all images for one parking space
+
++ Parameters
+    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+     + Attributes (Image)
+
++ Response 404
+Returned if parking space was not found or it doesn't belong to the user.
+    + Body
+
+### Create a new Image [POST /owner/parking-spaces/{parking_space_id}/images]
++ Request (application/json)
+    + Attributes
+        + `content`: `w6JQTkcNChoNCgAAAA0KSUhEUgAAAMK3AAAAwrcIAwA...` (string, required) - base64 encoded image content
+
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 201 (application/json)
+    + Attributes (Image)
+
++ Response 404
+Returned if parking space was not found or it doesn't belong to the user.
+    + Body
+
++ Response 422
+Returned if an error occurred.
+    + Attributes (Api Error)
+
+### Delete an Image [DELETE /owner/parking-spaces/{parking_space_id}/images/{image_id}]
+
++ Parameters
+    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+    + image_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the image id
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200
+    + Attributes (Image)
+
++ Response 404
+Returned if parking space or image was not found or if the parking space doesn't belong to the user.
+    + Body
+
++ Response 422
+Returned if an error occurred.
+    + Attributes (Api Error)
+
+### List periods [GET /owner/parking-spaces/{parking_space_id}/periods]
+Returns all periods for one parking space
+
++ Parameters
+    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+     + Attributes (Period)
+
++ Response 404
+Returned if parking space was not found or it doesn't belong to the user.
+    + Body
+
+### Create a new Period [POST /owner/parking-spaces/{parking_space_id}/periods]
++ Request (application/json)
+    + Attributes
+        + `date_start`: `2017-12-15` (string) - can be null
+        + `date_end`: `null` (string) - can be null
+
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 201 (application/json)
+    + Attributes (Period)
+
++ Response 404
+Returned if the parking space was not found or it doesn't belong to the user.
+    + Body
+
++ Response 422
+Returned if the period has overlapping dates or an error occurred.
+    + Attributes (Api Error)
+
+### Update a Period [PUT /owner/parking-spaces/{parking_space_id}/periods/{period_id}]
+Updates the period by setting the values of the parameters passed.
+
++ Parameters
+    + parking_space_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+    + period_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+
++ Request  (application/json)
+    + Attributes
+        + `date_start`: `2017-12-15` (string) - can be null
+        + `date_end`: `null` (string) - can be null
+
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200
+    + Attributes (Description)
+
++ Response 404
+Returned if parking space or period was not found, if the parking space doesn't belong to the user or period doesn't belong to the parking space.
+    + Body
+
++ Response 422
+Returned if an error occurred.
+    + Attributes (Api Error)
+
+### Delete a period [DELETE /owner/parking-spaces/{parking_space_id}/periods/{period_id}]
+
++ Parameters
+    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+    + period_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the period id
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200
+    + Attributes (Period)
+
++ Response 404
+Returned if parking space or period was not found or the parking space doesn't belong to user.
+    + Body
+
++ Response 422
+Returned if an error occurred.
+    + Attributes (Api Error)
+
+### List Times [GET /owner/parking-spaces/{parking_space_id}/periods/{period_id}/times]
+Returns all times for an availability period.
+
++ Parameters
+    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+    + period_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the period id
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+     + Attributes (Times)
+
++ Response 404
+Returned if parking space or period was not found, if the parking space doesn't belong to the user or period doesn't belong to the parking space.
+    + Body
+
+### Create new Times [POST /owner/parking-spaces/{parking_space_id}/periods/{period_id}/times]
++ Request (application/json)
+    + Attributes
+        + `weekday`: `1` (number, required)
+        + `time_start`: `00:00` (number, required)
+        + `time_end`: `19:00` (number, required)
+
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 201 (application/json)
+    + Attributes (Times)
+
++ Response 404
+Returned if parking space or period was not found or if the parking space doesn't belong to the user.
+    + Body
+
++ Response 422
+Returned if weekday is not in range 1-7, weekday already exists, time is invalid, weekday or times are missing, time is overlapping or an error occurred.
+    + Attributes (Api Error)
+
+### Update Times [PUT /owner/parking-spaces/{parking_space_id}/periods/{period_id}/times/{times_id}]
+Updates the times by setting the values of the parameters passed.
+
++ Parameters
+    + parking_space_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+    + period_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+    + times_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+
++ Request  (application/json)
+    + Attributes
+        + `time_start`: `2017-12-15` (string) - can be null
+        + `time_end`: `null` (string) - can be null
+
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200
+    + Attributes (Times)
+
++ Response 404
+Returned if parking space, period or time was not found or if the parking space doesn't belong to the user.
+    + Body
+
++ Response 422
+Returned if weekday is not in range 1-7, weekday already exists, time is invalid, weekday or times are missing, time is overlapping or an error occurred.
+    + Attributes (Api Error)
+
+### Delete a Times [DELETE /owner/parking-spaces/{parking_space_id}/periods/{period_id}/times/{times_id}]
+
++ Parameters
+    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+    + period_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the period id
+    + times_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200
+    + Attributes (Times)
+
++ Response 404
+Returned if parking space, period or time was not found or if the parking space doesn't belong to the user.
+    + Body
+
++ Response 422
+Returned if an error occurred.
+    + Body
+
+# Data Structures
+
+## Parking space (object)
++ `id`: `005c4826-4e28-11e3-a675-d43d7eece53d` (string)
++ `commission`: `33.33` (number, in percent)
++ `status`: `active` (string)
++ `currency`: `EUR` (string)
++ `code`: `ASDF12` (string)
++ `type`: `offstreet` (string)
++ `price` (Owner Price)
++ `options` (array) - describes which options are available at the location and can contains each of the following elements. The list can be **empty**.
+    + (enum)
+      + `excess length` - the parking space can be used by cars with a small trailer
+      + `indoor` - the parking space has a roof or can be an underground garagethe parking space has a roof or can be an underground garage
+      + `disabled` - parking space is accessible for disabled peopleI
+      + `patio` - the parking space is located at an inner courtyard the parking space is located at an inner courtyard
+      + `barrier` - parking space has a barrier and user needs a smartphone to open it parking space has a barrier and user needs a smartphone to open it
+      + `charging station` - parking space with an electric vehicle charging station
+      + `key_necessary` - parking space can only be accessed with a keyparking space can only be accessed with a key
+      + `long_term_booking` - parking space is bookable for longer time period
+      + `surveillance` - parking space has surveillance
+      + `valet_service` - parking space contains valet serviceparking space contains valet service
++ `post_booking_info`: `Hallo, bitte lassen Sie mich allein.`
++ `earliest_start`: `-15` (number) - bookable_range_start in minutes
++ `latest_end`: `43200` (number) - bookable_range_end in minutes (should be max 183 days)
++ `minimum_duration`: 30 - booking_duration_min
++ `maximum_duration`: 43200 - booking_duration_max (should be max 183 days)
+
+## Description (object)
++ `id`: `005c4826-4e28-11e3-a675-d43d7eece53d` (string)
++ `locale`: `de_DE` (string)
++ `content`: `Hallo, ich bin ein Parkplatz.`
+
+## Image (object)
++ `id`: `005c4826-4e28-11e3-a675-d43d7eece53d` (string)
++ `created_at`: `2016-10-27T09:10:20+00:00` (string, optional)
++ `url`: `https://parku.de/images/parkingspace/020a81f5-c8b9-11e4-bfd2-d43d7eece658/640x286.jpg` - medium size
+
+## Period (object)
++ `id`: `005c4826-4e28-11e3-a675-d43d7eece53d` (string)
++ `date_start`: `2017-12-15` (number, nullable)
++ `date_end`: `null` (number, nullable)
+
+## Times (object)
++ `id`: `005c4826-4e28-11e3-a675-d43d7eece53d` (string)
++ `weekday`: `1` (number, required)
++ `time_start`: `00:00` (number, required)
++ `time_end`: `19:00` (number, required)
+
+## Owner Price (object)
++ `rate_hourly`: `300` (number, nullable) - as integer, 300 means 3,00 EUR
++ `rate_daily`: `1500` (number, nullable)
++ `rate_weekly`: `null` (number, nullable)
++ `rate_monthly`: `null` (number, nullable)

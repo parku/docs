@@ -63,7 +63,8 @@ v5_SRC:= \
 	v4/static_pages.apib \
 	v5/user.apib \
 	v4/violations.apib \
-	v5/changelog.md
+	v5/changelog.md \
+	v5/owner.apib
 
 MOCK_VERSION=v5
 
