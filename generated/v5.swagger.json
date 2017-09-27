@@ -36,7 +36,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "key": {
@@ -502,7 +501,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "group_id": {
@@ -1230,7 +1228,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "license_plate": {
@@ -1794,7 +1791,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "license_plate": {
@@ -1884,7 +1880,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "car_id": {
@@ -2041,7 +2036,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "ios_device_token": {
@@ -2080,12 +2074,15 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "access_token": {
                                     "type": "string",
                                     "description": "The access token which is used to obtain information from Facebook.\n\nThe token must have the permissions to get the users email."
+                                },
+                                "device_id": {
+                                    "type": "string",
+                                    "description": "identifier for the mobile device on that the registration is done, e.g. advertisement id for Android or iOS"
                                 }
                             },
                             "required": [
@@ -3487,7 +3484,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "zone": {
@@ -3740,7 +3736,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "phone_number": {
@@ -3814,7 +3809,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "phone_number_id": {
@@ -4446,7 +4440,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "enabled": {
@@ -4532,7 +4525,7 @@
             "post": {
                 "responses": {
                     "201": {
-                        "description": "Created",
+                        "description": "Returned when the user was successfully created",
                         "headers": {},
                         "examples": {
                             "application/json": {
@@ -4542,32 +4535,106 @@
                                 "email": "test@example.com",
                                 "firstname": "Test",
                                 "lastname": "Name",
-                                "credit": 0,
+                                "credit": "0",
                                 "currency": "EUR",
                                 "country": "DE",
-                                "facebook_id": null,
-                                "cars": [
-                                    {
-                                        "id": 12,
-                                        "license_plate": "B-AB 1234",
-                                        "vehicle": "Isetta",
-                                        "country": null
-                                    }
-                                ],
-                                "phone_numbers": [
-                                    {
-                                        "id": 16696,
-                                        "phone_number": "099028-237489"
-                                    }
-                                ],
-                                "attributes": [
-                                    {
-                                        "id": 1,
-                                        "key": "adac",
-                                        "value": "1234567890"
-                                    }
-                                ],
+                                "facebook_id": "null",
+                                "cars": {
+                                    "id": "12",
+                                    "license_plate": "B-AB 1234",
+                                    "vehicle": "Isetta",
+                                    "country": "null"
+                                },
+                                "phone_numbers": {
+                                    "id": "16696",
+                                    "phone_number": "099028-237489"
+                                },
+                                "attributes": {
+                                    "id": "1",
+                                    "key": "adac",
+                                    "value": "1234567890"
+                                },
                                 "token": "098f6bcd4621d373cade4e832627b4f6"
+                            }
+                        },
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                },
+                                "gender": {
+                                    "type": "string"
+                                },
+                                "age_range": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string"
+                                },
+                                "firstname": {
+                                    "type": "string"
+                                },
+                                "lastname": {
+                                    "type": "string"
+                                },
+                                "credit": {
+                                    "type": "string"
+                                },
+                                "currency": {
+                                    "type": "string"
+                                },
+                                "country": {
+                                    "type": "string"
+                                },
+                                "facebook_id": {
+                                    "type": "string"
+                                },
+                                "cars": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "license_plate": {
+                                            "type": "string"
+                                        },
+                                        "vehicle": {
+                                            "type": "string"
+                                        },
+                                        "country": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "phone_numbers": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "phone_number": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "attributes": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "key": {
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "token": {
+                                    "type": "string"
+                                }
                             }
                         }
                     }
@@ -4582,7 +4649,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "email": {
@@ -4631,6 +4697,10 @@
                                 },
                                 "attributes": {
                                     "type": "array"
+                                },
+                                "device_id": {
+                                    "type": "string",
+                                    "description": "identifier for the mobile device on that the registration is done, e.g. advertisement id for Android or iOS"
                                 }
                             },
                             "required": [
@@ -4660,32 +4730,106 @@
                                 "email": "test@example.com",
                                 "firstname": "Test",
                                 "lastname": "Name",
-                                "credit": 0,
+                                "credit": "0",
                                 "currency": "EUR",
                                 "country": "DE",
-                                "facebook_id": null,
-                                "cars": [
-                                    {
-                                        "id": 12,
-                                        "license_plate": "B-AB 1234",
-                                        "vehicle": "Isetta",
-                                        "country": null
-                                    }
-                                ],
-                                "phone_numbers": [
-                                    {
-                                        "id": 16696,
-                                        "phone_number": "099028-237489"
-                                    }
-                                ],
-                                "attributes": [
-                                    {
-                                        "id": 1,
-                                        "key": "adac",
-                                        "value": "1234567890"
-                                    }
-                                ],
+                                "facebook_id": "null",
+                                "cars": {
+                                    "id": "12",
+                                    "license_plate": "B-AB 1234",
+                                    "vehicle": "Isetta",
+                                    "country": "null"
+                                },
+                                "phone_numbers": {
+                                    "id": "16696",
+                                    "phone_number": "099028-237489"
+                                },
+                                "attributes": {
+                                    "id": "1",
+                                    "key": "adac",
+                                    "value": "1234567890"
+                                },
                                 "token": "098f6bcd4621d373cade4e832627b4f6"
+                            }
+                        },
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                },
+                                "gender": {
+                                    "type": "string"
+                                },
+                                "age_range": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string"
+                                },
+                                "firstname": {
+                                    "type": "string"
+                                },
+                                "lastname": {
+                                    "type": "string"
+                                },
+                                "credit": {
+                                    "type": "string"
+                                },
+                                "currency": {
+                                    "type": "string"
+                                },
+                                "country": {
+                                    "type": "string"
+                                },
+                                "facebook_id": {
+                                    "type": "string"
+                                },
+                                "cars": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "license_plate": {
+                                            "type": "string"
+                                        },
+                                        "vehicle": {
+                                            "type": "string"
+                                        },
+                                        "country": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "phone_numbers": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "phone_number": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "attributes": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "key": {
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "token": {
+                                    "type": "string"
+                                }
                             }
                         }
                     }
@@ -4713,32 +4857,106 @@
                                 "email": "test@example.com",
                                 "firstname": "Test",
                                 "lastname": "Name",
-                                "credit": 0,
-                                "currency": "CHF",
-                                "country": "CH",
-                                "facebook_id": null,
-                                "cars": [
-                                    {
-                                        "id": 12,
-                                        "license_plate": "B-AB 1234",
-                                        "vehicle": "Isetta",
-                                        "country": null
-                                    }
-                                ],
-                                "phone_numbers": [
-                                    {
-                                        "id": 16696,
-                                        "phone_number": "099028-237489"
-                                    }
-                                ],
-                                "attributes": [
-                                    {
-                                        "id": 1,
-                                        "key": "adac",
-                                        "value": "1234567890"
-                                    }
-                                ],
+                                "credit": "0",
+                                "currency": "EUR",
+                                "country": "DE",
+                                "facebook_id": "null",
+                                "cars": {
+                                    "id": "12",
+                                    "license_plate": "B-AB 1234",
+                                    "vehicle": "Isetta",
+                                    "country": "null"
+                                },
+                                "phone_numbers": {
+                                    "id": "16696",
+                                    "phone_number": "099028-237489"
+                                },
+                                "attributes": {
+                                    "id": "1",
+                                    "key": "adac",
+                                    "value": "1234567890"
+                                },
                                 "token": "098f6bcd4621d373cade4e832627b4f6"
+                            }
+                        },
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                },
+                                "gender": {
+                                    "type": "string"
+                                },
+                                "age_range": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string"
+                                },
+                                "firstname": {
+                                    "type": "string"
+                                },
+                                "lastname": {
+                                    "type": "string"
+                                },
+                                "credit": {
+                                    "type": "string"
+                                },
+                                "currency": {
+                                    "type": "string"
+                                },
+                                "country": {
+                                    "type": "string"
+                                },
+                                "facebook_id": {
+                                    "type": "string"
+                                },
+                                "cars": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "license_plate": {
+                                            "type": "string"
+                                        },
+                                        "vehicle": {
+                                            "type": "string"
+                                        },
+                                        "country": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "phone_numbers": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "phone_number": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "attributes": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "key": {
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "token": {
+                                    "type": "string"
+                                }
                             }
                         }
                     }
@@ -4753,7 +4971,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "email": {
@@ -5053,7 +5270,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "primary": {
@@ -5498,7 +5714,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "primary": {
@@ -5564,6 +5779,44 @@
                 ]
             }
         },
+        "/user/tracking/installation": {
+            "post": {
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "headers": {},
+                        "examples": {}
+                    }
+                },
+                "summary": "Tracking App Installation",
+                "description": "",
+                "tags": [
+                    "User"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "device_id": {
+                                    "type": "string",
+                                    "description": "identifier for the mobile device on that the installation was done, e.g. advertisement id for Android or iOS"
+                                },
+                                "campaigns": {
+                                    "type": "array",
+                                    "description": "array of campaigns that the installation is coming from, contains at least one element"
+                                }
+                            },
+                            "required": [
+                                "device_id"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
         "/bookings/{booking_id}/violation": {
             "post": {
                 "responses": {
@@ -5596,7 +5849,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "license_plate": {
@@ -5680,7 +5932,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "license_plate": {
@@ -6727,8 +6978,89 @@
             }
         },
         "Static Pages": {},
-        "User": {},
+        "User": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "age_range": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "credit": {
+                    "type": "string"
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "facebook_id": {
+                    "type": "string"
+                },
+                "cars": {
+                    "type": "object"
+                },
+                "phone_numbers": {
+                    "type": "object"
+                },
+                "attributes": {
+                    "type": "object"
+                },
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
         "User Payment Methods": {},
+        "User Tracking": {},
+        "User Tracking Installation": {
+            "type": "object",
+            "required": [
+                "device_id"
+            ],
+            "properties": {
+                "device_id": {
+                    "type": "string"
+                },
+                "campaigns": {
+                    "type": "array",
+                    "items": {}
+                }
+            }
+        },
+        "User Tracking Campaign": {
+            "type": "object",
+            "required": [
+                "id",
+                "type"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "adjust",
+                        "facebook"
+                    ]
+                }
+            }
+        },
         "Violations": {},
         "Violation Images": {}
     }

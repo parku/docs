@@ -36,7 +36,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "key": {
@@ -255,7 +254,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "location_id": {
@@ -635,7 +633,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "license_plate": {
@@ -725,7 +722,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "car_id": {
@@ -884,7 +880,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "ios_device_token": {
@@ -920,7 +915,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "access_token": {
@@ -1421,7 +1415,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "phone_number": {
@@ -1495,7 +1488,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "phone_number_id": {
@@ -1675,7 +1667,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "enabled": {
@@ -1811,7 +1802,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "email": {
@@ -1982,7 +1972,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "email": {
@@ -2058,7 +2047,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "license_plate": {
@@ -2142,7 +2130,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "license_plate": {
@@ -2240,7 +2227,6 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$schema": "http://json-schema.org/draft-04/schema#",
                             "type": "object",
                             "properties": {
                                 "voucher": {
