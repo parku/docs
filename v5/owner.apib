@@ -1,15 +1,14 @@
 # Group Owner
-
 ## Owner [/owner]
 Access needs a __private key__.
 
-### List parking spaces [GET /owner/parking-spaces]
+### List parking spaces [GET /owner/parking-spaces{?page,limit}]
 Returns all parking spaces that are owned by the user given by the used private token for the request.
 
 + Parameters
-    + page: 1 (number) -  the page number
+    + page: 1 (number, optional) -  the page number
 
-    + limit: 10 (number) - the limit of parking spaces in one page
+    + limit: 10 (number, optional) - the limit of parking spaces in one page
         + Default: 20
 
 + Request
@@ -70,6 +69,9 @@ Returned if parking space was not found ot it doesn't belong to the user.
 + Response 422
 Returned if an error occurred.
     + Attributes (Api Error)
+
+## Descriptions [/owner/parking-spaces/{parking_space_id}/descriptions]
+Access needs a __private key__.
 
 ### List parking space descriptions [GET /owner/parking-spaces/{parking_space_id}/descriptions]
 Returns all descriptions for one parking space.
@@ -157,6 +159,9 @@ Returned if parking space or description was not found, if the parking space doe
 Returned if an error occurred.
     + Attributes (Api Error)
 
+## Images [/owner/parking-spaces/{parking_space_id}/images]
+Access needs a __private key__.
+
 ### List images [GET /owner/parking-spaces/{parking_space_id}/images]
 Returns all images for one parking space
 
@@ -216,6 +221,9 @@ Returned if parking space or image was not found or if the parking space doesn't
 + Response 422
 Returned if an error occurred.
     + Attributes (Api Error)
+
+## Periods [/owner/parking-spaces/{parking_space_id}/periods]
+Access needs a __private key__.
 
 ### List periods [GET /owner/parking-spaces/{parking_space_id}/periods]
 Returns all periods for one parking space
@@ -309,6 +317,9 @@ Returned if parking space or period was not found or the parking space doesn't b
 + Response 422
 Returned if an error occurred.
     + Attributes (Api Error)
+
+## Times [/owner/parking-spaces/{parking_space_id}/periods/{period_id}/times]
+Access needs a __private key__.
 
 ### List Times [GET /owner/parking-spaces/{parking_space_id}/periods/{period_id}/times]
 Returns all times for an availability period.
@@ -404,7 +415,7 @@ Returned if an error occurred.
 
 # Data Structures
 
-## Parking space (object)
+## Parking Space (object)
 + `id`: `005c4826-4e28-11e3-a675-d43d7eece53d` (string)
 + `commission`: `33.33` (number) - commission in percent
 + Include Status
@@ -444,12 +455,12 @@ Use null if period is not restricted to any date in the future, valid for now.
 + `time_end`: `19:00` (string, required)
 
 ## Owner Price (object)
-+ `rate_hourly`: `300` (number, nullable) - as integer, 300 means 3,00 EUR
-+ `rate_daily`: `1500` (number, nullable)
-+ `rate_weekly`: null (number, nullable)
-+ `rate_monthly`: null (number, nullable)
++ `rate_hourly`: `10` (number, nullable) - as integer, 300 means 3,00 EUR
++ `rate_daily`: `100` (number, nullable)
++ `rate_weekly`: 300 (number, nullable)
++ `rate_monthly`: 1500 (number, nullable)
 
-## Locale
+## Locale (object)
 + `locale` (enum) - the locale of the description
   + Members
     + de_DE
@@ -458,7 +469,7 @@ Use null if period is not restricted to any date in the future, valid for now.
     + en_GB
     + nl_NL
 
-## Options
+## Options (object)
 + `options` (enum) - describes which options are available at the location and can contains each of the following elements. The list can be **empty**.
   + Members
       + excess length - the parking space can be used by cars with a small trailer
@@ -472,14 +483,14 @@ Use null if period is not restricted to any date in the future, valid for now.
       + surveillance - parking space has surveillance
       + valet_service - parking space contains valet serviceparking space contains valet service
 
-## Status
+## Status (object)
 + `status` (enum) - the status of the parking space
     + Members
         + inactive
         + active
         + deleted
 
-## Type
+## Type (object)
 + `type` (enum) - the type of the parking space
     + Members
         + off-street
