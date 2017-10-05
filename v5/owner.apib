@@ -6,9 +6,9 @@ Access needs a __private key__.
 Returns all parking spaces that are owned by the user given by the used private token for the request.
 
 + Parameters
-    + page: 1 (number, optional) -  the page number
+    + page: 1 (number, optional) -  The page number
 
-    + limit: 10 (number, optional) - the limit of parking spaces in one page
+    + limit: 10 (number, optional) - The limit of parking spaces in one page
         + Default: 20
 
 + Request
@@ -23,7 +23,7 @@ Returns all parking spaces that are owned by the user given by the used private 
 Retrieves the details of one singe parking space.
 
 + Parameters
-    + parking_space_id: `005c4826-4e28-11e3-a675-d43d7eece53d` (string, required) - The id of the parking space
+    + parking_space_id: `005c4826-4e28-11e3-a675-d43d7eece53d` (string, required) - The parking space id
 + Request
     + Headers
 
@@ -40,7 +40,7 @@ Returned if parking space was not found or it doesn't belong to the user.
 Updates the parking space by setting the values of the parameters passed. Any parameter not provided will be left unchanged.
 
 + Parameters
-    + parking_space_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+    + parking_space_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The parking space id
 
 + Request  (application/json)
     + Attributes
@@ -77,7 +77,7 @@ Access needs a __private key__.
 Returns all descriptions for one parking space.
 
 + Parameters
-    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The parking space id
 
 + Request
     + Headers
@@ -116,7 +116,7 @@ Returned if content is null, content is too long, locale is null, locale already
 Updates the description.
 
 + Parameters
-    + parking_space_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+    + parking_space_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The parking space id
 
 + Request  (application/json)
     + Attributes
@@ -140,8 +140,8 @@ Returned if content is null, content is too long or an error occurred.
 ### Delete a Description [DELETE /owner/parking-spaces/{parking_space_id}/descriptions/{description_id}]
 
 + Parameters
-    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
-    + description_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the description id
+    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The parking space id
+    + description_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The description id
 
 + Request
     + Headers
@@ -166,7 +166,7 @@ Access needs a __private key__.
 Returns all images for one parking space
 
 + Parameters
-    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The parking space id
 
 + Request
     + Headers
@@ -203,8 +203,8 @@ Returned if an error occurred.
 ### Delete an Image [DELETE /owner/parking-spaces/{parking_space_id}/images/{image_id}]
 
 + Parameters
-    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
-    + image_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the image id
+    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The parking space id
+    + image_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The image id
 
 + Request
     + Headers
@@ -229,7 +229,7 @@ Access needs a __private key__.
 Returns all periods for one parking space
 
 + Parameters
-    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The parking space id
 
 + Request
     + Headers
@@ -271,8 +271,8 @@ Returned if the period has overlapping dates or an error occurred.
 Updates the period by setting the values of the parameters passed.
 
 + Parameters
-    + parking_space_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
-    + period_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+    + parking_space_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The parking space id
+    + period_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The parking space id
 
 + Request  (application/json)
     + Attributes
@@ -299,8 +299,8 @@ Returned if an error occurred.
 ### Delete a period [DELETE /owner/parking-spaces/{parking_space_id}/periods/{period_id}]
 
 + Parameters
-    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
-    + period_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the period id
+    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The parking space id
+    + period_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The period id
 
 + Request
     + Headers
@@ -325,8 +325,8 @@ Access needs a __private key__.
 Returns all times for an availability period.
 
 + Parameters
-    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
-    + period_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the period id
+    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The parking space id
+    + period_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The period id
 
 + Request
     + Headers
@@ -366,9 +366,9 @@ Returned if weekday is not in range 1-7, weekday already exists, time is invalid
 Updates the times by setting the values of the parameters passed.
 
 + Parameters
-    + parking_space_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
-    + period_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
-    + times_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
+    + parking_space_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The parking space id
+    + period_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The period id
+    + times_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The times id
 
 + Request  (application/json)
     + Attributes
@@ -393,9 +393,9 @@ Returned if weekday is not in range 1-7, weekday already exists, time is invalid
 ### Delete a Times [DELETE /owner/parking-spaces/{parking_space_id}/periods/{period_id}/times/{times_id}]
 
 + Parameters
-    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the parking space id
-    + period_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the period id
-    + times_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the times id
+    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The parking space id
+    + period_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The period id
+    + times_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The times id
 
 + Request
     + Headers
