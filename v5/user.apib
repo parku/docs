@@ -102,13 +102,16 @@ Changing cars, phone_numbers, attributes and password is done via separate endpo
 ## User Verification [/user/verify]
 Access needs a __public key__.
 
-### Check if a User exists [GET /user/verify/exists]
+### Check if a User exists [GET /user/verify/exists{?email}]
 Returns 204 if the user exists and a 404 if the user does not exists. Use this to check the user email before creating a new user.
 
-+ Request (application/json)
-    + Attributes
-        + `email`: `test@example.com` (string,required)
++ Parameters
+    + email: `test@example.com` (string,required)
 
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
 + Response 204 (application/json)
     Returned if the user exists.
     + Body
