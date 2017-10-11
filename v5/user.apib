@@ -99,6 +99,47 @@ Changing cars, phone_numbers, attributes and password is done via separate endpo
 + Response 200 (application/json)
     + Attributes (User)
 
+## User Verification [/user/verify]
+Access needs a __public key__.
+
+### Check if a User exists [GET /user/verify/exists{?email}]
+Returns 204 if the user exists and a 404 if the user does not exists. Use this to check the user email before creating a new user.
+
++ Parameters
+    + email: `test@example.com` (string,required)
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
++ Response 204 (application/json)
+    Returned if the user exists.
+    + Body
+
++ Response 404 (application/json)
+    Returned if the user does not exists.
+    + Body
+
+### Check if an ADAC code is valid [GET /user/verify/adac/{code}]
+Returns 200 if the code is valid and a 404 if the code is invalid.
+
++ Parameters
+    + code: `asdf1234` (string,required)
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
+
++ Response 200 (application/json)
+    Returned if the code is valid.
+    + Body
+
++ Response 404 (application/json)
+    Returned if the code is invalid.
+    + Body
+
 
 ## User Payment Methods [/user/payment_methods]
 Access needs a __private key__.
