@@ -5017,6 +5017,66 @@
                 ]
             }
         },
+        "/user/verify/exists": {
+            "get": {
+                "responses": {
+                    "204": {
+                        "description": "Returned if the user exists.",
+                        "headers": {},
+                        "examples": {}
+                    },
+                    "404": {
+                        "description": "Returned if the user does not exists.",
+                        "headers": {},
+                        "examples": {}
+                    }
+                },
+                "summary": "Check if a User exists",
+                "description": "Returns 204 if the user exists and a 404 if the user does not exists. Use this to check the user email before creating a new user.",
+                "tags": [
+                    "User"
+                ],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "",
+                        "required": true,
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/user/verify/adac/{code}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Returned if the code is valid.",
+                        "headers": {},
+                        "examples": {}
+                    },
+                    "404": {
+                        "description": "Returned if the code is invalid.",
+                        "headers": {},
+                        "examples": {}
+                    }
+                },
+                "summary": "Check if an ADAC code is valid",
+                "description": "Returns 200 if the code is valid and a 404 if the code is invalid.",
+                "tags": [
+                    "User"
+                ],
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "type": "string"
+                    }
+                ]
+            }
+        },
         "/user/payment_methods": {
             "get": {
                 "responses": {
@@ -7025,6 +7085,7 @@
                 }
             }
         },
+        "User Verification": {},
         "User Payment Methods": {},
         "User Tracking": {},
         "User Tracking Installation": {
