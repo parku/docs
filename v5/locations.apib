@@ -368,6 +368,10 @@ With this endpoint you can retrieve location based terms and conditions.
         + qrcode
         + beacon
 + identifier: `PARKU3KU` (string) - the identifier for the access method, a short identification string for `qrcode` and the bluetooth id for `beacon`
++ `car_entrance`: true  (boolean) - wether this gate is an entrance usable by cars
++ `car_exit`: false  (boolean) - wether this gate is an exit usable by cars
++ `pedestrian_entrance`: false  (boolean) - wether this gate is an entrance usable by pedestrians
++ `pedestrian_exit`: false  (boolean) - wether this gate is an exit usable by pedestrians
 + gateways (array[Gateway])
 
 ## Gateway (object)
