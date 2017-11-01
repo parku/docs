@@ -214,13 +214,15 @@
                                     "max_datetime_end": "2009-06-30T18:30:00+02:00",
                                     "duration_max_minutes`": 760
                                 },
-                                "extend": {
-                                    "date_start": "2016-10-27T10:00:00+0000",
-                                    "date_end": "2016-10-27T12:00:00+0000",
-                                    "minutes": 60,
-                                    "price": 125,
-                                    "currency": "EUR"
-                                }
+                                "extend": [
+                                    {
+                                        "date_start": "2016-10-27T10:00:00+0000",
+                                        "date_end": "2016-10-27T12:00:00+0000",
+                                        "minutes": 60,
+                                        "price": 125,
+                                        "currency": "EUR"
+                                    }
+                                ]
                             }
                         },
                         "schema": {
@@ -459,33 +461,8 @@
                                     "description": "the zone that was booked, only available if `type` is `onstreet`."
                                 },
                                 "extend": {
-                                    "type": "object",
-                                    "properties": {
-                                        "date_start": {
-                                            "type": "string",
-                                            "description": "start date of the extended booking"
-                                        },
-                                        "date_end": {
-                                            "type": "string",
-                                            "description": "end date of the extended booking"
-                                        },
-                                        "minutes": {
-                                            "type": "number",
-                                            "description": "length of extension in minutes"
-                                        },
-                                        "price": {
-                                            "type": "number",
-                                            "description": "price of the extension"
-                                        },
-                                        "currency": {
-                                            "type": "string",
-                                            "enum": [
-                                                "EUR",
-                                                "CHF"
-                                            ],
-                                            "description": "the currency of the price"
-                                        }
-                                    }
+                                    "type": "array",
+                                    "items": {}
                                 }
                             }
                         }
@@ -711,13 +688,15 @@
                                         "max_datetime_end": "2009-06-30T18:30:00+02:00",
                                         "duration_max_minutes`": 760
                                     },
-                                    "extend": {
-                                        "date_start": "2016-10-27T10:00:00+0000",
-                                        "date_end": "2016-10-27T12:00:00+0000",
-                                        "minutes": 60,
-                                        "price": 125,
-                                        "currency": "EUR"
-                                    }
+                                    "extend": [
+                                        {
+                                            "date_start": "2016-10-27T10:00:00+0000",
+                                            "date_end": "2016-10-27T12:00:00+0000",
+                                            "minutes": 60,
+                                            "price": 125,
+                                            "currency": "EUR"
+                                        }
+                                    ]
                                 }
                             ]
                         },
@@ -903,13 +882,15 @@
                                     "max_datetime_end": "2009-06-30T18:30:00+02:00",
                                     "duration_max_minutes`": 760
                                 },
-                                "extend": {
-                                    "date_start": "2016-10-27T10:00:00+0000",
-                                    "date_end": "2016-10-27T12:00:00+0000",
-                                    "minutes": 60,
-                                    "price": 125,
-                                    "currency": "EUR"
-                                }
+                                "extend": [
+                                    {
+                                        "date_start": "2016-10-27T10:00:00+0000",
+                                        "date_end": "2016-10-27T12:00:00+0000",
+                                        "minutes": 60,
+                                        "price": 125,
+                                        "currency": "EUR"
+                                    }
+                                ]
                             }
                         },
                         "schema": {
@@ -1148,33 +1129,8 @@
                                     "description": "the zone that was booked, only available if `type` is `onstreet`."
                                 },
                                 "extend": {
-                                    "type": "object",
-                                    "properties": {
-                                        "date_start": {
-                                            "type": "string",
-                                            "description": "start date of the extended booking"
-                                        },
-                                        "date_end": {
-                                            "type": "string",
-                                            "description": "end date of the extended booking"
-                                        },
-                                        "minutes": {
-                                            "type": "number",
-                                            "description": "length of extension in minutes"
-                                        },
-                                        "price": {
-                                            "type": "number",
-                                            "description": "price of the extension"
-                                        },
-                                        "currency": {
-                                            "type": "string",
-                                            "enum": [
-                                                "EUR",
-                                                "CHF"
-                                            ],
-                                            "description": "the currency of the price"
-                                        }
-                                    }
+                                    "type": "array",
+                                    "items": {}
                                 }
                             }
                         }
@@ -1419,13 +1375,15 @@
                                     "max_datetime_end": "2009-06-30T18:30:00+02:00",
                                     "duration_max_minutes`": 760
                                 },
-                                "extend": {
-                                    "date_start": "2016-10-27T10:00:00+0000",
-                                    "date_end": "2016-10-27T12:00:00+0000",
-                                    "minutes": 60,
-                                    "price": 125,
-                                    "currency": "EUR"
-                                },
+                                "extend": [
+                                    {
+                                        "date_start": "2016-10-27T10:00:00+0000",
+                                        "date_end": "2016-10-27T12:00:00+0000",
+                                        "minutes": 60,
+                                        "price": 125,
+                                        "currency": "EUR"
+                                    }
+                                ],
                                 "payment_urls": {
                                     "urls": {
                                         "entrance": "http://www.ideal.nl/asdf1234",
@@ -1673,33 +1631,8 @@
                                     "description": "the zone that was booked, only available if `type` is `onstreet`."
                                 },
                                 "extend": {
-                                    "type": "object",
-                                    "properties": {
-                                        "date_start": {
-                                            "type": "string",
-                                            "description": "start date of the extended booking"
-                                        },
-                                        "date_end": {
-                                            "type": "string",
-                                            "description": "end date of the extended booking"
-                                        },
-                                        "minutes": {
-                                            "type": "number",
-                                            "description": "length of extension in minutes"
-                                        },
-                                        "price": {
-                                            "type": "number",
-                                            "description": "price of the extension"
-                                        },
-                                        "currency": {
-                                            "type": "string",
-                                            "enum": [
-                                                "EUR",
-                                                "CHF"
-                                            ],
-                                            "description": "the currency of the price"
-                                        }
-                                    }
+                                    "type": "array",
+                                    "items": {}
                                 },
                                 "payment_urls": {
                                     "type": "object",
@@ -3187,13 +3120,15 @@
                                     "max_datetime_end": "2009-06-30T18:30:00+02:00",
                                     "duration_max_minutes`": 760
                                 },
-                                "extend": {
-                                    "date_start": "2016-10-27T10:00:00+0000",
-                                    "date_end": "2016-10-27T12:00:00+0000",
-                                    "minutes": 60,
-                                    "price": 125,
-                                    "currency": "EUR"
-                                }
+                                "extend": [
+                                    {
+                                        "date_start": "2016-10-27T10:00:00+0000",
+                                        "date_end": "2016-10-27T12:00:00+0000",
+                                        "minutes": 60,
+                                        "price": 125,
+                                        "currency": "EUR"
+                                    }
+                                ]
                             }
                         },
                         "schema": {
@@ -3432,33 +3367,8 @@
                                     "description": "the zone that was booked, only available if `type` is `onstreet`."
                                 },
                                 "extend": {
-                                    "type": "object",
-                                    "properties": {
-                                        "date_start": {
-                                            "type": "string",
-                                            "description": "start date of the extended booking"
-                                        },
-                                        "date_end": {
-                                            "type": "string",
-                                            "description": "end date of the extended booking"
-                                        },
-                                        "minutes": {
-                                            "type": "number",
-                                            "description": "length of extension in minutes"
-                                        },
-                                        "price": {
-                                            "type": "number",
-                                            "description": "price of the extension"
-                                        },
-                                        "currency": {
-                                            "type": "string",
-                                            "enum": [
-                                                "EUR",
-                                                "CHF"
-                                            ],
-                                            "description": "the currency of the price"
-                                        }
-                                    }
+                                    "type": "array",
+                                    "items": {}
                                 }
                             }
                         }
@@ -6124,7 +6034,8 @@
                     "type": "Parking Zone Base Data"
                 },
                 "extend": {
-                    "type": "Booking Extend Times"
+                    "type": "array",
+                    "items": {}
                 }
             }
         },
