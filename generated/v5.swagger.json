@@ -114,6 +114,7 @@
                                     "payment_provider_fee": 25,
                                     "currency": "EUR"
                                 },
+                                "post_booking_info": "Please get the key at the reception.",
                                 "violation": {
                                     "id": "005c4826-4e28-11e3-a675-d43d7eece53d"
                                 },
@@ -192,6 +193,10 @@
                                         {
                                             "type": "qrcode",
                                             "identifier": "PARKU3KU",
+                                            "car_entrance": true,
+                                            "car_exit": false,
+                                            "pedestrian_entrance": false,
+                                            "pedestrian_exit": false,
                                             "gateways": [
                                                 {
                                                     "type": "api",
@@ -277,6 +282,13 @@
                                             "description": "the currency of the price"
                                         }
                                     }
+                                },
+                                "post_booking_info": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "information to show the renter after a successful booking"
                                 },
                                 "violation": {
                                     "type": "object",
@@ -588,6 +600,7 @@
                                         "payment_provider_fee": 25,
                                         "currency": "EUR"
                                     },
+                                    "post_booking_info": "Please get the key at the reception.",
                                     "violation": {
                                         "id": "005c4826-4e28-11e3-a675-d43d7eece53d"
                                     },
@@ -666,6 +679,10 @@
                                             {
                                                 "type": "qrcode",
                                                 "identifier": "PARKU3KU",
+                                                "car_entrance": true,
+                                                "car_exit": false,
+                                                "pedestrian_entrance": false,
+                                                "pedestrian_exit": false,
                                                 "gateways": [
                                                     {
                                                         "type": "api",
@@ -782,6 +799,7 @@
                                     "payment_provider_fee": 25,
                                     "currency": "EUR"
                                 },
+                                "post_booking_info": "Please get the key at the reception.",
                                 "violation": {
                                     "id": "005c4826-4e28-11e3-a675-d43d7eece53d"
                                 },
@@ -860,6 +878,10 @@
                                         {
                                             "type": "qrcode",
                                             "identifier": "PARKU3KU",
+                                            "car_entrance": true,
+                                            "car_exit": false,
+                                            "pedestrian_entrance": false,
+                                            "pedestrian_exit": false,
                                             "gateways": [
                                                 {
                                                     "type": "api",
@@ -945,6 +967,13 @@
                                             "description": "the currency of the price"
                                         }
                                     }
+                                },
+                                "post_booking_info": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "information to show the renter after a successful booking"
                                 },
                                 "violation": {
                                     "type": "object",
@@ -1275,6 +1304,7 @@
                                     "payment_provider_fee": 25,
                                     "currency": "EUR"
                                 },
+                                "post_booking_info": "Please get the key at the reception.",
                                 "violation": {
                                     "id": "005c4826-4e28-11e3-a675-d43d7eece53d"
                                 },
@@ -1353,6 +1383,10 @@
                                         {
                                             "type": "qrcode",
                                             "identifier": "PARKU3KU",
+                                            "car_entrance": true,
+                                            "car_exit": false,
+                                            "pedestrian_entrance": false,
+                                            "pedestrian_exit": false,
                                             "gateways": [
                                                 {
                                                     "type": "api",
@@ -1447,6 +1481,13 @@
                                             "description": "the currency of the price"
                                         }
                                     }
+                                },
+                                "post_booking_info": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "information to show the renter after a successful booking"
                                 },
                                 "violation": {
                                     "type": "object",
@@ -2136,6 +2177,10 @@
                                     {
                                         "type": "qrcode",
                                         "identifier": "PARKU3KU",
+                                        "car_entrance": true,
+                                        "car_exit": false,
+                                        "pedestrian_entrance": false,
+                                        "pedestrian_exit": false,
                                         "gateways": [
                                             {
                                                 "type": "api",
@@ -2363,6 +2408,10 @@
                                             {
                                                 "type": "qrcode",
                                                 "identifier": "PARKU3KU",
+                                                "car_entrance": true,
+                                                "car_exit": false,
+                                                "pedestrian_entrance": false,
+                                                "pedestrian_exit": false,
                                                 "gateways": [
                                                     {
                                                         "type": "api",
@@ -2610,6 +2659,10 @@
                                             {
                                                 "type": "qrcode",
                                                 "identifier": "PARKU3KU",
+                                                "car_entrance": true,
+                                                "car_exit": false,
+                                                "pedestrian_entrance": false,
+                                                "pedestrian_exit": false,
                                                 "gateways": [
                                                     {
                                                         "type": "api",
@@ -3020,6 +3073,7 @@
                                     "payment_provider_fee": 25,
                                     "currency": "EUR"
                                 },
+                                "post_booking_info": "Please get the key at the reception.",
                                 "violation": {
                                     "id": "005c4826-4e28-11e3-a675-d43d7eece53d"
                                 },
@@ -3098,6 +3152,10 @@
                                         {
                                             "type": "qrcode",
                                             "identifier": "PARKU3KU",
+                                            "car_entrance": true,
+                                            "car_exit": false,
+                                            "pedestrian_entrance": false,
+                                            "pedestrian_exit": false,
                                             "gateways": [
                                                 {
                                                     "type": "api",
@@ -3183,6 +3241,13 @@
                                             "description": "the currency of the price"
                                         }
                                     }
+                                },
+                                "post_booking_info": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "information to show the renter after a successful booking"
                                 },
                                 "violation": {
                                     "type": "object",
@@ -6008,6 +6073,9 @@
                 "price": {
                     "type": "Booking Price"
                 },
+                "post_booking_info": {
+                    "type": "string"
+                },
                 "violation": {
                     "type": "Violation Dummy"
                 },
@@ -6306,6 +6374,18 @@
                 },
                 "identifier": {
                     "type": "string"
+                },
+                "car_entrance": {
+                    "type": "boolean"
+                },
+                "car_exit": {
+                    "type": "boolean"
+                },
+                "pedestrian_entrance": {
+                    "type": "boolean"
+                },
+                "pedestrian_exit": {
+                    "type": "boolean"
                 },
                 "gateways": {
                     "type": "array",

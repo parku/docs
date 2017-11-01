@@ -259,6 +259,7 @@ Whenever user information are requested or bookings on behalf of a user is made,
     "<span class="hljs-attribute">payment_provider_fee</span>": <span class="hljs-value"><span class="hljs-number">25</span></span>,
     "<span class="hljs-attribute">currency</span>": <span class="hljs-value"><span class="hljs-string">"EUR"</span>
   </span>}</span>,
+  "<span class="hljs-attribute">post_booking_info</span>": <span class="hljs-value"><span class="hljs-string">"Please get the key at the reception."</span></span>,
   "<span class="hljs-attribute">violation</span>": <span class="hljs-value">{
     "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"005c4826-4e28-11e3-a675-d43d7eece53d"</span>
   </span>}</span>,
@@ -337,6 +338,10 @@ Whenever user information are requested or bookings on behalf of a user is made,
       {
         "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"qrcode"</span></span>,
         "<span class="hljs-attribute">identifier</span>": <span class="hljs-value"><span class="hljs-string">"PARKU3KU"</span></span>,
+        "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+        "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+        "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+        "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
         "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">[
           {
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"api"</span></span>,
@@ -373,6 +378,7 @@ Whenever user information are requested or bookings on behalf of a user is made,
 </dd><dt><code>price.<wbr >transaction_fee</code></dt><dd><code>number</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>25</span></span><p>the transaction fee included in <code>amount</code></p>
 </dd><dt><code>price.<wbr >payment_provider_fee</code></dt><dd><code>number</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>25</span></span><p>the payment provider fee included in <code>amount</code></p>
 </dd><dt><code>price.<wbr >currency</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>EUR</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>EUR</code> <code>CHF</code> </p><p>the currency of the price</p>
+</dd><dt><code>post_booking_info</code></dt><dd><code>string,null</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>Please get the key at the reception.</span></span><p>information to show the renter after a successful booking</p>
 </dd><dt><code>violation</code></dt><dd><code>object</code>&nbsp;<span class="text-muted example"></span><p></p></dd><dt><code>violation.<wbr >id</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>005c4826-4e28-11e3-a675-d43d7eece53d</span></span><p>violation id</p>
 </dd><dt><code>status</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>active</span></span><p>status of the booking, can be <code>active</code> or <code>canceled</code> for <code>offstreet</code> bookings and <code>running</code>, <code>finished</code> or ‘canceled’ for <code>onstreet</code> bookings</p>
 </dd><dt><code>type</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>offstreet</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>offstreet</code> <code>onstreet</code> </p><p>the booking type</p>
@@ -438,6 +444,10 @@ Whenever user information are requested or bookings on behalf of a user is made,
 </dd><dt><code>location.<wbr >gates</code></dt><dd><code>array</code>&nbsp;<span class="text-muted example"></span><p>the gates connected to the location</p>
 </dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >type</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>qrcode</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>qrcode</code> <code>beacon</code> </p><p>the type how the gate can be opened</p>
 </dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >identifier</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>PARKU3KU</span></span><p>the identifier for the access method, a short identification string for <code>qrcode</code> and the bluetooth id for <code>beacon</code></p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >car_entrance</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>true</span></span><p>wether this gate is an entrance usable by cars</p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >car_exit</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an exit usable by cars</p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >pedestrian_entrance</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an entrance usable by pedestrians</p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >pedestrian_exit</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an exit usable by pedestrians</p>
 </dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >gateways</code></dt><dd><code>array</code>&nbsp;<span class="text-muted example"></span><p></p></dd><dt><code>zone</code></dt><dd><code>object</code>&nbsp;<span class="text-muted example"></span><p>the zone that was booked, only available if <code>type</code> is <code>onstreet</code>.</p>
 </dd><dt><code>zone.<wbr >id</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>101012</span></span><p>the parking zone id</p>
 </dd><dt><code>zone.<wbr >latitude</code></dt><dd><code>number</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>53.12341234</span></span><p>latitude of the requested point</p>
@@ -505,6 +515,13 @@ Whenever user information are requested or bookings on behalf of a user is made,
           "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the currency of the price"</span>
         </span>}
       </span>}
+    </span>}</span>,
+    "<span class="hljs-attribute">post_booking_info</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value">[
+        <span class="hljs-string">"string"</span>,
+        <span class="hljs-string">"null"</span>
+      ]</span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"information to show the renter after a successful booking"</span>
     </span>}</span>,
     "<span class="hljs-attribute">violation</span>": <span class="hljs-value">{
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
@@ -825,6 +842,22 @@ Whenever user information are requested or bookings on behalf of a user is made,
               "<span class="hljs-attribute">identifier</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
                 "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the identifier for the access method, a short identification string for `qrcode` and the bluetooth id for `beacon`"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an entrance usable by cars"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an exit usable by cars"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an entrance usable by pedestrians"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an exit usable by pedestrians"</span>
               </span>}</span>,
               "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
@@ -1010,6 +1043,7 @@ for the users current position.</p>
     "<span class="hljs-attribute">payment_provider_fee</span>": <span class="hljs-value"><span class="hljs-number">25</span></span>,
     "<span class="hljs-attribute">currency</span>": <span class="hljs-value"><span class="hljs-string">"EUR"</span>
   </span>}</span>,
+  "<span class="hljs-attribute">post_booking_info</span>": <span class="hljs-value"><span class="hljs-string">"Please get the key at the reception."</span></span>,
   "<span class="hljs-attribute">violation</span>": <span class="hljs-value">{
     "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"005c4826-4e28-11e3-a675-d43d7eece53d"</span>
   </span>}</span>,
@@ -1088,6 +1122,10 @@ for the users current position.</p>
       {
         "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"qrcode"</span></span>,
         "<span class="hljs-attribute">identifier</span>": <span class="hljs-value"><span class="hljs-string">"PARKU3KU"</span></span>,
+        "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+        "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+        "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+        "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
         "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">[
           {
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"api"</span></span>,
@@ -1124,6 +1162,7 @@ for the users current position.</p>
 </dd><dt><code>price.<wbr >transaction_fee</code></dt><dd><code>number</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>25</span></span><p>the transaction fee included in <code>amount</code></p>
 </dd><dt><code>price.<wbr >payment_provider_fee</code></dt><dd><code>number</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>25</span></span><p>the payment provider fee included in <code>amount</code></p>
 </dd><dt><code>price.<wbr >currency</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>EUR</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>EUR</code> <code>CHF</code> </p><p>the currency of the price</p>
+</dd><dt><code>post_booking_info</code></dt><dd><code>string,null</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>Please get the key at the reception.</span></span><p>information to show the renter after a successful booking</p>
 </dd><dt><code>violation</code></dt><dd><code>object</code>&nbsp;<span class="text-muted example"></span><p></p></dd><dt><code>violation.<wbr >id</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>005c4826-4e28-11e3-a675-d43d7eece53d</span></span><p>violation id</p>
 </dd><dt><code>status</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>active</span></span><p>status of the booking, can be <code>active</code> or <code>canceled</code> for <code>offstreet</code> bookings and <code>running</code>, <code>finished</code> or ‘canceled’ for <code>onstreet</code> bookings</p>
 </dd><dt><code>type</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>offstreet</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>offstreet</code> <code>onstreet</code> </p><p>the booking type</p>
@@ -1189,6 +1228,10 @@ for the users current position.</p>
 </dd><dt><code>location.<wbr >gates</code></dt><dd><code>array</code>&nbsp;<span class="text-muted example"></span><p>the gates connected to the location</p>
 </dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >type</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>qrcode</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>qrcode</code> <code>beacon</code> </p><p>the type how the gate can be opened</p>
 </dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >identifier</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>PARKU3KU</span></span><p>the identifier for the access method, a short identification string for <code>qrcode</code> and the bluetooth id for <code>beacon</code></p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >car_entrance</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>true</span></span><p>wether this gate is an entrance usable by cars</p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >car_exit</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an exit usable by cars</p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >pedestrian_entrance</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an entrance usable by pedestrians</p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >pedestrian_exit</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an exit usable by pedestrians</p>
 </dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >gateways</code></dt><dd><code>array</code>&nbsp;<span class="text-muted example"></span><p></p></dd><dt><code>zone</code></dt><dd><code>object</code>&nbsp;<span class="text-muted example"></span><p>the zone that was booked, only available if <code>type</code> is <code>onstreet</code>.</p>
 </dd><dt><code>zone.<wbr >id</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>101012</span></span><p>the parking zone id</p>
 </dd><dt><code>zone.<wbr >latitude</code></dt><dd><code>number</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>53.12341234</span></span><p>latitude of the requested point</p>
@@ -1256,6 +1299,13 @@ for the users current position.</p>
           "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the currency of the price"</span>
         </span>}
       </span>}
+    </span>}</span>,
+    "<span class="hljs-attribute">post_booking_info</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value">[
+        <span class="hljs-string">"string"</span>,
+        <span class="hljs-string">"null"</span>
+      ]</span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"information to show the renter after a successful booking"</span>
     </span>}</span>,
     "<span class="hljs-attribute">violation</span>": <span class="hljs-value">{
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
@@ -1576,6 +1626,22 @@ for the users current position.</p>
               "<span class="hljs-attribute">identifier</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
                 "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the identifier for the access method, a short identification string for `qrcode` and the bluetooth id for `beacon`"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an entrance usable by cars"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an exit usable by cars"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an entrance usable by pedestrians"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an exit usable by pedestrians"</span>
               </span>}</span>,
               "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
@@ -1791,6 +1857,7 @@ for the users current position.</p>
     "<span class="hljs-attribute">payment_provider_fee</span>": <span class="hljs-value"><span class="hljs-number">25</span></span>,
     "<span class="hljs-attribute">currency</span>": <span class="hljs-value"><span class="hljs-string">"EUR"</span>
   </span>}</span>,
+  "<span class="hljs-attribute">post_booking_info</span>": <span class="hljs-value"><span class="hljs-string">"Please get the key at the reception."</span></span>,
   "<span class="hljs-attribute">violation</span>": <span class="hljs-value">{
     "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"005c4826-4e28-11e3-a675-d43d7eece53d"</span>
   </span>}</span>,
@@ -1869,6 +1936,10 @@ for the users current position.</p>
       {
         "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"qrcode"</span></span>,
         "<span class="hljs-attribute">identifier</span>": <span class="hljs-value"><span class="hljs-string">"PARKU3KU"</span></span>,
+        "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+        "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+        "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+        "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
         "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">[
           {
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"api"</span></span>,
@@ -1905,6 +1976,7 @@ for the users current position.</p>
 </dd><dt><code>price.<wbr >transaction_fee</code></dt><dd><code>number</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>25</span></span><p>the transaction fee included in <code>amount</code></p>
 </dd><dt><code>price.<wbr >payment_provider_fee</code></dt><dd><code>number</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>25</span></span><p>the payment provider fee included in <code>amount</code></p>
 </dd><dt><code>price.<wbr >currency</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>EUR</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>EUR</code> <code>CHF</code> </p><p>the currency of the price</p>
+</dd><dt><code>post_booking_info</code></dt><dd><code>string,null</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>Please get the key at the reception.</span></span><p>information to show the renter after a successful booking</p>
 </dd><dt><code>violation</code></dt><dd><code>object</code>&nbsp;<span class="text-muted example"></span><p></p></dd><dt><code>violation.<wbr >id</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>005c4826-4e28-11e3-a675-d43d7eece53d</span></span><p>violation id</p>
 </dd><dt><code>status</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>active</span></span><p>status of the booking, can be <code>active</code> or <code>canceled</code> for <code>offstreet</code> bookings and <code>running</code>, <code>finished</code> or ‘canceled’ for <code>onstreet</code> bookings</p>
 </dd><dt><code>type</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>offstreet</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>offstreet</code> <code>onstreet</code> </p><p>the booking type</p>
@@ -1970,6 +2042,10 @@ for the users current position.</p>
 </dd><dt><code>location.<wbr >gates</code></dt><dd><code>array</code>&nbsp;<span class="text-muted example"></span><p>the gates connected to the location</p>
 </dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >type</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>qrcode</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>qrcode</code> <code>beacon</code> </p><p>the type how the gate can be opened</p>
 </dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >identifier</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>PARKU3KU</span></span><p>the identifier for the access method, a short identification string for <code>qrcode</code> and the bluetooth id for <code>beacon</code></p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >car_entrance</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>true</span></span><p>wether this gate is an entrance usable by cars</p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >car_exit</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an exit usable by cars</p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >pedestrian_entrance</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an entrance usable by pedestrians</p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >pedestrian_exit</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an exit usable by pedestrians</p>
 </dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >gateways</code></dt><dd><code>array</code>&nbsp;<span class="text-muted example"></span><p></p></dd><dt><code>zone</code></dt><dd><code>object</code>&nbsp;<span class="text-muted example"></span><p>the zone that was booked, only available if <code>type</code> is <code>onstreet</code>.</p>
 </dd><dt><code>zone.<wbr >id</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>101012</span></span><p>the parking zone id</p>
 </dd><dt><code>zone.<wbr >latitude</code></dt><dd><code>number</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>53.12341234</span></span><p>latitude of the requested point</p>
@@ -2037,6 +2113,13 @@ for the users current position.</p>
           "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the currency of the price"</span>
         </span>}
       </span>}
+    </span>}</span>,
+    "<span class="hljs-attribute">post_booking_info</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value">[
+        <span class="hljs-string">"string"</span>,
+        <span class="hljs-string">"null"</span>
+      ]</span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"information to show the renter after a successful booking"</span>
     </span>}</span>,
     "<span class="hljs-attribute">violation</span>": <span class="hljs-value">{
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
@@ -2357,6 +2440,22 @@ for the users current position.</p>
               "<span class="hljs-attribute">identifier</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
                 "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the identifier for the access method, a short identification string for `qrcode` and the bluetooth id for `beacon`"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an entrance usable by cars"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an exit usable by cars"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an entrance usable by pedestrians"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an exit usable by pedestrians"</span>
               </span>}</span>,
               "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
@@ -2531,6 +2630,7 @@ payments<span class="hljs-class">.payload</span>[cvv]=EncryptedCvv</code></pre>
     "<span class="hljs-attribute">payment_provider_fee</span>": <span class="hljs-value"><span class="hljs-number">25</span></span>,
     "<span class="hljs-attribute">currency</span>": <span class="hljs-value"><span class="hljs-string">"EUR"</span>
   </span>}</span>,
+  "<span class="hljs-attribute">post_booking_info</span>": <span class="hljs-value"><span class="hljs-string">"Please get the key at the reception."</span></span>,
   "<span class="hljs-attribute">violation</span>": <span class="hljs-value">{
     "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"005c4826-4e28-11e3-a675-d43d7eece53d"</span>
   </span>}</span>,
@@ -2609,6 +2709,10 @@ payments<span class="hljs-class">.payload</span>[cvv]=EncryptedCvv</code></pre>
       {
         "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"qrcode"</span></span>,
         "<span class="hljs-attribute">identifier</span>": <span class="hljs-value"><span class="hljs-string">"PARKU3KU"</span></span>,
+        "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+        "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+        "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+        "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
         "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">[
           {
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"api"</span></span>,
@@ -2645,6 +2749,7 @@ payments<span class="hljs-class">.payload</span>[cvv]=EncryptedCvv</code></pre>
 </dd><dt><code>price.<wbr >transaction_fee</code></dt><dd><code>number</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>25</span></span><p>the transaction fee included in <code>amount</code></p>
 </dd><dt><code>price.<wbr >payment_provider_fee</code></dt><dd><code>number</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>25</span></span><p>the payment provider fee included in <code>amount</code></p>
 </dd><dt><code>price.<wbr >currency</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>EUR</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>EUR</code> <code>CHF</code> </p><p>the currency of the price</p>
+</dd><dt><code>post_booking_info</code></dt><dd><code>string,null</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>Please get the key at the reception.</span></span><p>information to show the renter after a successful booking</p>
 </dd><dt><code>violation</code></dt><dd><code>object</code>&nbsp;<span class="text-muted example"></span><p></p></dd><dt><code>violation.<wbr >id</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>005c4826-4e28-11e3-a675-d43d7eece53d</span></span><p>violation id</p>
 </dd><dt><code>status</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>active</span></span><p>status of the booking, can be <code>active</code> or <code>canceled</code> for <code>offstreet</code> bookings and <code>running</code>, <code>finished</code> or ‘canceled’ for <code>onstreet</code> bookings</p>
 </dd><dt><code>type</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>offstreet</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>offstreet</code> <code>onstreet</code> </p><p>the booking type</p>
@@ -2710,6 +2815,10 @@ payments<span class="hljs-class">.payload</span>[cvv]=EncryptedCvv</code></pre>
 </dd><dt><code>location.<wbr >gates</code></dt><dd><code>array</code>&nbsp;<span class="text-muted example"></span><p>the gates connected to the location</p>
 </dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >type</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>qrcode</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>qrcode</code> <code>beacon</code> </p><p>the type how the gate can be opened</p>
 </dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >identifier</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>PARKU3KU</span></span><p>the identifier for the access method, a short identification string for <code>qrcode</code> and the bluetooth id for <code>beacon</code></p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >car_entrance</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>true</span></span><p>wether this gate is an entrance usable by cars</p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >car_exit</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an exit usable by cars</p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >pedestrian_entrance</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an entrance usable by pedestrians</p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >pedestrian_exit</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an exit usable by pedestrians</p>
 </dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >gateways</code></dt><dd><code>array</code>&nbsp;<span class="text-muted example"></span><p></p></dd><dt><code>zone</code></dt><dd><code>object</code>&nbsp;<span class="text-muted example"></span><p>the zone that was booked, only available if <code>type</code> is <code>onstreet</code>.</p>
 </dd><dt><code>zone.<wbr >id</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>101012</span></span><p>the parking zone id</p>
 </dd><dt><code>zone.<wbr >latitude</code></dt><dd><code>number</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>53.12341234</span></span><p>latitude of the requested point</p>
@@ -2777,6 +2886,13 @@ payments<span class="hljs-class">.payload</span>[cvv]=EncryptedCvv</code></pre>
           "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the currency of the price"</span>
         </span>}
       </span>}
+    </span>}</span>,
+    "<span class="hljs-attribute">post_booking_info</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value">[
+        <span class="hljs-string">"string"</span>,
+        <span class="hljs-string">"null"</span>
+      ]</span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"information to show the renter after a successful booking"</span>
     </span>}</span>,
     "<span class="hljs-attribute">violation</span>": <span class="hljs-value">{
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
@@ -3098,6 +3214,22 @@ payments<span class="hljs-class">.payload</span>[cvv]=EncryptedCvv</code></pre>
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
                 "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the identifier for the access method, a short identification string for `qrcode` and the bluetooth id for `beacon`"</span>
               </span>}</span>,
+              "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an entrance usable by cars"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an exit usable by cars"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an entrance usable by pedestrians"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an exit usable by pedestrians"</span>
+              </span>}</span>,
               "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
                 "<span class="hljs-attribute">items</span>": <span class="hljs-value">{
@@ -3232,6 +3364,7 @@ payments<span class="hljs-class">.payload</span>[cvv]=EncryptedCvv</code></pre>
       "<span class="hljs-attribute">payment_provider_fee</span>": <span class="hljs-value"><span class="hljs-number">25</span></span>,
       "<span class="hljs-attribute">currency</span>": <span class="hljs-value"><span class="hljs-string">"EUR"</span>
     </span>}</span>,
+    "<span class="hljs-attribute">post_booking_info</span>": <span class="hljs-value"><span class="hljs-string">"Please get the key at the reception."</span></span>,
     "<span class="hljs-attribute">violation</span>": <span class="hljs-value">{
       "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"005c4826-4e28-11e3-a675-d43d7eece53d"</span>
     </span>}</span>,
@@ -3310,6 +3443,10 @@ payments<span class="hljs-class">.payload</span>[cvv]=EncryptedCvv</code></pre>
         {
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"qrcode"</span></span>,
           "<span class="hljs-attribute">identifier</span>": <span class="hljs-value"><span class="hljs-string">"PARKU3KU"</span></span>,
+          "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+          "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+          "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+          "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
           "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">[
             {
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"api"</span></span>,
@@ -3347,6 +3484,7 @@ payments<span class="hljs-class">.payload</span>[cvv]=EncryptedCvv</code></pre>
 </dd><dt><code>.<wbr >[]<wbr >.<wbr >price.<wbr >transaction_fee</code></dt><dd><code>number</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>25</span></span><p>the transaction fee included in <code>amount</code></p>
 </dd><dt><code>.<wbr >[]<wbr >.<wbr >price.<wbr >payment_provider_fee</code></dt><dd><code>number</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>25</span></span><p>the payment provider fee included in <code>amount</code></p>
 </dd><dt><code>.<wbr >[]<wbr >.<wbr >price.<wbr >currency</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>EUR</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>EUR</code> <code>CHF</code> </p><p>the currency of the price</p>
+</dd><dt><code>.<wbr >[]<wbr >.<wbr >post_booking_info</code></dt><dd><code>string,null</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>Please get the key at the reception.</span></span><p>information to show the renter after a successful booking</p>
 </dd><dt><code>.<wbr >[]<wbr >.<wbr >violation</code></dt><dd><code>object</code>&nbsp;<span class="text-muted example"></span><p></p></dd><dt><code>.<wbr >[]<wbr >.<wbr >violation.<wbr >id</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>005c4826-4e28-11e3-a675-d43d7eece53d</span></span><p>violation id</p>
 </dd><dt><code>.<wbr >[]<wbr >.<wbr >status</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>active</span></span><p>status of the booking, can be <code>active</code> or <code>canceled</code> for <code>offstreet</code> bookings and <code>running</code>, <code>finished</code> or ‘canceled’ for <code>onstreet</code> bookings</p>
 </dd><dt><code>.<wbr >[]<wbr >.<wbr >type</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>offstreet</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>offstreet</code> <code>onstreet</code> </p><p>the booking type</p>
@@ -3391,6 +3529,10 @@ payments<span class="hljs-class">.payload</span>[cvv]=EncryptedCvv</code></pre>
 </dd><dt><code>.<wbr >[]<wbr >.<wbr >location.<wbr >gates</code></dt><dd><code>array</code>&nbsp;<span class="text-muted example"></span><p>the gates connected to the location</p>
 </dd><dt><code>.<wbr >[]<wbr >.<wbr >location.<wbr >gates[]<wbr >.<wbr >type</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>qrcode</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>qrcode</code> <code>beacon</code> </p><p>the type how the gate can be opened</p>
 </dd><dt><code>.<wbr >[]<wbr >.<wbr >location.<wbr >gates[]<wbr >.<wbr >identifier</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>PARKU3KU</span></span><p>the identifier for the access method, a short identification string for <code>qrcode</code> and the bluetooth id for <code>beacon</code></p>
+</dd><dt><code>.<wbr >[]<wbr >.<wbr >location.<wbr >gates[]<wbr >.<wbr >car_entrance</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>true</span></span><p>wether this gate is an entrance usable by cars</p>
+</dd><dt><code>.<wbr >[]<wbr >.<wbr >location.<wbr >gates[]<wbr >.<wbr >car_exit</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an exit usable by cars</p>
+</dd><dt><code>.<wbr >[]<wbr >.<wbr >location.<wbr >gates[]<wbr >.<wbr >pedestrian_entrance</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an entrance usable by pedestrians</p>
+</dd><dt><code>.<wbr >[]<wbr >.<wbr >location.<wbr >gates[]<wbr >.<wbr >pedestrian_exit</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an exit usable by pedestrians</p>
 </dd><dt><code>.<wbr >[]<wbr >.<wbr >location.<wbr >gates[]<wbr >.<wbr >gateways</code></dt><dd><code>array</code>&nbsp;<span class="text-muted example"></span><p></p></dd><dt><code>.<wbr >[]<wbr >.<wbr >zone</code></dt><dd><code>object</code>&nbsp;<span class="text-muted example"></span><p>the zone that was booked, only available if <code>type</code> is <code>onstreet</code>.</p>
 </dd><dt><code>.<wbr >[]<wbr >.<wbr >zone.<wbr >id</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>101012</span></span><p>the parking zone id</p>
 </dd><dt><code>.<wbr >[]<wbr >.<wbr >zone.<wbr >latitude</code></dt><dd><code>number</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>53.12341234</span></span><p>latitude of the requested point</p>
@@ -3460,6 +3602,13 @@ payments<span class="hljs-class">.payload</span>[cvv]=EncryptedCvv</code></pre>
             "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the currency of the price"</span>
           </span>}
         </span>}
+      </span>}</span>,
+      "<span class="hljs-attribute">post_booking_info</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value">[
+          <span class="hljs-string">"string"</span>,
+          <span class="hljs-string">"null"</span>
+        ]</span>,
+        "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"information to show the renter after a successful booking"</span>
       </span>}</span>,
       "<span class="hljs-attribute">violation</span>": <span class="hljs-value">{
         "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
@@ -3781,6 +3930,22 @@ payments<span class="hljs-class">.payload</span>[cvv]=EncryptedCvv</code></pre>
                   "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
                   "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the identifier for the access method, a short identification string for `qrcode` and the bluetooth id for `beacon`"</span>
                 </span>}</span>,
+                "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value">{
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an entrance usable by cars"</span>
+                </span>}</span>,
+                "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value">{
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an exit usable by cars"</span>
+                </span>}</span>,
+                "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value">{
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an entrance usable by pedestrians"</span>
+                </span>}</span>,
+                "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value">{
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an exit usable by pedestrians"</span>
+                </span>}</span>,
                 "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">{
                   "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
                   "<span class="hljs-attribute">items</span>": <span class="hljs-value">{
@@ -3920,6 +4085,7 @@ The API will return the requested number of items starting at that offset.</p>
     "<span class="hljs-attribute">payment_provider_fee</span>": <span class="hljs-value"><span class="hljs-number">25</span></span>,
     "<span class="hljs-attribute">currency</span>": <span class="hljs-value"><span class="hljs-string">"EUR"</span>
   </span>}</span>,
+  "<span class="hljs-attribute">post_booking_info</span>": <span class="hljs-value"><span class="hljs-string">"Please get the key at the reception."</span></span>,
   "<span class="hljs-attribute">violation</span>": <span class="hljs-value">{
     "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"005c4826-4e28-11e3-a675-d43d7eece53d"</span>
   </span>}</span>,
@@ -3998,6 +4164,10 @@ The API will return the requested number of items starting at that offset.</p>
       {
         "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"qrcode"</span></span>,
         "<span class="hljs-attribute">identifier</span>": <span class="hljs-value"><span class="hljs-string">"PARKU3KU"</span></span>,
+        "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+        "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+        "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+        "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
         "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">[
           {
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"api"</span></span>,
@@ -4043,6 +4213,7 @@ The API will return the requested number of items starting at that offset.</p>
 </dd><dt><code>price.<wbr >transaction_fee</code></dt><dd><code>number</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>25</span></span><p>the transaction fee included in <code>amount</code></p>
 </dd><dt><code>price.<wbr >payment_provider_fee</code></dt><dd><code>number</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>25</span></span><p>the payment provider fee included in <code>amount</code></p>
 </dd><dt><code>price.<wbr >currency</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>EUR</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>EUR</code> <code>CHF</code> </p><p>the currency of the price</p>
+</dd><dt><code>post_booking_info</code></dt><dd><code>string,null</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>Please get the key at the reception.</span></span><p>information to show the renter after a successful booking</p>
 </dd><dt><code>violation</code></dt><dd><code>object</code>&nbsp;<span class="text-muted example"></span><p></p></dd><dt><code>violation.<wbr >id</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>005c4826-4e28-11e3-a675-d43d7eece53d</span></span><p>violation id</p>
 </dd><dt><code>status</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>active</span></span><p>status of the booking, can be <code>active</code> or <code>canceled</code> for <code>offstreet</code> bookings and <code>running</code>, <code>finished</code> or ‘canceled’ for <code>onstreet</code> bookings</p>
 </dd><dt><code>type</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>offstreet</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>offstreet</code> <code>onstreet</code> </p><p>the booking type</p>
@@ -4108,6 +4279,10 @@ The API will return the requested number of items starting at that offset.</p>
 </dd><dt><code>location.<wbr >gates</code></dt><dd><code>array</code>&nbsp;<span class="text-muted example"></span><p>the gates connected to the location</p>
 </dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >type</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>qrcode</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>qrcode</code> <code>beacon</code> </p><p>the type how the gate can be opened</p>
 </dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >identifier</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>PARKU3KU</span></span><p>the identifier for the access method, a short identification string for <code>qrcode</code> and the bluetooth id for <code>beacon</code></p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >car_entrance</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>true</span></span><p>wether this gate is an entrance usable by cars</p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >car_exit</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an exit usable by cars</p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >pedestrian_entrance</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an entrance usable by pedestrians</p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >pedestrian_exit</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an exit usable by pedestrians</p>
 </dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >gateways</code></dt><dd><code>array</code>&nbsp;<span class="text-muted example"></span><p></p></dd><dt><code>zone</code></dt><dd><code>object</code>&nbsp;<span class="text-muted example"></span><p>the zone that was booked, only available if <code>type</code> is <code>onstreet</code>.</p>
 </dd><dt><code>zone.<wbr >id</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>101012</span></span><p>the parking zone id</p>
 </dd><dt><code>zone.<wbr >latitude</code></dt><dd><code>number</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>53.12341234</span></span><p>latitude of the requested point</p>
@@ -4176,6 +4351,13 @@ The API will return the requested number of items starting at that offset.</p>
           "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the currency of the price"</span>
         </span>}
       </span>}
+    </span>}</span>,
+    "<span class="hljs-attribute">post_booking_info</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value">[
+        <span class="hljs-string">"string"</span>,
+        <span class="hljs-string">"null"</span>
+      ]</span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"information to show the renter after a successful booking"</span>
     </span>}</span>,
     "<span class="hljs-attribute">violation</span>": <span class="hljs-value">{
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
@@ -4496,6 +4678,22 @@ The API will return the requested number of items starting at that offset.</p>
               "<span class="hljs-attribute">identifier</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
                 "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the identifier for the access method, a short identification string for `qrcode` and the bluetooth id for `beacon`"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an entrance usable by cars"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an exit usable by cars"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an entrance usable by pedestrians"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an exit usable by pedestrians"</span>
               </span>}</span>,
               "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
@@ -5247,6 +5445,10 @@ A <a href="#first-level-cluster-model">location cluster</a> contains information
         {
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"qrcode"</span></span>,
           "<span class="hljs-attribute">identifier</span>": <span class="hljs-value"><span class="hljs-string">"PARKU3KU"</span></span>,
+          "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+          "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+          "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+          "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
           "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">[
             {
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"api"</span></span>,
@@ -5392,6 +5594,10 @@ Which level is returned depends on the bounding box size of your request.</p>
     {
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"qrcode"</span></span>,
       "<span class="hljs-attribute">identifier</span>": <span class="hljs-value"><span class="hljs-string">"PARKU3KU"</span></span>,
+      "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+      "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+      "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+      "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
       "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">[
         {
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"api"</span></span>,
@@ -5582,6 +5788,10 @@ Which level is returned depends on the bounding box size of your request.</p>
     {
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"qrcode"</span></span>,
       "<span class="hljs-attribute">identifier</span>": <span class="hljs-value"><span class="hljs-string">"PARKU3KU"</span></span>,
+      "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+      "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+      "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+      "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
       "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">[
         {
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"api"</span></span>,
@@ -5649,6 +5859,10 @@ Which level is returned depends on the bounding box size of your request.</p>
 </dd><dt><code>gates</code></dt><dd><code>array</code>&nbsp;<span class="text-muted example"></span><p>the gates connected to the location</p>
 </dd><dt><code>gates[]<wbr >.<wbr >type</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>qrcode</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>qrcode</code> <code>beacon</code> </p><p>the type how the gate can be opened</p>
 </dd><dt><code>gates[]<wbr >.<wbr >identifier</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>PARKU3KU</span></span><p>the identifier for the access method, a short identification string for <code>qrcode</code> and the bluetooth id for <code>beacon</code></p>
+</dd><dt><code>gates[]<wbr >.<wbr >car_entrance</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>true</span></span><p>wether this gate is an entrance usable by cars</p>
+</dd><dt><code>gates[]<wbr >.<wbr >car_exit</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an exit usable by cars</p>
+</dd><dt><code>gates[]<wbr >.<wbr >pedestrian_entrance</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an entrance usable by pedestrians</p>
+</dd><dt><code>gates[]<wbr >.<wbr >pedestrian_exit</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an exit usable by pedestrians</p>
 </dd><dt><code>gates[]<wbr >.<wbr >gateways</code></dt><dd><code>array</code>&nbsp;<span class="text-muted example"></span><p></p></dd><dt><code>gates[]<wbr >.<wbr >gateways[]<wbr >.<wbr >type</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>api</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>api</code> <code>box</code> </p><p>the type of gateway</p>
 </dd><dt><code>gates[]<wbr >.<wbr >gateways[]<wbr >.<wbr >name</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>PRK-123</span></span><p>the name of the box if <code>type</code> is <code>box</code></p>
 </dd></dl></div><h5>Schema</h5><pre><code>{
@@ -5943,6 +6157,22 @@ Which level is returned depends on the bounding box size of your request.</p>
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
             "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the identifier for the access method, a short identification string for `qrcode` and the bluetooth id for `beacon`"</span>
           </span>}</span>,
+          "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an entrance usable by cars"</span>
+          </span>}</span>,
+          "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an exit usable by cars"</span>
+          </span>}</span>,
+          "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an entrance usable by pedestrians"</span>
+          </span>}</span>,
+          "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an exit usable by pedestrians"</span>
+          </span>}</span>,
           "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
             "<span class="hljs-attribute">items</span>": <span class="hljs-value">{
@@ -6049,6 +6279,10 @@ see <code>date_start</code>.</p>
         {
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"qrcode"</span></span>,
           "<span class="hljs-attribute">identifier</span>": <span class="hljs-value"><span class="hljs-string">"PARKU3KU"</span></span>,
+          "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+          "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+          "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+          "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
           "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">[
             {
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"api"</span></span>,
@@ -6097,6 +6331,10 @@ see <code>date_start</code>.</p>
 </dd><dt><code>locations[]<wbr >.<wbr >gates</code></dt><dd><code>array</code>&nbsp;<span class="text-muted example"></span><p>the gates connected to the location</p>
 </dd><dt><code>locations[]<wbr >.<wbr >gates[]<wbr >.<wbr >type</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>qrcode</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>qrcode</code> <code>beacon</code> </p><p>the type how the gate can be opened</p>
 </dd><dt><code>locations[]<wbr >.<wbr >gates[]<wbr >.<wbr >identifier</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>PARKU3KU</span></span><p>the identifier for the access method, a short identification string for <code>qrcode</code> and the bluetooth id for <code>beacon</code></p>
+</dd><dt><code>locations[]<wbr >.<wbr >gates[]<wbr >.<wbr >car_entrance</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>true</span></span><p>wether this gate is an entrance usable by cars</p>
+</dd><dt><code>locations[]<wbr >.<wbr >gates[]<wbr >.<wbr >car_exit</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an exit usable by cars</p>
+</dd><dt><code>locations[]<wbr >.<wbr >gates[]<wbr >.<wbr >pedestrian_entrance</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an entrance usable by pedestrians</p>
+</dd><dt><code>locations[]<wbr >.<wbr >gates[]<wbr >.<wbr >pedestrian_exit</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an exit usable by pedestrians</p>
 </dd><dt><code>locations[]<wbr >.<wbr >gates[]<wbr >.<wbr >gateways</code></dt><dd><code>array</code>&nbsp;<span class="text-muted example"></span><p></p></dd></dl></div><h5>Schema</h5><pre><code>{
   "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
   "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
@@ -6394,6 +6632,22 @@ see <code>date_start</code>.</p>
                   "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
                   "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the identifier for the access method, a short identification string for `qrcode` and the bluetooth id for `beacon`"</span>
                 </span>}</span>,
+                "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value">{
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an entrance usable by cars"</span>
+                </span>}</span>,
+                "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value">{
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an exit usable by cars"</span>
+                </span>}</span>,
+                "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value">{
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an entrance usable by pedestrians"</span>
+                </span>}</span>,
+                "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value">{
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an exit usable by pedestrians"</span>
+                </span>}</span>,
                 "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">{
                   "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
                   "<span class="hljs-attribute">items</span>": <span class="hljs-value">{
@@ -6565,6 +6819,10 @@ This can either be <code>all</code> or an comma separated list of field names fr
         {
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"qrcode"</span></span>,
           "<span class="hljs-attribute">identifier</span>": <span class="hljs-value"><span class="hljs-string">"PARKU3KU"</span></span>,
+          "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+          "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+          "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+          "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
           "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">[
             {
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"api"</span></span>,
@@ -6640,6 +6898,10 @@ Which level is returned depends on the bounding box size of your request.</p>
 </dd><dt><code>locations[]<wbr >.<wbr >gates</code></dt><dd><code>array</code>&nbsp;<span class="text-muted example"></span><p>the gates connected to the location</p>
 </dd><dt><code>locations[]<wbr >.<wbr >gates[]<wbr >.<wbr >type</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>qrcode</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>qrcode</code> <code>beacon</code> </p><p>the type how the gate can be opened</p>
 </dd><dt><code>locations[]<wbr >.<wbr >gates[]<wbr >.<wbr >identifier</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>PARKU3KU</span></span><p>the identifier for the access method, a short identification string for <code>qrcode</code> and the bluetooth id for <code>beacon</code></p>
+</dd><dt><code>locations[]<wbr >.<wbr >gates[]<wbr >.<wbr >car_entrance</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>true</span></span><p>wether this gate is an entrance usable by cars</p>
+</dd><dt><code>locations[]<wbr >.<wbr >gates[]<wbr >.<wbr >car_exit</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an exit usable by cars</p>
+</dd><dt><code>locations[]<wbr >.<wbr >gates[]<wbr >.<wbr >pedestrian_entrance</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an entrance usable by pedestrians</p>
+</dd><dt><code>locations[]<wbr >.<wbr >gates[]<wbr >.<wbr >pedestrian_exit</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an exit usable by pedestrians</p>
 </dd><dt><code>locations[]<wbr >.<wbr >gates[]<wbr >.<wbr >gateways</code></dt><dd><code>array</code>&nbsp;<span class="text-muted example"></span><p></p></dd></dl></div><h5>Schema</h5><pre><code>{
   "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
   "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
@@ -7038,6 +7300,22 @@ Which level is returned depends on the bounding box size of your request.</p>
                 "<span class="hljs-attribute">identifier</span>": <span class="hljs-value">{
                   "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
                   "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the identifier for the access method, a short identification string for `qrcode` and the bluetooth id for `beacon`"</span>
+                </span>}</span>,
+                "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value">{
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an entrance usable by cars"</span>
+                </span>}</span>,
+                "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value">{
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an exit usable by cars"</span>
+                </span>}</span>,
+                "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value">{
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an entrance usable by pedestrians"</span>
+                </span>}</span>,
+                "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value">{
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an exit usable by pedestrians"</span>
                 </span>}</span>,
                 "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">{
                   "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
@@ -7568,6 +7846,7 @@ All further requests using the token as HTTP Basic Auth username are made on beh
     "<span class="hljs-attribute">payment_provider_fee</span>": <span class="hljs-value"><span class="hljs-number">25</span></span>,
     "<span class="hljs-attribute">currency</span>": <span class="hljs-value"><span class="hljs-string">"EUR"</span>
   </span>}</span>,
+  "<span class="hljs-attribute">post_booking_info</span>": <span class="hljs-value"><span class="hljs-string">"Please get the key at the reception."</span></span>,
   "<span class="hljs-attribute">violation</span>": <span class="hljs-value">{
     "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"005c4826-4e28-11e3-a675-d43d7eece53d"</span>
   </span>}</span>,
@@ -7646,6 +7925,10 @@ All further requests using the token as HTTP Basic Auth username are made on beh
       {
         "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"qrcode"</span></span>,
         "<span class="hljs-attribute">identifier</span>": <span class="hljs-value"><span class="hljs-string">"PARKU3KU"</span></span>,
+        "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+        "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+        "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+        "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
         "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">[
           {
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"api"</span></span>,
@@ -7682,6 +7965,7 @@ All further requests using the token as HTTP Basic Auth username are made on beh
 </dd><dt><code>price.<wbr >transaction_fee</code></dt><dd><code>number</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>25</span></span><p>the transaction fee included in <code>amount</code></p>
 </dd><dt><code>price.<wbr >payment_provider_fee</code></dt><dd><code>number</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>25</span></span><p>the payment provider fee included in <code>amount</code></p>
 </dd><dt><code>price.<wbr >currency</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>EUR</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>EUR</code> <code>CHF</code> </p><p>the currency of the price</p>
+</dd><dt><code>post_booking_info</code></dt><dd><code>string,null</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>Please get the key at the reception.</span></span><p>information to show the renter after a successful booking</p>
 </dd><dt><code>violation</code></dt><dd><code>object</code>&nbsp;<span class="text-muted example"></span><p></p></dd><dt><code>violation.<wbr >id</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>005c4826-4e28-11e3-a675-d43d7eece53d</span></span><p>violation id</p>
 </dd><dt><code>status</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>active</span></span><p>status of the booking, can be <code>active</code> or <code>canceled</code> for <code>offstreet</code> bookings and <code>running</code>, <code>finished</code> or ‘canceled’ for <code>onstreet</code> bookings</p>
 </dd><dt><code>type</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>offstreet</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>offstreet</code> <code>onstreet</code> </p><p>the booking type</p>
@@ -7747,6 +8031,10 @@ All further requests using the token as HTTP Basic Auth username are made on beh
 </dd><dt><code>location.<wbr >gates</code></dt><dd><code>array</code>&nbsp;<span class="text-muted example"></span><p>the gates connected to the location</p>
 </dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >type</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>qrcode</span></span><p class="choices"><strong>Choices:&nbsp;</strong><code>qrcode</code> <code>beacon</code> </p><p>the type how the gate can be opened</p>
 </dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >identifier</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>PARKU3KU</span></span><p>the identifier for the access method, a short identification string for <code>qrcode</code> and the bluetooth id for <code>beacon</code></p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >car_entrance</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>true</span></span><p>wether this gate is an entrance usable by cars</p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >car_exit</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an exit usable by cars</p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >pedestrian_entrance</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an entrance usable by pedestrians</p>
+</dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >pedestrian_exit</code></dt><dd><code>boolean</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>wether this gate is an exit usable by pedestrians</p>
 </dd><dt><code>location.<wbr >gates[]<wbr >.<wbr >gateways</code></dt><dd><code>array</code>&nbsp;<span class="text-muted example"></span><p></p></dd><dt><code>zone</code></dt><dd><code>object</code>&nbsp;<span class="text-muted example"></span><p>the zone that was booked, only available if <code>type</code> is <code>onstreet</code>.</p>
 </dd><dt><code>zone.<wbr >id</code></dt><dd><code>string</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>101012</span></span><p>the parking zone id</p>
 </dd><dt><code>zone.<wbr >latitude</code></dt><dd><code>number</code>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>53.12341234</span></span><p>latitude of the requested point</p>
@@ -7814,6 +8102,13 @@ All further requests using the token as HTTP Basic Auth username are made on beh
           "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the currency of the price"</span>
         </span>}
       </span>}
+    </span>}</span>,
+    "<span class="hljs-attribute">post_booking_info</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value">[
+        <span class="hljs-string">"string"</span>,
+        <span class="hljs-string">"null"</span>
+      ]</span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"information to show the renter after a successful booking"</span>
     </span>}</span>,
     "<span class="hljs-attribute">violation</span>": <span class="hljs-value">{
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
@@ -8134,6 +8429,22 @@ All further requests using the token as HTTP Basic Auth username are made on beh
               "<span class="hljs-attribute">identifier</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
                 "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the identifier for the access method, a short identification string for `qrcode` and the bluetooth id for `beacon`"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">car_entrance</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an entrance usable by cars"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">car_exit</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an exit usable by cars"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">pedestrian_entrance</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an entrance usable by pedestrians"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">pedestrian_exit</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"wether this gate is an exit usable by pedestrians"</span>
               </span>}</span>,
               "<span class="hljs-attribute">gateways</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
