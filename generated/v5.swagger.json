@@ -560,6 +560,13 @@
                                         "longitude": {
                                             "type": "number",
                                             "description": "users longitude"
+                                        },
+                                        "device": {
+                                            "type": "string",
+                                            "enum": [
+                                                "ford"
+                                            ],
+                                            "description": "3rd party device associated with the booking"
                                         }
                                     },
                                     "description": "Additional information about a user (optional). This is for example latitude/longitude parameters\nfor the users current position."
@@ -3526,6 +3533,13 @@
                                         "longitude": {
                                             "type": "number",
                                             "description": "users longitude"
+                                        },
+                                        "device": {
+                                            "type": "string",
+                                            "enum": [
+                                                "ford"
+                                            ],
+                                            "description": "3rd party device associated with the booking"
                                         }
                                     },
                                     "description": "Additional information about a user (optional). This is for example latitude/longitude parameters\nfor the users current position."
@@ -6157,6 +6171,12 @@
                 },
                 "longitude": {
                     "type": "number"
+                },
+                "device": {
+                    "type": "string",
+                    "enum": [
+                        "ford"
+                    ]
                 }
             }
         },
