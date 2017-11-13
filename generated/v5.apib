@@ -115,8 +115,8 @@ Access needs a __private key__.
     + Attributes
         + `group_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) -
             The ID of the location you get returned from the locations request
-        + `date_start`: `2016-10-27T09:10:20+00:00` (string, required) - start date and time of the booking
-        + `date_end`: `2016-10-27T10:10:20+00:00` (string, required) - end date and time of the booking
+        + `date_start`: `2016-10-27T09:10:20+00:00` (string, required) - start date and time of the booking. The minutes part of the time has to be a multiple of 15 and seconds have to be 00.
+        + `date_end`: `2016-10-27T10:10:20+00:00` (string, required) - end date and time of the booking. The minutes part of the time has to be a multiple of 15 and seconds have to be 00.
         + `license_plate`: `B-AB 1234` (string, required) - The license plate of the used car.
             Get all cars of a user from the [cars](#user-cars-get) request.
         + `phone_number`: `+493057701872` (string, required) - The phone number.

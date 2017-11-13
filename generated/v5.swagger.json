@@ -498,11 +498,11 @@
                                 },
                                 "date_start": {
                                     "type": "string",
-                                    "description": "start date and time of the booking"
+                                    "description": "start date and time of the booking. The minutes part of the time has to be a multiple of 15 and seconds have to be 00."
                                 },
                                 "date_end": {
                                     "type": "string",
-                                    "description": "end date and time of the booking"
+                                    "description": "end date and time of the booking. The minutes part of the time has to be a multiple of 15 and seconds have to be 00."
                                 },
                                 "license_plate": {
                                     "type": "string",
