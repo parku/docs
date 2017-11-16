@@ -413,6 +413,41 @@ Returned if parking space, period or time was not found or if the parking space 
 Returned if an error occurred.
     + Body
 
+### List all bookings of an owner [GET /owner/bookings{?page,limit}]
+Returns all bookings of all parking spaces that are owned by the user given by the used private token for the request.
+
++ Parameters
+    + page: 1 (number, optional) -  The page number
+
+    + limit: 10 (number, optional) - The limit of bookings in one page
+        + Default: 20
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (array[Booking])
+
+### Retrieve all bookings of one location from specific owner [GET /owner/bookings/{location_id}]
+Retrieves the details of all bookings of one location.
+
++ Parameters
+    + location_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - The location id
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (array[Booking])
+
++ Response 404
+Returned if location was not found or the user doesn't have any parking spaces in this location.
+    + Body
+
 # Data Structures
 
 ## Parking Space (object)
@@ -498,4 +533,25 @@ Use null if period is not restricted to any date in the future, valid for now.
         + `professional-garage`
         + `airport-parking`
         + `harbor-parking`
+
+## Booking (object)
++ `id`: `005c4826-4e28-11e3-a675-d43d7eece53d` (string)
++ `license_plate`: `B-AB 1234` (string)
++ `phone_number`: `+493057701872` (string)
++ `reference`: `HRS5J` (string)
++ `date_start`: `2016-10-27T10:00:00+0000` (string)
++ `date_end`: `2016-10-27T16:30:00+0000` (string)
++ `price` (Booking Price)
++ `post_booking_info`: `Please get the key at the reception.` (string, nullable) - information to show the renter after a successful booking
++ `violation` (Violation Dummy)
++ status: active (string) - status of the booking, can be `active` or `canceled` for `offstreet` bookings and `running`, `finished` or 'canceled' for `onstreet` bookings
++ `type`: `location` (enum) - the booking type
+    + Members
+        + offstreet
+        + onstreet
++ `group_id`: `123c4826-4e28-11e3-a675-d43d7eece53d` (string) - the id of the booked parking space group
++ `parking_space_code`: `ABCDE` (string) - the code of the booked parking space
++ `location` (Location) - the location that was booked, only available if `type` is `offstreet`.
++ `zone` (Parking Zone Base Data) - the zone that was booked, only available if `type` is `onstreet`.
++ `extend` (array[Booking Extend Times])
 
