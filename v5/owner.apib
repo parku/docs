@@ -1,5 +1,5 @@
 # Group Owner
-## Owner [/owner]
+## Parking Space [/owner]
 Access needs a __private key__.
 
 ### List parking spaces [GET /owner/parking-spaces{?page,limit}]
@@ -412,6 +412,9 @@ Returned if parking space, period or time was not found or if the parking space 
 + Response 422
 Returned if an error occurred.
     + Body
+
+## Bookings [/owner/bookings]
+Access needs a __private key__.
 
 ### List all bookings of an owner [GET /owner/bookings{?page,limit}]
 Returns all bookings of all parking spaces that are owned by the user given by the used private token for the request.

@@ -54,6 +54,7 @@ v5_SRC:= \
 	v5/locations.apib \
 	v5/login.apib \
 	v5/onstreet.apib \
+	v5/owner.apib \
 	v4/password.apib \
 	v5/payment.apib \
 	v4/phone_numbers.apib \
@@ -63,8 +64,7 @@ v5_SRC:= \
 	v4/static_pages.apib \
 	v5/user.apib \
 	v4/violations.apib \
-	v5/changelog.md \
-	v5/owner.apib
+	v5/changelog.md
 
 MOCK_VERSION=v5
 
