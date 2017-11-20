@@ -533,25 +533,3 @@ Use null if period is not restricted to any date in the future, valid for now.
         + `professional-garage`
         + `airport-parking`
         + `harbor-parking`
-
-## Booking (object)
-+ `id`: `005c4826-4e28-11e3-a675-d43d7eece53d` (string)
-+ `license_plate`: `B-AB 1234` (string)
-+ `phone_number`: `+493057701872` (string)
-+ `reference`: `HRS5J` (string)
-+ `date_start`: `2016-10-27T10:00:00+0000` (string)
-+ `date_end`: `2016-10-27T16:30:00+0000` (string)
-+ `price` (Booking Price)
-+ `post_booking_info`: `Please get the key at the reception.` (string, nullable) - information to show the renter after a successful booking
-+ `violation` (Violation Dummy)
-+ status: active (string) - status of the booking, can be `active` or `canceled` for `offstreet` bookings and `running`, `finished` or 'canceled' for `onstreet` bookings
-+ `type`: `location` (enum) - the booking type
-    + Members
-        + offstreet
-        + onstreet
-+ `group_id`: `123c4826-4e28-11e3-a675-d43d7eece53d` (string) - the id of the booked parking space group
-+ `parking_space_code`: `ABCDE` (string) - the code of the booked parking space
-+ `location` (Location) - the location that was booked, only available if `type` is `offstreet`.
-+ `zone` (Parking Zone Base Data) - the zone that was booked, only available if `type` is `onstreet`.
-+ `extend` (array[Booking Extend Times])
-
