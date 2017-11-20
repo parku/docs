@@ -3994,6 +3994,9 @@
                                     },
                                     "smart_device_link_enabled": {
                                         "enabled": true
+                                    },
+                                    "paypal_payment_method_enabled": {
+                                        "enabled": true
                                     }
                                 },
                                 "provider": {
@@ -4298,6 +4301,15 @@
                                             }
                                         },
                                         "smart_device_link_enabled": {
+                                            "type": "object",
+                                            "properties": {
+                                                "enabled": {
+                                                    "type": "boolean",
+                                                    "description": "defines wether the flag is enabled"
+                                                }
+                                            }
+                                        },
+                                        "paypal_payment_method_enabled": {
                                             "type": "object",
                                             "properties": {
                                                 "enabled": {
@@ -6970,6 +6982,9 @@
                     "type": "User Settings Feature Flag"
                 },
                 "smart_device_link_enabled": {
+                    "type": "User Settings Feature Flag"
+                },
+                "paypal_payment_method_enabled": {
                     "type": "User Settings Feature Flag"
                 }
             }
