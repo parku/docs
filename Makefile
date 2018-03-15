@@ -48,6 +48,7 @@ v5_SRC:= \
 	v4/cars.apib \
 	v5/coupon.apib \
 	v4/devices.apib \
+	v5/doors.apib \
 	v5/errors.apib \
 	v5/facebook.apib \
 	v4/invitations.apib \
