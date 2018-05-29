@@ -1,0 +1,333 @@
+# Group Locations
+Access needs at least a __public key__.
+## Locations [/locations]
+
+### List Locations [GET /locations{?sw,ne,date_start,date_end,availability,bookability}]
+Returns a list of locations that provide the same format as the single location.
+When no `date_start` or `date_end` was provided, all locations are returned.
+That does not mean, that they are available.
+
+Some of the locations do not show all the location details in this request. A special flag `has_live_details` defines
+if a second request has to be done to retrieve valid location details like description, price and availability.
+If `has_live_details` is `true`, a request to the single location with the corresponding id has to be made before
+booking the location. If `has_live_details` is true, the list request will have an `availability.current` of `null` and
+a `price` of `null` as well as an empty `description` and `additional fields`.
+
++ Parameters
+    + sw: `45.74001,5.67868` (string,required) - Comma separated latitude and longitude of the southwest position.
+    + ne: `47.74236,10.24900` (string,required) - Comma separated latitude and longitude of the northeast position.
+    + date_start: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the start date.
+        `date_start` will have no effect unless `date_end` is also provided.
+    + date_end: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the end date.
+        `date_end` will have no effect unless `date_start` is also provided.
+    + availability: all (string,optional) - Filters returned locations regarding their availability if start and end
+        are also given.
+        * `true` only returns available locations
+            (this is default if availability is not specified and start and end were given)
+        * `false` only returns non-available locations
+        * `all` return all locations, including ones that no availability information is available for
+        + Members
+            + true
+            + false
+            + all
+        + Default: true
+    + bookability: all (string,optional) - Filters returned locations regarding their general bookability.
+        * `true` only returns locations that could be booked through the api if they are available
+        * `false` only returns locations that can not be booked through the api, even though they might be available
+        * `all` return all locations, no matter if they would be bookable though the API or not
+        + Members
+            + true
+            + false
+            + all
+        + Default: true
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
+
++ Response 200
+    + Body
+
+            [
+                {
+                    "street": "Hopfenstrasse",
+                    "street_number": "20",
+                    "postcode": "8045",
+                    "city": "Zürich",
+                    "country": "CH",
+                    "bookable": true,
+                    "has_live_details": false,
+                    "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
+                    "type": "off-street",
+                    "code": "ZHRTHW",
+                    "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
+                    "latitude": 52.505681,
+                    "longitude": 13.303608,
+                    "image_urls": [
+                        "https://parku.de/images/parkingspace/020a81f5-c8b9-11e4-bfd2-d43d7eece658/640x286.jpg"
+                    ],
+                    "options": [
+                        "excess length", "indoor", "disabled", "patio", "barrier"
+                    ],
+                    "support": {
+                        "phone_number": "+41 43 928 72 52"
+                    },
+                    "notifications": [],
+                    "currency": "EUR",
+                    "price": 3.5,
+                    "price_period": "timeframe",
+                    "pricing": {
+                        "rate_hourly": 2,
+                        "rate_daily": 10,
+                        "rate_weekly": null,
+                        "rate_monthly": null
+                    },
+                    "address_slug": "hopfenstrasse-20",
+                    "user_owned": false,
+                    "settings": {
+                        "bookable_range_start": -15,
+                        "bookable_range_end": 43200,
+                        "booking_duration_min": 30,
+                        "booking_duration_max": 43200
+                    },
+                    "required_fields": [
+                        "additional_services",
+                        "car_colour",
+                        "number_of_passengers"
+                    ],
+                    "provider": "parku",
+                    "availability": {
+                        "current": 13,
+                        "maximum": 15,
+                        "next_start": "2016-09-12T03:45:00+02:00",
+                        "next_end": "2016-10-13T04:00:00+02:00"
+                    }
+                },
+                { ... },
+                { ... }
+            ]
+
+## Location [/locations/{location_id}]
+### Retrieve a Location [GET /locations/{location_id}{?date_start,date_end}]
++ Parameters
+    + location_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122, required) - Identifier of the location.
+    + date_start: `2016-10-27T09:10:20+00:00` (ISO 8601, optional) - Used to calculate the price for a location.
+        Requires the field `date_end` to be defined. If no `date_start` or `date_end` is specified,
+        the returned `price` field will be `null`.
+    + date_end: `2016-10-27T10:10:20+00:00` (ISO 8601, optional)
+        see `date_start`.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200
+    | Field                         | Description                                                                                                                                                                                                                          |
+    | -----------------             | --------------------------------------------------------------------------------------                                                                                                                                               |
+    | address_slug                  | `string` street name and number of the location in url address format                                                                                                                                                                |
+    | availability                  | `dictionary` describes the availability of the location in relation to the request                                                                                                                                                   |
+    | availability.current          | `number` the number of parking spaces available at the location for the requested time period defined by `start` and `end`                                                                                                           |
+    | availability.maximum          | `number` the overall number of parking spaces at this location                                                                                                                                                                       |
+    | availability.next_start       | `time` the start of the next from now slot in which a parking space in this location is free and bookable, can be in the past                                                                                                        |
+    | availability.next_end         | `time` the end of the next slot from now in which a parking space in this location is free and bookable, can be in the past                                                                                                          |
+    | bookable                      | `boolean` `true` if that locations can be booked via the parku API, `false` if the location is purely providing information                                                                                                          |
+    | city                          | `string` city of the location                                                                                                                                                                                                        |
+    | code                          | `string` short identification code of the location, not necessarily unique                                                                                                                                                           |
+    | country                       | `string` country of the location in 2 character encoding                                                                                                                                                                             |
+    | currency                      | `string` the currency that the price for the location is in, `EUR` for Euro or `CHF` for swiss franc.                                                                                                                                |
+    | description                   | `string` the description of the location. The description is returned in the users language or in the language specified by the HTTP header `Accept-Language` if it was given.                                                       |
+    | id                            | `uuid rfc4122` unique identifier of the location used for referencing.                                                                                                                                                               |
+    | image_urls                    | `list` urls of location images, can be **empty**                                                                                                                                                                                     |
+    | has_live_details              | `boolean` if `true` for booking a request to the single location endpoint has to be made to retrieve valid location details (price, availability, description, additional fields)
+    |
+    | latitude                      | `decimal` latitude part of the location geo coordinate                                                                                                                                                                               |
+    | longitude                     | `decimal` longitude part of the location geo                                                                                                                                                                                         |
+    | notification                  | `list` *deprecated* usually empty, ignore                                                                                                                                                                                            |
+    | options                       | `list` describes which options are available at the location and can contains each of the following elements. The list can be **empty**.                                                                                             |
+    | options[excess length]        | the parking space can be used by cars with a small trailer                                                                                                                                                                           |
+    | options[indoor]               | the parking space has a roof or can be an underground garage                                                                                                                                                                         |
+    | options[disabled]             | parking space is accessible for disabled people                                                                                                                                                                                      |
+    | options[patio]                | the parking space is located at an inner courtyard                                                                                                                                                                                   |
+    | options[barrier]              | parking space has a barrier and user needs a smartphone to open it                                                                                                                                                                   |
+    | options[charging station]     | parking space with an electric vehicle charging station                                                                                                                                                                              |
+    | options[key_necessary]        | parking space can only be accessed with a key                                                                                                                                                                                        |
+    | options[long_term_booking]    | parking space is bookable for longer time period                                                                                                                                                                                     |
+    | options[surveillance]         | parking space has surveillance                                                                                                                                                                                                       |
+    | options[valet_service]        | parking space contains valet service                                                                                                                                                                                                 |
+    | price                         | `decimal` the actual price shown to the user, can be **null** if `start` or `end` were not provided                                                                                                                                  |
+    | price_period                  | `string` contains the period for how long the price is valid, can be `day`, `week`, `month`, `timeframe`, can be **null** if `start` or `end` was not provided                                                                       |
+    | pricing                       | `dictionary` contains information about the pricing and price prediction. It contains the keys                                                                                                                                       |
+    | pricing.rate_hourly           | `decimal` shows the price for per hour                                                                                                                                                                                               |
+    | pricing.rate_daily            | `decimal` shows the price per day                                                                                                                                                                                                    |
+    | pricing.rate_weekly           | `decimal` shows the price per week                                                                                                                                                                                                   |
+    | pricing.rate_monthly          | `decimal` shows the price per month                                                                                                                                                                                                  |
+    | post_code                     | `string` post code of the location                                                                                                                                                                                                   |
+    | provider                      | `string` names the parking space provider. Additional information(terms and conditions, logo, ...) about the provider can found be using the provider key from the field in [settings](/api/settings/)                               |
+    | required_fields               | `list` lists all additionally required fields when creating a booking for this location, can be **empty** if no fields are required. The field names correspond to the `booking.fields.*` entries in the settings endpoint which can |
+    |                               | be used for retrieving translated strings for these fields.                                                                                                                                                                          |
+    | settings                      | `dictionary` provides booking requirements for the location. The settings of a location are used in favor of the global settings that can be found in the settings endpoint.                                                         |
+    | settings.bookable_range_start | `number` start of the range wherein a booking is allowed in minutes from now.                                                                                                                                                        |
+    | settings.bookable_range_end   | `number` end of the range wherein a booking is allowed in minutes from now.                                                                                                                                                          |
+    | settings.booking_duration_min | `number` minimum duration of a booking in minutes.                                                                                                                                                                                   |
+    | settings.booking_duration_max | `number` maximum duration of a booking in minutes.                                                                                                                                                                                   |
+    | street                        | `string` the street name of the location without number                                                                                                                                                                              |
+    | street_number                 | `string` the street number of the location                                                                                                                                                                                           |
+    | support                       | `dictionary` contains field `phone_number` that returns the support center phone number for this location                                                                                                                            |
+    | type                          | `string` describes the type of location and can be one of the following. Choices `off-street` `park-and-ride` `professional-garage` `airport-parking` `harbor-parking`                                                               |
+    | user_owned                    | `boolean` `true` if the user who requested the location is also the owner of the parking space. This allows to determine if the user could block the parking space from bookings. The blocking feature itself is not yet             |
+
+    + Body
+
+            {
+                "street": "Hopfenstrasse",
+                "street_number": "20",
+                "postcode": "8045",
+                "city": "Zürich",
+                "country": "CH",
+                "bookable": true,
+                "has_live_details": false,
+                "id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
+                "type": "off-street",
+                "code": "ZHRTHW",
+                "description": "Doppelparkplatz. Jedoch nur für ein Auto zu vermieten. Die andere Hälfte wird benötigt. Aufteilung wie im Bild.",
+                "latitude": 52.505681,
+                "longitude": 13.303608,
+                "image_urls": [
+                    "https://parku.de/images/parkingspace/020a81f5-c8b9-11e4-bfd2-d43d7eece658/640x286.jpg"
+                ],
+                "options": [
+                    "excess length", "indoor", "disabled", "patio", "barrier"
+                ],
+                "support": {
+                    "phone_number": "+41 43 928 72 52"
+                },
+                "notifications": [],
+                "currency": "EUR",
+                "price": 3.5,
+                "price_period": "timeframe",
+                "pricing": {
+                    "rate_hourly": 2,
+                    "rate_daily": 10,
+                    "rate_weekly": null,
+                    "rate_monthly": null
+                },
+                "address_slug": "hopfenstrasse-20",
+                "user_owned": false,
+                "settings": {
+                    "bookable_range_start": -15,
+                    "bookable_range_end": 43200,
+                    "booking_duration_min": 30,
+                    "booking_duration_max": 43200
+                },
+                "required_fields": [
+                    "additional_services",
+                    "car_colour",
+                    "number_of_passengers"
+                ],
+                "provider": "parku",
+                "availability": {
+                    "current": 13,
+                    "maximum": 15,
+                    "next_start": "2016-09-12T03:45:00+02:00",
+                    "next_end": "2016-10-13T04:00:00+02:00"
+                }
+            }
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 404
+Location was not found, check the location id and that your user has the correct access rights to see the location.
+    + Body
+
+
++ Response 422
+Request validation failed because the request data was malformed.
+    + Body
+
+### Get availability times for location [GET /locations/{parking_space_id}/availability{?date_start,date_end}]
+
++ Parameters
+    + parking_space_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - Identifier of a parking space.
+    + date_start: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Start of time frame to include periods.
+        If `date_start` is provided, `date_end` is required and vice versa.
+    + date_end: 2016-10-27T10:10:20+00:00 (ISO 8601, optional)
+        see `date_start`.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200
+    Displays the availability times. For every affected availability period there will be one entry in the json.
+    This sub json contains 9 keys, one for every weekday including the day's times and also the period start and end.
+
+    __Caution__: This does not include bookings
+
+    A period is affected, if one of the following holds:
+
+    * `date_start` is between period start and period end
+    * `date_end` is between period start and end
+    * `date_start` and `date_end` overlay the period
+
+    + Body
+
+            {
+                "begin": "2016-04-09T00:00:00+02:00",
+                "end": "2016-04-18T00:00:00+02:00",
+                "weekday_1": [{
+                  "start": "08:00",
+                  "end": "17:00"
+                }],
+                "weekday_2": [{
+                  "start": "08:00",
+                  "end": "17:00"
+                }],
+                "weekday_3": [{
+                  "start": "08:00",
+                  "end": "16:00"
+                }],
+                "weekday_4": [{
+                  "start": "08:00",
+                  "end": "16:00"
+                }],
+                "weekday_5": [{
+                  "start": "08:00",
+                  "end": "18:00"
+                }],
+                "weekday_6": [{
+                  "start": "08:00",
+                  "end": "17:00"
+                }],
+                "weekday_7": [{
+                  "start": "08:00",
+                  "end": "17:00"
+                }]
+            }
+
+### Retrieve Terms and Conditions [GET /locations/{location_id}/terms]
+
+__Deprecated__ This endpoint is deprecated. `/settings` endpoint should be used instead.
+
+Each location can have different terms and conditions.
+With this endpoint you can retrieve location based terms and conditions.
+
++ Parameters
+    + location_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - Identifier of the location.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/xhtml+xml)
+    + Body
+
+            <!DOCTYPE html>
+              <html xmlns="http://www.w3.org/1999/xhtml"...

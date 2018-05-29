@@ -1,0 +1,23 @@
+# Group Invitations
+## Invitations [/invitations/{invitation_code}]
+Access needs a __private key__.
+
+### Check Invitation Code Validity [GET /invitations/{invitation_code}]
+
++ Parameters
+    + invitation_code: `d2VsbCBkb25lISBnZXQgYSBiZWVyIG5vdyA9RA==` (string,required) - Base64 encoded invitation code.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+|       |                                                                   |
+|-------|-------------------------------------------------------------------|
+| valid | `bool` _true_, if the invitation code is valid, _false_ otherwise |
+    + Body
+
+            {
+              "valid": true
+            }

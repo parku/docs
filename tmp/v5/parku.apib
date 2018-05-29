@@ -1,0 +1,36 @@
+FORMAT: 1A
+HOST: https://sandbox.test.parku.io/v5
+CURL_HOST: https://sandbox.test.parku.io/v5
+CURL_OPTIONS: --insecure
+RESPONSE_ATTRIBUTE_LEVELS: 4
+DATA_STRUCTURE_LEVELS: 1
+LOGO: images/logo_parku.png
+
+# Parku API v5 Reference
+
+The parku API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and to use
+HTTP response codes to indicate API errors. We use built-in HTTP features, like HTTP authentication and HTTP verbs,
+which can be understood by off-the-shelf HTTP clients. JSON will be returned in all responses from the API,
+including errors.
+
+### Versions
+- previous: [v4](v4.html)
+- latest stable: __v5__
+
+#### Changes in v5
+- Replaced locations model with an hierarchical one. This affects the [Locations Endpoint](#locations-locations) and
+  [Bookings Endpoint](#bookings-bookings). Find the description of the new model at:
+  + [Location Model](#location-model)
+  + [Parking Space Group Model](#parking-space-group-model)
+  + [First Level Cluster Model](#first-level-cluster-model)
+  + [Second Level Cluster Model](#second-level-cluster-model)
+- extended [booking model](#booking-model) with `type`, `zone` and `payment`
+- added [onstreet](#onstreet) endpoint
+- added [stop a booking](#stop-a-booking)
+- added [user payment methods](#user-user-payment-methods)
+
+- `voucher` endpoint removed
+
+#### Api definition files
+- [Swagger definition](generated/v5.swagger.json) (readable by [Postman](https://www.getpostman.com/))
+- [Api Blueprint](generated/v5.apib)

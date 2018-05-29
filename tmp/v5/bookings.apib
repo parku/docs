@@ -1,0 +1,190 @@
+# Group Bookings
+
+## Bookings [/bookings]
+Access needs a __private key__.
+
+### Create a new Booking [POST /bookings{?location_id,date_start,date_end,license_plate,phone_number,provider,provider_info,status,required_fields}]
++ Request (application/json)
+    + Attributes
+        + `group_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) -
+            The ID of the location you get returned from the locations request
+        + `date_start`: `2016-10-27T09:10:20+00:00` (string, required) - start date and time of the booking. The minutes part of the time has to be a multiple of 15 and seconds have to be 00.
+        + `date_end`: `2016-10-27T10:10:20+00:00` (string, required) - end date and time of the booking. The minutes part of the time has to be a multiple of 15 and seconds have to be 00.
+        + `license_plate`: `B-AB 1234` (string, required) - The license plate of the used car.
+            Get all cars of a user from the [cars](#user-cars-get) request.
+        + `phone_number`: `+493057701872` (string, required) - The phone number.
+            Get all phone numbers of a user from the [phone_numbers](`#user-phone_numbers-get`) request.
+        + payment (array[Pre Booking Payment Input], optional)
+          The payments to use for paying (optional). This can be credits, coupons,
+          paypal and braintree payments that have been authorized on the frontend.
+        + payment_method (Used Payment Method Input, optional)
+          The payment method to use for paying. This method will be used for paying the fee of the booking
+          after all payments from the `payments` field have been applied. E.g. if you provided a 5 Euro
+          voucher via `payments`, the payment method will be used on 5 Euro less than the actual booking fee.
+        + `required_fields` (object) - Parking space required fields defined in the locations request. The required fields should contain all required fields defined in location. All values should be sent as strings.
+            + car_color: `red` (string, optional) - the car color
+            + number_of_passengers: `5` (string, optional) - the number of passengers
+        + user_metadata (User Metadata Input, optional)
+          Additional information about a user (optional). This is for example latitude/longitude parameters
+          for the users current position.
+
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 201 (application/json)
+    + Attributes (Booking)
+
+### Retrieve a Booking [GET /bookings/{reference}]
+Retrieves the details of an existing booking. You need to supply either the id or the reference of a booking.
+
++ Parameters
+    + reference: `005c4826-4e28-11e3-a675-d43d7eece53d` (string, required) - The id or code of the booking
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (Booking)
+
+### Update a Booking [PUT /bookings/{booking_id}]
+Updates the booking by setting the values of the parameters passed. Any parameter not provided will be left unchanged.
+
++ Parameters
+    + booking_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
++ Request  (application/json)
+    + Attributes
+        + `license_plate`: `B-BC 4567` (string, optional) -
+            refer to the description of [`Create a new Booking`](#bookings-bookings-post)
+        + `phone_number`: `+493057701871` (string, optional) -
+            refer to the description of [`Create a new Booking`](#bookings-bookings-post)
+        + `date_end`: `2016-10-27T17:00:00+0000` (string, optional) -
+            refer to the description of [`Create a new Booking`](#bookings-bookings-post)
+        + payment (array[Pre Booking Payment Input], optional)
+            The payments to use for paying (optional). This can be credits, coupons,
+            paypal and braintree payments that have been authorized on the frontend.
+        + payment_method (Used Payment Method Input, optional)
+            The payment method to use for paying.
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200
+    + Attributes (Booking)
+
+
+### Cancel a Booking [DELETE /bookings/{booking_id}]
+
++ Parameters
+    + booking_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200
+    + Attributes (Booking)
+
+### List bookings [GET /bookings{?count,offset,date_start,date_end,status,type}]
+
++ Parameters
+    + count: 3 (number, optional) - A limit on the number of objects to be returned.
+        Count can range between 1 and 100 items.
+        + Default: 10
+    + offset: 10 (number, optional) - An offset into the list of returned items.
+        The API will return the requested number of items starting at that offset.
+        + Default: 0
+    + status: active (enum, optional) - Filter bookings for status.
+        + Members
+            + all
+            + active
+            + cancelled
+            + running
+            + finished
+        + Default: all
+    + type: all (enum, optional) - Filter bookings for their type
+        + Members
+            + all
+            + offstreet
+            + onstreet
+        + Default: all
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+     + Attributes (array[Booking])
+
+### Stop a Booking [POST /bookings/{booking_id}/stop]
+Stops and pays a booking.
+
+Currently supports stopping onstreet bookings only.
+
++ Parameters
+    + booking_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string,required) - the booking id
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (Booking)
+        + `payment_urls` (object) - urls for user to visit for doing the payment, currently only available for `ideal`
+            + `urls` (object)
+                + `entrance`: `http://www.ideal.nl/asdf1234`(string)
+                + `success`: `http://www.ideal.nl/asdf1234`(string)
+                + `cancel`: `http://www.ideal.nl/asdf1234`(string)
+                + `failure`: `http://www.ideal.nl/asdf1234`(string)
+                + `pending`: `http://www.ideal.nl/asdf1234`(string)
+
+# Data Structures
+
+## Booking (object)
++ `id`: `005c4826-4e28-11e3-a675-d43d7eece53d` (string)
++ `license_plate`: `B-AB 1234` (string)
++ `phone_number`: `+493057701872` (string)
++ `reference`: `HRS5J` (string)
++ `date_start`: `2016-10-27T10:00:00+0000` (string)
++ `date_end`: `2016-10-27T16:30:00+0000` (string)
++ `price` (Booking Price)
++ `post_booking_info`: `Please get the key at the reception.` (string, nullable) - information to show the renter after a successful booking
++ `violation` (Violation Dummy)
++ status: active (string) - status of the booking, can be `active` or `canceled` for `offstreet` bookings and `running`, `finished` or 'canceled' for `onstreet` bookings
++ `type`: `location` (enum) - the booking type
+    + Members
+        + offstreet
+        + onstreet
++ `group_id`: `123c4826-4e28-11e3-a675-d43d7eece53d` (string) - the id of the booked parking space group
++ `parking_space_code`: `ABCDE` (string) - the code of the booked parking space
++ `location` (Location) - the location that was booked, only available if `type` is `offstreet`.
++ `zone` (Parking Zone Base Data) - the zone that was booked, only available if `type` is `onstreet`.
++ `extend` (array[Booking Extend Times])
+
+## Booking Extend Times (object)
++ `date_start`: `2016-10-27T10:00:00+0000` (string) - start date of the extended booking
++ `date_end`: `2016-10-27T12:00:00+0000` (string) - end date of the extended booking
++ `minutes`: 60 (number) - length of extension in minutes
++ `price`: 125 (number) - price of the extension
++ Include Currency
+
+## Violation Dummy (object)
++ id: `005c4826-4e28-11e3-a675-d43d7eece53d` (string) - violation id
+
+## Booking Price (object)
++ `total`: `425` (number, nullable) - the overall amount to pay for the booking
++ `parking_fee`: `375` (number) - the transaction fee included in `amount`
++ `transaction_fee`: `25` (number) - the transaction fee included in `amount`
++ `payment_provider_fee`: `25` (number) - the payment provider fee included in `amount`
++ Include Currency
+
+## User Metadata Input (object)
++ `latitude`: `52.521381` (number, optional) - users latitude
++ `longitude`: `13.3920158` (number, optional) - users longitude
++ `device`: `ford` (enum, optional) - 3rd party device associated with the booking
+  + Members
+    + ford

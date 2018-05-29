@@ -1,0 +1,231 @@
+# Group Settings
+## Settings [/settings]
+Access needs at least a __public key__.
+### Retrieve Settings [GET /settings{?lat,lon}]
+
+This endpoint exposes the global settings for the ParkU-platform.
+Changing the settings is not possible.
+
++ Parameters
+    + lat: `52.53568811` (float,optional) - Latitude of current location.
+    + lon: `13.39412887` (float,optional) - Longitude of current location.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+
+    #### Response Fields
+    |             Field             |                                                                                  Description                                                                                   |
+    |-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    | location                      | provides the booking requirements for a parking space. Every location can have its own settings but these will always be the same or within the limits of the global settings. |
+    | location.bookable_range_start | start of the range wherein a booking is allowed in minutes from now.                                                                                                           |
+    | location.bookable_range_end   | end of the range wherein a booking is allowed in minutes from now.                                                                                                             |
+    | location.booking_duration_min | minimum duration of a booking in minutes.                                                                                                                                      |
+    | location.booking_duration_max | maximum duration of a booking in minutes.                                                                                                                                      |
+    | sesam                         | contains informations about how to work with the sesam boxes.                                                                                                                  |
+    | sesam.connection_trials       | Amount of tries to connect to a sesam box.                                                                                                                                     |
+    | sesam.connection_timeout      | Amount of seconds allowed to connect to a box.                                                                                                                                 |
+    | sesam.communication_timeout   | Second until canceling the communication with the sesam box.                                                                                                                   |
+    | gps                           | contains information on how to handle GPS data.                                                                                                                                |
+    | gps.ttl                       | Time-To-Live for previously retrieved GPS data i.e. by operation system                                                                                                        |
+    | gps.accuracy                  | Accuracy of GPS data in meters, renders data invalid if exceeded                                                                                                               |
+    | booking                       | contains information on how to handle bookings.                                                                                                                                |
+    | booking.collection.ttl        | Time-To-Live for previously retrieved booking list                                                                                                                             |
+    | booking.notification.*        | List of notifications and their settings. see [Notifications](#header-notifications)                                                                                          |
+    | booking.fields.*              | List of additional fields that may be required to make a booking. see [Additional Fields](#header-additional-fields)                                                          |
+    | features                      | see [Features](#header-features)                                                                                                                                              |
+    | provider                      | see [Provider](#header-provider)                                                                                                                                              |
+
+    #### Notifications
+    Each notification contains an `enabled` flag. If set to `true`, the notification is enabled and should appear. If set to `false`, that notification is disabled.
+    |     Field     |                                        Description                                        |
+    |---------------|-------------------------------------------------------------------------------------------|
+    | time_to_leave | _n_ `time_to_leave.minutes` before to leave to get to a booking location.                 |
+    | near_location | Entering a region, defined by `near_location.radius` in meters around a booking location. |
+    | near_entry    | Entering a region, defined by `near_entry.radius` in meters around a booking location.    |
+    | expiring      | Shown _n_ `expiring.minutes` to a bookings ending.                                        |
+    | over          | Shown _n_ `over.minutes` to a bookings ending.                                            |
+
+    #### Additional Fields
+    Each additional field uses its name as a key to a dictionary containing the field `label` and `type`.
+    `label` contains the translated name of the field.
+     The translation of the label is determined by the language of user who is identified by the provided user token.
+
+    Field types currently are:
+    * text
+    * datetime
+    * date
+    * time
+    * number
+    * tel
+    * boolean
+
+    #### Features
+    Feature flags that enables or disables certaint features based parameters given in header. These feature flags can be different for each operation systems.
+
+    * `recommend_update` _Android specific_: Is enabled if there is a newer version off application that is
+        recommended to be updated. Current version still works.
+    * `force_update` _Android specific_: Is enabled if current application version is not supported anymore.
+
+    #### Provider
+    Info for parking space provider. Key is linked with location response field `provider`.
+
+    |    Field     |                                             Description                                             |
+    |--------------|-----------------------------------------------------------------------------------------------------|
+    | image        | Large provider logo.                                                                                |
+    | thumbnail    | Provider logo thumbnail.                                                                            |
+    | header       | Translated header text for required fields.                                                         |
+    | legal        | Contains two lists for terms and conditions entries where you can find text and url for each.       |
+    | legal.accept | List of terms and conditions entries which the user needs to accept by some action (like checkbox). |
+    | legal.show   | List of terms and conditions entries which the user needs only to see.                              |
+
+    If the list entry `text` contains ``%TERMS_LINK%``, it should be replaced by the actual link (check example).
+
+    + Body
+
+            {
+                "location": {
+                  "bookable_range_start": -15,
+                  "bookable_range_end": 43200,
+                  "booking_duration_min": 30,
+                  "booking_duration_max": 43200
+                },
+                "sesam": {
+                  "bluetooth": {
+                    "connection_trials": 2,
+                    "connection_timeout": 2,
+                    "communication_timeout": 2
+                  }
+                },
+                "gps": {
+                  "ttl": 60,
+                  "accuracy": 1000
+                },
+                "booking": {
+                  "collection": {
+                    "ttl": 60
+                  },
+                  "notification": {
+                    "time_to_leave": {
+                      "enabled": true,
+                      "type": "time",
+                      "time": {
+                        "minutes": -5,
+                        "relative_to": "begin",
+                        "include_distance": true
+                      }
+                    },
+                    "near_location": {
+                      "enabled": true,
+                      "type": "region",
+                      "radius": 500
+                    },
+                    "near_entry": {
+                      "enabled": true,
+                      "type": "region",
+                      "radius": 50
+                    },
+                    "expiring": {
+                      "enabled": true,
+                      "type": "time",
+                      "time": {
+                        "minutes": -10,
+                        "relative_to": "end",
+                        "include_distance": false
+                      }
+                    },
+                    "over": {
+                      "enabled": true,
+                      "type": "time",
+                      "time": {
+                        "minutes": -2,
+                        "relative_to": "end",
+                        "include_distance": false
+                      }
+                    }
+                  },
+                  "fields": {
+                    "additional_services": {
+                      "label": "zusätzliche Dienste",
+                      "type": "text"
+                    },
+                    "car_colour": {
+                      "label": "Fahrzeugfarbe",
+                      "type": "text"
+                    },
+                    "number_of_passengers": {
+                      "label": "Anzahl der Passagiere",
+                      "type": "number"
+                    }
+                    ...
+                  }
+                },
+                "features": {
+                  "recommend_update": {
+                    "enabled": true
+                  },
+                  "force_update": {
+                    "enabled": false
+                  }
+                },
+                "provider": {
+                  "parku": {
+                    "legals": {
+                      "show": [{
+                        "text": "By proceeding further, you acknowledge and agree to ParkU’s %TERMS_LINK%.",
+                        "url": "https:\/\/parku.de\/terms\/"
+                      }]
+                    }
+                  },
+                  "providerkey": {
+                    "image": "http://provider/image.png",
+                    "thumbnail": "http://provider/thumbnail.png",
+                    "header": "Please provide the data necessary for booking the parking space.",
+                    "legals": {
+                      "accept": [
+                        {
+                          "url": "http://www.provider.com/terms_and_conditions.html",
+                          "text": "Please accept the parking providers' %TERMS_LINK%.",
+                        }
+                      ],
+                      "show": [
+                        {
+                          "url": "http://www.provider.com/terms_and_conditions_info.html",
+                          "text": "By tapping 'Pay Now' you hereby acknowledge and agree the %TERMS_LINK% of parking space provider",
+                        }
+                      ],
+                    }
+                  }
+                }
+              }
+
+## Notification [/settings/booking/notification/{notification_key}]
+### Enable/Disable Notification [PUT /settings/booking/notification/{notification_key}]
+#### Body Parameters
++ Parameters
+    + notification_key: `entry` (enum,required)
+        A notification key
+        + Members
+            + time_to_leave
+            + near_location
+            + entry
+            + expiring
+            + over
+
++ Request (application/json)
+    + Attributes
+        + `enabled`: true (boolean,required) - The value for the notification key.
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 204
+    Updated successfully.
+    + Body
+
++ Response 304
+    Value of notification was not modified.
+    + Body

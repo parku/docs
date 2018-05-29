@@ -1,0 +1,2129 @@
+FORMAT: 1A
+HOST: https://sandbox.test.parku.io/v5
+CURL_HOST: https://sandbox.test.parku.io/v5
+CURL_OPTIONS: --insecure
+RESPONSE_ATTRIBUTE_LEVELS: 4
+DATA_STRUCTURE_LEVELS: 1
+LOGO: images/logo_parku.png
+
+# Parku API v5 Reference
+
+The parku API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and to use
+HTTP response codes to indicate API errors. We use built-in HTTP features, like HTTP authentication and HTTP verbs,
+which can be understood by off-the-shelf HTTP clients. JSON will be returned in all responses from the API,
+including errors.
+
+### Versions
+- previous: [v4](v4.html)
+- latest stable: __v5__
+
+#### Changes in v5
+- Replaced locations model with an hierarchical one. This affects the [Locations Endpoint](#locations-locations) and
+  [Bookings Endpoint](#bookings-bookings). Find the description of the new model at:
+  + [Location Model](#location-model)
+  + [Parking Space Group Model](#parking-space-group-model)
+  + [First Level Cluster Model](#first-level-cluster-model)
+  + [Second Level Cluster Model](#second-level-cluster-model)
+- extended [booking model](#booking-model) with `type`, `zone` and `payment`
+- added [onstreet](#onstreet) endpoint
+- added [stop a booking](#stop-a-booking)
+- added [user payment methods](#user-user-payment-methods)
+
+- `voucher` endpoint removed
+
+#### Api definition files
+- [Swagger definition](generated/v5.swagger.json) (readable by [Postman](https://www.getpostman.com/))
+- [Api Blueprint](generated/v5.apib)
+# Group Attributes
+
+## Attributes [/attributes]
+Access needs a __private key__.
+
+### Create a new Attribute [POST /attributes{?key,value}]
++ Request (application/json)
+    + Attributes
+        + key: adac (string, required) - The name of the attribute. Currently only 'adac' and 'test' are allowed
+        + value: 12345 (string, required) - The value of the attribute, eg. a membership number
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Body
+
+            {
+              "id": 32,
+              "key": "adac",
+              "value": "12345"
+            }
+
+### Retrieve an Attribute [GET /attributes/{attribute_id}]
+
++ Parameters
+    + attribute_id: 32 (int, required) - The identifier of the attribute to be retrieved
+
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Body
+
+            {
+              "id": 32,
+              "key": "adac",
+              "value": "12345"
+            }
+# Group Authentication
+
+## Http Basic Auth
+Authentication to the API occurs via HTTP Basic Auth. Provide your API key as the basic auth username.
+The password is always parku.
+All API requests must be made over HTTPS. Calls made over plain HTTP will fail.
+You must authenticate for all requests.
+
+### Example
+Curl using HTTP Basic Auth with username and password for the public token `012345678abcdef`:
+```
+$ curl -u 012345678abcdef:parku http://sandbox.test.parku.io/v5/
+```
+
+Same request, directly using the username and password from above encoded into Base64 inside the basic auth header:
+```
+$ curl -H 'Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1' http://sandbox.test.parku.io/v5/
+```
+
+## Private and public tokens
+There are two types of tokens: public and private. Public tokens are used to obtain publicly available
+information (eg. parking spaces). Private tokens are used to identify users.
+Whenever user information are requested or bookings on behalf of a user is made, the private key is necessary.
+
+## Retrieving a private token
+You retrieve a user specific private key by logging in as a user.
+
+## Private vs. public urls
+For the public urls you need a public key. With a private key you can access public urls.
+# Group Bookings
+
+## Bookings [/bookings]
+Access needs a __private key__.
+
+### Create a new Booking [POST /bookings{?location_id,date_start,date_end,license_plate,phone_number,provider,provider_info,status,required_fields}]
++ Request (application/json)
+    + Attributes
+        + `group_id`: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) -
+            The ID of the location you get returned from the locations request
+        + `date_start`: `2016-10-27T09:10:20+00:00` (string, required) - start date and time of the booking. The minutes part of the time has to be a multiple of 15 and seconds have to be 00.
+        + `date_end`: `2016-10-27T10:10:20+00:00` (string, required) - end date and time of the booking. The minutes part of the time has to be a multiple of 15 and seconds have to be 00.
+        + `license_plate`: `B-AB 1234` (string, required) - The license plate of the used car.
+            Get all cars of a user from the [cars](#user-cars-get) request.
+        + `phone_number`: `+493057701872` (string, required) - The phone number.
+            Get all phone numbers of a user from the [phone_numbers](`#user-phone_numbers-get`) request.
+        + payment (array[Pre Booking Payment Input], optional)
+          The payments to use for paying (optional). This can be credits, coupons,
+          paypal and braintree payments that have been authorized on the frontend.
+        + payment_method (Used Payment Method Input, optional)
+          The payment method to use for paying. This method will be used for paying the fee of the booking
+          after all payments from the `payments` field have been applied. E.g. if you provided a 5 Euro
+          voucher via `payments`, the payment method will be used on 5 Euro less than the actual booking fee.
+        + `required_fields` (object) - Parking space required fields defined in the locations request. The required fields should contain all required fields defined in location. All values should be sent as strings.
+            + car_color: `red` (string, optional) - the car color
+            + number_of_passengers: `5` (string, optional) - the number of passengers
+        + user_metadata (User Metadata Input, optional)
+          Additional information about a user (optional). This is for example latitude/longitude parameters
+          for the users current position.
+
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 201 (application/json)
+    + Attributes (Booking)
+
+### Retrieve a Booking [GET /bookings/{reference}]
+Retrieves the details of an existing booking. You need to supply either the id or the reference of a booking.
+
++ Parameters
+    + reference: `005c4826-4e28-11e3-a675-d43d7eece53d` (string, required) - The id or code of the booking
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (Booking)
+
+### Update a Booking [PUT /bookings/{booking_id}]
+Updates the booking by setting the values of the parameters passed. Any parameter not provided will be left unchanged.
+
++ Parameters
+    + booking_id : `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
++ Request  (application/json)
+    + Attributes
+        + `license_plate`: `B-BC 4567` (string, optional) -
+            refer to the description of [`Create a new Booking`](#bookings-bookings-post)
+        + `phone_number`: `+493057701871` (string, optional) -
+            refer to the description of [`Create a new Booking`](#bookings-bookings-post)
+        + `date_end`: `2016-10-27T17:00:00+0000` (string, optional) -
+            refer to the description of [`Create a new Booking`](#bookings-bookings-post)
+        + payment (array[Pre Booking Payment Input], optional)
+            The payments to use for paying (optional). This can be credits, coupons,
+            paypal and braintree payments that have been authorized on the frontend.
+        + payment_method (Used Payment Method Input, optional)
+            The payment method to use for paying.
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200
+    + Attributes (Booking)
+
+
+### Cancel a Booking [DELETE /bookings/{booking_id}]
+
++ Parameters
+    + booking_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string, required) - the booking id
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200
+    + Attributes (Booking)
+
+### List bookings [GET /bookings{?count,offset,date_start,date_end,status,type}]
+
++ Parameters
+    + count: 3 (number, optional) - A limit on the number of objects to be returned.
+        Count can range between 1 and 100 items.
+        + Default: 10
+    + offset: 10 (number, optional) - An offset into the list of returned items.
+        The API will return the requested number of items starting at that offset.
+        + Default: 0
+    + status: active (enum, optional) - Filter bookings for status.
+        + Members
+            + all
+            + active
+            + cancelled
+            + running
+            + finished
+        + Default: all
+    + type: all (enum, optional) - Filter bookings for their type
+        + Members
+            + all
+            + offstreet
+            + onstreet
+        + Default: all
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+     + Attributes (array[Booking])
+
+### Stop a Booking [POST /bookings/{booking_id}/stop]
+Stops and pays a booking.
+
+Currently supports stopping onstreet bookings only.
+
++ Parameters
+    + booking_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (string,required) - the booking id
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (Booking)
+        + `payment_urls` (object) - urls for user to visit for doing the payment, currently only available for `ideal`
+            + `urls` (object)
+                + `entrance`: `http://www.ideal.nl/asdf1234`(string)
+                + `success`: `http://www.ideal.nl/asdf1234`(string)
+                + `cancel`: `http://www.ideal.nl/asdf1234`(string)
+                + `failure`: `http://www.ideal.nl/asdf1234`(string)
+                + `pending`: `http://www.ideal.nl/asdf1234`(string)
+
+# Data Structures
+
+## Booking (object)
++ `id`: `005c4826-4e28-11e3-a675-d43d7eece53d` (string)
++ `license_plate`: `B-AB 1234` (string)
++ `phone_number`: `+493057701872` (string)
++ `reference`: `HRS5J` (string)
++ `date_start`: `2016-10-27T10:00:00+0000` (string)
++ `date_end`: `2016-10-27T16:30:00+0000` (string)
++ `price` (Booking Price)
++ `post_booking_info`: `Please get the key at the reception.` (string, nullable) - information to show the renter after a successful booking
++ `violation` (Violation Dummy)
++ status: active (string) - status of the booking, can be `active` or `canceled` for `offstreet` bookings and `running`, `finished` or 'canceled' for `onstreet` bookings
++ `type`: `location` (enum) - the booking type
+    + Members
+        + offstreet
+        + onstreet
++ `group_id`: `123c4826-4e28-11e3-a675-d43d7eece53d` (string) - the id of the booked parking space group
++ `parking_space_code`: `ABCDE` (string) - the code of the booked parking space
++ `location` (Location) - the location that was booked, only available if `type` is `offstreet`.
++ `zone` (Parking Zone Base Data) - the zone that was booked, only available if `type` is `onstreet`.
++ `extend` (array[Booking Extend Times])
+
+## Booking Extend Times (object)
++ `date_start`: `2016-10-27T10:00:00+0000` (string) - start date of the extended booking
++ `date_end`: `2016-10-27T12:00:00+0000` (string) - end date of the extended booking
++ `minutes`: 60 (number) - length of extension in minutes
++ `price`: 125 (number) - price of the extension
++ Include Currency
+
+## Violation Dummy (object)
++ id: `005c4826-4e28-11e3-a675-d43d7eece53d` (string) - violation id
+
+## Booking Price (object)
++ `total`: `425` (number, nullable) - the overall amount to pay for the booking
++ `parking_fee`: `375` (number) - the transaction fee included in `amount`
++ `transaction_fee`: `25` (number) - the transaction fee included in `amount`
++ `payment_provider_fee`: `25` (number) - the payment provider fee included in `amount`
++ Include Currency
+
+## User Metadata Input (object)
++ `latitude`: `52.521381` (number, optional) - users latitude
++ `longitude`: `13.3920158` (number, optional) - users longitude
++ `device`: `ford` (enum, optional) - 3rd party device associated with the booking
+  + Members
+    + ford
+# Group Cars
+
+## Cars [/cars]
+Access needs a __private key__.
+
+### List all cars [GET /cars]
+Returns a list of all cars of the user. The cars are returned sorted by creation date,
+with the most recently created car appearing first.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 201 (application/json)
+    + Body
+
+            [
+              {
+                "id": 22,
+                "vehicle": "Ducati Monster S4Rs",
+                "license_plate": "ABCDE1234",
+                "country": "DE"
+              },
+              {
+                "id": 21,
+                "vehicle": "Harley Davidson FortyEight 1200",
+                "license_plate": "ABCDE2345",
+                "country": "DE"
+              },
+              {...},
+              {...}
+            ]
+
+### Create a new Car [POST /cars{?license_plate,vehicle,country}]
+You can store multiple cars for a user.
+
++ Request (application/json)
+    + Attributes
+        + license_plate: `B-AB 1234` (string, required) - The license plate for the stored car.
+        + vehicle: Isetta (string, optional) - A name for the car to be identified easier.
+        + country: DE (enum, optional) - The country code the license plate.
+            + Members
+                + DE
+                + CH
+
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 201 (application/json)
+    + Body
+
+            {
+              "id": 23,
+              "license_plate": "B-AB 1234",
+              "vehicle": "Isetta",
+              "country": "DE"
+            }
+
+## Car [/cars/{car_id}]
+### Retrieve a Car [GET]
+
++ Parameters
+    + car_id: 23 (int, required) - The identifier of the car to be retrieved
+
++ Request
+
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Body
+
+            {
+              "id": 23,
+              "license_plate": "B-AB 1234",
+              "vehicle": "Isetta",
+              "country": "DE"
+            }
+
+### Update a Car [PUT /cars/{car_id}{?license_plate,vehicle,country}]
+Updates the car by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+
++ Request  (application/json)
+    + Attributes
+        + car_id: 23 (number, required) - The identifier of the car to be updated.
+        + license_plate: `B-AB 1234` (string, required) - The license plate for the stored car.
+        + vehicle: Polo (string, optional) - A name for the car to be identified easier.
+        + country: DE (enum, optional) - The country code the license plate.
+            + Members
+                + DE
+                + CH
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
+
++ Response 200 (application/json)
+    + Body
+
+            {
+              "id": 23,
+              "license_plate": "B-AB 1234",
+              "vehicle": "Polo",
+              "country": "DE"
+            }
+
+### Delete a Car [DELETE /cars/{car_id}]
+
++ Parameters
+    + car_id: 23 (number, required) - The identifier of the car to be deleted.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 204
+# Group Coupon
+## Coupon [/coupon]
+Access needs a __private key__.
+
+### Test a Coupon [GET /coupon/{encoded_code}{?action,amount}]
++ Parameters
+    + encoded_code: Zm9vYmFyMTIz (string, required) - A base64url encoded coupon code string.
+    + action: test (enum, required) - Action to do.
+        + Members
+            + test
+    + amount: 42 (number, required) - Amount coupon has to be tested against.
++ Request
+
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+|           |                                         |
+|-----------|-----------------------------------------|
+| code      | `string` Decoded, sanitized coupon code |
+| value     | `number` Coupons value                  |
+| deduction | `number` Amount used of coupon value    |
+    + Body
+
+            {
+              "code": "foobar123",
+              "value": 10,
+              "deduction": 10
+            }
+
++ Response 422 (application/json)
+| Code |                                         Description                                         |
+|------|---------------------------------------------------------------------------------------------|
+| 10   | "amount" is faulty, probably below 0.                                                       |
+| 30   | Coupon quota exhausted.                                                                     |
+| 31   | User usage quota for this coupon is exhausted.                                              |
+| 32   | User usage quota for a coupon is same grouping is exhausted.                                |
+| 40   | Platform (Android, iOS, web) is not enabled. Some coupons only work on specific a platform. |
+    + Body
+
+            {
+              "error": [
+                {
+                  "code": 31,
+                  "message": "Coupon usage exceeded."
+                }
+              ]
+            }
+
++ Response 404 (application/json)
+| Code |                                         Description                                         |
+|------|---------------------------------------------------------------------------------------------|
+| 20   | Coupon not found.                                                                           |
+| 21   | Coupon is inactive.                                                                         |
+| 22   | Coupon expired.                                                                             |
+| 23   | Coupon date (start or end) prohibit coupon usage.                                           |
+    + Body
+
+            {
+              "error": [
+                {
+                  "code": 20,
+                  "message": "Coupon not found."
+                }
+              ]
+            }
+# Group Devices
+Access needs a __private key__.
+
+## Devices [/devices]
+
+This endpoint is used to send the latest device identifier to the backend.
+The device identifier is used to send push notifications.
+
+Only the creation of identifiers is allowed. Retrieving is not allowed.
+
+### Create an Identifier [POST /devices{?ios_device_token,android_registration_id}]
+Send the latest device identifier to the backend.
+
+The iOS device token can change through time.
+[Apple suggests](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/IPhoneOSClientImp.html#//apple_ref/doc/uid/TP40008194-CH103-SW2)
+to send the device token every time the app launches.
+
++ Request (application/json)
+    + Attributes
+        + `ios_device_token`: `A339F8BE4F...` (string,optional) - iOS push notification identifier via APNs.
+            Full integration and how to request a push notification Device Token through Apple's APM service is accessible
+            [here](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/APNSOverview.html).
+            Device Token may be raw format or in push format.
+        + `android_registration_id`: `A339F8BE4F...` (string,optional) - Android push notification identifier via GCM.
+            Full integration and how to request a push notification Registration ID through Android's GCM service is
+            accessible [here](http://developer.android.com/google/gcm/gs.html).
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 204
+# Group Errors
+
+```nginx
+Status: 422 Unprocessable Entity
+```
+
+```json
+{
+  "error": {
+      "code": "email",
+      "message": "Booking failed."
+    }
+
+}
+```
+
+parku uses conventional HTTP response codes to indicate success or failure of an API request.
+In general, codes in the 2xx range indicate success, codes in the 4xx range indicate an error that resulted from
+the provided information (e.g. a required parameter was missing, etc.), and codes in the 5xx range indicate an error
+with parku's servers.
+
+## HTTP Status Codes Summary
+
+Code   | Description
+---    |---
+`200`  | OK - Everything worked as expected.
+`201`  | Created - Item was created successfully. The URL to the item can be found in the "Location"-Header.
+`204`  | No Content - The request was successful.
+`401`  | Unauthorized - No valid API key provided.
+`404`  | Not Found - The requested item doesn't exist.
+`422`  |  Unprocessable Entity
+`5xx`  | Server errors - something went wrong on parku's end.
+
+All error objects have _field_ properties so that your client can tell what the problem is.
+There is also an error _message_ to let you know what is wrong with the field.
+
+# Data Structure
+
+## Api Error (object)
++ code: 1001 (number) - error code
++ message: `Error description.` (string) - error message
+# Group Facebook
+Access needs a __public key__.
+
+## Facebook [/facebook]
+
+### Facebook Login [POST /facebook/login{?access_token}]
+When a new user was created through Facebook, the country is not set.
+In this case, you must ask the user for the country and [update](#user-user-put) the user profile accordingly.
+
+All further requests using the token as _HTTP Basic Auth_ username are made on behalf of the user.
+
++ Request (application/json)
+    + Attributes
+        + `access_token`: `1234...` (string,required) - The access token which is used to obtain information from Facebook.
+            The token must have the permissions to get the users email.
+        + `device_id`: `f00bar` (string, optional) - identifier for the mobile device on that the registration is done, e.g. advertisement id for Android or iOS
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200
+    + Attributes (Login Response)
+# Group Invitations
+## Invitations [/invitations/{invitation_code}]
+Access needs a __private key__.
+
+### Check Invitation Code Validity [GET /invitations/{invitation_code}]
+
++ Parameters
+    + invitation_code: `d2VsbCBkb25lISBnZXQgYSBiZWVyIG5vdyA9RA==` (string,required) - Base64 encoded invitation code.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+|       |                                                                   |
+|-------|-------------------------------------------------------------------|
+| valid | `bool` _true_, if the invitation code is valid, _false_ otherwise |
+    + Body
+
+            {
+              "valid": true
+            }
+# Group Locations
+Access needs at least a __public key__.
+
+## Locations [/locations]
+The [location model](#location-model) contains the directly location related information (e.g. street and city)
+as well as one or more parking space groups.
+
+A [parking space group](#parking-space-group-model) is a group of parking spaces with similar properties.
+Bookings are made using parking space group ids.
+
+The [location list](#list-locations) can cover a large number of locations in its response. In order to
+keep the responses reasonably fast and small that request will return a mix of locations and clusters.
+A [location cluster](#first-level-cluster-model) contains information about how many locations are in a certain area.
+
++ Attributes
+    + `Locations and Clusters Model` (Locations and Clusters)
+    + `First Level Cluster Model` (First Level Cluster)
+    + `Second Level Cluster Model` (Second Level Cluster)
+    + `Location Model` (Location)
+    + `Parking Space Group Model` (Parking Space Group)
+    + `Availability Model` (Availability)
+
+### Retrieve a Location [GET /locations/{location_id}{?date_start,date_end}]
+
++ Parameters
+    + location_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122, required) - Identifier of the location.
+    + date_start: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Used to calculate the price for a location.
+        Requires the field `date_end` to be defined. If no `date_start` or `date_end` is specified,
+        the returned `price` field will be `null`.
+    + date_end: 2016-10-27T10:10:20+00:00 (ISO 8601, optional)
+        see `date_start`.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    See [Location Model](#header-location-model)
+    + Attributes (Location)
+
++ Response 404
+Location was not found, check the location id and that your user has the correct access rights to see the location.
+    + Body
+
+
++ Response 422
+Request validation failed because the request data was malformed.
+    + Body
+
+### List Locations [GET /locations{?sw,ne,date_start,date_end,filter_available,filter_bookable,filter_type,filter_price,filter_properties,fields}]
+Returns a list of locations for a given bounding box. This request returns the highest ranking 42 locations
+in the bounding box and does not return any other locations if there are more than 42. For retrieving all locations
+in a hierarchical manner, you can use the [List Clusters](#locations-locations-get-2) request.
+
+The parameters named `filter_*` filter the returned results using the following logic:
+```
+available
+AND bookable
+AND (type1 OR type2 OR ...)
+AND (price1 OR price2 OR ...)
+AND (properties1 AND properties2 AND ...)
+```
+
++ Parameters
+    + sw: `45.74001,5.67868` (string,required) - Comma separated latitude and longitude of the southwest position.
+    + ne: `47.74236,10.24900` (string,required) - Comma separated latitude and longitude of the northeast position.
+    + date_start: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the start date.
+        `date_start` will have no effect unless `date_end` is also provided.
+    + date_end: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the end date.
+        `date_end` will have no effect unless `date_start` is also provided.
+    + filter_available: true (boolean,optional) - Filters returned locations regarding their availability if start and
+        end are also given.
+        * `true` only returns available locations
+        * `false` return all locations
+        + Members
+            + true
+            + false
+        + Default: false
+    + filter_bookable: true (boolean,optional) - Filters returned locations regarding their general bookability.
+        * `true` only returns locations that could be booked through the api if they are available
+        * `false` only returns locations that can not be booked through the api, even though they might be available
+        + Members
+            + true
+            + false
+    + filter_type: `airport-parking` (array[string],optional) - Filters the result to only show parking spaces with
+        with either of the provided types.
+        + Members
+            + `off-street`
+            + `park-and-ride`
+            + `professional-garage`
+            + `airport-parking`
+            + `harbor-parking`
+    + filter_price: (array[string],optional)
+        Filters the result to only show parking spaces with
+        either of the provided rates.
+        + Members
+            + `rate_hourly`
+            + `rate_daily`
+            + `rate_weekly`
+            + `rate_monthly`
+    + filter_properties: `indoor` (array[string],optional) - Filters the result to only show parking spaces
+        all the provided properties.
+        + Members
+            + `excess_length`
+            + `indoor`
+            + `patio`
+            + `disabled`
+            + `charging_station`
+            + `key_necessary`
+            + `long_term_booking`
+            + `surveillance`
+            + `valet_service`
+            + `barrier`
+    + fields: `all` (array[string],optional) - Response will only contain the fields mentioned in this parameter.
+        This can either be `all` or an comma separated list of field names from the response, e.g. `id,street,country`.
+
++ Request (application/x-www-form-urlencode)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes
+      + locations (array[Location])
+
+### List Clusters [GET /locations/clusters{?sw,ne,date_start,date_end,filter_available,filter_bookable,filter_type,filter_price,filter_properties,fields}]
+Returns a list of locations and clusters. Clusters are returned if there are too
+many locations to return for a specific part of the bounding box.
+You have to execute multiple hierarchical requests to get all locations from the
+clusters.
+
+The parameters named `filter_*` filter the returned results using the following logic:
+```
+available
+AND bookable
+AND (type1 OR type2 OR ...)
+AND (price1 OR price2 OR ...)
+AND (properties1 AND properties2 AND ...)
+```
+
++ Parameters
+    + sw: `45.74001,5.67868` (string,required) - Comma separated latitude and longitude of the southwest position.
+    + ne: `47.74236,10.24900` (string,required) - Comma separated latitude and longitude of the northeast position.
+    + date_start: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the start date.
+        `date_start` will have no effect unless `date_end` is also provided.
+    + date_end: 2016-10-27T10:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the end date.
+        `date_end` will have no effect unless `date_start` is also provided.
+    + filter_available: true (boolean,optional) - Filters returned locations regarding their availability if start and
+        end are also given.
+        * `true` only returns available locations
+        * `false` return all locations
+        + Members
+            + true
+            + false
+        + Default: false
+    + filter_bookable: true (boolean,optional) - Filters returned locations regarding their general bookability.
+        * `true` only returns locations that could be booked through the api if they are available
+        * `false` only returns locations that can not be booked through the api, even though they might be available
+        + Members
+            + true
+            + false
+    + filter_type: `airport-parking` (array[string],optional) - Filters the result to only show parking spaces with
+        with either of the provided types.
+        + Members
+            + `off-street`
+            + `park-and-ride`
+            + `professional-garage`
+            + `airport-parking`
+            + `harbor-parking`
+    + filter_price: (array[string],optional)
+        Filters the result to only show parking spaces with
+        either of the provided rates.
+        + Members
+            + `rate_hourly`
+            + `rate_daily`
+            + `rate_weekly`
+            + `rate_monthly`
+    + filter_properties: `indoor` (array[string],optional) - Filters the result to only show parking spaces
+        all the provided properties.
+        + Members
+            + `excess_length`
+            + `indoor`
+            + `patio`
+            + `disabled`
+            + `charging_station`
+            + `key_necessary`
+            + `long_term_booking`
+            + `surveillance`
+            + `valet_service`
+            + `barrier`
+    + fields: `all` (array[string],optional) - Response will only contain the fields mentioned in this parameter.
+        This can either be `all` or an comma separated list of field names from the response, e.g. `id,street,country`.
+
++ Request (application/x-www-form-urlencode)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
+
++ Response 200 (application/json)
+    + Attributes (Locations and Clusters)
+
+### Get availability times for location [GET /locations/{parking_space_group_id}/availability{?date_start,date_end}]
+
++ Parameters
+    + parking_space_group_id: `0e623e0a-6708-11e7-ab84-0660dadc820f` (uuid rfc4122,required) - Identifier of a parking space group.
+    + date_start: 2016-10-27T09:10:20+00:00 (ISO 8601, optional) - Start of time frame to include periods.
+        If `date_start` is provided, `date_end` is required and vice versa.
+    + date_end: 2016-10-27T10:10:20+00:00 (ISO 8601, optional)
+        see `date_start`.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200
+    Displays the availability times for a parking space group. Availability times are based on week days, but can also
+    have a specific date for their beginning and end, in which case you might get different results based on the `date_start`
+    and `date_end` parameters. All availability times that are valid between a specific begin and end date form an availability period.
+
+    The result contains the times for every weekday,
+    while weekday 1 is monday and a weekday can contain multiple non overlapping times.
+    If the availability period has no defined `begin` and `end`, then these values will be `null` and the period is
+    valid from infinite past to infinite future.
+
+    __Caution__: This is the general availablity and does not include bookings and reservations.
+
+    + Body
+
+            {
+                "begin": "2016-04-09T00:00:00+02:00",
+                "end": "2016-04-18T00:00:00+02:00",
+                "weekday_1": [{
+                  "start": "08:00",
+                  "end": "17:00"
+                }],
+                "weekday_2": [{
+                  "start": "08:00",
+                  "end": "17:00"
+                }],
+                "weekday_3": [{
+                  "start": "08:00",
+                  "end": "16:00"
+                }],
+                "weekday_4": [{
+                  "start": "08:00",
+                  "end": "16:00"
+                }],
+                "weekday_5": [{
+                  "start": "08:00",
+                  "end": "18:00"
+                }],
+                "weekday_6": [{
+                  "start": "08:00",
+                  "end": "17:00"
+                }],
+                "weekday_7": [{
+                  "start": "08:00",
+                  "end": "17:00"
+                }]
+            }
+
+### Retrieve Terms and Conditions [GET /locations/{location_id}/terms]
+
+_Deprecated_ This endpoint is deprecated. `/settings` endpoint should be used instead.
+
+Each location can have different terms and conditions.
+With this endpoint you can retrieve location based terms and conditions.
+
++ Parameters
+    + location_id: `00cd7cfd-e42d-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - Identifier of the location.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/xhtml+xml)
+    + Body
+
+            <!DOCTYPE html>
+              <html xmlns="http://www.w3.org/1999/xhtml"...
+
+# Data Structures
+## Locations and Clusters (object)
++ clusters (array[First Level Cluster]) -
+    A cluster contains meta information about the locations inside a specific area. The cluster itself contains 2 levels.
+    The first level groups the second level clusters that are given by the field `includes`.
+
+    First level clusters are great for display on maps as we make sure that those clusters have a certain distance to
+    each other.
+
+    Second level clusters are great for being displayed in a list as they all have a distinct name and a parent
+    city/country that can be used for grouping them. These clusters work on 3 predefined levels:
+        - postcode: contains only locations with same postcode
+        - city: contains only locations in same city
+        - country: contains only locations in same country
+    Which level is returned depends on the bounding box size of your request.
++ locations (array[Location])
+
+## First Level Cluster (object)
++ title: `13405` (string)A presentable and translated title for the cluster. The content depends on `type`.
++ type: `postcode` (enum)The type of cluster.
+    + Members
+        + postcode
+        + city
+        + country
++ count: 4 (number) - The number of locations inside the cluster.
++ `center_latitude`: `52.528809357143` (number) - Latitude of the cluster center.
++ `center_longitude`: 13.379654547619 (number) - Longitude of the cluster center.
++ `sw_latitude`: 52.505681 (number) - South west corner latitude of the cluster bounding boxes.
++ `sw_longitude`: 13.285105 (number) - South west corner longitude of the cluster bounding boxes.
++ `ne_latitude`: 52.576979 (number) - North east corner latitude of the cluster bounding boxes.
++ `ne_longitude`: 13.47168 (number) - North east corner longitude of the cluster bounding boxes.
++ includes (array[Second Level Cluster]) - List of second level clusters contained in this cluster.
+
+## Second Level Cluster (object)
++ title: `10115` (string)A presentable and translated title for the cluster. The content depends on `type`.
++ type: `postcode` (enum)The type of cluster.
+    + Members
+        + postcode
+        + city
+        + country
++ count: 4 (number) - The number of locations inside the cluster.
++ `center_latitude`: `52.528809357143` (number) - Latitude of the cluster center.
++ `center_longitude`: 13.379654547619 (number) - Longitude of the cluster center.
++ `sw_latitude`: 52.505681 (number) - South west corner latitude of the cluster bounding boxes.
++ `sw_longitude`: 13.285105 (number) - South west corner longitude of the cluster bounding boxes.
++ `ne_latitude`: 52.576979 (number) - North east corner latitude of the cluster bounding boxes.
++ `ne_longitude`: 13.47168 (number) - North east corner longitude of the cluster bounding boxes.
++ `city`: `Berlin` (string) - parent city the cluster belongs to, only shown if the cluster `type` is `postcode`
++ `country`: `Deutschland` (string) - parent country the cluster belongs to, only shown if the cluster `type` is `postcode` or `city`
+
+## Location (object)
++ `id`: `e644e4bc-4c5c-11e4-a24a-d43d7eecedd2` (string) - unique identifier of the location used for referencing.
++ `address_slug`: `dorfstrasse-11` (string)street name and number of the location in url address format
++ `latitude`: `52.60826` (number) - latitude part of the location geo coordinate
++ `longitude`: `13.19988` (number) - longitude part of the location geo
++ `street`: `Dorfstraße` (string) - the street name of the location without number
++ `street_number`: `11` (string) - the street number of the location
++ `postcode`: `16761` (string) - post code of the location
++ `city`: `Hennigsdorf` (string) - city of the location
++ `country`: `Deutschland` (string) - country of the location in 2 character encoding  country of the location in 2
+    character encoding
++ `bookable`: `true` (boolean) -  `true` if that locations can be booked via the parku API, `false` if the location
+    is purely providing information
++  payment (object) - available payment methods and types for the current user in this location. The payment methods and types depend on the private key of the logged in user. For locations requests using public keys these arrays will be empty.
+    + methods (array) - Possible payment methods for this location and user
+        + (enum)
+            + paypal
+            + credits
+            + coupon
+            + braintree
+            + ideal
+    + types (array) - Possible payment types for this location and user
+        + (enum)
+            + post
+            + immediate
++ availability (Availability) - describes the availability of the location in relation to the request
++ `parking_space_groups` (array[Parking Space Group]) - different parking space groups for this location. See [Parking Space Group Data](#header-parking-space-group-data)
++ gates (array[Gate]) - the gates connected to the location
+
+## Gate (object)
++ type: `qrcode` (enum) - the type how the gate can be opened
+    + Members
+        + qrcode
+        + beacon
++ identifier: `PARKU3KU` (string) - the identifier for the access method, a short identification string for `qrcode` and the bluetooth id for `beacon`
++ `car_entrance`: true  (boolean) - wether this gate is an entrance usable by cars
++ `car_exit`: false  (boolean) - wether this gate is an exit usable by cars
++ `pedestrian_entrance`: false  (boolean) - wether this gate is an entrance usable by pedestrians
++ `pedestrian_exit`: false  (boolean) - wether this gate is an exit usable by pedestrians
++ gateways (array[Gateway])
+
+## Gateway (object)
++ type: `api` (enum) - the type of gateway
+    + Members
+        + api
+        + box
++ name: `PRK-123` (string) - the name of the box if `type` is `box`
+
+## Parking Space Group (object)
++ `id`: `1644c5dc-4c5c-11e4-a24a-d43d7eecedd2` - unique identifier of the location used for referencing.
++ `type`: `off-street` (enum) - describes the type of location and can be one of the following.
+    + Members
+        + `off-street`
+        + `park-and-ride`
+        + `professional-garage`
+        + `airport-parking`
+        + `harbor-parking`
++ `description`: `Doppelparkplatz. Jedoch nur für ein Auto zu vermieten.` (string)
++ `image_urls`: `https://parku.de/images/parkingspace/020a81f5-c8b9-11e4-bfd2-d43d7eece658/640x286.jpg` (array[string]) - urls of location images, can be **empty**
++ `options` (array) - describes which options are available at the location and can contains each of the following elements. The list can be **empty**.
+    + (enum)
+      + `excess length` - the parking space can be used by cars with a small trailer
+      + indoor - the parking space has a roof or can be an underground garagethe parking space has a roof or can be an underground garage
+      + disabled - parking space is accessible for disabled peopleI
+      + patio - the parking space is located at an inner courtyard the parking space is located at an inner courtyard
+      + barrier - parking space has a barrier and user needs a smartphone to open it parking space has a barrier and user needs a smartphone to open it
+      + `charging station` - parking space with an electric vehicle charging station
+      + `key_necessary` - parking space can only be accessed with a keyparking space can only be accessed with a key
+      + `long_term_booking` - parking space is bookable for longer time period
+      + `surveillance` - parking space has surveillance
+      + `valet_service` - parking space contains valet serviceparking space contains valet service
++ `support` (object)
+    + `phone_number`: `+493012064329` - returns the support center phone number for this location
++ `price` (Location Price)
++ `user_owned`: false (boolean) - `true` if the user who requested the location is also the owner of the parking space. This allows to determine if the user could block the parking space from bookings.
++ `settings` (object) - provides booking requirements for the location. The settings of a location are used in favor of the global settings that can be found in the settings endpoint.
+    + `bookable_range_start`: `-15` (number) - start of the range wherein a booking is allowed in minutes from now.
+    + `bookable_range_end`: 43200 (number) - end of the range wherein a booking is allowed in minutes from now. end of the range wherein a booking is allowed in minutes from now.
+    + `booking_duration_min`: 30 (number) - minimum duration of a booking in minutes.
+    + `booking_duration_max`: 43200 (number) - maximum duration of a booking in minutes.
++ `required_fields` (array) - lists all additionally required fields when creating a booking for this location, can be **empty** if no fields are required. The field names correspond to the `booking.fields.*` entries in the settings endpoint which can be used for retrieving translated strings for these fields.
+    + (enum)
+        + car_registration_number
+        + car_make
+        + car_model
+        + car_colour
+        + number_of_passengers
+        + car_dropoff_time
+        + car_pickup_time
+        + outbound_flight_terminal
+        + outbound_flight_number
+        + inbound_flight_number
+        + outbound_flight_time
+        + inbound_flight_time
+        + user_mobile_number
+        + ship_name
+        + pier_name
+        + child_seat_required
+        + additional_services
+        + inbound_flight_terminal
++ provider: parku (enum) - names the parking space provider. Additional information(terms and conditions, logo, ...) about the provider can found be using the provider key from the field in [settings](/api/settings/)
+    + Members
+        + parku
+        + holidayextras
+        + inrix
++ availability (Availability) - describes the availability of the group in relation to the requestdescribes the
+    availability of the group in relation to the request
+
+## Availability (object)
++ `current`: 0 (number) - the number of parking spaces available in the group for the requested time period defined
+    by `start` and `end`the number of parking spaces available in the group for the requested time period defined by
+    `start` and `end`
++ `maximum`: 1 (number) - the overall number of parking spaces at this group the overall number of parking spaces at
+    this group
++ `next_start`: `2016-...15:00:..` (string) - the start of the next from now slot in which a parking space in this
+    group is free and bookable, can be in the past
++ `next_end`: `2016-...15:00:..` (string) - the end of the next slot from now in which a parking space in this group
+    is free and bookable, can be in the past
+
+## Location Price (object)
++ `total`: 150 (number) - the total price for booking a parking space of this group if `start` and `end` was provided, null otherwise.
++ Include Currency
++ `period`: `timeframe` (enum) - contains the period for how long the price is valid, can be **null** if `start` or `end` was not provided
+    + Members
+      + timeframe
+      + day
+      + week
+      + month
++ `rate_hourly`: 10 (number) - shows the price for per hour
++ `rate_daily`: 100 (number) - shows the price per day
++ `rate_weekly`: 300 (number) - shows the price per week
++ `rate_monthly`: 1500 (number) - shows the price per month
+# Group Login
+## Login [/login]
+Access needs a __public key__.
+
+### Login [POST /login{?email,password}]
+
+Checks the given credentials email and password for validity.
+Returns the user object with a user token needed for private endpoints. A public key is needed.
+All further requests using the token as HTTP Basic Auth username are made on behalf of the user.
+
+Login through Facebook is described in a separate endpoint.
+
++ Request
+    + Attributes
+        + `email`: `test@example.com` (string,required) - The users email address.
+        + `password`: `1234pwd` (string,required) - The users password.
+
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200
+    + Attributes (Login Response)
+
+# Data Structures
+
+## Login Response (object)
++ code: KFJ32 (string) - customer code
++ gender: male (enum[string]) - customer gender
+    + Members
+        + male
+        + female
++ email: `test@example.com` (string) - customer email
++ firstname: Max (string) - customers first name
++ lastname: Power (string) - customers last name
++ credit: 10650 (number) - customers credit as integer number
++ Include (Currency)
++ country: CH (string) - country code of the customers origin country
++ facebook_id: 100006987966349 (string) - customers facebook id if available
++ cars (array[Car])
++ `phone_numbers` (array[Phone Number])
++ attributes (array[Attribute])
++ token: ce35e3504183c2f52f58263ce11004e0 (string) - private user token
+
+## Car (object)
++ id: 12 (string) - car id
++ `license_place`: `B-AB 1234` (string) - the cars license plate
++ vehicle: Isetta (string) - the car type
++ country: DE (string) - the cars country if available
+
+## Phone Number (object)
++ id: 16696 (string) - phone number id
++ `phone_number`: `099028-237489` (string) - the actual number
+
+## Attribute (object)
++ id: 1 (string) - attribute id
++ key: adac (string) - the key of the attributes
++ value: 1234567890 (string) - the value of the attribute
+# Group Onstreet
+
+## Onstreet [/onstreet]
+
+### Retrieve Onstreet Zone Information [GET /onstreet{?lat,lon}]
+Access needs at least a __public key__.
+
+This request returns parking zone information about a specific point on the map.
+
++ Parameters
+    + lat: 53.12341234 (number,required) - latitude of the requested point
+    + lon: 13.12341234 (number,required) - longitude of the requested point
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (Parking Zone)
+
++ Response 404 (application/json)
+Returned when there is no zone available at this latitude/longitude.
+    + Body
+
+### Start an Onstreet Booking [POST /onstreet/start]
+Access needs at least a __private key__.
+
+Bookings can be stopped using the [Stop a Booking](#stop-a-booking) action.
+
+The request requires some of the values that were received by the
+[Retrieve Onstreet Zone Information](#retrieve-onstreet-zone-information) request.
+These values are checked against the booking that is started with the onstreet provider to ensure that the pricing
+is as expected. The optional attributes of the parking zone object here are mainly used for logging.
+
++ Request (application/json)
+    + Attributes
+        + `zone` (Parking Zone Input, required) - the parking zone object to start the booking on
+        + `payment_method` (Used Payment Method Input, required) - information about payment method.
+        + `license_plate`: `AB 1234` (string, required) - the license plate of the car used for parking
+        + `phone_number`: `01234567890` (string, required) - the customer phone number
+        + `duration_minutes`: `15` (number, optional) - the parking duration, required if the retrieved zone had entries in the `available_durations` field.
+        + `user_metadata` (User Metadata Input, optional)
+          Additional information about a user (optional). This is for example latitude/longitude parameters
+          for the users current position.
+
++ Response 201 (application/json)
+    Returned if a booking was created
+    + Attributes (Booking)
+
++ Response 404
+Returned if parking zone was not found, or it is already booked.
+    + Body
+
++ Response 422
+Returned if either one of the provided zone fields didn't match or the payment information was not processable.
+    + Body
+
+# Data Structures
+
+## Parking Zone Input (object)
++ id: `101012` (string, required) - the parking zone id
++ latitude: 53.12341234 (number, required) - latitude of the requested point
++ longitude: 13.12341234 (number, required) - longitude of the requested point
+
+## Parking Zone Base Data (Parking Zone Input)
++ name: `Berlin 101012` (string, optional) - the parking space zone name
++ hours: `Mon-Fri, 08:00 - 22:30` (string, optional) - the translated availability time in this zone
++ price (Zone Price, required) - information about the price for this zone
++ max_datetime_end: `2009-06-30T18:30:00+02:00` (string, required) - Latest time when a booking has to end. Bookings that are not stopped after this time will be automatically stopped on backend side.
++ duration_max_minutes`: 760 (number, required) - Maximum time the booking can be running in minutes. Bookings that are not stopped after this amount of time will be automatically stopped on backend side.
+
+## Parking Zone (object)
++ Include Parking Zone Base Data
++ `available_durations`: 15,30,45 (array[number]) - array containing the possible parking durations.
++ `available_payment_methods`: `28aded77-138f-11e7-bae4-0242ac120005` (array[string]) - list of payment method ids that can be used to pay for a booking in this zone.
++ `currently_valid`: true (boolean) - defines it is valid to book the zone at the current point in time, if this is `false` that means that that you are out of the opening hours of the zone.
+
+## Zone Price (object)
++ description: `15 Min. gebührenfrei, danach 50 Cent pro 30 Min.` (string) - description of the price
++ Include Currency
+
+## Currency (object)
++ `currency` (enum) - the currency of the price
+  + Members
+    + EUR
+    + CHF
+# Group Password
+## Password [/password]
+
+### Update password [PUT /password]
+Access needs a __private key__.
+
++ Request
+    + Attributes
+        + `old_password`: pwd123 (string,required) - The current active password.
+        + `new_password`: pwd321 (string,required) - The new password.
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 204
+
+### Reset password [GET /password{?for}]
+Access needs a __public key__.
+
+This sends an email with the newly set password to the users email address.
+
++ Parameters
+    + for: `test@example.com` (string,required) - A valid email address of the user.
+
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 204
+
++ Response 404
+The given email address is not found in the database.
+    + Body
+# Group Payment
+## Payment [/payment]
+Access needs a __private key__.
+
+### List Credit Cards [GET /payment/creditcards]
+Shows all credit cards the user used before.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Body
+
+            [
+                {
+                    "id": "gphsyb",
+                    "type": "Visa",
+                    "number": "400934******1881",
+                    "expiration_date": "05/2020",
+                    "image_url": "https://assets.braintreegateway.com/payment_method_logo/visa.png?environment=sandbox&merchant_id=8fbxty8dhjmy8g4j"
+                },
+                {
+                    "id": "6tvts6",
+                    "type": "Visa",
+                    "number": "411111******1111",
+                    "expiration_date": "01/2014",
+                    "image_url": "https://assets.braintreegateway.com/payment_method_logo/visa.png?environment=sandbox&merchant_id=8fbxty8dhjmy8g4j"
+                }
+            ]
+
+### Delete a Credit Card [DELETE /payment/credit_cards/{credit_card_id}]
+
++ Parameters
+    + credit_card_id: gphsyb (string,required) - The identifier of the credit card to delete.
+        You'll receive a list of the users credit cards through the `GET /payment/creditcards` request.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 204
+
+# Data Structure
+## Pre Booking Payment Input (object)
++ `type`: paypal (enum[string], required) - The payment method.
+    + Members
+        + paypal - pay by paypal
+        + credit - pay by credit
+        + braintree - pay by braintree
++ amount: 1200 (number, required) - The amount to pay with this method as an integer where `amount = 100 * decimal_amount`.
++ `payload`: `PAY-1CM399047K4649003KM4WJQQ` (string, optional) -
+    The information of the payment provider to perform a payment.  Required for `paypal` and `braintree`.
+
+    The field `provider_info` should contain required payment information.
+    Typically you just forward the info from your request to the payment provider into this field.
+
+    * **PayPal**
+        You can either use the complete PayPal response or just add the payment ID:
+        ```
+        payments.payload=PAY-1CM399047K4649003KM4WJQQ
+        ```
+    * **Braintree**
+        There are two ways to pay with braintree:
+        1. _CreditCard-ID_
+
+            Retrieve the Card ID through the payment endpoint and add it to the request:
+
+            ```
+            payments.payload[id]=gphsyb
+            ```
+        2. _CreditCard Credentials_
+
+            ```
+            payments.payload[number]=EncryptedCreditCardNumber
+            payments.payload[expiration_date]=EncryptedExpirationDate
+            payments.payload[cvv]=EncryptedCvv
+            ```
+## Payment Method Input (object)
++ `primary`: `true` (boolean, optional)
+    Wether the payment method should be activated as the users primary payment method.
+    If another payment method of the user was set to be the primary method before,
+    that one will be be changed to not be the primary one anymore.
+    + Default: false
++ provider_type: stripe (enum[string], required) - provider type
+    + Members
+        + stripe
++ One Of
+    + provider (Stripe Payment Method Input, required) - provider information
+
+## Payment Method Update Input (object)
++ `primary`: `true` (boolean, optional)
+    Wether the payment method should be activated as the users primary payment method.
+    If another payment method of the user was set to be the primary method before,
+    that one will be be changed to not be the primary one anymore.
+    + Default: false
+
+## Stripe Payment Method Input
++ `source_id`: `tok_1234567890` (string, required)
+    the stripe source token for a credit card or a token representing a credit
+    card as returned by various stripe libraries, see https://stripe.com/docs/checkout
+
+## Used Payment Method Input (object)
++ id: `1000bb3e-506d-11e5-9781-d43d7eece658` (string, optional) - the payment method id,
+    only needed if type is `immediate`
++ type: post (enum[string], required) - How to execute the payment. Currently only immediate
+    payments are supported.
+    + Members
+        + immediate
+
+## Payment Method (object)
++ id: `1000bb3e-506d-11e5-9781-d43d7eece658` (string) - the payment method id
++ created_at: `2009-06-30T18:30:00+02:00` (string) - date when the payment method was created
++ primary: true (boolean) - wether this is the primary payment method of the user
++ validated: successful (enum[string]) -
+    Wether the payment method was already validated successfully. Non validated payment methods cannot be used for paying.
+    + Members
+        + successful
+        + failed
+        + pending
++ provider_type: stripe (enum[string], required) - provider type
+  + Members
+    + stripe
++ One Of
+    + provider (Stripe Payment Method) - payment using stripe
++ `fee`
+    + `percent`: `1.4` (number) - the payment provider fee percentage. This percentage is added on top of the overall booking cost. The overall booking cost is calculated by `booking_fee + booking_fee * fee_percentage + fee_fixed`.
+    + `fixed`: 25 (number) - fixed payment provider fee.
+    + `minimum_total`: 50 (number) - minimum total amount for a booking transaction. If a booking is cheaper than this, the payment provider fee will be adapted.
+
+
+
+## Payment (Payment Method)
++ amount: `5.35` (number)
+
+## Stripe Payment Method (object)
++ `customer_id`: `cus_123456789` (string, required) - stripe customer id
++ `source_id`: `card_123456789` (string, required) - stripe source id
++ `instrument_type`: `credit_card` (string, required) - type of payment instrument used for charging
++ One Of
+    + `instrument` (Credit Card Payment Method, required) - the credit card information
+
+## Credit Card Payment Method (object)
++ number: 6789 (string, required) - last 4 digits of credit card
++ type: `Visa` (string, required) - card type as defined by `brand` at https://stripe.com/docs/api#card_object
++ `expire_month`: 12 (number, required) - expiration month of the credit card
++ `expire_year`: 2067 (number, required) - expiration year of the credit card
++ country: DE (string, required) - two letter ISO code representing the country of the card
++ `cvc_check`: pass(enum, required) - result of the cvc check if cvc was provided
+    + Members
+        + pass
+        + fail
+        + unavailable
+        + unchecked
+# Group Phone Numbers
+Access needs a __private key__.
+
+## Phone Numbers [/phone_numbers]
+### List all Phone Numbers [GET /phone_numbers]
+Returns a list of all phone numbers of the user.
+The phone numbers are returned sorted by creation date, with the most recently created phone number appearing first.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Body
+
+            [
+              {
+                "id": 150,
+                "phone_number": "+493057701872"
+              },
+              {
+                "id": 149,
+                "phone_number": "+493057701871"
+              },
+              {...},
+              {...}
+            ]
+
+### Create a New Phone Number [POST /phone_numbers]
+You can store multiple phone numbers for a user.
+
+#### Body Parameters
++ Request (application/json)
+    + Attributes
+        + `phone_number`: `+493057701873` (string,required) - The phone number.
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": "151",
+                "phone_number": "+493057701873"
+            }
+
+## Phone Number [/phone_numbers/{phone_number_id}]
+### Retrieve a Phone Number [GET /phone_numbers/{phone_number_id}]
+
++ Parameters
+    + phone_number_id: 151 (number,required) - The identifier of the phone number to be retrieved.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Body
+
+            {
+              "id": 151,
+              "phone_number": "+493057701873"
+            }
+
+### Update a Phone Number [PUT /phone_numbers/{phone_number_id}]
+#### Body Parameters
++ Request (application/json)
+    + Attributes
+        + phone_number_id: 151 (number,required) - The identifier of the phone number to be updated.
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Body
+
+            {
+              "id": 151,
+              "phone_number": "+493057701874"
+            }
+
+### Delete a Phone Number [DELETE /phone_numbers/{phone_number_id}]
++ Parameters
+    + phone_number_id: 151 (number,required) - The identifier of the phone number to be deleted.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200
+# Group Prices
+
+All fields that are money value related are given as integer values. Typically this is user credits, amounts in payments, booking prices and location prices.
+If not otherwise stated, these prices are converted to float values using an exponent of -2: `float_value = int_value * 10 ^ (-2)`
+# Group Sesam
+Access needs a __private key__.
+
+## Sesam Actions [/sesam/{sesam_id}]
+
+This endpoint is used to open gates and barriers. A private key is needed.
+The user scans a QR code which is attached somewhere near the gate or barrier.
+The QR code contains an URL: http://parku.ch/s/1234abcd or http://parku.de/s/1234abcd.
+
+The part after the last / (slash) represents the sesam ID.
+You have to parse the URL and create an API call with the sesam ID.
+
+![QR code 1](images/qr1.png) ![QR code 2](images/qr2.png)
+
+_Both QR codes are valid and activate a sesam device in the parku office._
+
+### Open Sesam [PUT /sesam/{sesam_id}]
+
++ Parameters
+    + sesam_id: 1234abcd (string,required) - The sesam ID which is hidden in the QR code.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 204
+    Everything went fine. The gate/barrier connected to the sesam device should open in the next few seconds.
+    + Body
+
++ Response 404
+    The QR code is not valid. Either it is not a parku QR code or the QR code is outdated.
+    + Body
+
++ Response 401
+    The code is valid, but the user does not have the permissions to use this sesam device.
+    Either no booking is made or the time for opening the sesam has expired.
+    + Body
+
+## Sesam [/sesam]
+### Check Sesam [GET /sesam]
+This endpoint gives you the information whether the user can open a sesam device now or in the near future.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    Returned if a booking with a sesam device is available.
+    + Body
+
+            {
+              "support": {
+                "phone_number": {
+                  "phone_number": "+49 123 456 789"
+                }
+              }
+            }
+
++ Response 404
+    No booking with a sesam device available.
+    + Body
+# Group Settings
+## Settings [/settings]
+Access needs at least a __public key__.
+### Retrieve Settings [GET /settings{?lat,lon}]
+
+This endpoint exposes the global settings for the ParkU-platform.
+Changing the settings is not possible.
+
++ Parameters
+    + lat: `52.53568811` (float,optional) - Latitude of current location.
+    + lon: `13.39412887` (float,optional) - Longitude of current location.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (User Settings)
+
+## Notification [/settings/booking/notification/{notification_key}]
+### Enable/Disable Notification [PUT /settings/booking/notification/{notification_key}]
+#### Body Parameters
++ Parameters
+    + notification_key: `entry` (enum,required)
+        A notification key
+        + Members
+            + time_to_leave
+            + near_location
+            + entry
+            + expiring
+            + over
+
++ Request (application/json)
+    + Attributes
+        + `enabled`: true (boolean,required) - The value for the notification key.
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 204
+    Updated successfully.
+    + Body
+
++ Response 304
+    Value of notification was not modified.
+    + Body
+
+# Data Structures
+
+## User Settings (object)
++ location (User Settings Location) - provides the booking requirements for a parking space.
+  Every location can have its own settings but these will always be the same or within the limits of the global settings.
++ sesam (User Settings Sesam) - contains informations about how to work with the sesam boxes.
++ gps (User Settings GPS) - contains information on how to handle GPS data.
++ booking (User Settings Booking) - contains information on how to handle bookings.
++ features (User Settings Features) - Feature flags that enables or disables certaint features based parameters given in header. These feature flags can be different for each operation systems.
++ provider (User Settings Provider) - Information for parking space provider. Key is linked with location response field `provider`.
+
+## User Settings Location (object)
++ bookable_range_start: `-15` (number) - start of the range wherein a booking is allowed in minutes from now.
++ bookable_range_end: 43200 (number) - end of the range wherein a booking is allowed in minutes from now.
++ booking_duration_min: 30 (number) - minimum duration of a booking in minutes.
++ booking_duration_max: 43200 (number) - maximum duration of a booking in minutes.
+
+## User Settings Sesam (object)
++ bluetooth
+    + connection_trials: 2 (number) - Amount of tries to connect to a sesam box.
+    + connection_timeout: 2 (number) - Amount of seconds allowed to connect to a box.
+    + communication_timeout: 2 (number) - Second until canceling the communication with the sesam box.
+
+## User Settings GPS
++ ttl: 60 (number) - Time-To-Live for previously retrieved GPS data i.e. by operation system
++ accuracy: 1000 (number) - Accuracy of GPS data in meters, renders data invalid if exceeded
+
+## User Settings Booking
++ collection
+  + ttl: 60 (number) - Time-To-Live for previously retrieved booking list
++ notification - Each notification contains an enabled flag. If set to `true`, the notification is enabled and should appear. If set to `false`, that notification is disabled.
+  + time_to_leave
+      + Include User Settings Notification
+      + time (User Settings Notification Time)
+  + near_location
+      + Include User Settings Notification
+      + radius: 500 (number)
+  + near_entry
+      + Include User Settings Notification
+      + radius: 50 (number)
+  + expiring
+      + Include User Settings Notification
+      + time (User Settings Notification Time)
+  + over
+      + Include User Settings Notification
+      + time (User Settings Notification Time)
++ fields - Each additional field uses its name as a `key` to a dictionary containing the field `label` and `type`. label contains the translated name of the field. The translation of the label is determined by the language of user who is identified by the provided user token.
+  + additional_services (User Settings Additional Field)
+
+## User Settings Notification
++ enabled: true (boolean) - wether the notification is enabled
++ type: time (enum[string]) - type of the notification
+  + Members
+    + time
+    + region
+
+## User Settings Features (object)
++ recommend_update (User Settings Feature Flag)
++ force_update (User Settings Feature Flag)
++ non_bookable_ps_visible (User Settings Feature Flag)
++ smart_device_link_enabled (User Settings Feature Flag)
++ paypal_payment_method_enabled (User Settings Feature Flag)
+
+## User Settings Provider (object)
++ image: `http://provider/image.png` (string) - Large provider logo.
++ thumbnail: `http://provider/thumbnail.png` (string) - Provider logo thumbnail.
++ header: `Please provide the data necessary for booking the parking space.` (string) - Translated header text for required fields.
++ legals - Contains two lists for terms and conditions entries where you can find text and url for each.
+    + accept (User Settings Provider Terms) - List of terms and conditions entries which the user needs to accept by some action (like checkbox).
+    + show (User Settings Provider Terms) - List of terms and conditions entries which the user needs only to see.
+
+## User Settings Provider Terms (object)
++ url: `http://www.provider.com/terms_and_conditions.html` (string) - link to terms and conditions
++ text: `Please accept the parking providers' %TERMS_LINK%.` (string) - prompt for accepting the terms and conditions. Replace `%TERMS_LINK%` with the `url`
+
+## User Settings Notification Time (object)
++ minutes: `-5` (number)
++ relative_to: begin (enum[string])
+  + Members
+    + begin
+    + end
++ include_distance: true (boolean)
+
+## User Settings Additional Field (object)
++ label: `zusätzliche Dienste` (string)
++ type: text (enum[string])
+  + Members
+    + text
+    + datetime
+    + date
+    + time
+    + number
+    + tel
+    + boolean
+
+## User Settings Feature Flag (object)
++ enabled: true (boolean) - defines wether the flag is enabled
+# Group Static Pages
+Access needs at least a __public key__.
+
+## Static Pages [/terms]
+### Retrieve Terms and Conditions [GET /terms]
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/xhtml+xml)
+    + Body
+
+            <!DOCTYPE html>
+                <html xmlns="http://www.w3.org/1999/xhtml"...
+
+## Static Pages [/imprint]
+### Retrieve Imprint [GET /imprint]
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/xhtml+xml)
+    + Body
+
+            <!DOCTYPE html>
+                <html xmlns="http://www.w3.org/1999/xhtml"...
+
+## Static Pages [/privacy_policy]
+### Retrieve Privacy Policy [GET /privacy_policy]
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/xhtml+xml)
+    + Body
+
+            <!DOCTYPE html>
+                <html xmlns="http://www.w3.org/1999/xhtml"...
+# Group User
+## User [/user]
+
+### Create a User [POST /user]
+Access needs a __public key__.
+
++ Request (application/json)
+    + Attributes
+        + `email`: `test@example.com` (string,required)
+        + `password`: `test` (string,required)
+        + `country`: `DE` (enum,required)
+            + Members
+                + DE
+                + CH
+        + `firstname`: `Max` (string,required)
+        + `lastname`: `Power` (string,required)
+        + `gender`: `female` (enum,optional)
+            + Members
+                + female
+                + male
+        + `age_range`: `null` (enum,optional) - always null
+        + `facebook_id`: `xxx` (string,optional)
+        + `cars` (array,optional)
+            + (object)
+                + `license_plate`: `B-AB 1234` (string,optional)
+                + `vehicle`: `Isetta` (string,optional)
+                + `country`: `DE` (enum,optional)
+                    + Members
+                        + DE
+                        + CH
+        + `phone_numbers` (array,optional)
+            + (object)
+                + `phone_number`: `099028-237489` (string,optional)
+        + `attributes` (array,optional)
+            + (object)
+                + `key`: `adac` (string,optional)
+                + `value`: `1234567890` (string,optional)
+        + `device_id`: `f00bar` (string, optional) - identifier for the mobile device on that the registration is done, e.g. advertisement id for Android or iOS
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
+
++ Response 201 (application/json)
+    Returned when the user was successfully created
+    + Attributes (User)
+
+
+### Retrieve a User [GET /user]
+Access needs a __private key__.
+
+Returns the user object for the private key.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (User)
+
+### Update a user [PUT /user]
+Access needs a __private key__.
+
+Updates the user by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+
+This request accepts mostly the same arguments as the user creation call.
+Changing cars, phone_numbers, attributes and password is done via separate endpoints.
+
++ Request (application/json)
+    + Attributes
+        + `email`: `test@example.com` (string,optional)
+        + `password`: `test` (string,optional)
+        + `country`: `DE` (enum,optional)
+            + Members
+                + DE
+                + CH
+        + `firstname`: `Max` (string,optional)
+        + `lastname`: `Power` (string,optional)
+        + `gender`: `female` (enum,optional)
+            + Members
+                + female
+                + male
+        + `age_range`: `null` (enum,optional)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (User)
+
+## User Verification [/user/verify]
+Access needs a __public key__.
+
+### Check if a User exists [GET /user/verify/exists{?email}]
+Returns 204 if the user exists and a 404 if the user does not exists. Use this to check the user email before creating a new user.
+
++ Parameters
+    + email: `test@example.com` (string,required)
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
++ Response 204 (application/json)
+    Returned if the user exists.
+    + Body
+
++ Response 404 (application/json)
+    Returned if the user does not exists.
+    + Body
+
+### Check if an ADAC code is valid [GET /user/verify/adac/{code}]
+Returns 200 if the code is valid and a 404 if the code is invalid.
+
++ Parameters
+    + code: `asdf1234` (string,required)
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
+
++ Response 200 (application/json)
+    Returned if the code is valid.
+    + Body
+
++ Response 404 (application/json)
+    Returned if the code is invalid.
+    + Body
+
+
+## User Payment Methods [/user/payment_methods]
+Access needs a __private key__.
+
+### List user payment methods [GET /user/payment_methods]
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (array[Payment Method])
+
+### Retrieve primary payment method [GET /user/payment_methods/primary]
++ Request (application/)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (Payment Method)
+
++ Response 404
+    Returned if no primary payment method is available.
+    + Body
+
+### Add a user payment method [POST /user/payment_methods]
+Adds a new payment method for the user.
+
++ Request (application/json)
+    + Attributes (Payment Method Input)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (Payment Method)
+
++ Response 422 (application/json)
+    Returned if an error occured, e.g. `primary` was set to true for a payment method that doesn't support post payment
+    + Attributes (Api Error)
+
+### Update a user payment method [PUT /user/payment_methods/{payment_method_id}]
+Updates a users payment method.
+
++ Parameters
+    + payment_method_id: `1000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
+
++ Request (application/json)
+    + Attributes (Payment Method Update Input)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    Returned when the payment method was successfully activated/deactivated.
+    + Attributes (Payment Method)
+
++ Response 422 (application/json)
+    Returned if an error occured, e.g. `primary` was set to true for a payment method that doesn't support post payment
+    + Attributes (Api Error)
+
+### Delete a user payment method [DELETE /user/payment_methods/{payment_method_id}]
+Deletes a user payment method.
+
++ Parameters
+    + payment_method_id: `1000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 204 (application/json)
+    Returned when the payment method was successfully deleted.
+    + Body
+
++ Response 422 (application/json)
+    Returned if an error occured, e.g. a booking exists that waits for a payment from this method.
+    + Attributes (Api Error)
+
+## User Tracking [/user/tracking]
+Access needs a __public key__.
+
+### Tracking App Installation [POST /user/tracking/installation]
++ Request (application/json)
+    + Attributes (User Tracking Installation)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 201 (application/json)
+    + Body
+
+# Data Structures
+
+## User
++ code: `KFJ32`
++ gender: `female`
++ age_range: null
++ email: `test@example.com`
++ firstname: `Test`
++ lastname: `Name`
++ credit: 0,
++ currency: `EUR`
++ country: `DE`
++ facebook_id: null
++ cars
+  + id: 12
+  + license_plate: `B-AB 1234`
+  + vehicle: `Isetta`
+  + country: null
++ phone_numbers
+  + id: 16696
+  + phone_number: `099028-237489`
++ attributes
+  + id: 1
+  + key: adac
+  + value: 1234567890
++ token: 098f6bcd4621d373cade4e832627b4f6
+
+## User Tracking Installation (object)
++ device_id: `f00bar` (string, required) - identifier for the mobile device on that the installation was done, e.g. advertisement id for Android or iOS
++ campaigns (array[User Tracking Campaign]) - array of campaigns that the installation is coming from, contains at least one element
+
+## User Tracking Campaign
++ id: d34db33f (string, required) - identifier for the campaign that the installation is coming from
++ type: adjust (enum, required) - name of the platform that the campaign belongs to
+  + Members
+    + adjust
+    + facebook
+# Group Violations
+## Violations [/bookings/{booking_id}/violation]
+Access needs a __private key__.
+
+You can store one violation per booking. A violation report is done in two steps:
+1. Create a new violation
+2. Add a photo
+
+### Create a New Violation [POST /bookings/{booking_id}/violation]
++ Parameters
+    + booking_id: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
+        to which the violation belongs to.
+
++ Request (application/json)
+    + Attributes
+        + license_plate: `B-CD 4321` (string,required)
+        + comment: `This car parked on my parking space!!!` (string,required)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Body
+
+            {
+              "license_plate": "B-CD 4321",
+              "comment": "This car parked on my parking space!!!",
+              "image_url": null
+            }
+
+### Retrieve a Violation [GET /bookings/{booking_id}/violation]
+
++ Parameters
+    + booking_id: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
+        to which the violation belongs to.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Body
+
+            {
+              "license_plate": "B-CD 4321",
+              "comment": "This car parked on my parking space!!!",
+              "image_url": "https://parku.ch/images/reports/12.jpeg"
+            }
+
+### Update a Violation [PUT /bookings/{booking_id}/violation]
+Updates the violation by setting the values of the parameters passed.
+Any parameters not provided will be left unchanged. The photo can be updated through
+[adding a new photo](#header-add-a-photo).
++ Parameters
+    + booking_id: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
+        to which the violation belongs to.
+
++ Request (application/json)
+    + Attributes
+        + `license_plate`: `B-CD 4321` (string,required)
+        + `comment`: `This car parked on my parking space!!!` (string,required)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Body
+
+            {
+              "license_plate": "B-CD 4321",
+              "comment": "This car parked on my parking space!!!",
+              "image_url": "https://parku.ch/images/reports/12.jpeg"
+            }
+
+### Delete a Violation [DELETE /bookings/{booking_id}/violation]
+
++ Parameters
+    + booking_id: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
+        to which the violation belongs to.
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 204
+
+## Violation Images [/bookings/{booking_id}/violation/image]
+### Add a Photo [PUT /bookings/{booking_id}/violation/image]
+You can add one photo to the violation. If you add a new photo the previous one gets overwritten.
+
+The entire `PUT` body will be treated as the file. Make sure to add the Content-Type: `application/octet-stream`
+to your header.
+
++ Parameters
+    + booking_id: `0072c629-e622-11e2-8bf1-8a83f3373875` (uuid rfc4122,required) - The identifier of the booking
+        to which the violation belongs to.
+
++ Request (application/octet-stream)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Body
+
+            {
+              "license_plate": "B-CD 4321",
+              "comment": "This car parked on my parking space!!!",
+              "image_url": "https://parku.ch/images/reports/12.jpeg"
+            }
+

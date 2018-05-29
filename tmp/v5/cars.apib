@@ -1,0 +1,120 @@
+# Group Cars
+
+## Cars [/cars]
+Access needs a __private key__.
+
+### List all cars [GET /cars]
+Returns a list of all cars of the user. The cars are returned sorted by creation date,
+with the most recently created car appearing first.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 201 (application/json)
+    + Body
+
+            [
+              {
+                "id": 22,
+                "vehicle": "Ducati Monster S4Rs",
+                "license_plate": "ABCDE1234",
+                "country": "DE"
+              },
+              {
+                "id": 21,
+                "vehicle": "Harley Davidson FortyEight 1200",
+                "license_plate": "ABCDE2345",
+                "country": "DE"
+              },
+              {...},
+              {...}
+            ]
+
+### Create a new Car [POST /cars{?license_plate,vehicle,country}]
+You can store multiple cars for a user.
+
++ Request (application/json)
+    + Attributes
+        + license_plate: `B-AB 1234` (string, required) - The license plate for the stored car.
+        + vehicle: Isetta (string, optional) - A name for the car to be identified easier.
+        + country: DE (enum, optional) - The country code the license plate.
+            + Members
+                + DE
+                + CH
+
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 201 (application/json)
+    + Body
+
+            {
+              "id": 23,
+              "license_plate": "B-AB 1234",
+              "vehicle": "Isetta",
+              "country": "DE"
+            }
+
+## Car [/cars/{car_id}]
+### Retrieve a Car [GET]
+
++ Parameters
+    + car_id: 23 (int, required) - The identifier of the car to be retrieved
+
++ Request
+
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Body
+
+            {
+              "id": 23,
+              "license_plate": "B-AB 1234",
+              "vehicle": "Isetta",
+              "country": "DE"
+            }
+
+### Update a Car [PUT /cars/{car_id}{?license_plate,vehicle,country}]
+Updates the car by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+
++ Request  (application/json)
+    + Attributes
+        + car_id: 23 (number, required) - The identifier of the car to be updated.
+        + license_plate: `B-AB 1234` (string, required) - The license plate for the stored car.
+        + vehicle: Polo (string, optional) - A name for the car to be identified easier.
+        + country: DE (enum, optional) - The country code the license plate.
+            + Members
+                + DE
+                + CH
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
+
++ Response 200 (application/json)
+    + Body
+
+            {
+              "id": 23,
+              "license_plate": "B-AB 1234",
+              "vehicle": "Polo",
+              "country": "DE"
+            }
+
+### Delete a Car [DELETE /cars/{car_id}]
+
++ Parameters
+    + car_id: 23 (number, required) - The identifier of the car to be deleted.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 204

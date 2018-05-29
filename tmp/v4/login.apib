@@ -1,0 +1,51 @@
+# Group Login
+## Login [/login]
+Access needs a __public key__.
+
+### Login [POST /login{?email,password}]
+
+Checks the given credentials email and password for validity.
+Returns the user object with a user token needed for private endpoints. A public key is needed.
+All further requests using the token as HTTP Basic Auth username are made on behalf of the user.
+
+Login through Facebook is described in a separate endpoint.
+
++ Request
+    + Attributes
+        + `email`: `test@example.com` (string,required) - The users email address.
+        + `password`: `1234pwd` (string,required) - The users password.
+
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200
+    + Body
+
+            {
+              "code": "KFJ32",
+              "gender": "male",
+              "email": "test@example.com",
+              "firstname": "Firstname",
+              "lastname": "Lastname",
+              "credit": 106.50,
+              "currency": "CHF",
+              "country": "CH",
+              "facebook_id": "100006987966349",
+              "cars": [{
+                  "id": 12,
+                  "license_plate": "B-AB 1234",
+                  "vehicle": "Isetta",
+                  "country": null
+              }],
+              "phone_numbers": [{
+                "id": 16696,
+                "phone_number": "099028-237489"
+              }],
+              "attributes": [{
+                "id": 1,
+                "key": "adac",
+                "value": "1234567890"
+              }],
+              "token": "ce35e3504183c2f52f58263ce11004e0"
+            }

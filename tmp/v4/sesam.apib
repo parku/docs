@@ -1,0 +1,63 @@
+# Group Sesam
+Access needs a __private key__.
+
+## Sesam Actions [/sesam/{sesam_id}]
+
+This endpoint is used to open gates and barriers. A private key is needed.
+The user scans a QR code which is attached somewhere near the gate or barrier.
+The QR code contains an URL: http://parku.ch/s/1234abcd or http://parku.de/s/1234abcd.
+
+The part after the last / (slash) represents the sesam ID.
+You have to parse the URL and create an API call with the sesam ID.
+
+![QR code 1](images/qr1.png) ![QR code 2](images/qr2.png)
+
+_Both QR codes are valid and activate a sesam device in the parku office._
+
+### Open Sesam [PUT /sesam/{sesam_id}]
+
++ Parameters
+    + sesam_id: 1234abcd (string,required) - The sesam ID which is hidden in the QR code.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 204
+    Everything went fine. The gate/barrier connected to the sesam device should open in the next few seconds.
+    + Body
+
++ Response 404
+    The QR code is not valid. Either it is not a parku QR code or the QR code is outdated.
+    + Body
+
++ Response 401
+    The code is valid, but the user does not have the permissions to use this sesam device.
+    Either no booking is made or the time for opening the sesam has expired.
+    + Body
+
+## Sesam [/sesam]
+### Check Sesam [GET /sesam]
+This endpoint gives you the information whether the user can open a sesam device now or in the near future.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    Returned if a booking with a sesam device is available.
+    + Body
+
+            {
+              "support": {
+                "phone_number": {
+                  "phone_number": "+49 123 456 789"
+                }
+              }
+            }
+
++ Response 404
+    No booking with a sesam device available.
+    + Body

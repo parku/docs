@@ -1,0 +1,87 @@
+# Group Onstreet
+
+## Onstreet [/onstreet]
+
+### Retrieve Onstreet Zone Information [GET /onstreet{?lat,lon}]
+Access needs at least a __public key__.
+
+This request returns parking zone information about a specific point on the map.
+
++ Parameters
+    + lat: 53.12341234 (number,required) - latitude of the requested point
+    + lon: 13.12341234 (number,required) - longitude of the requested point
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (Parking Zone)
+
++ Response 404 (application/json)
+Returned when there is no zone available at this latitude/longitude.
+    + Body
+
+### Start an Onstreet Booking [POST /onstreet/start]
+Access needs at least a __private key__.
+
+Bookings can be stopped using the [Stop a Booking](#stop-a-booking) action.
+
+The request requires some of the values that were received by the
+[Retrieve Onstreet Zone Information](#retrieve-onstreet-zone-information) request.
+These values are checked against the booking that is started with the onstreet provider to ensure that the pricing
+is as expected. The optional attributes of the parking zone object here are mainly used for logging.
+
++ Request (application/json)
+    + Attributes
+        + `zone` (Parking Zone Input, required) - the parking zone object to start the booking on
+        + `payment_method` (Used Payment Method Input, required) - information about payment method.
+        + `license_plate`: `AB 1234` (string, required) - the license plate of the car used for parking
+        + `phone_number`: `01234567890` (string, required) - the customer phone number
+        + `duration_minutes`: `15` (number, optional) - the parking duration, required if the retrieved zone had entries in the `available_durations` field.
+        + `user_metadata` (User Metadata Input, optional)
+          Additional information about a user (optional). This is for example latitude/longitude parameters
+          for the users current position.
+
++ Response 201 (application/json)
+    Returned if a booking was created
+    + Attributes (Booking)
+
++ Response 404
+Returned if parking zone was not found, or it is already booked.
+    + Body
+
++ Response 422
+Returned if either one of the provided zone fields didn't match or the payment information was not processable.
+    + Body
+
+# Data Structures
+
+## Parking Zone Input (object)
++ id: `101012` (string, required) - the parking zone id
++ latitude: 53.12341234 (number, required) - latitude of the requested point
++ longitude: 13.12341234 (number, required) - longitude of the requested point
+
+## Parking Zone Base Data (Parking Zone Input)
++ name: `Berlin 101012` (string, optional) - the parking space zone name
++ hours: `Mon-Fri, 08:00 - 22:30` (string, optional) - the translated availability time in this zone
++ price (Zone Price, required) - information about the price for this zone
++ max_datetime_end: `2009-06-30T18:30:00+02:00` (string, required) - Latest time when a booking has to end. Bookings that are not stopped after this time will be automatically stopped on backend side.
++ duration_max_minutes`: 760 (number, required) - Maximum time the booking can be running in minutes. Bookings that are not stopped after this amount of time will be automatically stopped on backend side.
+
+## Parking Zone (object)
++ Include Parking Zone Base Data
++ `available_durations`: 15,30,45 (array[number]) - array containing the possible parking durations.
++ `available_payment_methods`: `28aded77-138f-11e7-bae4-0242ac120005` (array[string]) - list of payment method ids that can be used to pay for a booking in this zone.
++ `currently_valid`: true (boolean) - defines it is valid to book the zone at the current point in time, if this is `false` that means that that you are out of the opening hours of the zone.
+
+## Zone Price (object)
++ description: `15 Min. gebührenfrei, danach 50 Cent pro 30 Min.` (string) - description of the price
++ Include Currency
+
+## Currency (object)
++ `currency` (enum) - the currency of the price
+  + Members
+    + EUR
+    + CHF

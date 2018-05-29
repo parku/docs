@@ -1,0 +1,263 @@
+# Group User
+## User [/user]
+
+### Create a User [POST /user]
+Access needs a __public key__.
+
++ Request (application/json)
+    + Attributes
+        + `email`: `test@example.com` (string,required)
+        + `password`: `test` (string,required)
+        + `country`: `DE` (enum,required)
+            + Members
+                + DE
+                + CH
+        + `firstname`: `Max` (string,required)
+        + `lastname`: `Power` (string,required)
+        + `gender`: `female` (enum,optional)
+            + Members
+                + female
+                + male
+        + `age_range`: `null` (enum,optional) - always null
+        + `facebook_id`: `xxx` (string,optional)
+        + `cars` (array,optional)
+            + (object)
+                + `license_plate`: `B-AB 1234` (string,optional)
+                + `vehicle`: `Isetta` (string,optional)
+                + `country`: `DE` (enum,optional)
+                    + Members
+                        + DE
+                        + CH
+        + `phone_numbers` (array,optional)
+            + (object)
+                + `phone_number`: `099028-237489` (string,optional)
+        + `attributes` (array,optional)
+            + (object)
+                + `key`: `adac` (string,optional)
+                + `value`: `1234567890` (string,optional)
+        + `device_id`: `f00bar` (string, optional) - identifier for the mobile device on that the registration is done, e.g. advertisement id for Android or iOS
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
+
++ Response 201 (application/json)
+    Returned when the user was successfully created
+    + Attributes (User)
+
+
+### Retrieve a User [GET /user]
+Access needs a __private key__.
+
+Returns the user object for the private key.
+
++ Request
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (User)
+
+### Update a user [PUT /user]
+Access needs a __private key__.
+
+Updates the user by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+
+This request accepts mostly the same arguments as the user creation call.
+Changing cars, phone_numbers, attributes and password is done via separate endpoints.
+
++ Request (application/json)
+    + Attributes
+        + `email`: `test@example.com` (string,optional)
+        + `password`: `test` (string,optional)
+        + `country`: `DE` (enum,optional)
+            + Members
+                + DE
+                + CH
+        + `firstname`: `Max` (string,optional)
+        + `lastname`: `Power` (string,optional)
+        + `gender`: `female` (enum,optional)
+            + Members
+                + female
+                + male
+        + `age_range`: `null` (enum,optional)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (User)
+
+## User Verification [/user/verify]
+Access needs a __public key__.
+
+### Check if a User exists [GET /user/verify/exists{?email}]
+Returns 204 if the user exists and a 404 if the user does not exists. Use this to check the user email before creating a new user.
+
++ Parameters
+    + email: `test@example.com` (string,required)
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
++ Response 204 (application/json)
+    Returned if the user exists.
+    + Body
+
++ Response 404 (application/json)
+    Returned if the user does not exists.
+    + Body
+
+### Check if an ADAC code is valid [GET /user/verify/adac/{code}]
+Returns 200 if the code is valid and a 404 if the code is invalid.
+
++ Parameters
+    + code: `asdf1234` (string,required)
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
+
++ Response 200 (application/json)
+    Returned if the code is valid.
+    + Body
+
++ Response 404 (application/json)
+    Returned if the code is invalid.
+    + Body
+
+
+## User Payment Methods [/user/payment_methods]
+Access needs a __private key__.
+
+### List user payment methods [GET /user/payment_methods]
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (array[Payment Method])
+
+### Retrieve primary payment method [GET /user/payment_methods/primary]
++ Request (application/)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (Payment Method)
+
++ Response 404
+    Returned if no primary payment method is available.
+    + Body
+
+### Add a user payment method [POST /user/payment_methods]
+Adds a new payment method for the user.
+
++ Request (application/json)
+    + Attributes (Payment Method Input)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    + Attributes (Payment Method)
+
++ Response 422 (application/json)
+    Returned if an error occured, e.g. `primary` was set to true for a payment method that doesn't support post payment
+    + Attributes (Api Error)
+
+### Update a user payment method [PUT /user/payment_methods/{payment_method_id}]
+Updates a users payment method.
+
++ Parameters
+    + payment_method_id: `1000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
+
++ Request (application/json)
+    + Attributes (Payment Method Update Input)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 200 (application/json)
+    Returned when the payment method was successfully activated/deactivated.
+    + Attributes (Payment Method)
+
++ Response 422 (application/json)
+    Returned if an error occured, e.g. `primary` was set to true for a payment method that doesn't support post payment
+    + Attributes (Api Error)
+
+### Delete a user payment method [DELETE /user/payment_methods/{payment_method_id}]
+Deletes a user payment method.
+
++ Parameters
+    + payment_method_id: `1000bb3e-506d-11e5-9781-d43d7eece658` (uuid rfc4122, required) - the user id
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 204 (application/json)
+    Returned when the payment method was successfully deleted.
+    + Body
+
++ Response 422 (application/json)
+    Returned if an error occured, e.g. a booking exists that waits for a payment from this method.
+    + Attributes (Api Error)
+
+## User Tracking [/user/tracking]
+Access needs a __public key__.
+
+### Tracking App Installation [POST /user/tracking/installation]
++ Request (application/json)
+    + Attributes (User Tracking Installation)
+    + Headers
+
+            Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
+
++ Response 201 (application/json)
+    + Body
+
+# Data Structures
+
+## User
++ code: `KFJ32`
++ gender: `female`
++ age_range: null
++ email: `test@example.com`
++ firstname: `Test`
++ lastname: `Name`
++ credit: 0,
++ currency: `EUR`
++ country: `DE`
++ facebook_id: null
++ cars
+  + id: 12
+  + license_plate: `B-AB 1234`
+  + vehicle: `Isetta`
+  + country: null
++ phone_numbers
+  + id: 16696
+  + phone_number: `099028-237489`
++ attributes
+  + id: 1
+  + key: adac
+  + value: 1234567890
++ token: 098f6bcd4621d373cade4e832627b4f6
+
+## User Tracking Installation (object)
++ device_id: `f00bar` (string, required) - identifier for the mobile device on that the installation was done, e.g. advertisement id for Android or iOS
++ campaigns (array[User Tracking Campaign]) - array of campaigns that the installation is coming from, contains at least one element
+
+## User Tracking Campaign
++ id: d34db33f (string, required) - identifier for the campaign that the installation is coming from
++ type: adjust (enum, required) - name of the platform that the campaign belongs to
+  + Members
+    + adjust
+    + facebook
