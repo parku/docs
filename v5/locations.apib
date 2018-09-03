@@ -360,9 +360,11 @@ With this endpoint you can retrieve location based terms and conditions.
             + immediate
 + availability (Availability) - describes the availability of the location in relation to the request
 + `parking_space_groups` (array[Parking Space Group]) - different parking space groups for this location. See [Parking Space Group Data](#header-parking-space-group-data)
-+ gates (array[Gate]) - the gates connected to the location
++ gates (array) - the gates connected to the location
+  + (Door Gate)
+  + (Sesam Gate)
 
-## Gate (object)
+## Sesam Gate (object)
 + type: `qrcode` (enum) - the type how the gate can be opened
     + Members
         + qrcode
@@ -373,6 +375,10 @@ With this endpoint you can retrieve location based terms and conditions.
 + `pedestrian_entrance`: false  (boolean) - wether this gate is an entrance usable by pedestrians
 + `pedestrian_exit`: false  (boolean) - wether this gate is an exit usable by pedestrians
 + gateways (array[Gateway])
+
+## Door Gate (object)
++ `type`: `door` (enum) - the type
++ `identifier`: `123` (string) - the identifier for the door
 
 ## Gateway (object)
 + type: `api` (enum) - the type of gateway
