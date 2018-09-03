@@ -1875,12 +1875,7 @@ Access needs a __public key__.
             + Members
                 + female
                 + male
-        + `age_range`: `18 - 25` (enum,optional)
-            + Members
-                + `18 - 25`
-                + `26 - 35`
-                + `36 - 45`
-                + `46+`
+        + `age_range`: `null` (enum,optional) - always null
         + `facebook_id`: `xxx` (string,optional)
         + `cars` (array,optional)
             + (object)
@@ -1907,7 +1902,7 @@ Access needs a __public key__.
             {
               "code": "KFJ32",
               "gender": "female",
-              "age_range": "26 - 35",
+              "age_range": null,
               "email": "test@example.com",
               "firstname": "Test",
               "lastname": "Name",
@@ -1949,7 +1944,7 @@ Returns the user object for the private key.
             {
               "code": "KFJ32",
               "gender": "female",
-              "age_range": "26 - 35",
+              "age_range": null,
               "email": "test@example.com",
               "firstname": "Test",
               "lastname": "Name",
@@ -1996,12 +1991,7 @@ Changing cars, phone_numbers, attributes and password is done via separate endpo
             + Members
                 + female
                 + male
-        + `age_range`: `18 - 25` (enum,optional)
-            + Members
-                + `18 - 25`
-                + `26 - 35`
-                + `36 - 45`
-                + `46+`
+        + `age_range`: `null` (enum,optional) - always null
     + Headers
 
             Authorization: Basic MDEyMzQ1Njc4YWJjZGVmOnBhcmt1
@@ -2012,7 +2002,7 @@ Changing cars, phone_numbers, attributes and password is done via separate endpo
             {
               "code": "KFJ32",
               "gender": "female",
-              "age_range": "26 - 35",
+              "age_range": null,
               "email": "test@example.com",
               "firstname": "Test",
               "lastname": "Name",

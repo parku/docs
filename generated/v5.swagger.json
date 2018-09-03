@@ -50,7 +50,11 @@
                             "required": [
                                 "key",
                                 "value"
-                            ]
+                            ],
+                            "example": {
+                                "key": "adac",
+                                "value": "12345"
+                            }
                         }
                     }
                 ],
@@ -85,6 +89,7 @@
                         "in": "path",
                         "description": "The identifier of the attribute to be retrieved",
                         "required": true,
+                        "x-example": "32",
                         "type": "string"
                     }
                 ],
@@ -578,7 +583,34 @@
                                 "date_end",
                                 "license_plate",
                                 "phone_number"
-                            ]
+                            ],
+                            "example": {
+                                "group_id": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
+                                "date_start": "2016-10-27T09:10:20+00:00",
+                                "date_end": "2016-10-27T10:10:20+00:00",
+                                "license_plate": "B-AB 1234",
+                                "phone_number": "+493057701872",
+                                "payment": [
+                                    {
+                                        "type": "paypal",
+                                        "amount": 1200,
+                                        "payload": "PAY-1CM399047K4649003KM4WJQQ"
+                                    }
+                                ],
+                                "payment_method": {
+                                    "id": "1000bb3e-506d-11e5-9781-d43d7eece658",
+                                    "type": "post"
+                                },
+                                "required_fields": {
+                                    "car_color": "red",
+                                    "number_of_passengers": "5"
+                                },
+                                "user_metadata": {
+                                    "latitude": 52.521381,
+                                    "longitude": 13.392016,
+                                    "device": "ford"
+                                }
+                            }
                         }
                     }
                 ],
@@ -741,6 +773,7 @@
                         "in": "query",
                         "description": "A limit on the number of objects to be returned.\nCount can range between 1 and 100 items.\n",
                         "required": false,
+                        "x-example": "3",
                         "type": "number",
                         "default": 10
                     },
@@ -749,6 +782,7 @@
                         "in": "query",
                         "description": "An offset into the list of returned items.\nThe API will return the requested number of items starting at that offset.\n",
                         "required": false,
+                        "x-example": "10",
                         "type": "number"
                     },
                     {
@@ -756,6 +790,7 @@
                         "in": "query",
                         "description": "Filter bookings for status.",
                         "required": false,
+                        "x-example": "active",
                         "type": "string",
                         "default": "all",
                         "enum": [
@@ -771,6 +806,7 @@
                         "in": "query",
                         "description": "Filter bookings for their type",
                         "required": false,
+                        "x-example": "all",
                         "type": "string",
                         "default": "all",
                         "enum": [
@@ -1183,6 +1219,7 @@
                         "in": "path",
                         "description": "The id or code of the booking",
                         "required": true,
+                        "x-example": "005c4826-4e28-11e3-a675-d43d7eece53d",
                         "type": "string"
                     }
                 ],
@@ -1214,6 +1251,7 @@
                         "in": "path",
                         "description": "the booking id",
                         "required": true,
+                        "x-example": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
                         "type": "string"
                     },
                     {
@@ -1258,6 +1296,22 @@
                                     ],
                                     "description": "The payment method to use for paying."
                                 }
+                            },
+                            "example": {
+                                "license_plate": "B-BC 4567",
+                                "phone_number": "+493057701871",
+                                "date_end": "2016-10-27T17:00:00+0000",
+                                "payment": [
+                                    {
+                                        "type": "paypal",
+                                        "amount": 1200,
+                                        "payload": "PAY-1CM399047K4649003KM4WJQQ"
+                                    }
+                                ],
+                                "payment_method": {
+                                    "id": "1000bb3e-506d-11e5-9781-d43d7eece658",
+                                    "type": "post"
+                                }
                             }
                         }
                     }
@@ -1285,6 +1339,7 @@
                         "in": "path",
                         "description": "the booking id",
                         "required": true,
+                        "x-example": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
                         "type": "string"
                     }
                 ]
@@ -1723,6 +1778,7 @@
                         "in": "path",
                         "description": "the booking id",
                         "required": true,
+                        "x-example": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
                         "type": "string"
                     }
                 ],
@@ -1793,7 +1849,12 @@
                             },
                             "required": [
                                 "license_plate"
-                            ]
+                            ],
+                            "example": {
+                                "license_plate": "B-AB 1234",
+                                "vehicle": "Isetta",
+                                "country": "DE"
+                            }
                         }
                     }
                 ],
@@ -1829,6 +1890,7 @@
                         "in": "path",
                         "description": "The identifier of the car to be retrieved",
                         "required": true,
+                        "x-example": "23",
                         "type": "string"
                     }
                 ],
@@ -1887,7 +1949,13 @@
                             "required": [
                                 "car_id",
                                 "license_plate"
-                            ]
+                            ],
+                            "example": {
+                                "car_id": 23,
+                                "license_plate": "B-AB 1234",
+                                "vehicle": "Polo",
+                                "country": "DE"
+                            }
                         }
                     }
                 ],
@@ -1914,6 +1982,7 @@
                         "in": "path",
                         "description": "The identifier of the car to be deleted.",
                         "required": true,
+                        "x-example": "23",
                         "type": "number"
                     }
                 ]
@@ -1973,6 +2042,7 @@
                         "in": "path",
                         "description": "A base64url encoded coupon code string.",
                         "required": true,
+                        "x-example": "Zm9vYmFyMTIz",
                         "type": "string"
                     },
                     {
@@ -1980,6 +2050,7 @@
                         "in": "query",
                         "description": "Action to do.",
                         "required": true,
+                        "x-example": "test",
                         "type": "string",
                         "enum": [
                             "test"
@@ -1990,6 +2061,7 @@
                         "in": "query",
                         "description": "Amount coupon has to be tested against.",
                         "required": true,
+                        "x-example": "42",
                         "type": "number"
                     }
                 ],
@@ -2027,6 +2099,10 @@
                                     "type": "string",
                                     "description": "Android push notification identifier via GCM.\n\nFull integration and how to request a push notification Registration ID through Android's GCM service is\naccessible [here](http://developer.android.com/google/gcm/gs.html)."
                                 }
+                            },
+                            "example": {
+                                "ios_device_token": "A339F8BE4F...",
+                                "android_registration_id": "A339F8BE4F..."
                             }
                         }
                     }
@@ -2068,7 +2144,11 @@
                             },
                             "required": [
                                 "access_token"
-                            ]
+                            ],
+                            "example": {
+                                "access_token": "1234...",
+                                "device_id": "f00bar"
+                            }
                         }
                     }
                 ]
@@ -2098,6 +2178,7 @@
                         "in": "path",
                         "description": "Base64 encoded invitation code.",
                         "required": true,
+                        "x-example": "d2VsbCBkb25lISBnZXQgYSBiZWVyIG5vdyA9RA==",
                         "type": "string"
                     }
                 ],
@@ -2313,6 +2394,7 @@
                         "in": "path",
                         "description": "Identifier of the location.",
                         "required": true,
+                        "x-example": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
                         "type": "string"
                     },
                     {
@@ -2320,6 +2402,7 @@
                         "in": "query",
                         "description": "10-27T09:10:20+00:00 (ISO 8601, optional) - Used to calculate the price for a location.\nRequires the field `date_end` to be defined. If no `date_start` or `date_end` is specified,\nthe returned `price` field will be `null`.\n",
                         "required": true,
+                        "x-example": "2016",
                         "type": "string"
                     },
                     {
@@ -2327,6 +2410,7 @@
                         "in": "query",
                         "description": "10-27T10:10:20+00:00 (ISO 8601, optional)\nsee `date_start`.\n",
                         "required": true,
+                        "x-example": "2016",
                         "type": "string"
                     }
                 ],
@@ -2453,6 +2537,7 @@
                         "in": "query",
                         "description": "Comma separated latitude and longitude of the southwest position.",
                         "required": true,
+                        "x-example": "45.74001,5.67868",
                         "type": "string"
                     },
                     {
@@ -2460,6 +2545,7 @@
                         "in": "query",
                         "description": "Comma separated latitude and longitude of the northeast position.",
                         "required": true,
+                        "x-example": "47.74236,10.24900",
                         "type": "string"
                     },
                     {
@@ -2467,6 +2553,7 @@
                         "in": "query",
                         "description": "10-27T09:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the start date.\n`date_start` will have no effect unless `date_end` is also provided.\n",
                         "required": true,
+                        "x-example": "2016",
                         "type": "string"
                     },
                     {
@@ -2474,6 +2561,7 @@
                         "in": "query",
                         "description": "10-27T10:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the end date.\n`date_end` will have no effect unless `date_start` is also provided.\n",
                         "required": true,
+                        "x-example": "2016",
                         "type": "string"
                     },
                     {
@@ -2481,6 +2569,7 @@
                         "in": "query",
                         "description": "Filters returned locations regarding their availability if start and\nend are also given.\n\n* `true` only returns available locations\n\n* `false` return all locations",
                         "required": false,
+                        "x-example": "true",
                         "type": "boolean",
                         "default": "false",
                         "enum": [
@@ -2493,6 +2582,7 @@
                         "in": "query",
                         "description": "Filters returned locations regarding their general bookability.\n\n* `true` only returns locations that could be booked through the api if they are available\n\n* `false` only returns locations that can not be booked through the api, even though they might be available",
                         "required": false,
+                        "x-example": "true",
                         "type": "boolean",
                         "enum": [
                             "true",
@@ -2504,6 +2594,7 @@
                         "in": "query",
                         "description": "Filters the result to only show parking spaces with\nwith either of the provided types.\n",
                         "required": false,
+                        "x-example": "airport-parking",
                         "type": "string",
                         "enum": [
                             "off-street",
@@ -2531,6 +2622,7 @@
                         "in": "query",
                         "description": "Filters the result to only show parking spaces\nall the provided properties.\n",
                         "required": false,
+                        "x-example": "indoor",
                         "type": "string",
                         "enum": [
                             "excess_length",
@@ -2550,6 +2642,7 @@
                         "in": "query",
                         "description": "Response will only contain the fields mentioned in this parameter.\nThis can either be `all` or an comma separated list of field names from the response, e.g. `id,street,country`.\n",
                         "required": false,
+                        "x-example": "all",
                         "type": "string"
                     }
                 ],
@@ -2709,6 +2802,7 @@
                         "in": "query",
                         "description": "Comma separated latitude and longitude of the southwest position.",
                         "required": true,
+                        "x-example": "45.74001,5.67868",
                         "type": "string"
                     },
                     {
@@ -2716,6 +2810,7 @@
                         "in": "query",
                         "description": "Comma separated latitude and longitude of the northeast position.",
                         "required": true,
+                        "x-example": "47.74236,10.24900",
                         "type": "string"
                     },
                     {
@@ -2723,6 +2818,7 @@
                         "in": "query",
                         "description": "10-27T09:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the start date.\n`date_start` will have no effect unless `date_end` is also provided.\n",
                         "required": true,
+                        "x-example": "2016",
                         "type": "string"
                     },
                     {
@@ -2730,6 +2826,7 @@
                         "in": "query",
                         "description": "10-27T10:10:20+00:00 (ISO 8601, optional) - Filter parking spaces for the end date.\n`date_end` will have no effect unless `date_start` is also provided.\n",
                         "required": true,
+                        "x-example": "2016",
                         "type": "string"
                     },
                     {
@@ -2737,6 +2834,7 @@
                         "in": "query",
                         "description": "Filters returned locations regarding their availability if start and\nend are also given.\n\n* `true` only returns available locations\n\n* `false` return all locations",
                         "required": false,
+                        "x-example": "true",
                         "type": "boolean",
                         "default": "false",
                         "enum": [
@@ -2749,6 +2847,7 @@
                         "in": "query",
                         "description": "Filters returned locations regarding their general bookability.\n\n* `true` only returns locations that could be booked through the api if they are available\n\n* `false` only returns locations that can not be booked through the api, even though they might be available",
                         "required": false,
+                        "x-example": "true",
                         "type": "boolean",
                         "enum": [
                             "true",
@@ -2760,6 +2859,7 @@
                         "in": "query",
                         "description": "Filters the result to only show parking spaces with\nwith either of the provided types.\n",
                         "required": false,
+                        "x-example": "airport-parking",
                         "type": "string",
                         "enum": [
                             "off-street",
@@ -2787,6 +2887,7 @@
                         "in": "query",
                         "description": "Filters the result to only show parking spaces\nall the provided properties.\n",
                         "required": false,
+                        "x-example": "indoor",
                         "type": "string",
                         "enum": [
                             "excess_length",
@@ -2806,6 +2907,7 @@
                         "in": "query",
                         "description": "Response will only contain the fields mentioned in this parameter.\nThis can either be `all` or an comma separated list of field names from the response, e.g. `id,street,country`.\n",
                         "required": false,
+                        "x-example": "all",
                         "type": "string"
                     }
                 ],
@@ -2834,6 +2936,7 @@
                         "in": "path",
                         "description": "Identifier of a parking space group.",
                         "required": true,
+                        "x-example": "0e623e0a-6708-11e7-ab84-0660dadc820f",
                         "type": "string"
                     },
                     {
@@ -2841,6 +2944,7 @@
                         "in": "query",
                         "description": "10-27T09:10:20+00:00 (ISO 8601, optional) - Start of time frame to include periods.\nIf `date_start` is provided, `date_end` is required and vice versa.\n",
                         "required": true,
+                        "x-example": "2016",
                         "type": "string"
                     },
                     {
@@ -2848,6 +2952,7 @@
                         "in": "query",
                         "description": "10-27T10:10:20+00:00 (ISO 8601, optional)\nsee `date_start`.\n",
                         "required": true,
+                        "x-example": "2016",
                         "type": "string"
                     }
                 ]
@@ -2875,6 +2980,7 @@
                         "in": "path",
                         "description": "Identifier of the location.",
                         "required": true,
+                        "x-example": "00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
                         "type": "string"
                     }
                 ],
@@ -3044,6 +3150,7 @@
                         "in": "query",
                         "description": "latitude of the requested point",
                         "required": true,
+                        "x-example": "53.12341234",
                         "type": "number"
                     },
                     {
@@ -3051,6 +3158,7 @@
                         "in": "query",
                         "description": "longitude of the requested point",
                         "required": true,
+                        "x-example": "13.12341234",
                         "type": "number"
                     }
                 ],
@@ -3550,7 +3658,26 @@
                                 "payment_method",
                                 "license_plate",
                                 "phone_number"
-                            ]
+                            ],
+                            "example": {
+                                "zone": {
+                                    "id": "101012",
+                                    "latitude": 53.123412,
+                                    "longitude": 13.123412
+                                },
+                                "payment_method": {
+                                    "id": "1000bb3e-506d-11e5-9781-d43d7eece658",
+                                    "type": "post"
+                                },
+                                "license_plate": "AB 1234",
+                                "phone_number": "01234567890",
+                                "duration_minutes": 15,
+                                "user_metadata": {
+                                    "latitude": 52.521381,
+                                    "longitude": 13.392016,
+                                    "device": "ford"
+                                }
+                            }
                         }
                     }
                 ],
@@ -3619,6 +3746,7 @@
                         "in": "query",
                         "description": "A valid email address of the user.",
                         "required": true,
+                        "x-example": "test@example.com",
                         "type": "string"
                     }
                 ]
@@ -3681,6 +3809,7 @@
                         "in": "path",
                         "description": "The identifier of the credit card to delete.\nYou'll receive a list of the users credit cards through the `GET /payment/creditcards` request.\n",
                         "required": true,
+                        "x-example": "gphsyb",
                         "type": "string"
                     }
                 ]
@@ -3734,7 +3863,10 @@
                             },
                             "required": [
                                 "phone_number"
-                            ]
+                            ],
+                            "example": {
+                                "phone_number": "+493057701873"
+                            }
                         }
                     }
                 ],
@@ -3768,6 +3900,7 @@
                         "in": "path",
                         "description": "The identifier of the phone number to be retrieved.",
                         "required": true,
+                        "x-example": "151",
                         "type": "number"
                     }
                 ],
@@ -3807,7 +3940,10 @@
                             },
                             "required": [
                                 "phone_number_id"
-                            ]
+                            ],
+                            "example": {
+                                "phone_number_id": 151
+                            }
                         }
                     }
                 ],
@@ -3834,6 +3970,7 @@
                         "in": "path",
                         "description": "The identifier of the phone number to be deleted.",
                         "required": true,
+                        "x-example": "151",
                         "type": "number"
                     }
                 ]
@@ -3869,6 +4006,7 @@
                         "in": "path",
                         "description": "The sesam ID which is hidden in the QR code.",
                         "required": true,
+                        "x-example": "1234abcd",
                         "type": "string"
                     }
                 ]
@@ -4388,6 +4526,7 @@
                         "in": "query",
                         "description": "Latitude of current location.",
                         "required": false,
+                        "x-example": "52.53568811",
                         "type": "string"
                     },
                     {
@@ -4395,6 +4534,7 @@
                         "in": "query",
                         "description": "Longitude of current location.",
                         "required": false,
+                        "x-example": "13.39412887",
                         "type": "string"
                     }
                 ],
@@ -4428,6 +4568,7 @@
                         "in": "path",
                         "description": "\nA notification key\n",
                         "required": true,
+                        "x-example": "entry",
                         "type": "string",
                         "enum": [
                             "time_to_leave",
@@ -4450,7 +4591,10 @@
                             },
                             "required": [
                                 "enabled"
-                            ]
+                            ],
+                            "example": {
+                                "enabled": true
+                            }
                         }
                     }
                 ]
@@ -4532,7 +4676,7 @@
                             "application/json": {
                                 "code": "KFJ32",
                                 "gender": "female",
-                                "age_range": "26 - 35",
+                                "age_range": "null",
                                 "email": "test@example.com",
                                 "firstname": "Test",
                                 "lastname": "Name",
@@ -4681,11 +4825,9 @@
                                 "age_range": {
                                     "type": "string",
                                     "enum": [
-                                        "18 - 25",
-                                        "26 - 35",
-                                        "36 - 45",
-                                        "46+"
-                                    ]
+                                        "null"
+                                    ],
+                                    "description": "always null"
                                 },
                                 "facebook_id": {
                                     "type": "string"
@@ -4710,7 +4852,36 @@
                                 "country",
                                 "firstname",
                                 "lastname"
-                            ]
+                            ],
+                            "example": {
+                                "email": "test@example.com",
+                                "password": "test",
+                                "country": "DE",
+                                "firstname": "Max",
+                                "lastname": "Power",
+                                "gender": "female",
+                                "age_range": "null",
+                                "facebook_id": "xxx",
+                                "cars": [
+                                    {
+                                        "license_plate": "B-AB 1234",
+                                        "vehicle": "Isetta",
+                                        "country": "DE"
+                                    }
+                                ],
+                                "phone_numbers": [
+                                    {
+                                        "phone_number": "099028-237489"
+                                    }
+                                ],
+                                "attributes": [
+                                    {
+                                        "key": "adac",
+                                        "value": "1234567890"
+                                    }
+                                ],
+                                "device_id": "f00bar"
+                            }
                         }
                     }
                 ],
@@ -4727,7 +4898,7 @@
                             "application/json": {
                                 "code": "KFJ32",
                                 "gender": "female",
-                                "age_range": "26 - 35",
+                                "age_range": "null",
                                 "email": "test@example.com",
                                 "firstname": "Test",
                                 "lastname": "Name",
@@ -4854,7 +5025,7 @@
                             "application/json": {
                                 "code": "KFJ32",
                                 "gender": "female",
-                                "age_range": "26 - 35",
+                                "age_range": "null",
                                 "email": "test@example.com",
                                 "firstname": "Test",
                                 "lastname": "Name",
@@ -5003,12 +5174,19 @@
                                 "age_range": {
                                     "type": "string",
                                     "enum": [
-                                        "18 - 25",
-                                        "26 - 35",
-                                        "36 - 45",
-                                        "46+"
-                                    ]
+                                        "null"
+                                    ],
+                                    "description": "always null"
                                 }
+                            },
+                            "example": {
+                                "email": "test@example.com",
+                                "password": "test",
+                                "country": "DE",
+                                "firstname": "Max",
+                                "lastname": "Power",
+                                "gender": "female",
+                                "age_range": "null"
                             }
                         }
                     }
@@ -5043,6 +5221,7 @@
                         "in": "query",
                         "description": "",
                         "required": true,
+                        "x-example": "test@example.com",
                         "type": "string"
                     }
                 ]
@@ -5073,6 +5252,7 @@
                         "in": "path",
                         "description": "",
                         "required": true,
+                        "x-example": "asdf1234",
                         "type": "string"
                     }
                 ]
@@ -5370,7 +5550,14 @@
                                         "provider"
                                     ]
                                 }
-                            ]
+                            ],
+                            "example": {
+                                "primary": true,
+                                "provider_type": "stripe",
+                                "provider": {
+                                    "source_id": "tok_1234567890"
+                                }
+                            }
                         }
                     }
                 ],
@@ -5769,6 +5956,7 @@
                         "in": "path",
                         "description": "the user id",
                         "required": true,
+                        "x-example": "1000bb3e-506d-11e5-9781-d43d7eece658",
                         "type": "string"
                     },
                     {
@@ -5782,6 +5970,9 @@
                                     "description": "Wether the payment method should be activated as the users primary payment method.\nIf another payment method of the user was set to be the primary method before,\nthat one will be be changed to not be the primary one anymore.",
                                     "default": false
                                 }
+                            },
+                            "example": {
+                                "primary": true
                             }
                         }
                     }
@@ -5832,6 +6023,7 @@
                         "in": "path",
                         "description": "the user id",
                         "required": true,
+                        "x-example": "1000bb3e-506d-11e5-9781-d43d7eece658",
                         "type": "string"
                     }
                 ],
@@ -5872,7 +6064,16 @@
                             },
                             "required": [
                                 "device_id"
-                            ]
+                            ],
+                            "example": {
+                                "device_id": "f00bar",
+                                "campaigns": [
+                                    {
+                                        "id": "d34db33f",
+                                        "type": "adjust"
+                                    }
+                                ]
+                            }
                         }
                     }
                 ]
@@ -5904,6 +6105,7 @@
                         "in": "path",
                         "description": "The identifier of the booking\nto which the violation belongs to.\n",
                         "required": true,
+                        "x-example": "0072c629-e622-11e2-8bf1-8a83f3373875",
                         "type": "string"
                     },
                     {
@@ -5922,7 +6124,11 @@
                             "required": [
                                 "license_plate",
                                 "comment"
-                            ]
+                            ],
+                            "example": {
+                                "license_plate": "B-CD 4321",
+                                "comment": "This car parked on my parking space!!!"
+                            }
                         }
                     }
                 ],
@@ -5955,6 +6161,7 @@
                         "in": "path",
                         "description": "The identifier of the booking\nto which the violation belongs to.\n",
                         "required": true,
+                        "x-example": "0072c629-e622-11e2-8bf1-8a83f3373875",
                         "type": "string"
                     }
                 ],
@@ -5987,6 +6194,7 @@
                         "in": "path",
                         "description": "The identifier of the booking\nto which the violation belongs to.\n",
                         "required": true,
+                        "x-example": "0072c629-e622-11e2-8bf1-8a83f3373875",
                         "type": "string"
                     },
                     {
@@ -6005,7 +6213,11 @@
                             "required": [
                                 "license_plate",
                                 "comment"
-                            ]
+                            ],
+                            "example": {
+                                "license_plate": "B-CD 4321",
+                                "comment": "This car parked on my parking space!!!"
+                            }
                         }
                     }
                 ],
@@ -6032,6 +6244,7 @@
                         "in": "path",
                         "description": "The identifier of the booking\nto which the violation belongs to.\n",
                         "required": true,
+                        "x-example": "0072c629-e622-11e2-8bf1-8a83f3373875",
                         "type": "string"
                     }
                 ]
@@ -6063,6 +6276,7 @@
                         "in": "path",
                         "description": "The identifier of the booking\nto which the violation belongs to.\n",
                         "required": true,
+                        "x-example": "0072c629-e622-11e2-8bf1-8a83f3373875",
                         "type": "string"
                     }
                 ],
