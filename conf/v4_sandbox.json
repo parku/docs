@@ -1,0 +1,2076 @@
+{
+	"info": {
+		"_postman_id": "048c8d78-3d86-4340-b5d9-d4470727af6c",
+		"name": "Sandbox - v4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "v4 - Attributes - Create a new Attribute",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"key\": \"adac\",\n  \"value\": \"12345\"\n}"
+				},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/attributes",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"attributes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Attributes - Retrieve an Attribute",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/attributes/32",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"attributes",
+						"32"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Bookings - List all bookings",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/bookings?count=3&offset=10&date_start=past&date_end=future&status=active",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"bookings"
+					],
+					"query": [
+						{
+							"key": "count",
+							"value": "3"
+						},
+						{
+							"key": "offset",
+							"value": "10"
+						},
+						{
+							"key": "date_start",
+							"value": "past"
+						},
+						{
+							"key": "date_end",
+							"value": "future"
+						},
+						{
+							"key": "status",
+							"value": "active"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Booking - Create a new Booking",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"location_id\": \"00cd7cfd-e42d-11e2-8bf1-8a83f3373875\",\n  \"date_start\": \"2016-10-27T09:10:20+00:00\",\n  \"date_end\": \"2016-10-27T10:10:20+00:00\",\n  \"license_plate\": \"B-AB 1234\",\n  \"phone_number\": \"+493057701872\",\n  \"provider\": \"paypal\",\n  \"provider_info\": \"PAY-1CM399047K4649003KM4WJQQ\",\n  \"status\": \"all\",\n  \"required_field\": {\n    \"car_color\": \"red\",\n    \"number_of_passengers\": \"5\"\n  }\n}"
+				},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/bookings",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Booking - Retrieve a Booking",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/bookings/005c4826-4e28-11e3-a675-d43d7eece53d",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"bookings",
+						"005c4826-4e28-11e3-a675-d43d7eece53d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Bookings - Update a Booking",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/bookings/00cd7cfd-e42d-11e2-8bf1-8a83f3373875?license_plate=B-BC 4567&phone_number=+493057701871&date_end=2016-10-27T17:00:00+0000&provider=paypal&provider_info=PAY-2CM399047K4649003KM4WJQQ",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"bookings",
+						"00cd7cfd-e42d-11e2-8bf1-8a83f3373875"
+					],
+					"query": [
+						{
+							"key": "license_plate",
+							"value": "B-BC 4567"
+						},
+						{
+							"key": "phone_number",
+							"value": "+493057701871"
+						},
+						{
+							"key": "date_end",
+							"value": "2016-10-27T17:00:00+0000"
+						},
+						{
+							"key": "provider",
+							"value": "paypal"
+						},
+						{
+							"key": "provider_info",
+							"value": "PAY-2CM399047K4649003KM4WJQQ"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Bookings -  Cancel a Booking",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/bookings/00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"bookings",
+						"00cd7cfd-e42d-11e2-8bf1-8a83f3373875"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Bookings - Retrieve Custom Extend Prices",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/bookings/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/extend?date_end=2016-10-27T10:10:20+00:00",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"bookings",
+						"00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
+						"extend"
+					],
+					"query": [
+						{
+							"key": "date_end",
+							"value": "2016-10-27T10:10:20+00:00"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Cars - List all cars",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/cars",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Cars - Create a new Car",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"license_plate\": \"B-AB 1234\",\n  \"vehicle\": \"Isetta\",\n  \"country\": \"DE\"\n}"
+				},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/cars",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Car - Retrieve a Car",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/cars/73501",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"cars",
+						"73501"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Car - Update a Car",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"car_id\": 73501,\n  \"license_plate\": \"B-AB 1234\",\n  \"vehicle\": \"Polo\",\n  \"country\": \"DE\"\n}"
+				},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/cars/",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"cars",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Car - Delete a Car",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/cars/73501",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"cars",
+						"73501"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Coupon - Test a Coupon",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/coupon/Zm9vYmFyMTIz?action=test&amount=42",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"coupon",
+						"Zm9vYmFyMTIz"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "test"
+						},
+						{
+							"key": "amount",
+							"value": "42"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Devices - Create an Identifier ",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"ios_device_token\": \"A339F8BE4F...\",\n  \"android_registration_id\": \"A339F8BE4F...\"\n}"
+				},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/devices",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"devices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Invitations- Check Invitation Code Validity",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/invitations/d2VsbCBkb25lISBnZXQgYSBiZWVyIG5vdyA9RA==",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"invitations",
+						"d2VsbCBkb25lISBnZXQgYSBiZWVyIG5vdyA9RA=="
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Locations - List Locations",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/locations?sw=45.74001,5.67868&ne=47.74236,10.24900&date_start=2016&date_end=2016&availability=all&bookability=all",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"locations"
+					],
+					"query": [
+						{
+							"key": "sw",
+							"value": "45.74001,5.67868"
+						},
+						{
+							"key": "ne",
+							"value": "47.74236,10.24900"
+						},
+						{
+							"key": "date_start",
+							"value": "2016"
+						},
+						{
+							"key": "date_end",
+							"value": "2016"
+						},
+						{
+							"key": "availability",
+							"value": "all"
+						},
+						{
+							"key": "bookability",
+							"value": "all"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Locations- Retrieve a Location",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875?date_start=2016-10-27T09:10:20+00:00&date_end=2016-10-27T10:10:20+00:00",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"locations",
+						"00cd7cfd-e42d-11e2-8bf1-8a83f3373875"
+					],
+					"query": [
+						{
+							"key": "date_start",
+							"value": "2016-10-27T09:10:20+00:00"
+						},
+						{
+							"key": "date_end",
+							"value": "2016-10-27T10:10:20+00:00"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Locations- Get availability times for location",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/availability?date_start=2016&date_end=2016",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"locations",
+						"00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
+						"availability"
+					],
+					"query": [
+						{
+							"key": "date_start",
+							"value": "2016"
+						},
+						{
+							"key": "date_end",
+							"value": "2016"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Locations - Retrieve Terms and Conditions",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/locations/00cd7cfd-e42d-11e2-8bf1-8a83f3373875/terms",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"locations",
+						"00cd7cfd-e42d-11e2-8bf1-8a83f3373875",
+						"terms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Login",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"1234pwd\"\n}"
+				},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/login",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Password - Update password",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"old_password\": \"pwd123\",\n  \"new_password\": \"pwd321\"\n}"
+				},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/password",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Password - Reset Password",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/password?for=test@example.com",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"password"
+					],
+					"query": [
+						{
+							"key": "for",
+							"value": "test@example.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Payment - List Credit Cards",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/payment/creditcards",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"payment",
+						"creditcards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Payment - Delete a Credit Card",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/payment/credit_cards/gphsyb",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"payment",
+						"credit_cards",
+						"gphsyb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Payment - Update Credit Card",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"amount\": 10,\n  \"provider\": \"paypal\",\n  \"provider_info\": \"PAY-1CM399047K4649003KM4WJQQ\"\n}"
+				},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/payment/credit",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"payment",
+						"credit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Phone Numbers - List all Phone Numbers",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/phone_numbers",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"phone_numbers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Phone Numbers - Create a New Phone Number",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"phone_number\": \"+493057701873\"\n}"
+				},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/phone_numbers",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"phone_numbers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Phone Number - Retrieve a Phone Number",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/phone_numbers/57844",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"phone_numbers",
+						"57844"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Phone Number - Update a Phone Number",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"phone_number_id\": 57844\n}"
+				},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/phone_numbers/",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"phone_numbers",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Phone Number - Delete a Phone Number",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/phone_numbers/57844",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"phone_numbers",
+						"57844"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Sesam - Open Sesam",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/sesam/1234abcd",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"sesam",
+						"1234abcd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Sesam - Check Sesam",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/sesam/",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"sesam",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Settings - Retrieve Settings",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/settings?lat=52.53568811&lon=13.39412887",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"settings"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "52.53568811"
+						},
+						{
+							"key": "lon",
+							"value": "13.39412887"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Settings- Enable/Disable Notification",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/settings/booking/notification/entry",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"settings",
+						"booking",
+						"notification",
+						"entry"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Static Pages - Retrieve Terms and Conditions",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/terms",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"terms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Static Pages - Retrieve Imprint",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/imprint",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"imprint"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Static Pages - Retrieve Privacy Policy",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/privacy_policy",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"privacy_policy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - User - Create a User",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"1234pwd\",\n  \"country\": \"DE\",\n  \"firstname\": \"Max\",\n  \"lastname\": \"Power\",\n  \"gender\": \"female\",\n  \"age_range\": \"18 - 25\",\n  \"facebook_id\": [],\n  \"cars\": [\n    {\n      \"license_plate\": \"B-AB 1234\",\n      \"vehicle\": \"Isetta\",\n      \"country\": \"DE\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"phone_number\": \"099028-237489\"\n    }\n  ],\n  \"attributes\": [\n    {\n      \"key\": \"adac\",\n      \"value\": \"1234567890\"\n    }\n  ]\n}\n"
+				},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/user",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - User - Retrieve a User",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/user",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - User - Update a user",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"test@example.com\",\n  \"country\": \"DE\",\n  \"firstname\": \"Max\",\n  \"lastname\": \"Power\",\n  \"gender\": \"female\"\n}"
+				},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/user",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Violations - Create a New Violation",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"license_plate\": \"B-CD 4321\",\n  \"comment\": \"This car parked on my parking space!!!\"\n}"
+				},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"bookings",
+						"0072c629-e622-11e2-8bf1-8a83f3373875",
+						"violation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Violation - Retrieve a Violation",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"bookings",
+						"0072c629-e622-11e2-8bf1-8a83f3373875",
+						"violation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Violation - Update a Violation",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"license_plate\": \"B-CD 4321\",\n  \"comment\": \"This car parked on my parking space!!!\"\n}"
+				},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"bookings",
+						"0072c629-e622-11e2-8bf1-8a83f3373875",
+						"violation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Violation - Delete a Violation ",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"bookings",
+						"0072c629-e622-11e2-8bf1-8a83f3373875",
+						"violation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Violation Images - Add a Photo",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/bookings/0072c629-e622-11e2-8bf1-8a83f3373875/violation/image",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"bookings",
+						"0072c629-e622-11e2-8bf1-8a83f3373875",
+						"violation",
+						"image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v4 - Voucher - Redeem a Voucher",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "parku",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "012345678abcdef",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"voucher\": \"parkieren12\",\n  \"device_id\": \"asdf1234\"\n}"
+				},
+				"url": {
+					"raw": "https://sandbox.test.parku.io/v4/voucher",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"test",
+						"parku",
+						"io"
+					],
+					"path": [
+						"v4",
+						"voucher"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
